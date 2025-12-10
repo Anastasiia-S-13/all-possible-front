@@ -1,5 +1,5 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: var(--font-work-sans), sans-serif;
   display: flex;
   flex-direction: column;
   min-width: 100%;

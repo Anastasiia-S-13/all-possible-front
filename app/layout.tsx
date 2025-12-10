@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import Header from "@/components/Header/Header";
-// import Footer from "@/components/Footer/Footer";
+import localFont from 'next/font/local'
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { Roboto } from 'next/font/google';
 
-const roboto = Roboto({
-  subsets: ['latin'], 
-  weight: ['400', '700'],
-  variable: '--font-roboto', 
-  display: 'swap', 
+const workSans = localFont({
+  src: [
+    {
+      path: '/fonts/WorkSans-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '/fonts/WorkSans-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '/fonts/WorkSans-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '/fonts/WorkSans-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-work-sans', 
 })
 
 
@@ -43,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>
+      <body className={workSans.variable}>
         <TanStackProvider>
           {/* <Header /> */}
           <main>

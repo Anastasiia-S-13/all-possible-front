@@ -6,29 +6,28 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 const workSans = localFont({
   src: [
     {
-      path: '/fonts/WorkSans-Regular.ttf',
+      path: '../fonts/WorkSansRegular.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '/fonts/WorkSans-Bold.ttf',
+      path: '../fonts/WorkSansBold.ttf',
       weight: '700',
       style: 'normal',
     },
     {
-      path: '/fonts/WorkSans-SemiBold.ttf',
+      path: '../fonts/WorkSansSemiBold.ttf',
       weight: '600',
       style: 'normal',
     },
     {
-      path: '/fonts/WorkSans-Medium.ttf',
+      path: '../fonts/WorkSansMedium.ttf',
       weight: '500',
       style: 'normal',
     },
   ],
-  variable: '--font-work-sans', 
-})
-
+  variable: '--font-work-sans',
+});
 
 export const metadata: Metadata = {
   title: "ToolNext",

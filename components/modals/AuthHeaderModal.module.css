@@ -1,0 +1,59 @@
+.form {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex: 1;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form h2 {
+  margin-bottom: 16px;
+}
+
+.form input {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.primary {
+  margin-left: auto;
+  margin-right: auto;
+  height: 44px;
+  width: 186px;
+  background: #8808cc;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.noaccount {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mainh {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image {
+  flex: 1;
+  display: block;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .image {
+    display: none;
+  }
+}

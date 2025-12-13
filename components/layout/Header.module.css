@@ -1,0 +1,190 @@
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 64px;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  height: 24px;
+  width: 24px;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+  padding-right: 8px;
+}
+
+.nav a {
+  color: #374151;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #111827;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.signupButton {
+  padding: 4px 16px;
+  background-color: #8b5cf6;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 178px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signupButton:hover {
+  background-color: #7c3aed;
+}
+
+.welcomeText {
+  margin-left: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+} */
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 16px 64px;
+  background-color: #f9fafb;
+  width: 100%;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+}
+
+/* Desktop nav */
+.nav {
+  display: flex;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.signupButton {
+  margin-left: 8px;
+  min-width: 178px;
+  height: 40px;
+  background-color: #8808cc;
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Authorized */
+.userBlock {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Burger hidden on desktop */
+.burger {
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #111;
+  border-radius: 8px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
+.publishButton {
+  display: none;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1439px) {
+  .nav {
+    display: none;
+  }
+  .userBlock,
+  .signupButton {
+    display: none;
+  }
+  .publishButton {
+    display: flex;
+  }
+
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .actions {
+    margin-left: auto;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 767px) {
+  .header {
+    padding: 16px;
+  }
+
+  .signupButton,
+  .userBlock {
+    display: none;
+  }
+  .publishButton {
+    display: none;
+  }
+
+  .navActive {
+    display: flex;
+  }
+}

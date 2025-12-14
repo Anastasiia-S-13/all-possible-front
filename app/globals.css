@@ -5,7 +5,8 @@ body {
   min-width: 100%;
   min-height: 100vh;
   margin: 0;
-  color: #080c09;
+  color: #000000;
+  background-color: #f2f2f2;
 }
 
 main {

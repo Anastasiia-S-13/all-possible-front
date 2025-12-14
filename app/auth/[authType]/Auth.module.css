@@ -1,0 +1,157 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  max-width: 375px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+.imageSection {
+  display: none;
+  position: relative;
+  background-color: #f0e8f7;
+  order: 2;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  background-color: #ffffff;
+  order: 1;
+  min-height: 100vh;
+}
+
+@media screen and (min-width: 768px) {
+  .formSection {
+    padding: 0 32px;
+  }
+}
+
+.formWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  height: 72px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.copyright {
+  display: flex;
+  height: 72px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  align-self: stretch;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  color: #000000;
+}
+
+
+.title {
+  width: 100%;
+  max-width: 480px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 8px;
+  text-align: center;
+  line-height: 120%;
+  letter-spacing: -0.32px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #6b6b6b;
+  text-align: center;
+  margin: 0;
+  max-width: 480px;
+}
+
+.switchText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  color: #000000;
+  text-align: center;
+  margin: 0;
+}
+
+.switchLink {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    display: flex;
+    width: 1440px;
+    max-width: 1440px;
+    height: 900px;
+    margin: 0 auto;
+    min-height: auto;
+  }
+
+  .imageSection {
+    display: block;
+    width: 704px;
+    height: 900px;
+    flex-shrink: 0;
+    order: 2;
+    overflow: hidden;
+  }
+
+  .formSection {
+    display: flex;
+    flex-direction: column;
+    width: 736px;
+    height: 900px;
+    padding: 0 64px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    order: 1;
+    min-height: auto;
+  }
+
+  .title {
+    font-size: 48px;
+    line-height: 1.2;
+    letter-spacing: -0.48px;
+  }
+}

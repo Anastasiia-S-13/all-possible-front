@@ -1,0 +1,84 @@
+'use client';
+
+import { useParams, useRouter, notFound } from 'next/navigation';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useAuthStore } from '@/stores/authStore';
+import { LoginForm, RegisterForm } from '@/components/AuthForms';
+import styles from './Auth.module.css';
+
+type AuthType = 'login' | 'register';
+
+export default function AuthPage() {
+  const params = useParams();
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const authType = params.authType as AuthType;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/');
+    }
+  }, [isAuthenticated, router]);
+
+  if (authType !== 'login' && authType !== 'register') {
+    notFound();
+  }
+
+  const isLogin = authType === 'login';
+  const backgroundImage = isLogin
+    ? '/images/auth-login-bg.png'
+    : '/images/auth-register-bg.png';
+  const backgroundImage2x = isLogin
+    ? '/images/auth-login-bg-2x.png'
+    : '/images/auth-register-bg-2x.png';
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.imageSection}>
+        {/* Retina support: 1x for standard, 2x for high-DPI displays */}
+        <img
+          src={backgroundImage}
+          srcSet={`${backgroundImage} 1x, ${backgroundImage2x} 2x`}
+          alt=""
+          className={styles.backgroundImage}
+        />
+      </div>
+
+      <div className={styles.formSection}>
+        <Link href="/" className={styles.logo}>
+          <Image src="/images/logo.svg" alt="ToolNext" width={124} height={20} />
+        </Link>
+
+        <div className={styles.formWrapper}>
+          <h1 className={styles.title}>
+            {isLogin ? 'Вхід' : 'Реєстрація'}
+          </h1>
+
+          {isLogin ? <LoginForm /> : <RegisterForm />}
+
+          <p className={styles.switchText}>
+            {isLogin ? (
+              <>
+                Не маєте аккаунту?{' '}
+                <Link href="/auth/register" className={styles.switchLink}>
+                  Реєстрація
+                </Link>
+              </>
+            ) : (
+              <>
+                Вже маєте аккаунт?{' '}
+                <Link href="/auth/login" className={styles.switchLink}>
+                  Вхід
+                </Link>
+              </>
+            )}
+          </p>
+        </div>
+
+        <div className={styles.copyright}>© 2025 ToolNext</div>
+      </div>
+    </div>
+  );
+}

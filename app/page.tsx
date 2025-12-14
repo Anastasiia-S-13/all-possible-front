@@ -1,4 +1,4 @@
-import styles from "./global.module.css";
+import styles from "./globals.module.css";
 
 export default function Home() {
   return (<main className={styles.main}>

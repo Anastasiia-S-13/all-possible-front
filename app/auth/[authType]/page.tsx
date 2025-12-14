@@ -61,14 +61,14 @@ export default function AuthPage() {
           <p className={styles.switchText}>
             {isLogin ? (
               <>
-                Не маєте аккаунту?{' '}
+                Не маєте акаунту?{' '}
                 <Link href="/auth/register" className={styles.switchLink}>
                   Реєстрація
                 </Link>
               </>
             ) : (
               <>
-                Вже маєте аккаунт?{' '}
+                Вже маєте акаунт?{' '}
                 <Link href="/auth/login" className={styles.switchLink}>
                   Вхід
                 </Link>

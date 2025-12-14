@@ -14,7 +14,7 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: #000000;
+  color: var(--color-text);
 }
 
 .input {
@@ -23,9 +23,9 @@
   padding: 8px 12px;
   font-size: 16px;
   line-height: 32px;
-  color: #000000;
-  background-color: #FFFFFF;
-  border: 2px solid #000000;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  border: 2px solid var(--color-border);
   border-radius: 6px;
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -37,21 +37,21 @@
 
 .input:focus {
   outline: none;
-  border-color: #8808CC;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(136, 8, 204, 0.1);
 }
 
 .inputError {
-  border-color: #C40202;
+  border-color: var(--color-error);
 }
 
 .inputError:focus {
-  box-shadow: 0 0 0 3px rgba(196, 2, 2, 0.1);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
 .error {
   font-size: 12px;
-  color: #C40202;
+  color: var(--color-error);
 }
 
 .submitButton {

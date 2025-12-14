@@ -3,7 +3,7 @@ import "./globals.css";
 import "@/styles/variables.css";
 import localFont from 'next/font/local'
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { Toaster } from 'react-hot-toast';
+import { AuthProvider, ToastProvider } from "@/providers";
 
 const workSans = localFont({
   src: [
@@ -63,13 +63,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.variable}>
         <TanStackProvider>
-          <Toaster position="top-center" />
-          {/* <Header /> */}
-          <main>
-            {children}
-            {modal}
-          </main>
-          {/* <Footer /> */}
+          <AuthProvider>
+            <ToastProvider>
+              <main>
+                {children}
+                {modal}
+              </main>
+            </ToastProvider>
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

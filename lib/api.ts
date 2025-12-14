@@ -7,18 +7,19 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true, // Важливо для відправки cookies
+  withCredentials: true,
 });
 
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError<{ error?: string; errors?: Array<{ msg: string }> }>) => {
-    const originalRequest = error.config;
+    const originalRequest = error.config as typeof error.config & { _retry?: boolean };
 
-    if (error.response?.status === 401 && originalRequest?.url !== '/auth/refresh') {
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+      originalRequest._retry = true;
       try {
         await api.post('/auth/refresh');
-        return api(originalRequest!);
+        return api(originalRequest);
       } catch (refreshError) {
         return Promise.reject(error);
       }

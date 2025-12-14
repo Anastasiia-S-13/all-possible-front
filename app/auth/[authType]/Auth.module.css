@@ -4,7 +4,7 @@
   min-height: 100vh;
   max-width: 375px;
   margin: 0 auto;
-  background: #ffffff;
+  background: var(--color-background);
 }
 
 @media screen and (min-width: 768px) {
@@ -16,7 +16,7 @@
 .imageSection {
   display: none;
   position: relative;
-  background-color: #f0e8f7;
+  background-color: var(--color-primary-hover);
   order: 2;
 }
 
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-  background-color: #ffffff;
+  background-color: var(--color-background);
   order: 1;
   min-height: 100vh;
 }
@@ -75,7 +75,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
-  color: #000000;
+  color: var(--color-text);
 }
 
 
@@ -84,7 +84,7 @@
   max-width: 480px;
   font-size: 32px;
   font-weight: 700;
-  color: #000000;
+  color: var(--color-text);
   margin: 0;
   margin-bottom: 8px;
   text-align: center;
@@ -104,13 +104,13 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
-  color: #000000;
+  color: var(--color-text);
   text-align: center;
   margin: 0;
 }
 
 .switchLink {
-  color: #000000;
+  color: var(--color-text);
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;

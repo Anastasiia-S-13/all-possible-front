@@ -30,19 +30,16 @@ export default function AuthPage() {
   const backgroundImage = isLogin
     ? '/images/auth-login-bg.png'
     : '/images/auth-register-bg.png';
-  const backgroundImage2x = isLogin
-    ? '/images/auth-login-bg-2x.png'
-    : '/images/auth-register-bg-2x.png';
 
   return (
     <div className={styles.container}>
       <div className={styles.imageSection}>
-        {/* Retina support: 1x for standard, 2x for high-DPI displays */}
-        <img
+        <Image
           src={backgroundImage}
-          srcSet={`${backgroundImage} 1x, ${backgroundImage2x} 2x`}
           alt=""
+          fill
           className={styles.backgroundImage}
+          priority
         />
       </div>
 

@@ -1,4 +1,4 @@
-import BenefitsBlock from "@/components/home/BenefitsBlock";
+import BenefitsBlock from "@/components/home/BenefitsBlock/BenefitsBlock";
 import styles from './page.module.css';
 
 

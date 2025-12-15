@@ -1,7 +1,29 @@
-import { BookingResponse, CreateBookingRequest, Tool } from "@/type/Booking";
+// lib/api/clientApi.ts
+import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
+import { User,  EditProfileData} from '../../types/User';
 
+export async function getProfile(): Promise<User> {
+  const res = await fetch('/api/profile');
+  if (!res.ok) throw new Error('Не вдалося завантажити профіль');
+  return res.json();
+}
+
+export async function updateProfile(user: EditProfileData) {
+  const res = await fetch('/api/profile', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  });
+
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || 'Не вдалося оновити профіль');
+  }
+
+  return res.json();
+}
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
   config?: AxiosRequestConfig

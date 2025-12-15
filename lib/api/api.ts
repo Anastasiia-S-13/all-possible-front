@@ -1,3 +1,4 @@
+// lib/api/api.ts
 import axios from "axios";
 
 const isServer = typeof window === "undefined";

@@ -1,0 +1,112 @@
+/* CTA Section - from Figma */
+.cta {
+  background-color: #F2F2F2;
+  padding: 64px 20px;
+}
+
+.container {
+  max-width: 1312px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  font-family: var(--font-family);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.text {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 525 / 350;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .cta {
+    padding: 80px 32px;
+  }
+
+  .content {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .textBlock {
+    flex: 1;
+    gap: 32px;
+  }
+
+  .heading {
+    font-size: 36px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 350px;
+    height: 233px;
+  }
+}
+
+/* Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .cta {
+    padding: 112px 64px;
+  }
+
+  .content {
+    gap: 32px;
+  }
+
+  .textBlock {
+    max-width: 755px;
+  }
+
+  .heading {
+    font-size: 48px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 525px;
+    height: 350px;
+  }
+}

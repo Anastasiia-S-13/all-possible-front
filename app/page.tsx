@@ -1,4 +1,5 @@
 // import BenefitsBlock from "@/components/home/BenefitsBlock";
+import RegistrationBlock from "@/components/home/RegistrationBlock";
 import styles from './page.module.css';
 
 
@@ -9,7 +10,7 @@ export default function Home() {
       {/* <BenefitsBlock /> */}
       {/* tools */}
       {/* feedback */}
-      {/* registration block */}
     </div>
+    <RegistrationBlock />
   </main>);
 }

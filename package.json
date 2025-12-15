@@ -11,10 +11,14 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.12",
     "@tanstack/react-query-devtools": "^5.91.1",
+    "axios": "^1.13.2",
+    "cookies": "^0.9.1",
     "formik": "^2.4.9",
-    "next": "^16.0.8",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "next": "16.0.8",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "react-simple-star-rating": "^5.1.7",
+    "swiper": "^12.0.3",
     "yup": "^1.7.1",
     "zustand": "^5.0.9"
   },

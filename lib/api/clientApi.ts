@@ -3,6 +3,7 @@ import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import { User,  EditProfileData} from '../../types/User';
+import { fetchFeedbacksProps } from "@/type/Feedback";
 
 export async function getProfile(): Promise<User> {
   const res = await fetch('/api/profile');
@@ -42,3 +43,14 @@ export const createBooking = async (
     throw new Error(`Error creating booking: ${error}`);
   }
 };
+
+export async function fetchFeedbacks(
+  page: number
+): Promise<fetchFeedbacksProps> {
+  const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
+    params: {
+      page,
+    },
+  });
+  return request.data;
+}

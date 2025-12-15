@@ -1,9 +1,7 @@
 // lib/api/api.ts
 import axios from "axios";
 
-const isServer = typeof window === "undefined";
-
-const baseURL = isServer ? process.env.NEXT_PUBLIC_API_URL : "/api";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export const api = axios.create({
   baseURL,

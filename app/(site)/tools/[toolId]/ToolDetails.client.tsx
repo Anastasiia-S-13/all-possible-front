@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import css from "./ToolDetails.module.css";
-import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
+//import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
 // import ToolGallery from "@/components/tools/ToolGallery";
 
 const ToolDetailsClient = () => {
@@ -39,7 +39,6 @@ const ToolDetailsClient = () => {
       <div className={css.container}>
         <div className={css.tool_details_wrap}>
           {/* <ToolGallery {data.images} /> */}
-          <ToolInfoBlock tool={toolData} user={userData} />
         </div>
       </div>
     )

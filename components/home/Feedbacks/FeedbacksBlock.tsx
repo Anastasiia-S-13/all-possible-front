@@ -26,63 +26,61 @@ const FeedbacksBlock = () => {
 
   return (
     <section className={css.feedbackSection}>
-      <div className={css.section}>
-        <div className={css.feedbackStaticBox}>
-          <h2 className={css.feedbackTitle}>Останні відгуки</h2>
-          {isSuccess && (data?.pages[0]?.totalPages ?? 0) === 0 && (
-            <button className={css.feedbackBtn}>Залишити відгук</button>
-          )}
-        </div>
+      <div className={css.feedbackStaticBox}>
+        <h2 className={css.feedbackTitle}>Останні відгуки</h2>
         {isSuccess && (data?.pages[0]?.totalPages ?? 0) === 0 && (
-          <EmptyFeedbacks />
-        )}
-        {isSuccess && (data?.pages[0]?.totalPages ?? 0) > 0 && (
-          <>
-            <Swiper
-              className={css.feedbackSwiper}
-              modules={[Navigation, Virtual, Pagination]}
-              navigation={{
-                nextEl: ".swaperBtnNext",
-                prevEl: ".swaperBtnPrev",
-              }}
-              pagination={{
-                el: ".feedback-pagination",
-                clickable: true,
-              }}
-              spaceBetween={20}
-              grabCursor={true}
-              breakpoints={{
-                375: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1440: { slidesPerView: 3 },
-              }}
-              virtual
-              onReachEnd={() => {
-                if (hasNextPage && !isFetchingNextPage) {
-                  fetchNextPage();
-                }
-              }}
-            >
-              {allFeedbacks.map((feedback, index) => (
-                <SwiperSlide key={feedback._id} virtualIndex={index}>
-                  <FeedbackItem feedback={feedback} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className={css.feedbackSwiperContainer}>
-              <div className="feedback-pagination"></div>
-              <div className={css.feedbackSwiperBtnBox}>
-                <div className="swaperBtnPrev">
-                  <SwiperBtnPrev />
-                </div>
-                <div className="swaperBtnNext">
-                  <SwiperBtnNext />
-                </div>
-              </div>
-            </div>
-          </>
+          <button className={css.feedbackBtn}>Залишити відгук</button>
         )}
       </div>
+      {isSuccess && (data?.pages[0]?.totalPages ?? 0) === 0 && (
+        <EmptyFeedbacks />
+      )}
+      {isSuccess && (data?.pages[0]?.totalPages ?? 0) > 0 && (
+        <>
+          <Swiper
+            className={css.feedbackSwiper}
+            modules={[Navigation, Virtual, Pagination]}
+            navigation={{
+              nextEl: ".swaperBtnNext",
+              prevEl: ".swaperBtnPrev",
+            }}
+            pagination={{
+              el: ".feedback-pagination",
+              clickable: true,
+            }}
+            spaceBetween={32}
+            grabCursor={true}
+            breakpoints={{
+              375: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1440: { slidesPerView: 3 },
+            }}
+            virtual
+            onReachEnd={() => {
+              if (hasNextPage && !isFetchingNextPage) {
+                fetchNextPage();
+              }
+            }}
+          >
+            {allFeedbacks.map((feedback, index) => (
+              <SwiperSlide key={feedback._id} virtualIndex={index}>
+                <FeedbackItem feedback={feedback} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className={css.feedbackSwiperContainer}>
+            <div className="feedback-pagination"></div>
+            <div className={css.feedbackSwiperBtnBox}>
+              <div className="swaperBtnPrev">
+                <SwiperBtnPrev />
+              </div>
+              <div className="swaperBtnNext">
+                <SwiperBtnNext />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };

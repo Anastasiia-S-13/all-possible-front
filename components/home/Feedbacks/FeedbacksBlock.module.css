@@ -1,34 +1,28 @@
 .feedbackSection {
-  min-width: 320px;
-  max-width: 375px;
-  margin: 0 auto;
-}
-
-.section {
-  padding: 32px 20px;
+  padding: 64px 0;
 }
 
 .feedbackStaticBox {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 }
 
 .feedbackTitle {
+  font-family: var(--font-family);
   font-weight: 700;
   font-size: 36px;
   line-height: 120%;
   letter-spacing: -0.01em;
-  margin: 0 0;
+  color: var(--color-scheme-1-text);
 }
 
 .feedbackBtn {
+  font-family: var(--font-family);
   border: 2px solid var(--color-neutral-darkest);
   border-radius: 6px;
-  padding: 10px 24px;
-  width: 335px;
-  height: 41px;
+  padding: 8px 110px;
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
@@ -38,23 +32,24 @@
 .feedbackItemBox {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 30px;
 }
 
 .feedbackItemText {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
   color: var(--color-scheme-1-text);
-  margin: 0 0;
+  min-height: 81px;
 }
 
 .feedbackItemName {
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 14px;
   line-height: 150%;
   color: var(--color-scheme-1-text);
-  margin: 0 0;
 }
 
 .feedbackSwiper {
@@ -88,7 +83,6 @@
   background-color: var(--color-scheme-1-text);
   transform: scale(1.2);
   opacity: 1;
-  margin: 0;
 }
 
 .feedbackSwiperContainer
@@ -96,4 +90,37 @@
 .feedbackSwiperContainer
   :global(.swiper-pagination-bullet:has(+ .swiper-pagination-bullet-active)) {
   transform: scale(1);
+}
+
+@media only screen and (min-width: 768px) {
+  .feedbackStaticBox {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+  .feedbackBtn {
+    padding: 8px 28px;
+    max-height: 41px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .feedbackSection {
+    padding: 112px 0;
+  }
+  .feedbackTitle {
+    font-size: 48px;
+  }
+  .feedbackBtn {
+    font-size: 16px;
+    max-height: 44px;
+  }
+  .feedbackItemText {
+    font-size: 20px;
+    min-height: 90px;
+  }
+  .feedbackItemName {
+    font-size: 16px;
+  }
 }

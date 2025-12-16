@@ -118,6 +118,7 @@
   }
   .feedbackItemText {
     font-size: 20px;
+    min-height: 90px;
   }
   .feedbackItemName {
     font-size: 16px;

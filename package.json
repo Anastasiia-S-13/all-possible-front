@@ -17,6 +17,7 @@
     "next": "16.0.8",
     "react": "19.2.1",
     "react-dom": "19.2.1",
+    "react-hot-toast": "^2.6.0",
     "react-simple-star-rating": "^5.1.7",
     "swiper": "^12.0.3",
     "yup": "^1.7.1",

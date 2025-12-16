@@ -1,0 +1,115 @@
+/* Button Component - Mobile First */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-family);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  text-align: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* Sizes */
+.btn--lg {
+  padding: 10px 24px;
+  font-size: var(--text-base);
+}
+
+.btn--sm {
+  padding: 8px 20px;
+  font-size: var(--text-base);
+}
+
+.btn--icon {
+  padding: 10px;
+}
+
+.btn--icon-sm {
+  padding: 8px;
+}
+
+/* Primary Button */
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  border-width: 2px;
+  color: var(--color-text);
+  padding: 9px 23px;
+}
+
+.btn--primary.btn--lg:hover:not(:disabled) {
+  padding: 9px 23px;
+}
+
+.btn--primary.btn--sm:hover:not(:disabled) {
+  padding: 7px 19px;
+}
+
+.btn--primary:active:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary);
+  border-width: 2px;
+  color: var(--color-text);
+}
+
+.btn--primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Secondary Button */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.btn--secondary:active:not(:disabled) {
+  background-color: var(--color-primary);
+  border-color: var(--color-text-inverse);
+  color: var(--color-text-inverse);
+}
+
+.btn--secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Tertiary/Ghost Button */
+.btn--tertiary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: none;
+  padding: 8px 20px;
+}
+
+.btn--tertiary:hover:not(:disabled) {
+  color: var(--color-primary);
+}
+
+.btn--tertiary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Full Width */
+.btn--full {
+  width: 100%;
+}

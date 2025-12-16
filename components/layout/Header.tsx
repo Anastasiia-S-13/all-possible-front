@@ -1,77 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./Header.module.css";
-import LoginModal from "../modals/LoginModal";
-import RegisterModal from "../modals/RegisterModal";
-import { Link } from "react-router-dom";
 
 interface HeaderProps {
   isLoggedIn: boolean;
   userName?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
+export default function Header({ isLoggedIn, userName }: HeaderProps) {
   return (
-    <>
-      <header className={styles.header}>
-        {/* Logo */}
-        <div className={styles.logoContainer}>
-          <img src="/favicon.ico" alt="ToolNext Logo" className={styles.logo} />
-          <a href="/">ToolNex</a>
-        </div>
+    <header className={styles.header}>
+      {/* Logo */}
+      <div className={styles.logoContainer}>
+        <img src="/logo.svg" alt="ToolNext Logo" className={styles.logo} />
+        <Link href="/">ToolNext</Link>
+      </div>
 
-        {/* Desktop nav */}
-        <nav className={styles.nav}>
-          <a href="/">Головна</a>
-          <a href="/tools">Інструменти</a>
-          {!isLoggedIn && (
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsLoginOpen(true);
-              }}
-            >
-              Увійти
-            </a>
-          )}
-        </nav>
+      {/* Desktop navigation */}
+      <nav className={styles.nav}>
+        <Link href="/">Головна</Link>
+        <Link href="/tools">Інструменти</Link>
 
-        <div className={styles.actions}>
-          {!isLoggedIn && (
-            <a href="/create" className={`${styles.signupButton} ${styles.publishButton}`}>
-              Опублікувати оголошення
-            </a>
-          )}
+        {isLoggedIn && <Link href="/profile">Мій профіль</Link>}
+        {isLoggedIn && <Link href="/create">Опублікувати оголошення</Link>}
 
-          {!isLoggedIn && (
-            <button className={styles.signupButton} onClick={() => setIsRegisterOpen(true)}>
-              Зареєструватися
-            </button>
-          )}
+        {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
+      </nav>
 
-          {isLoggedIn && (
-            <div className={styles.userBlock}>
-              <img src="/avatar.png" className={styles.avatar} />
-              <span>{userName}</span>
-            </div>
-          )}
+      {/* Actions */}
+      <div className={styles.actions}>
+        {!isLoggedIn && (
+          <Link href="/auth/register" className={`${styles.signupButton} ${styles.publishButton}`}>
+            Зареєструватися
+          </Link>
+        )}
 
-          <button className={styles.burger} onClick={() => setIsRegisterOpen(!isRegisterOpen)}>
-            ☰
-          </button>
-        </div>
-      </header>
+        {isLoggedIn && (
+          <div className={styles.userBlock}>
+            <div className={styles.userAvatar}>{userName?.[0]?.toUpperCase()}</div>
+            <span>{userName}</span>
+          </div>
+        )}
 
-      {/* Modals */}
-      {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
-      {isRegisterOpen && <RegisterModal onClose={() => setIsRegisterOpen(false)} />}
-    </>
+        {/* Burger → mobile menu page */}
+        <Link href="/menu" className={styles.burger}>
+          ☰
+        </Link>
+      </div>
+    </header>
   );
-};
-
-export default Header;
+}

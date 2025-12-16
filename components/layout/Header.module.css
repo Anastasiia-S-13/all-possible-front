@@ -72,10 +72,14 @@
   }
 } */
 
+/* ================= BASE (MOBILE FIRST) ================= */
+
+/* ================= BASE (MOBILE FIRST) ================= */
+
 .header {
   display: flex;
   align-items: center;
-  padding: 16px 64px;
+  padding: 16px;
   background-color: #f9fafb;
   width: 100%;
 }
@@ -92,35 +96,34 @@
   background: transparent;
 }
 
-/* Desktop nav */
+/* Nav hidden on mobile */
 .nav {
-  display: flex;
-  gap: 32px;
-  margin-left: auto;
+  display: none;
 }
 
+/* Actions */
 .actions {
   display: flex;
   align-items: center;
+  margin-left: auto;
   gap: 16px;
 }
 
+/* Signup button */
 .signupButton {
-  margin-left: 8px;
   min-width: 178px;
   height: 40px;
   background-color: #8808cc;
   color: #fff;
   border-radius: 6px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 }
 
-/* Authorized */
+/* Authorized user */
 .userBlock {
-  margin-left: 16px;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 8px;
 }
@@ -131,9 +134,8 @@
   border-radius: 50%;
 }
 
-/* Burger hidden on desktop */
+/* Burger visible on mobile */
 .burger {
-  margin-left: auto;
   width: 40px;
   height: 40px;
   border: 2px solid #111;
@@ -141,50 +143,48 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Hidden by default */
 .publishButton {
   display: none;
 }
 
 /* ================= TABLET ================= */
-@media (max-width: 1439px) {
-  .nav {
-    display: none;
-  }
-  .userBlock,
+@media (min-width: 768px) {
   .signupButton {
-    display: none;
-  }
-  .publishButton {
     display: flex;
   }
 
-  .burger {
+  .publishButton {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .actions {
-    margin-left: auto;
   }
 }
 
-/* ================= MOBILE ================= */
-@media (max-width: 767px) {
+/* ================= DESKTOP ================= */
+@media (min-width: 1440px) {
   .header {
-    padding: 16px;
+    padding: 16px 64px;
   }
 
-  .signupButton,
-  .userBlock {
-    display: none;
-  }
-  .publishButton {
-    display: none;
-  }
-
-  .navActive {
+  .nav {
     display: flex;
+    gap: 32px;
+    margin-left: auto;
+  }
+
+  .burger {
+    display: none;
+  }
+  .actions {
+    margin-left: 16px;
+  }
+
+  .userBlock {
+    display: flex;
+    margin-left: 16px;
   }
 }

@@ -67,7 +67,7 @@ export default function Footer({ isAuthenticated }: FooterProps) {
 
       <div className={styles.divider} />
 
-      <p className={styles.copy}>© 2025 ToolNext. Всі права захищені.</p>
+      <p className={styles.copy}>© {new Date().getFullYear()} ToolNext. Всі права захищені.</p>
     </footer>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import * as yup from "yup";
-import { DateRange } from "@/type/Booking";
+import { DateRange } from "@/types/Booking";
 import {
   BookingFormSchema,
   bookingSchema,

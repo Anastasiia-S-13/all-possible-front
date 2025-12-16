@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import styles from "./ToolBooking.module.css";
-import { DateRange, Tool } from "@/type/Booking";
+import { DateRange, Tool } from "@/types/Booking";
 import { BookingFormSchema } from "@/lib/validation/validateBooking";
 import { createBooking } from "@/lib/api/clientApi";
 import BookingForm from "@/components/forms/BookingToolForm/BookingToolForm";

@@ -1,4 +1,4 @@
-import { DateRange } from "@/type/Booking";
+import { DateRange } from "@/types/Booking";
 
 export const calculateTotalPrice = (
   pricePerDay: number,

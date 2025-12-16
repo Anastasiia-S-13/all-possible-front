@@ -1,4 +1,4 @@
-import { BookingResponse, CreateBookingRequest, Tool } from "@/type/Booking";
+import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import { fetchFeedbacksProps } from "@/type/Feedback";

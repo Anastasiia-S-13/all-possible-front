@@ -1,4 +1,4 @@
-import { BookingResponse, CreateBookingRequest } from "@/type/Booking";
+import { BookingResponse, CreateBookingRequest } from "@/types/Booking";
 import { api } from "@/lib/api/api";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";

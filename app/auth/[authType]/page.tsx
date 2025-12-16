@@ -74,7 +74,7 @@ export default function AuthPage() {
           </p>
         </div>
 
-        <div className={styles.copyright}>© 2025 ToolNext</div>
+        <div className={styles.copyright}>© {new Date().getFullYear()} ToolNext</div>
       </div>
     </div>
   );

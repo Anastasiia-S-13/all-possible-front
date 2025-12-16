@@ -121,7 +121,7 @@
 @media screen and (min-width: 1024px) {
   .container {
     display: flex;
-    width: 1440px;
+    width: 100%;
     max-width: 1440px;
     height: 900px;
     margin: 0 auto;
@@ -130,9 +130,8 @@
 
   .imageSection {
     display: block;
-    width: 704px;
+    flex: 704;
     height: 900px;
-    flex-shrink: 0;
     order: 2;
     overflow: hidden;
   }
@@ -140,11 +139,10 @@
   .formSection {
     display: flex;
     flex-direction: column;
-    width: 736px;
+    flex: 736;
     height: 900px;
     padding: 0 64px;
     box-sizing: border-box;
-    flex-shrink: 0;
     order: 1;
     min-height: auto;
   }
@@ -153,5 +151,21 @@
     font-size: 48px;
     line-height: 1.2;
     letter-spacing: -0.48px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 1440px;
+  }
+
+  .imageSection {
+    flex: none;
+    width: 704px;
+  }
+
+  .formSection {
+    flex: none;
+    width: 736px;
   }
 }

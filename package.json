@@ -15,7 +15,7 @@
     "axios": "^1.13.2",
     "cookies": "^0.9.1",
     "formik": "^2.4.9",
-    "next": "16.0.8",
+    "next": "^16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-hook-form": "^7.68.0",
@@ -31,6 +31,6 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.8",
-    "typescript": "^5.9.3"
+    "typescript": "5.9.3"
   }
 }

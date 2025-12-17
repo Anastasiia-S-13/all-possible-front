@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { BookedPeriod, DateRange } from "@/types/Booking";
-import { buildCalendar, CalendarDay } from "@/lib/utils/buildCalendar";
+import React, { useState, useMemo } from "react";
+import { BookedPeriod, DateRange } from "@/types/booking";
+import { buildCalendar, CalendarDay } from "@/lib/util/buildCalendar";
 import styles from "./Calendar.module.css";
 
 interface CalendarProps {

@@ -1,53 +1,60 @@
 export interface BookedPeriod {
-  startDate: string;
-  endDate: string;
+    startDate: string;
+    endDate: string;
 }
 
 export interface Tool {
-  _id: string;
-  name: string;
-  pricePerDay: number;
-  description?: string;
-  category?: string;
-  bookedPeriods: BookedPeriod[];
-  createdAt?: string;
-  updatedAt?: string;
+    _id: string;
+    name: string;
+    pricePerDay: number;
+    description?: string;
+    category?: string;
+    bookedPeriods: BookedPeriod[];
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface BookingFormData {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  deliveryCity: string;
-  novaPoshtaBranch: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    deliveryCity: string;
+    novaPoshtaBranch: string;
 }
 
 export interface CreateBookingRequest extends BookingFormData {
-  toolId: string;
-  startDate: string;
-  endDate: string;
+    toolId: string;
+    startDate: string;
+    endDate: string;
 }
 
 export interface DateRange {
-  startDate: Date | null;
-  endDate: Date | null;
+    startDate: Date | null;
+    endDate: Date | null;
 }
 
 export interface User {
-  id: string;
-  name: string;
-  avatar?: string;
+    id: string;
+    name: string;
+    avatar?: string;
 }
 
 export interface BookingResponse {
-  success: boolean;
-  message?: string;
-  booking?: {
-    id: string;
-    toolId: string;
-    userId: string;
-    startDate: string;
-    endDate: string;
-    createdAt: string;
-  };
+    success: boolean;
+    message?: string;
+    booked: {
+        rentalPeriod: {
+            startDate: string;
+            endDate: string;
+        };
+        // Add other properties if needed based on the user's "result.booked" usage
+    };
+    booking?: {
+        id: string;
+        toolId: string;
+        userId: string;
+        startDate: string;
+        endDate: string;
+        createdAt: string;
+    };
 }

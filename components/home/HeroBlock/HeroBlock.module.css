@@ -1,0 +1,137 @@
+.root {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+  
+    display: flex;
+    align-items: center;
+    height: 100%;
+  
+    @media (min-width: 768px) {
+      height: 518px;
+    }
+  }
+  
+  
+  .root::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+  }
+  
+  .image {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  .inner {
+    position: relative;
+    padding: 2.625rem 0;
+    width: 100%;
+    z-index: 3;
+  }
+  
+  
+  .title {
+    margin-bottom: 2rem;
+    font-size: 2.5rem; /* 40px */
+    line-height: 120%;
+    font-weight: 700;
+    font-style: bold;
+    letter-spacing: -1%;
+    text-align: center;
+    text-wrap: balance;    
+    color: rgba(255, 255, 255, 255);
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+  
+    @media (min-width: 1440px) {
+      padding-left: 4.75rem;
+    }
+  }
+  
+  
+
+
+
+
+/* .root {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    
+
+    @media (min-width: 768px) {
+        min-height: 518px;
+    }
+}
+
+
+.root::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.container {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    @media (min-width: 768px) {
+        max-width: 768px;
+        padding: 0 32px;
+    }
+
+    @media (min-width: 1440px) {
+        max-width: 1440px;
+        padding: 0 64px;
+    }
+}
+
+
+
+
+.image {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.inner {
+    position: relative;
+    padding: 2.625rem 0;
+    width: 100%;
+    z-index: 3;
+}
+
+
+.title {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    line-height: 120%;
+    font-weight: 700;
+    font-style: bold;
+    letter-spacing: -1%;
+    text-align: center;
+    text-wrap: balance;
+    color: rgba(255, 255, 255, 255);
+
+    @media (min-width: 768px) {
+        text-align: left;
+    }
+
+    @media (min-width: 1440px) {
+        padding-left: 4.75rem;
+    }
+} */

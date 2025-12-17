@@ -1,0 +1,14 @@
+.root {
+    max-width: 1440px;
+    width: 100%;
+    padding: 0 1.25rem; /* 20px */
+    margin: 0 auto;
+  
+    @media (min-width: 768px) {
+      padding: 0 2rem; /* 32px */
+    }
+  
+    @media (min-width: 1440px) {
+      padding: 0 4rem; /* 64px */
+    }
+  } 

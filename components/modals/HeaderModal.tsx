@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import styles from "./HeaderModal.module.css";
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
   onClose: () => void;
 }
 

@@ -58,6 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
+  const isAuthenticated = false; // Replace with actual authentication logic
   return (
     <html lang="en">
       <body className={workSans.variable}>

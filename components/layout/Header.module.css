@@ -1,107 +1,47 @@
-/* .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 16px 64px;
-  background-color: #f9fafb;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.logoContainer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo {
-  height: 24px;
-  width: 24px;
-}
-
-.nav {
-  display: flex;
-  gap: 32px;
-  align-items: flex-end;
-  padding-right: 8px;
-}
-
-.nav a {
-  color: #374151;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.nav a:hover {
-  color: #111827;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-}
-
-.signupButton {
-  padding: 4px 16px;
-  background-color: #8b5cf6;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  min-width: 178px;
-  min-height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.signupButton:hover {
-  background-color: #7c3aed;
-}
-
-.welcomeText {
-  margin-left: 16px;
-  font-weight: 500;
-  color: #374151;
-}
-
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-} */
-
-/* ================= BASE (MOBILE FIRST) ================= */
-
-/* ================= BASE (MOBILE FIRST) ================= */
-
+/* ================= HEADER ================= */
 .header {
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 16px;
   background-color: #f9fafb;
-  width: 100%;
+  box-sizing: border-box;
 }
 
+/* ================= LOGO ================= */
 .logoContainer {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .logo {
   width: 24px;
   height: 24px;
-  background: transparent;
+  fill: currentColor;
 }
 
-/* Nav hidden on mobile */
+.logoText {
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+}
+
+/* ================= NAV ================= */
 .nav {
   display: none;
+  margin-left: auto;
+  gap: 32px;
 }
 
-/* Actions */
+.nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================= ACTIONS ================= */
 .actions {
   display: flex;
   align-items: center;
@@ -109,7 +49,7 @@
   gap: 16px;
 }
 
-/* Signup button */
+/* ================= BUTTONS ================= */
 .signupButton {
   min-width: 178px;
   height: 40px;
@@ -119,22 +59,34 @@
   display: none;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-/* Authorized user */
+/* ================= USER ================= */
 .userBlock {
   display: none;
   align-items: center;
   gap: 8px;
 }
 
-.avatar {
+.userAvatar {
   width: 32px;
   height: 32px;
+  background-color: #8808cc;
+  color: #fff;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 
-/* Burger visible on mobile */
+.userName {
+  font-size: 14px;
+}
+
+/* ================= BURGER ================= */
 .burger {
   width: 40px;
   height: 40px;
@@ -148,17 +100,13 @@
   justify-content: center;
 }
 
-/* Hidden by default */
+/* ================= HELPERS ================= */
 .publishButton {
   display: none;
 }
 
 /* ================= TABLET ================= */
-@media (min-width: 768px) {
-  .signupButton {
-    display: flex;
-  }
-
+@media (min-width: 768px) and (max-width: 1439px) {
   .publishButton {
     display: flex;
   }
@@ -172,13 +120,12 @@
 
   .nav {
     display: flex;
-    gap: 32px;
-    margin-left: auto;
   }
 
   .burger {
     display: none;
   }
+
   .actions {
     margin-left: 16px;
   }
@@ -186,5 +133,12 @@
   .userBlock {
     display: flex;
     margin-left: 16px;
+  }
+  .signupButton {
+    display: flex;
+  }
+
+  .publishButton {
+    display: flex;
   }
 }

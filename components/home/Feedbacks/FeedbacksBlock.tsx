@@ -11,31 +11,50 @@ import { fetchFeedbacks } from "@/lib/api/clientApi";
 import EmptyFeedbacks from "../EmptyFeedback/EmptyFeedbacks";
 import SwiperBtnPrev from "./SwiperButton/SwiperBtnPrev";
 import SwiperBtnNext from "./SwiperButton/SwiperBtnNext";
+import EmptyUserFeedbacks from "../EmptyFeedback/EmptyUserFeedbacks";
+import { useState } from "react";
 
-const FeedbacksBlock = () => {
+interface FeedbacksBlockProps {
+  toolId?: string;
+  userId?: string;
+}
+
+const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
+  const [isStart, setIsStart] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   const { data, isSuccess, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["feedbackAllKey"],
+      queryKey: ["feedbackAllKey", toolId, userId],
       initialPageParam: 1,
-      queryFn: ({ pageParam }) => fetchFeedbacks(pageParam),
+      queryFn: ({ pageParam }) =>
+        fetchFeedbacks({ page: pageParam, toolId, userId }),
       getNextPageParam: (lastPage) =>
         lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
     });
 
   const allFeedbacks = data?.pages.flatMap((p) => p.feedbacks) ?? [];
+  const hasFeedbacks = isSuccess && allFeedbacks.length > 0;
+  const hasNoFeedbacks = isSuccess && allFeedbacks.length === 0;
+
+  const isToolPage = Boolean(toolId);
+  const isUserPage = Boolean(userId);
+  const isMainPage = !toolId && !userId;
 
   return (
     <section className={css.feedbackSection}>
       <div className={css.feedbackStaticBox}>
-        <h2 className={css.feedbackTitle}>Останні відгуки</h2>
-        {isSuccess && (data?.pages[0]?.totalPages ?? 0) === 0 && (
+        <h2 className={css.feedbackTitle}>
+          {isMainPage && "Останні відгуки"}
+          {(isToolPage || isUserPage) && "Відгуки"}
+        </h2>
+        {isToolPage && (
           <button className={css.feedbackBtn}>Залишити відгук</button>
         )}
       </div>
-      {isSuccess && (data?.pages[0]?.totalPages ?? 0) === 0 && (
-        <EmptyFeedbacks />
-      )}
-      {isSuccess && (data?.pages[0]?.totalPages ?? 0) > 0 && (
+      {hasNoFeedbacks && isToolPage && <EmptyFeedbacks />}
+      {hasNoFeedbacks && isUserPage && <EmptyUserFeedbacks />}
+      {hasFeedbacks && (
         <>
           <Swiper
             className={css.feedbackSwiper}
@@ -61,6 +80,14 @@ const FeedbacksBlock = () => {
                 fetchNextPage();
               }
             }}
+            onSwiper={(swiper) => {
+              setIsStart(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsStart(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
           >
             {allFeedbacks.map((feedback, index) => (
               <SwiperSlide key={feedback._id} virtualIndex={index}>
@@ -71,10 +98,18 @@ const FeedbacksBlock = () => {
           <div className={css.feedbackSwiperContainer}>
             <div className="feedback-pagination"></div>
             <div className={css.feedbackSwiperBtnBox}>
-              <div className="swaperBtnPrev">
+              <div
+                className={`swaperBtnPrev ${
+                  isStart ? css.feedbackSwiperBtnDisabled : ""
+                }`}
+              >
                 <SwiperBtnPrev />
               </div>
-              <div className="swaperBtnNext">
+              <div
+                className={`swaperBtnNext ${
+                  isEnd && !hasNextPage ? css.feedbackSwiperBtnDisabled : ""
+                }`}
+              >
                 <SwiperBtnNext />
               </div>
             </div>

@@ -14,13 +14,17 @@ api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError<{ error?: string; errors?: Array<{ msg: string }> }>) => {
     const originalRequest = error.config as typeof error.config & { _retry?: boolean };
+    const url = originalRequest?.url || '';
 
-    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+    const skipRefreshUrls = ['/users/me', '/auth/refresh', '/auth/login', '/auth/register'];
+    const shouldSkipRefresh = skipRefreshUrls.some(skipUrl => url.includes(skipUrl));
+
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry && !shouldSkipRefresh) {
       originalRequest._retry = true;
       try {
         await api.post('/auth/refresh');
         return api(originalRequest);
-      } catch (refreshError) {
+      } catch {
         return Promise.reject(error);
       }
     }
@@ -42,5 +46,5 @@ export const authApi = {
 
   refresh: () => api.post('/auth/refresh'),
 
-  getMe: () => api.get('/auth/me'),
+  getMe: () => api.get('/users/me', { validateStatus: (status) => status < 500 }),
 };

@@ -1,11 +1,11 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Virtual } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import FeedbackItem from "./FeedbackItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import css from "./FeedbacksBlock.module.css";
 import { fetchFeedbacks } from "@/lib/api/clientApi";
 import EmptyFeedbacks from "../EmptyFeedback/EmptyFeedbacks";
@@ -13,27 +13,29 @@ import SwiperBtnPrev from "./SwiperButton/SwiperBtnPrev";
 import SwiperBtnNext from "./SwiperButton/SwiperBtnNext";
 import EmptyUserFeedbacks from "../EmptyFeedback/EmptyUserFeedbacks";
 import { useState } from "react";
+import EmptyUserPersonalFeedbacks from "../EmptyFeedback/EmptyUserPersonalFeedbacks";
 
 interface FeedbacksBlockProps {
   toolId?: string;
   userId?: string;
+  isOwner?: boolean;
 }
 
-const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
+const FeedbacksBlock = ({
+  toolId,
+  userId,
+  isOwner = false,
+}: FeedbacksBlockProps) => {
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const { data, isSuccess, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["feedbackAllKey", toolId, userId],
-      initialPageParam: 1,
-      queryFn: ({ pageParam }) =>
-        fetchFeedbacks({ page: pageParam, toolId, userId }),
-      getNextPageParam: (lastPage) =>
-        lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
-    });
+  const { data, isSuccess } = useQuery({
+    queryKey: ["feedbackAllKey", toolId, userId],
+    queryFn: () => fetchFeedbacks({ page: 1, toolId, userId }),
+  });
 
-  const allFeedbacks = data?.pages.flatMap((p) => p.feedbacks) ?? [];
+  const allFeedbacks = data?.feedbacks ?? [];
+
   const hasFeedbacks = isSuccess && allFeedbacks.length > 0;
   const hasNoFeedbacks = isSuccess && allFeedbacks.length === 0;
 
@@ -53,12 +55,15 @@ const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
         )}
       </div>
       {hasNoFeedbacks && isToolPage && <EmptyFeedbacks />}
-      {hasNoFeedbacks && isUserPage && <EmptyUserFeedbacks />}
+      {hasNoFeedbacks && isUserPage && isOwner && <EmptyUserFeedbacks />}
+      {hasNoFeedbacks && isUserPage && isOwner && (
+        <EmptyUserPersonalFeedbacks />
+      )}
       {hasFeedbacks && (
         <>
           <Swiper
             className={css.feedbackSwiper}
-            modules={[Navigation, Virtual, Pagination]}
+            modules={[Navigation, Pagination]}
             navigation={{
               nextEl: ".swaperBtnNext",
               prevEl: ".swaperBtnPrev",
@@ -74,12 +79,6 @@ const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
               768: { slidesPerView: 2 },
               1440: { slidesPerView: 3 },
             }}
-            virtual
-            onReachEnd={() => {
-              if (hasNextPage && !isFetchingNextPage) {
-                fetchNextPage();
-              }
-            }}
             onSwiper={(swiper) => {
               setIsStart(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
@@ -89,8 +88,8 @@ const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
               setIsEnd(swiper.isEnd);
             }}
           >
-            {allFeedbacks.map((feedback, index) => (
-              <SwiperSlide key={feedback._id} virtualIndex={index}>
+            {allFeedbacks.map((feedback) => (
+              <SwiperSlide key={feedback._id}>
                 <FeedbackItem feedback={feedback} />
               </SwiperSlide>
             ))}
@@ -107,7 +106,7 @@ const FeedbacksBlock = ({ toolId, userId }: FeedbacksBlockProps) => {
               </div>
               <div
                 className={`swaperBtnNext ${
-                  isEnd && !hasNextPage ? css.feedbackSwiperBtnDisabled : ""
+                  isEnd ? css.feedbackSwiperBtnDisabled : ""
                 }`}
               >
                 <SwiperBtnNext />

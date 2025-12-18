@@ -12,7 +12,11 @@ export default function Footer({ isAuthenticated }: FooterProps) {
       <div className={styles.top}>
         {/* Logo */}
         <Link href="/" className={styles.logo} aria-label="ToolNext home">
-          <svg width="175" height="32" viewBox="0 0 175 32" aria-hidden="true">
+          <svg
+            className={styles.logoSvg}
+            viewBox="0 0 175 32"
+            aria-hidden="true"
+          >
             <use href="/sprite/sprite.svg#icon-footer-logo" />
           </svg>
         </Link>
@@ -44,7 +48,7 @@ export default function Footer({ isAuthenticated }: FooterProps) {
               rel="noopener noreferrer"
               aria-label="Facebook"
             >
-              <svg width="24" height="24">
+              <svg className={styles.socialSvg}>
                 <use href="/sprite/sprite.svg#icon-Facebook" />
               </svg>
             </a>
@@ -57,7 +61,7 @@ export default function Footer({ isAuthenticated }: FooterProps) {
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
-              <svg width="24" height="24">
+              <svg className={styles.socialSvg}>
                 <use href="/sprite/sprite.svg#icon-Instagram" />
               </svg>
             </a>
@@ -67,7 +71,10 @@ export default function Footer({ isAuthenticated }: FooterProps) {
 
       <div className={styles.divider} />
 
-      <p className={styles.copy}>© {new Date().getFullYear()} ToolNext. Всі права захищені.</p>
+      <p className={styles.copy}>
+        © <span className={styles.year}>{new Date().getFullYear()}</span>{" "}
+        ToolNext. Всі права захищені.
+      </p>
     </footer>
   );
 }

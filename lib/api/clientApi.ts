@@ -1,10 +1,12 @@
-import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
+import { BookingResponse, CreateBookingRequest} from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
 } from "@/types/Feedback";
+import { User } from "@/types/User";
+import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
@@ -38,4 +40,16 @@ export async function fetchFeedbacks({
     },
   });
   return request.data;
+}
+
+export const fetchToolById = async (toolId: string): Promise<Tool> => {
+  const response = await api.get<Tool>(`/tools/${toolId}`);
+  console.log(response.data);
+  return response.data;
+}
+
+export const fetchUserById = async (userId: string): Promise<User> => {
+  const response = await api.get<User>(`/user/${userId}`);
+  console.log(response.data);
+  return response.data;
 }

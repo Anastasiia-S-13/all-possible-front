@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 
-import { Tool } from "@/models/Tool";
 import css from "../../app/(site)/tools/[toolId]/ToolDetails.module.css";
-import { User } from "@/models/User";
+
+import { Tool } from "@/types/Tool";
+import { User } from "@/types/User";
 interface ToolInfoBlockProps {
   tool: Pick<Tool, "name" | "pricePerDay" | "description" | "specifications">;
   user: User;

@@ -19,7 +19,7 @@ api.interceptors.response.use(
       try {
         await api.post("/auth/refresh");
         return api(originalRequest);
-      } catch (refreshError) {
+      } catch {
         return Promise.reject(error);
       }
     }

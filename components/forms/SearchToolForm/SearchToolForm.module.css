@@ -10,33 +10,6 @@
     }
 }
 
-/* .field {
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.375rem;
-    border: 2px solid rgb(255, 255, 255);
-    background: transparent;
-
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-
-    font-size: 1rem;
-    line-height: 150%;
-    color: rgb(255, 255, 255);
-
-    &::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-    }
-
-    &:focus,
-    &:focus-visible {
-        border: 2px solid #8808CC;
-    }
-
-    @media (min-width: 768px) {
-        width: 100%;
-    }
-} */
-
 .field {
     padding: 0.5rem 0.75rem;
     border-radius: 0.375rem;

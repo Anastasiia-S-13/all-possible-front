@@ -67,6 +67,12 @@
   gap: 16px;
 }
 
+.feedbackSwiperBtnDisabled {
+  background: var(--color-scheme-1-foreground);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .feedbackSwiperContainer :global(.feedback-pagination) {
   display: flex;
   flex-direction: row;

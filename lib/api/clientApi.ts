@@ -6,7 +6,7 @@ import { User,  EditProfileData} from '../../types/User';
 import { fetchFeedbacksProps } from "@/type/Feedback";
 
 export async function getProfile(): Promise<User> {
-  const res = await fetch('/api/profile');
+  const res = await fetch('/api/users/me');
   if (!res.ok) throw new Error('Не вдалося завантажити профіль');
   return res.json();
 }

@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import css from './ProfileEdit.module.css';
+import css from './EditProfile.module.css';
 import iziToast from 'izitoast';
 import { EditProfileData } from '../../../types/User';
 import { getProfile, updateProfile } from "@/lib/api/clientApi";

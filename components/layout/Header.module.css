@@ -50,9 +50,9 @@
 }
 
 /* ================= BUTTONS ================= */
-.signupButton {
-  min-width: 178px;
-  height: 40px;
+.signupButton,
+.publishButton {
+  padding: 8px 20px;
   background-color: #8808cc;
   color: #fff;
   border-radius: 6px;
@@ -60,7 +60,18 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 24px;
+  border: 1px solid #8808cc;
+  transition: background-color 0.25s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.signupButton:hover,
+.publishButton:hover {
+  background-color: #6b06a3;
 }
 
 /* ================= USER ================= */
@@ -73,6 +84,13 @@
 .userAvatar {
   width: 32px;
   height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userAvatarPlaceholder {
+  width: 32px;
+  height: 32px;
   background-color: #8808cc;
   color: #fff;
   border-radius: 50%;
@@ -80,10 +98,42 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-size: 12px;
 }
 
 .userName {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  line-height: 18px;
+}
+
+/* ================= DIVIDER ================= */
+.divider {
+  width: 1px;
+  height: 39px;
+  background-color: #000;
+  display: none;
+}
+
+/* ================= LOGOUT ================= */
+.logoutButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.logoutButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logoutButton:hover {
+  opacity: 0.7;
 }
 
 /* ================= BURGER ================= */
@@ -100,13 +150,8 @@
   justify-content: center;
 }
 
-/* ================= HELPERS ================= */
-.publishButton {
-  display: none;
-}
-
 /* ================= TABLET ================= */
-@media (min-width: 768px) and (max-width: 1439px) {
+@media (min-width: 768px) {
   .publishButton {
     display: flex;
   }
@@ -130,15 +175,19 @@
     margin-left: 16px;
   }
 
-  .userBlock {
-    display: flex;
-    margin-left: 16px;
-  }
   .signupButton {
     display: flex;
   }
 
-  .publishButton {
+  .userBlock {
+    display: flex;
+  }
+
+  .divider {
+    display: block;
+  }
+
+  .logoutButton {
     display: flex;
   }
 }

@@ -59,7 +59,6 @@ export const useAuthStore = create<AuthState>()(
         try {
           await authApi.logout();
         } catch {
-          // Ігноруємо помилки при виході
         } finally {
           set({
             user: null,
@@ -70,13 +69,29 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
+        const stored = localStorage.getItem('auth-storage');
+        const hasStoredAuth = stored && JSON.parse(stored)?.state?.isAuthenticated;
+
+        if (!hasStoredAuth) {
+          set({ user: null, isAuthenticated: false, isLoading: false });
+          return;
+        }
+
         try {
           const response = await authApi.getMe();
-          set({
-            user: response.data.user,
-            isAuthenticated: true,
-            isLoading: false,
-          });
+          if (response.status === 200 && response.data.user) {
+            set({
+              user: response.data.user,
+              isAuthenticated: true,
+              isLoading: false,
+            });
+          } else {
+            set({
+              user: null,
+              isAuthenticated: false,
+              isLoading: false,
+            });
+          }
         } catch {
           set({
             user: null,

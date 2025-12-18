@@ -42,13 +42,9 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           ))}
         </ul>
       </div>
-      {isAuthenticated ? (
-        <Link className={css.booking_btn} href={`/booking`}>
-          Забронювати
-        </Link>
-      ) : (
-        "Not authenticated(here will be modal xD)"
-      )}
+      <Link className={css.booking_btn} href={`/booking`}>
+        Забронювати
+      </Link>
     </div>
   );
 };

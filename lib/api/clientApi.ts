@@ -1,4 +1,4 @@
-import { BookingResponse, CreateBookingRequest} from "@/types/Booking";
+import { BookingResponse, CreateBookingPayload, CreateBookingRequest} from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {

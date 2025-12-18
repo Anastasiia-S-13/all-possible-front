@@ -1,9 +1,14 @@
 // lib/api/clientApi.ts
+
+import { User,  EditProfileData} from '../../types/User';
+
 import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
-import { User,  EditProfileData} from '../../types/User';
-import { fetchFeedbacksProps } from "@/type/Feedback";
+import {
+  fetchFeedbacksProps,
+  fetchFeedbacksRequestProps,
+} from "@/types/Feedback";
 
 export async function getProfile(): Promise<User> {
   const res = await fetch('/api/users/me');
@@ -44,12 +49,16 @@ export const createBooking = async (
   }
 };
 
-export async function fetchFeedbacks(
-  page: number
-): Promise<fetchFeedbacksProps> {
+export async function fetchFeedbacks({
+  page,
+  toolId,
+  userId,
+}: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> {
   const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
     params: {
       page,
+      ...(toolId && { toolId }),
+      ...(userId && { userId }),
     },
   });
   return request.data;

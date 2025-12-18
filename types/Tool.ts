@@ -1,8 +1,7 @@
-// types/Tool.ts
-export interface Tool {
-  id: string;
-  title: string;
-  description?: string;
-  image?: string;
-
-}
+export type Tool = {
+  _id: string;
+  name: string;
+  images: string;
+  pricePerDay: number;
+  rating?: number;
+};

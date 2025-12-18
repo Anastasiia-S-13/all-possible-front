@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "@/styles/variables.css";
 import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { AuthProvider, ToastProvider } from "@/providers";
 import Footer from "@/components/layout/Footer/Footer";
 
 const workSans = localFont({
@@ -63,12 +65,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.variable}>
         <TanStackProvider>
-          {/* <Header /> */}
-          <main>
-            {children}
-            {modal}
-          </main>
-          <Footer isAuthenticated={isAuthenticated} />
+          <AuthProvider>
+            <ToastProvider>
+              {/* <Header /> */}
+              <main>
+                {children}
+                {modal}
+              </main>
+              <Footer isAuthenticated={isAuthenticated} />
+            </ToastProvider>
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

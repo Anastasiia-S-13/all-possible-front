@@ -1,7 +1,14 @@
 .calendar {
     border: 2px solid var(--color-scheme-1-border);
     border-radius: 6px;
-    background: #ffffff;
+    background: var(--color-white);
+    transition: box-shadow 0.2s ease;
+}
+
+.calendar:hover,
+.calendar:focus {
+    box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.223);
+
 }
 
 .header {
@@ -59,6 +66,10 @@
 }
 
 .weekDay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 18px;
@@ -78,7 +89,7 @@
 }
 
 .day {
-    aspect-ratio: 1;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,13 +138,11 @@
 .rangeStart {
     background: var(--color-electric-violet-lighter) !important;
     color: var(--color-scheme-1-text) !important;
-    border-radius: 4px 0 0 4px;
 }
 
 .rangeEnd {
     background: var(--color-electric-violet-lighter) !important;
     color: var(--color-scheme-1-text) !important;
-    border-radius: 0 4px 4px 0;
 }
 
 .today {
@@ -144,3 +153,9 @@
 .weekend {
     color: var(--color-neutral-dark);
 }
+
+
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 1440px) {}

@@ -12,7 +12,7 @@ export default function ProfilePlaceholder({ isOwner }: { isOwner: boolean }) {
   };
 
   return (
-    <section className={styles.section}>
+    <div className={styles.placeholderContainer}>
       <h1 className={styles.extraTitle}></h1>
 
       <p className={styles.title}>
@@ -34,6 +34,6 @@ export default function ProfilePlaceholder({ isOwner }: { isOwner: boolean }) {
       >
         {isOwner ? "Опублікувати інструмент" : "Всі інструменти"}
       </button>
-    </section>
+    </div>
   );
 }

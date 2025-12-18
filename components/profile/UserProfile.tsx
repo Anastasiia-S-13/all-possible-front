@@ -11,13 +11,13 @@ export default function UserProfile({ user, isOwner }: UserProfileProps) {
   const router = useRouter();
 
   return (
-    <div className={css.container}>
+    <div className={css.userProfileContainer}>
       <div className={css.avatar}>{firstletter}</div>
       <h2 className={css.username}>{user.name}</h2>
 
       {isOwner && (
         <button
-          className={css.editProfileButton}
+          className={css.button}
           onClick={() => router.push('/profile/edit')}
         >
           Редагувати профіль

@@ -1,6 +1,6 @@
 /* components/profile/UserProfile.module.css */
 
-.container {
+.userProfileContainer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -12,8 +12,8 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background-color: #4f46e5;
-    color: #ffffff;
+    background-color: var(--color-electric-violet);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,7 +28,7 @@
     color: #1a1a1a;
 }
 
-.editProfileButton {
+.button {
     width: 168px;
     height: 40px;
     margin-left: auto;
@@ -42,18 +42,17 @@
     border: 1px solid var(--color-electric-violet);
     border-radius: 6px;
     border: none;
-    cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 
-.editProfileButton:hover {
+.button:hover {
     background-color: var(--color-white);
     border: 2px solid var(--color-electric-violet);
     color: var(--color-scheme-1-text);
 }
 
-.editProfileButton:focus {
+.button:focus {
     background-color: var(--color-electric-violet-lighter);
     border: 2px solid var(--color-neutral-darkest);
     color: var(--color-scheme-1-text);

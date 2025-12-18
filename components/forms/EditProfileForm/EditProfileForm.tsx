@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './ProfileEdit.module.css';
+import css from './ProfileEdit.module.css';
 import iziToast from 'izitoast';
 import { EditProfileData } from '../../../types/User';
 import { getProfile, updateProfile } from "@/lib/api/clientApi";
@@ -35,7 +35,7 @@ export default function ProfileEditForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setUser(prev => ({ ...prev, [name]: value }));
-    setErrors(prev => ({ ...prev, [name]: undefined })); // очищаємо помилку під час редагування
+    setErrors(prev => ({ ...prev, [name]: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,24 +43,25 @@ export default function ProfileEditForm() {
     setErrors({});
 
     try {
-      // Валідація через Yup
       await profileSchema.validate(user, { abortEarly: false });
 
-      // Оновлення профілю
       const data = await updateProfile(user);
 
       iziToast.success({ title: 'Успіх', message: 'Профіль оновлено!' });
       setUser(data);
 
     } catch (error) {
-      if (error instanceof ValidationError) {
+           if (error instanceof ValidationError) {
         const newErrors: FormErrors = {};
         error.inner.forEach(err => {
-          if (err.path) newErrors[err.path as keyof EditProfileData] = err.message;
-          iziToast.error({ title: 'Помилка', message: err.message });
+          if (err.path) {
+            newErrors[err.path as keyof EditProfileData] = err.message;
+          }
         });
         setErrors(newErrors);
-      } else if (error instanceof Error) {
+        return;
+      }
+      if (error instanceof Error) {
         iziToast.error({ title: 'Помилка', message: error.message });
       } else {
         iziToast.error({ title: 'Помилка', message: 'Сервер недоступний' });
@@ -71,50 +72,59 @@ export default function ProfileEditForm() {
   if (loading) return <p>Завантаження...</p>;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.formGroup}>
-        <label className={styles.formLabel} htmlFor="name">Ім’я</label>
+    <form className={css.form} onSubmit={handleSubmit}>
+      <h1 className={css.formTitle}>Редагування профілю</h1>
+
+      <div className={css.formGroup}>
+        <label className={css.formLabel} htmlFor="name">Ім’я</label>
         <input
-          className={`${styles.formInput} ${errors.name ? styles.inputError : ''}`}
+          className={`${css.formInput} ${errors.name ? css.inputError : ''}`}
           type="text"
           id="name"
           name="name"
           value={user.name}
           onChange={handleChange}
+          placeholder="Наприклад: Антон Петренко"
           aria-invalid={!!errors.name}
           aria-describedby={errors.name ? 'name-error' : undefined}
         />
-        {errors.name && <p id="name-error" className={styles.errorText}>{errors.name}</p>}
+        {errors.name && (
+          <p id="name-error" className={css.errorText}>{errors.name}</p>
+        )}
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.formLabel} htmlFor="email">Email</label>
+      <div className={css.formGroup}>
+        <label className={css.formLabel} htmlFor="email">Пошта</label>
         <input
-          className={`${styles.formInput} ${errors.email ? styles.inputError : ''}`}
+          className={`${css.formInput} ${errors.email ? css.inputError : ''}`}
           type="email"
           id="email"
           name="email"
           value={user.email}
           onChange={handleChange}
+          placeholder="example@email.com"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? 'email-error' : undefined}
         />
-        {errors.email && <p id="email-error" className={styles.errorText}>{errors.email}</p>}
+        {errors.email && (
+          <p id="email-error" className={css.errorText}>{errors.email}</p>
+        )}
       </div>
 
-      <div className={styles.formGroup}>
-        <label className={styles.formLabel} htmlFor="bio">Біо</label>
+      <div className={css.formGroup}>
+        <label className={css.formLabel} htmlFor="bio">Біо</label>
         <textarea
-          className={styles.formTextarea}
+          className={css.formTextarea}
           id="bio"
           name="bio"
           value={user.bio}
           onChange={handleChange}
+          placeholder="Розкажіть трохи про себе та інструменти, які пропонуєте"
         />
       </div>
 
-      <div className={styles.actions}>
-        <button className={styles.button} type="submit">Зберегти</button>
+      <div className={css.actions}>
+        <button className={css.button} type="submit">Зберегти</button>
       </div>
     </form>
   );

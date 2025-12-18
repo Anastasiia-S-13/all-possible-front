@@ -1,57 +1,59 @@
 /* components/profile/ProfilePlaceholder.module.css */
 
-.section {
+.placeholderContainer {
+    min-width: 320px;
+    max-width: 375px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 48px 16px;
-    text-align: center;
-    gap: 16px;
+    padding: 64px 20px;
+    text-align: left;
 }
 
 .extraTitle {
     font-family: var(--font-family);
     font-weight: 700;
-    font-size: 48px;
+    font-size: 36px;
     line-height: 1.2;
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
-    margin-bottom: 32px;
+    padding-bottom: 32px;
 }
 
 .title {
     font-family: var(--font-family);
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1.4;
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
+    padding-bottom: 16px;
 }
 
 .subtitle {
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     color: var(--color-scheme-1-text);
+    padding-bottom: 16px;
 }
 
 .button {
     border: 1px solid var(--color-electric-violet);
     border-radius: 6px;
     padding: 8px 20px;
-    width: 244px;
-    height: 40px;
+    width: 335px;
+    height: 37px;
     background-color: var(--color-electric-violet);
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--color-white);
-    cursor: pointer;
     transition: background-color 0.2s;
-    padding-top: 16px;
 }
 
 .button:hover {
@@ -66,9 +68,41 @@
     color: var(--color-scheme-1-text);
 }
 
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .button {
+        width: 152px;
+        height: 37px;
+        font-size: 14px;
+    }
+}
+
 @media only screen and (min-width: 1440px) {
     .container {
         max-width: 1440px;
-        padding: 0px 64px;
+        padding: 0px 64px 112px 64px;
+    }
+
+    .extraTitle {
+        font-size: 48px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .button {
+        width: 224px;
+        height: 40px;
+        font-size: 16px;
     }
 }

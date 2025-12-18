@@ -1,14 +1,15 @@
 /* app/(site)/profile/[userId]Profile.module.css */
 
-.container {
+.profileContainer {
     min-width: 320px;
     max-width: 375px;
     margin: 0 auto;
     padding: 48px 20px 0px 20px;
-    min-height: 183px;
+    min-height: 231px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--color-scheme-3-background);
 }
 
 .avatar {
@@ -16,8 +17,8 @@
     height: 128px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #4f46e5;
-    color: #ffffff;
+    background-color: var(--color-scheme-2-accent);
+    color: var(--color-white);
     gap: 24px;
     display: flex;
     align-items: center;
@@ -37,7 +38,8 @@
 @media only screen and (min-width: 768px) {
     .container {
         max-width: 768px;
-        padding: 0px 32px;
+        padding-left: 32px;
+        padding-right: 32px;
         min-height: 247px;
         flex-direction: row;
         align-items: center;
@@ -57,6 +59,7 @@
 @media only screen and (min-width: 1440px) {
     .container {
         max-width: 1440px;
-        padding: 0px 64px;
+        padding-left: 64px;
+        padding-right: 64px;
     }
 }

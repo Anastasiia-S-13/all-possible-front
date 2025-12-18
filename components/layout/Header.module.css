@@ -1,0 +1,144 @@
+/* ================= HEADER ================= */
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: #f9fafb;
+  box-sizing: border-box;
+}
+
+/* ================= LOGO ================= */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.logoText {
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+}
+
+/* ================= NAV ================= */
+.nav {
+  display: none;
+  margin-left: auto;
+  gap: 32px;
+}
+
+.nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================= ACTIONS ================= */
+.actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 16px;
+}
+
+/* ================= BUTTONS ================= */
+.signupButton {
+  min-width: 178px;
+  height: 40px;
+  background-color: #8808cc;
+  color: #fff;
+  border-radius: 6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================= USER ================= */
+.userBlock {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  background-color: #8808cc;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.userName {
+  font-size: 14px;
+}
+
+/* ================= BURGER ================= */
+.burger {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #111;
+  border-radius: 8px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= HELPERS ================= */
+.publishButton {
+  display: none;
+}
+
+/* ================= TABLET ================= */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .publishButton {
+    display: flex;
+  }
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 1440px) {
+  .header {
+    padding: 16px 64px;
+  }
+
+  .nav {
+    display: flex;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .actions {
+    margin-left: 16px;
+  }
+
+  .userBlock {
+    display: flex;
+    margin-left: 16px;
+  }
+  .signupButton {
+    display: flex;
+  }
+
+  .publishButton {
+    display: flex;
+  }
+}

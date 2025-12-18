@@ -1,15 +1,22 @@
 import { api } from "./api";
-import { Tool, BookingResponse, CreateBookingRequest } from "@/types/Booking";
+import {
+  Tool,
+  BookingResponse,
+  CreateBookingRequest,
+  CreateBookingPayload,
+} from "@/types/Booking";
 
 export const createBooking = async (
-  bookingData: CreateBookingRequest & { userId: string }
+  bookingData: CreateBookingPayload
 ): Promise<BookingResponse> => {
-  const response = await api.post<BookingResponse>(
-    `/${bookingData.toolId}/bookings`,
-    bookingData
-  );
+  try {
+    const { userId, ...payload } = bookingData;
+    const response = await api.post(`/bookings`, payload);
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error creating booking: ${error}`);
+  }
 };
 
 export const getToolById = async (toolId: string): Promise<Tool> => {

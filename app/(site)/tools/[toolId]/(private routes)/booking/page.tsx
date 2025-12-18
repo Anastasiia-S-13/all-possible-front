@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import Link from "next/link";
 import Calendar from "@/components/Calendar/Calendar";
 import BookingForm from "@/components/BookingForm/BookingForm";
 import { Tool, DateRange } from "@/types/Booking";
-import { BookingFormSchema } from "@/validation/bookingSchema";
 import { createBooking, getToolById } from "@/lib/api/bookingApi";
-import styles from "./page.module.css";
+import styles from "./ToolBooking.module.css";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/authStore";
+import { BookingFormSchema } from "@/lib/validation/validateBooking";
 
 interface BookingPageProps {
-  params: { toolId: string };
+  params: Promise<{ toolId: string }>;
 }
 
 export default function BookingPage({ params }: BookingPageProps) {
-  const { toolId } = params;
+  const { toolId } = use(params);
 
   const queryClient = useQueryClient();
   const { isAuthenticated, isLoading: authLoading, user } = useAuthStore();
@@ -53,7 +53,8 @@ export default function BookingPage({ params }: BookingPageProps) {
         old
           ? {
               ...old,
-              bookedPeriods: [...old.bookedPeriods, newPeriod],
+              bookedPeriods: [...(old.bookedPeriods || []), newPeriod],
+              bookedDates: [...(old.bookedDates || []), newPeriod],
             }
           : old
       );
@@ -75,13 +76,21 @@ export default function BookingPage({ params }: BookingPageProps) {
       return { success: false, message: "Виберіть період бронювання" };
     }
 
+    // Найнадійніший спосіб відправити "чисту" дату без зміщення часових поясів
+    const toLocalISOString = (date: Date) => {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}T00:00:00.000Z`;
+    };
+
     const bookingData = {
       toolId,
       firstName: formData.firstName,
       lastName: formData.lastName,
       phone: formData.phone,
-      startDate: selectedRange.startDate.toISOString(),
-      endDate: selectedRange.endDate.toISOString(),
+      startDate: toLocalISOString(selectedRange.startDate),
+      endDate: toLocalISOString(selectedRange.endDate),
       deliveryCity: formData.deliveryCity,
       novaPoshtaBranch: formData.novaPoshtaBranch,
       userId,
@@ -117,7 +126,7 @@ export default function BookingPage({ params }: BookingPageProps) {
           <div className={styles.loginRequired}>
             <h2>Потрібна авторизація</h2>
             <p>Для бронювання інструменту потрібно увійти в систему</p>
-            <Link href="/login" className={styles.loginBtn}>
+            <Link href="/auth/login" className={styles.loginBtn}>
               Увійти
             </Link>
           </div>
@@ -152,7 +161,10 @@ export default function BookingPage({ params }: BookingPageProps) {
               <p className={styles.sectionTitle}>Виберіть період бронювання</p>
 
               <Calendar
-                reservedPeriods={tool.bookedPeriods || []}
+                reservedPeriods={[
+                  ...(tool.bookedPeriods || []),
+                  ...(tool.bookedDates || []),
+                ]}
                 selectedRange={selectedRange}
                 onRangeChange={setSelectedRange}
               />

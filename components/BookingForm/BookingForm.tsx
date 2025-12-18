@@ -3,9 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { bookingSchema, BookingFormSchema } from "@/validation/bookingSchema";
-import { DateRange } from "@/types/booking";
-import { calculateTotalPrice } from "@/lib/util/calculateTotalPrice";
+import { toast } from "react-hot-toast";
+import { DateRange } from "@/types/Booking";
+import {
+  BookingFormSchema,
+  bookingSchema,
+} from "@/lib/validation/validateBooking";
+import { calculateTotalPrice } from "@/lib/utils/calculateRating";
 import styles from "./BookingForm.module.css";
 
 const STORAGE_KEY = "bookingFormData";
@@ -27,8 +31,6 @@ export default function BookingForm({
   onSubmit,
   children,
 }: BookingFormProps) {
-  const [serverError, setServerError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -71,8 +73,7 @@ export default function BookingForm({
           });
         }, 0);
       }
-    } catch (error) {
-      console.warn("Failed to load saved form data:", error);
+    } catch {
       localStorage.removeItem(STORAGE_KEY);
     } finally {
       setIsLoaded(true);
@@ -105,19 +106,17 @@ export default function BookingForm({
 
   const handleFormSubmit = async (data: BookingFormSchema) => {
     if (!selectedRange.startDate || !selectedRange.endDate) {
-      setServerError("Будь ласка, виберіть період бронювання");
+      toast.error("Будь ласка, виберіть період бронювання");
       return;
     }
 
     setIsSubmitting(true);
-    setServerError(null);
-    setSuccessMessage(null);
 
     try {
       const result = await onSubmit(data);
 
       if (result.success) {
-        setSuccessMessage("Бронювання успішно створено!");
+        toast.success("Бронювання успішно створено!");
         reset({
           firstName: "",
           lastName: "",
@@ -125,12 +124,12 @@ export default function BookingForm({
           deliveryCity: "",
           novaPoshtaBranch: "",
         });
-        localStorage.removeItem(STORAGE_KEY); //  очищаємо тільки при успіху
+        localStorage.removeItem(STORAGE_KEY); // очищаємо тільки при успіху
       } else {
-        setServerError(result.message || "Помилка при створенні бронювання");
+        toast.error(result.message || "Помилка при створенні бронювання");
       }
     } catch {
-      setServerError("Помилка з'єднання з сервером. Спробуйте пізніше.");
+      toast.error("Помилка з'єднання з сервером. Спробуйте пізніше.");
     } finally {
       setIsSubmitting(false);
     }
@@ -187,6 +186,7 @@ export default function BookingForm({
           <span className={styles.error}>{errors.phone.message}</span>
         )}
       </div>
+
       {/*календар*/}
       {children}
 
@@ -220,6 +220,7 @@ export default function BookingForm({
             }
             {...register("novaPoshtaBranch")}
           />
+
           {errors.novaPoshtaBranch && (
             <span className={styles.error}>
               {errors.novaPoshtaBranch.message}
@@ -227,9 +228,6 @@ export default function BookingForm({
           )}
         </div>
       </div>
-
-      {serverError && <div className={styles.serverError}>{serverError}</div>}
-      {successMessage && <div className={styles.success}>{successMessage}</div>}
 
       <div className={styles.priceRow}>
         <span className={styles.price}>Ціна: {totalPrice} грн</span>

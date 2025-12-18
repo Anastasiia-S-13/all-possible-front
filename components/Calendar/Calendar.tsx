@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { BookedPeriod, DateRange } from "@/types/booking";
-import { buildCalendar, CalendarDay } from "@/lib/util/buildCalendar";
+import { BookedPeriod, DateRange } from "@/types/Booking";
 import styles from "./Calendar.module.css";
+import { buildCalendar, CalendarDay } from "@/lib/utils/buildCalendar";
 
 interface CalendarProps {
   reservedPeriods: BookedPeriod[];
@@ -39,15 +39,40 @@ export default function Calendar({
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
+  // Допоміжна функція для отримання YYYY-MM-DD у локальному часі
+  const formatDateLocal = (date: Date) => {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  };
+
   const reservedDates = useMemo(() => {
     const dates = new Set<string>();
-    reservedPeriods.forEach((period) => {
-      const start = new Date(period.startDate);
-      const end = new Date(period.endDate);
-      const current = new Date(start);
-      while (current <= end) {
-        dates.add(current.toISOString().split("T")[0]);
-        current.setDate(current.getDate() + 1);
+    reservedPeriods.forEach((period: BookedPeriod) => {
+      if (!period) return;
+
+      const addDatesForPeriod = (startStr: string, endStr: string) => {
+        const start = new Date(startStr);
+        const end = new Date(endStr);
+        const current = new Date(
+          //локальний час
+          start.getFullYear(),
+          start.getMonth(),
+          start.getDate()
+        );
+        const last = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+        while (current <= last) {
+          dates.add(formatDateLocal(current));
+          current.setDate(current.getDate() + 1);
+        }
+      };
+
+      if (period.startDate && period.endDate) {
+        addDatesForPeriod(period.startDate, period.endDate);
+      } else if (typeof period === "string") {
+        dates.add(formatDateLocal(new Date(period)));
       }
     });
     return dates;
@@ -56,8 +81,8 @@ export default function Calendar({
   const days = useMemo(() => buildCalendar(year, month), [year, month]);
 
   const isDateReserved = (day: number): boolean => {
-    const dateStr = new Date(year, month, day).toISOString().split("T")[0];
-    return reservedDates.has(dateStr);
+    const d = new Date(year, month, day);
+    return reservedDates.has(formatDateLocal(d));
   };
 
   const isDateInPast = (day: number): boolean => {

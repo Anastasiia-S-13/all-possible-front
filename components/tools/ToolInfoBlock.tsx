@@ -13,9 +13,8 @@ interface ToolInfoBlockProps {
   user: User;
 }
 
-const { isAuthenticated } = useAuthStore();
-
 const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
+  const { isAuthenticated } = useAuthStore();
   return (
     <div className={css.tool_details_content}>
       <h1 className={css.tool_details_heading}>{tool.name}</h1>
@@ -29,7 +28,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           alt="User avatar"
         />
         <h2 className={css.username}>{user.name}</h2>
-        <Link className={css.user_profile_btn} href={`/profile`}>
+        <Link className={css.user_profile_btn} href={`/profile/${user._id}`}>
           Переглянути профіль
         </Link>
       </div>
@@ -48,7 +47,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           Забронювати
         </Link>
       ) : (
-        
+        "Not authenticated(here will be modal xD)"
       )}
     </div>
   );

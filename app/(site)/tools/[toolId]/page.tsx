@@ -1,26 +1,24 @@
-// import {
-//   dehydrate,
-//   HydrationBoundary,
-//   QueryClient,
-// } from "@tanstack/react-query";
+"use client";
 
-type Props = {
-  params: { toolId: string };
-};
+import { use } from "react";
+import Link from "next/link";
+import styles from "../../../../components/tools/ToolCard.module.css";
 
-const ToolDetails = async ({ params }: Props) => {
-  //const { toolId } = await params;
-  //   const queryClient = new QueryClient();
+interface ToolDetailsProps {
+  params: Promise<{ toolId: string }>;
+}
 
-  //   await queryClient.prefetchQuery({
-  //     queryKey: ["tool", toolId],
-  //     // queryFn: () => getSingleTool(toolId), <-- get function
-  //   });
+export default function ToolDetailsPage({ params }: ToolDetailsProps) {
+  const { toolId } = use(params);
 
-  //   return (
-  //     <HydrationBoundary state={dehydrate(queryClient)}>Tool</HydrationBoundary>
-  //   );
-  return <div>Tool ID: {params.toolId}</div>;
-};
-
-export default ToolDetails;
+  return (
+    <div>
+      <h1>сторінка інструменту</h1>
+      <p>Це тимчасовий заповнювач для налагодження (клієнтська компонент).</p>
+      <p>Tool ID: {toolId}</p>
+      <Link href={`/tools/${toolId}/booking`} className={styles.details}>
+        бронювання інструменту
+      </Link>
+    </div>
+  );
+}

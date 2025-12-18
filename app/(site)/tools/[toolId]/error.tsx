@@ -4,8 +4,8 @@ interface ErrorProps {
   error: Error;
 }
 
-const Error = ({ error }: ErrorProps) => {
-  return <p>Could not fetch tool details. {error.message}</p>;
+const ToolError = ({ error }: ErrorProps) => {
+  return <p>Щось пішло не так. {error.message}</p>;
 };
 
-export default Error;
+export default ToolError;

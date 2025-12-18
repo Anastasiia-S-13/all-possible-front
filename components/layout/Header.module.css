@@ -12,20 +12,7 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
   flex-shrink: 0;
-}
-
-.logo {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-}
-
-.logoText {
-  font-weight: 600;
-  color: #111;
-  text-decoration: none;
 }
 
 /* ================= NAV ================= */
@@ -154,6 +141,9 @@
 @media (min-width: 768px) {
   .publishButton {
     display: flex;
+    padding: 8px 16px;
+    font-size: 14px;
+    line-height: 19px;
   }
 }
 
@@ -173,10 +163,16 @@
 
   .actions {
     margin-left: 16px;
+    gap: 16px;
   }
 
   .signupButton {
     display: flex;
+  }
+
+  .publishButton {
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .userBlock {

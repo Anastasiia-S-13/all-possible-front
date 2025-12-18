@@ -26,15 +26,15 @@ export default function Header() {
     <>
       <header className={styles.header}>
         {/* Logo */}
-        <div className={styles.logoContainer}>
-          <svg className={styles.logo} aria-hidden="true">
-            <use href="/sprite/sprite.svg#logo" />
-          </svg>
-
-          <Link href="/" className={styles.logoText}>
-            ToolNext
-          </Link>
-        </div>
+        <Link href="/" className={styles.logoContainer}>
+          <Image
+            src="/images/logo.svg"
+            alt="ToolNext"
+            width={124}
+            height={20}
+            priority
+          />
+        </Link>
 
         {/* Navigation */}
         <nav className={styles.nav}>

@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { AuthProvider, ToastProvider } from "@/providers";
 import Footer from "@/components/layout/Footer/Footer";
+import Header from "@/components/layout/Header";
 
 const workSans = localFont({
   src: [
@@ -67,7 +68,7 @@ export default function RootLayout({
         <TanStackProvider>
           <AuthProvider>
             <ToastProvider>
-              {/* <Header /> */}
+              <Header />
               <main>
                 {children}
                 {modal}

@@ -1,15 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import css from "../../app/(site)/tools/[toolId]/ToolDetails.module.css";
-
 import { Tool } from "@/types/Tool";
 import { User } from "@/types/User";
+import { useAuthStore } from "@/stores/authStore";
+
 interface ToolInfoBlockProps {
   tool: Pick<Tool, "name" | "pricePerDay" | "description" | "specifications">;
   user: User;
 }
+
+const { isAuthenticated } = useAuthStore();
+
 const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
   return (
     <div className={css.tool_details_content}>
@@ -24,7 +29,9 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           alt="User avatar"
         />
         <h2 className={css.username}>{user.name}</h2>
-        <button className={css.user_profile_btn}>Переглянути профіль</button>
+        <Link className={css.user_profile_btn} href={`/profile`}>
+          Переглянути профіль
+        </Link>
       </div>
       <p className={css.tool_description}>{tool.description}</p>
       <div className={css.tool_specs}>
@@ -36,7 +43,13 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           ))}
         </ul>
       </div>
-      <button className={css.booking_btn}>Забронювати</button>
+      {isAuthenticated ? (
+        <Link className={css.booking_btn} href={`/booking`}>
+          Забронювати
+        </Link>
+      ) : (
+        
+      )}
     </div>
   );
 };

@@ -44,12 +44,12 @@ export async function fetchFeedbacks({
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
-  console.log(response.data);
+  console.log(response.data.images);
   return response.data;
 }
 
 export const fetchUserById = async (userId: string): Promise<User> => {
-  const response = await api.get<User>(`/user/${userId}`);
+  const response = await api.get<User>(`/users/${userId}`);
   console.log(response.data);
   return response.data;
 }

@@ -8,7 +8,7 @@ export type Tool = {
   name: string;
   description: string;
   pricePerDay: number;
-  images: string[];
+  images: string;
   rating: number;
   specifications: Record<string, string>;
   rentalTerms: string,

@@ -1,32 +1,36 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import localFont from 'next/font/local'
+import "@/styles/variables.css";
+import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { AuthProvider, ToastProvider } from "@/providers";
+import FooterWithAuth from "@/components/layout/Footer/FooterWithAuth";
+import Header from "@/components/layout/Header";
 
 const workSans = localFont({
   src: [
     {
-      path: '../fonts/WorkSansRegular.ttf',
-      weight: '400',
-      style: 'normal',
+      path: "../fonts/WorkSansRegular.ttf",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../fonts/WorkSansBold.ttf',
-      weight: '700',
-      style: 'normal',
+      path: "../fonts/WorkSansBold.ttf",
+      weight: "700",
+      style: "normal",
     },
     {
-      path: '../fonts/WorkSansSemiBold.ttf',
-      weight: '600',
-      style: 'normal',
+      path: "../fonts/WorkSansSemiBold.ttf",
+      weight: "600",
+      style: "normal",
     },
     {
-      path: '../fonts/WorkSansMedium.ttf',
-      weight: '500',
-      style: 'normal',
+      path: "../fonts/WorkSansMedium.ttf",
+      weight: "500",
+      style: "normal",
     },
   ],
-  variable: '--font-work-sans',
+  variable: "--font-work-sans",
 });
 
 export const metadata: Metadata = {
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
         alt: "ToolNext",
       },
     ],
-  }
+  },
 };
 
 export default function RootLayout({
@@ -61,12 +65,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={workSans.variable}>
         <TanStackProvider>
-          {/* <Header /> */}
-          <main>
-            {children}
-            {modal}
-          </main>
-          {/* <Footer /> */}
+          <AuthProvider>
+            <ToastProvider>
+              <Header />
+              <main>
+                {children}
+                {modal}
+              </main>
+              <FooterWithAuth />
+            </ToastProvider>
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

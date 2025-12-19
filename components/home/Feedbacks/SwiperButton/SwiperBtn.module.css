@@ -1,0 +1,33 @@
+.swiperButtonPrev,
+.swiperButtonNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 10px;
+  border: 2px solid var(--color-scheme-1-border);
+  background: var(--color-scheme-1-foreground);
+  transition: background-color 0.3s ease, fill 0.3s ease, opacity 0.3s ease;
+}
+
+.swiperButtonPrev:hover,
+.swiperButtonNext:hover,
+.swiperButtonPrev:focus,
+.swiperButtonNext:focus {
+  border: 2px solid var(--color-neutral-darkest);
+  background-color: var(--color-electric-violet-lighter);
+}
+
+.swiperButtonPrev:active,
+.swiperButtonNext:active {
+  border: 2px solid var(--color-white);
+  background-color: var(--color-electric-violet);
+  fill: var(--color-scheme-1-foreground);
+}
+
+.swiperButtonPrev:disabled,
+.swiperButtonNext:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}

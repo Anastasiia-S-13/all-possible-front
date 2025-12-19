@@ -1,14 +1,20 @@
+import BenefitsBlock from "@/components/home/BenefitsBlock/BenefitsBlock";
+import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
+import RegistrationBlock from "@/components/home/RegistrationBlock";
+import HeroBlock from "@/components/home/HeroBlock/HeroBlock";
 import styles from "./page.module.css";
-import NewTool from "./(site)/tools/new/page";
+import PopularTools from "@/components/tools/PopularTools";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <h1 className={styles.title}>Ласкаво просимо</h1>
-      <NewTool />
-      <p className={styles.description}>
-        This is the main landing page of the application.
-      </p>
-    </main>
+    <>
+      <HeroBlock />
+      <div className={styles.container}>
+        <BenefitsBlock />
+        {<PopularTools />}
+        <FeedbacksBlock />
+      </div>
+      <RegistrationBlock />
+    </>
   );
 }

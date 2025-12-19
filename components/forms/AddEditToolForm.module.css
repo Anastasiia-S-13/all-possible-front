@@ -1,0 +1,44 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 400px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #6c5ce7;
+}
+
+.error {
+    color: #d63031;
+    font-size: 12px;
+}
+
+.submit {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #6c5ce7;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

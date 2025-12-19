@@ -1,7 +1,11 @@
 export type Tool = {
-  _id: string;
-  name: string;
-  images: string;
+  id: string;
+  title: string;
   pricePerDay: number;
-  rating?: number;
+  category: string;
+  rentTerms: string;
+  description: string;
+  characteristics: string;
+  imageUrl: string | null;
+  ownerId: string;
 };

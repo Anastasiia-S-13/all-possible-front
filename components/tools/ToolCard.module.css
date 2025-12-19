@@ -2,11 +2,7 @@
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
-  
- 
-
-  
-  
+  gap: 16px;
 }
 
 .image {
@@ -14,12 +10,9 @@
   aspect-ratio: 335 / 413;
   object-fit: cover;
   border-radius: 16px;
-  margin-bottom: 16px;
- 
 }
 
 .content {
-  
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -29,35 +22,54 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 1.5;
-  color: #000;
-  margin-bottom: 8px;
+  min-height: 54px;
 }
 
 .price {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
-color: #000;
-margin-bottom: 16px;
 }
 
 .rating {
   font-size: 14px;
-  color: #f5a623; 
   text-align: left;
-  margin-bottom: 8px;
 }
 
-.details {
-  
-  padding: 9.5px 12px;
+.detailsBtn {
+  padding: 8px 10px;
   text-align: center;
-  font-size: 14px;
   font-weight: 500;
-  color: #000;
+  font-size: 14px;
+  line-height: 1.5;
   border: 2px solid #000;
   border-radius: 6px;
-  text-decoration: none;
-  width: 100%;
-  box-sizing: border-box;
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.detailsBtn:hover,
+.detailsBtn:focus {
+  background-color: #e7cdf4;
+}
+
+.detailsBtn:active {
+  background-color: #8808cc;
+  color: #fff;
+  border-color: #8808cc;
+}
+
+@media only screen and (min-width: 1440px) {
+  .name {
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .detailsBtn {
+    font-size: 16px;
+    padding: 6.5px 10px;
+  }
 }

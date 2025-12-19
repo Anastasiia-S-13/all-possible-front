@@ -15,3 +15,7 @@ export type Tool = {
   bookedDates: BookingResponse[];
   feedBacks: Feedback[];
 };
+
+export interface ToolHttpRequest {
+  tools: Tool[];
+}

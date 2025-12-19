@@ -1,0 +1,66 @@
+/* components/profile/UserProfile.module.css */
+
+.userProfileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 24px 0px;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--color-electric-violet);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.username {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.button {
+    width: 168px;
+    height: 40px;
+    margin-left: auto;
+    padding: 8px 16px;
+    background-color: var(--color-electric-violet);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-white);
+    border: 1px solid var(--color-electric-violet);
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+
+.button:hover {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-electric-violet);
+    color: var(--color-scheme-1-text);
+}
+
+.button:focus {
+    background-color: var(--color-electric-violet-lighter);
+    border: 2px solid var(--color-neutral-darkest);
+    color: var(--color-scheme-1-text);
+}
+
+@media only screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        padding: 0px 64px;
+    }
+}

@@ -6,3 +6,5 @@ export type User = {
     createdAt: string,
     updatedAt: string,
 }
+
+export type EditProfileData = Pick<User, 'name' | 'email' | 'bio'>;

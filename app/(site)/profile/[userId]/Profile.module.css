@@ -1,0 +1,65 @@
+/* app/(site)/profile/[userId]Profile.module.css */
+
+.profileContainer {
+    min-width: 320px;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 48px 20px 0px 20px;
+    min-height: 231px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-scheme-3-background);
+}
+
+.avatar {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--color-scheme-2-accent);
+    color: var(--color-white);
+    gap: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.username {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--color-scheme-3-text);
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+        min-height: 247px;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .avatar {
+        width: 199px;
+        height: 199px;
+        justify-content: flex-start;
+    }
+
+    .username {
+        text-align: left;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        padding-left: 64px;
+        padding-right: 64px;
+    }
+}

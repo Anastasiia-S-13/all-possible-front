@@ -1,6 +1,6 @@
 import EmptyStar from "@/components/RateStars/EmptyStar";
 import FulledStar from "@/components/RateStars/FullerStar";
-import { Feedback } from "@/type/Feedback";
+import { Feedback } from "@/types/Feedback";
 import { Rating } from "react-simple-star-rating";
 import css from "./FeedbacksBlock.module.css";
 

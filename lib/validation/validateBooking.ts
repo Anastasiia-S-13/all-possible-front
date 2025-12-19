@@ -1,24 +1,6 @@
 import * as yup from "yup";
 
 export const bookingSchema = yup.object({
-  toolId: yup.string().required("ID інструменту обов'язковий"),
-
-  startDate: yup
-    .string()
-    .matches(
-      /^\d{4}-\d{2}-\d{2}$/,
-      "Невірний формат дати. Використовуйте YYYY-MM-DD"
-    )
-    .required("Початкова дата обов'язкова"),
-
-  endDate: yup
-    .string()
-    .matches(
-      /^\d{4}-\d{2}-\d{2}$/,
-      "Невірний формат дати. Використовуйте YYYY-MM-DD"
-    )
-    .required("Кінцева дата обов'язкова"),
-
   firstName: yup
     .string()
     .min(2, "Ім'я повинно містити мінімум 2 символи")

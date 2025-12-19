@@ -10,6 +10,7 @@ import {
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
 } from "@/types/Feedback";
+import { User, EditProfileData } from "@/types/User";
 
 import { Category, CreateToolPayload } from "@/types/typesCategories";
 
@@ -50,6 +51,7 @@ export async function fetchFeedbacks({
   return request.data;
 }
 
+
 export const getCategories = async () => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
@@ -89,3 +91,15 @@ export const createTool = async (payload: CreateToolPayload) => {
     throw new Error("Failed to create tool");
   }
 };
+
+export const fetchToolById = async (toolId: string): Promise<Tool> => {
+  const response = await api.get<Tool>(`/tools/${toolId}`);
+  console.log(response.data.images);
+  return response.data;
+}
+
+export const fetchUserById = async (userId: string): Promise<User> => {
+  const response = await api.get<User>(`/users/${userId}`);
+  console.log(response.data);
+  return response.data;
+}

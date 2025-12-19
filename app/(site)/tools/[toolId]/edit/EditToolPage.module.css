@@ -12,9 +12,12 @@
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #000;
+  font-family: var(--font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -0.48px;
+  color: var(--color-scheme-2-text);
   margin: 0 0 24px 0;
 }
 
@@ -73,7 +76,6 @@
   }
 
   .title {
-    font-size: 28px;
     margin-bottom: 32px;
   }
 }
@@ -86,7 +88,8 @@
   }
 
   .title {
-    font-size: 32px;
+    font-size: 56px;
+    letter-spacing: -0.56px;
     margin-bottom: 40px;
   }
 }

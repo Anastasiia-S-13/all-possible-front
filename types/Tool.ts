@@ -22,7 +22,7 @@ export interface ToolHttpRequest {
 
 export interface Category {
   _id: string;
-  name: string;
+  title: string;
 }
 
 export interface UpdateToolData {

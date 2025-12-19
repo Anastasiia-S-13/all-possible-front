@@ -215,7 +215,7 @@ export default function AddEditToolForm({ tool, onSuccess }: AddEditToolFormProp
                 <option value="">Категорія</option>
                 {categories.map((cat) => (
                   <option key={cat._id} value={cat._id}>
-                    {cat.name}
+                    {cat.title}
                   </option>
                 ))}
               </Field>

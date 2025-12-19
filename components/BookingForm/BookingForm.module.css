@@ -5,7 +5,6 @@
 }
 
 .row {
-
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -18,7 +17,6 @@
 }
 
 .fieldFull {
-
     grid-column: 1 / -1;
 }
 

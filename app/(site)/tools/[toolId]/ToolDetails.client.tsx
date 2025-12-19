@@ -3,47 +3,41 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import css from "./ToolDetails.module.css";
-import { getToolById } from "@/lib/api/bookingApi";
-//import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
-// import ToolGallery from "@/components/tools/ToolGallery";
+import { fetchToolById, fetchUserById } from "@/lib/api/clientApi";
+import ToolGallery from "@/components/tools/ToolGallery";
+import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
 
 const ToolDetailsClient = () => {
   const { toolId } = useParams<{ toolId: string }>();
 
-  const {
-    data: toolData,
-    isLoading: isLoadingTool,
-    error: toolError,
-  } = useQuery({
+  const { data: toolData, isSuccess: isSuccessTool } = useQuery({
     queryKey: ["tool", toolId],
-    queryFn: () => getToolById(toolId),
+    queryFn: () => fetchToolById(toolId),
     refetchOnMount: false,
   });
-  const {
-    data: userData,
-    isLoading: isLoadingUser,
-    error: userError,
-  } = useQuery({
-    queryKey: ["owner" /**toolData?.owner*/],
-    // queryFn: () => getUserById(toolData.owner),
+  const { data: userData, isSuccess: isSuccesUser } = useQuery({
+    queryKey: ["owner", toolData?.owner],
+    queryFn: () => {
+      if (!toolData) {
+        throw new Error("Tool data is not avialable");
+      }
+      return fetchUserById(toolData.owner);
+    },
     enabled: !!toolData,
     refetchOnMount: false,
   });
 
-  if (isLoadingTool || isLoadingUser) return <p>Loading, please wait...</p>;
-  if (toolError || userError || !toolData || !userData)
-    return <p>Something went wrong.</p>;
+  if (!toolData || !userData) return null;
 
   return (
-    toolData &&
-    userData && (
+    toolData && (
       <div className={css.container}>
         <div className={css.tool_details_wrap}>
-          {/* <ToolGallery {data.images} /> */}
+          <ToolGallery images={toolData.images} />
+          <ToolInfoBlock user={userData} tool={toolData} />
         </div>
       </div>
     )
   );
 };
-
 export default ToolDetailsClient;

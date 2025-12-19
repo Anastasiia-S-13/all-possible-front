@@ -33,85 +33,87 @@ export default function Header() {
     <>
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
-        {/* Logo */}
-        <Link href="/" className={styles.logoContainer}>
-          <Image
-            src="/images/logo.svg"
-            alt="ToolNext"
-            width={124}
-            height={20}
-            priority
-          />
-        </Link>
+          {/* Logo */}
+          <Link href="/" className={styles.logoContainer}>
+            <Image
+              src="/images/logo.svg"
+              alt="ToolNext"
+              width={124}
+              height={20}
+              priority
+            />
+          </Link>
 
-        {/* Navigation */}
-        <nav className={styles.nav}>
-          <Link href="/">Головна</Link>
-          <Link href="/tools">Інструменти</Link>
+          {/* Navigation */}
+          <nav className={styles.nav}>
+            <Link href="/">Головна</Link>
+            <Link href="/tools">Інструменти</Link>
 
-          {isLoggedIn && userId && <Link href={`/profile/${userId}`}>Мій профіль</Link>}
+            {isLoggedIn && userId && (
+              <Link href={`/profile/${userId}`}>Мій профіль</Link>
+            )}
 
-          {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
-        </nav>
+            {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
+          </nav>
 
-        {/* Actions */}
-        <div className={styles.actions}>
-          {!isLoggedIn && (
-            <Link href="/auth/register" className={styles.signupButton}>
-              Зареєструватися
-            </Link>
-          )}
-
-          {isLoggedIn && (
-            <>
-              <Link href="/create" className={styles.publishButton}>
-                Опублікувати оголошення
+          {/* Actions */}
+          <div className={styles.actions}>
+            {!isLoggedIn && (
+              <Link href="/auth/register" className={styles.signupButton}>
+                Зареєструватися
               </Link>
+            )}
 
-              <div className={styles.userBlock}>
-                {userAvatar ? (
-                  <Image
-                    src={userAvatar}
-                    alt={userName || "User"}
-                    width={32}
-                    height={32}
-                    className={styles.userAvatar}
-                  />
-                ) : (
-                  <div className={styles.userAvatarPlaceholder}>
-                    {userName?.[0]?.toUpperCase() || "U"}
-                  </div>
-                )}
-                <span className={styles.userName}>{userName}</span>
-              </div>
+            {isLoggedIn && (
+              <>
+                <Link href="/tools/new" className={styles.publishButton}>
+                  Опублікувати оголошення
+                </Link>
 
-              <div className={styles.divider} />
+                <div className={styles.userBlock}>
+                  {userAvatar ? (
+                    <Image
+                      src={userAvatar}
+                      alt={userName || "User"}
+                      width={32}
+                      height={32}
+                      className={styles.userAvatar}
+                    />
+                  ) : (
+                    <div className={styles.userAvatarPlaceholder}>
+                      {userName?.[0]?.toUpperCase() || "U"}
+                    </div>
+                  )}
+                  <span className={styles.userName}>{userName}</span>
+                </div>
 
-              <button
-                type="button"
-                className={styles.logoutButton}
-                onClick={handleLogout}
-                aria-label="Вийти"
-              >
-                <svg width="24" height="24" aria-hidden="true">
-                  <use href="/sprite/sprite.svg#icon-logout" />
-                </svg>
-              </button>
-            </>
-          )}
+                <div className={styles.divider} />
 
-          {/* Burger */}
-          <button
-            type="button"
-            className={styles.burger}
-            aria-label="Відкрити меню"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <svg width="24" height="24" aria-hidden="true">
-              <use href="/sprite/sprite.svg#icon-menu" />
-            </svg>
-          </button>
-        </div>
+                <button
+                  type="button"
+                  className={styles.logoutButton}
+                  onClick={handleLogout}
+                  aria-label="Вийти"
+                >
+                  <svg width="24" height="24" aria-hidden="true">
+                    <use href="/sprite/sprite.svg#icon-logout" />
+                  </svg>
+                </button>
+              </>
+            )}
+
+            {/* Burger */}
+            <button
+              type="button"
+              className={styles.burger}
+              aria-label="Відкрити меню"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <svg width="24" height="24" aria-hidden="true">
+                <use href="/sprite/sprite.svg#icon-menu" />
+              </svg>
+            </button>
+          </div>
         </header>
       </div>
 

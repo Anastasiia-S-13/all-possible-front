@@ -1,5 +1,3 @@
-// app/(site)/profile/[userId]/page.tsx
-
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import UserProfile from "../../../../components/profile/UserProfile";

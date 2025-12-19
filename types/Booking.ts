@@ -10,6 +10,7 @@ export interface Tool {
   description?: string;
   category?: string;
   bookedPeriods: BookedPeriod[];
+  bookedDates?: BookedPeriod[];
   createdAt?: string;
   updatedAt?: string;
 }
@@ -42,6 +43,12 @@ export interface User {
 export interface BookingResponse {
   success: boolean;
   message?: string;
+  booked: {
+    rentalPeriod: {
+      startDate: string;
+      endDate: string;
+    };
+  };
   booking?: {
     id: string;
     toolId: string;
@@ -51,3 +58,7 @@ export interface BookingResponse {
     createdAt: string;
   };
 }
+
+export type CreateBookingPayload = CreateBookingRequest & {
+  userId?: string;
+};

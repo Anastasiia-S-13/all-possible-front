@@ -1,5 +1,11 @@
+"use client";
 import Link from "next/link";
-import styles from "./ToolCard.module.css"
+import Image from "next/image";
+import styles from "./ToolCard.module.css";
+import { Rating } from "react-simple-star-rating";
+import EmptyStar from "../RateStars/EmptyStar";
+import FulledStar from "../RateStars/FullerStar";
+
 type ToolCardProps = {
   id: string;
   name: string;
@@ -9,38 +15,45 @@ type ToolCardProps = {
 };
 
 export default function ToolCard({
-
-  id,  
+  id,
   name,
   pricePerDay,
   image,
-  rating=0,
+  rating = 0,
 }: ToolCardProps) {
+  const isRate = Boolean(rating);
+
   return (
-    <article className={styles.card}>
-      <img
+    <div className={styles.card}>
+      <Image
         src={image}
         alt={name}
         className={styles.image}
+        width={335}
+        height={414}
       />
-
-      <div className={styles.rating}>
-          ⭐ {rating.toFixed(1)}
+      <div className={styles.content}>
+        <div className={styles.rating}>
+          {isRate ? (
+            <Rating
+              emptyIcon={<EmptyStar />}
+              allowFraction
+              fillIcon={<FulledStar />}
+              initialValue={rating}
+              readonly
+            />
+          ) : (
+            <p>У цього інструмента ще немає оцінки</p>
+          )}
         </div>
 
-      <div className={styles.content}>
         <h3 className={styles.name}>{name}</h3>
 
-        <p className={styles.price}>
-          {pricePerDay} ₴ / доба
-        </p>
-
-        
-
-        <Link href={`/tools/${id}`} className={styles.details}>
-          Детальніше
-        </Link>
+        <p className={styles.price}>{pricePerDay} грн/доба</p>
       </div>
-    </article>
+      <Link href={`/tools/${id}`} className={styles.detailsBtn}>
+        Детальніше
+      </Link>
+    </div>
   );
 }

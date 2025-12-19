@@ -1,0 +1,189 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.row {
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fieldFull {
+
+    grid-column: 1 / -1;
+}
+
+.label {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-scheme-3-text);
+}
+
+.input {
+    border: 2px solid var(--color-neutral-darkest);
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 335px;
+    height: 37px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+    background: var(--opacity-transparent);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--opacity-neutral-darkest-60);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-electric-violet);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.inputError {
+    border-color: var(--color-red-dark);
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 335px;
+    height: 37px;
+}
+
+.inputError:focus {
+    border-color: var(--color-red-dark);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.error {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-red-dark);
+    margin-top: 2px;
+}
+
+.priceRow {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.price {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-scheme-3-text);
+}
+
+.submitBtn {
+    background: var(--color-electric-violet);
+    border: 1px solid var(--color-electric-violet);
+    border-radius: 6px;
+    padding: 10px 24px;
+    width: 335px;
+    height: 42px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submitBtn:hover,
+.submitBtn:focus {
+    transform: translateY(-2px);
+    border: 2px solid var(--color-electric-violet);
+    background: transparent;
+    color: var(--color-scheme-1-text);
+}
+
+.submitBtn:active {
+    border: 2px solid var(--color-electric-violet);
+    background: var(--color-electric-violet-lighter);
+}
+
+.submitBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.serverError {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--error);
+    font-size: 14px;
+}
+
+.success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--success);
+    font-size: 14px;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .row .input {
+        width: 340px;
+    }
+
+    .input[type="tel"] {
+        width: 100%;
+    }
+
+    .priceRow {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .submitBtn {
+        width: 144px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .row .input {
+        width: 420px;
+    }
+
+    .input {
+        height: 40px;
+    }
+
+    .submitBtn {
+        width: 158px;
+        height: 44px;
+    }
+}

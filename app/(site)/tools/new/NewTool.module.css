@@ -1,0 +1,34 @@
+.container {
+  padding: 0 20px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: #000;
+  width: 335px;
+  padding: 48px 0px;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .title {
+    width: 704px;
+    padding: 48px 0px;
+  }
+}
+
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1186px) {
+  .title {
+    width: 1090px;
+    padding: 48px 0px;
+  }
+}

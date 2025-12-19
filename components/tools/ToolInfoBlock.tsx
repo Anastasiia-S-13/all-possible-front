@@ -7,14 +7,29 @@ import css from "../../app/(site)/tools/[toolId]/ToolDetails.module.css";
 import { Tool } from "@/types/Tool";
 import { User } from "@/types/User";
 import { useAuthStore } from "@/stores/authStore";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Modal from "../Modal/Modal";
+import AuthRedirectModal from "../modals/AuthRedirect/AuthRedirectModal";
 
 interface ToolInfoBlockProps {
-  tool: Pick<Tool, "name" | "pricePerDay" | "description" | "specifications">;
+  tool: Tool;
   user: User;
 }
 
 const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
+  const router = useRouter();
   const { isAuthenticated } = useAuthStore();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    if (!isAuthenticated) {
+      setIsOpen(true);
+      return;
+    }
+    router.push(`/tools/${tool._id}/booking`);
+  };
+
   return (
     <div className={css.tool_details_content}>
       <h1 className={css.tool_details_heading}>{tool.name}</h1>
@@ -42,9 +57,14 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           ))}
         </ul>
       </div>
-      <Link className={css.booking_btn} href={`/booking`}>
+      <button className={css.booking_btn} onClick={handleClick}>
         Забронювати
-      </Link>
+      </button>
+      {isOpen && (
+        <Modal onClose={() => setIsOpen(false)}>
+          <AuthRedirectModal />
+        </Modal>
+      )}
     </div>
   );
 };

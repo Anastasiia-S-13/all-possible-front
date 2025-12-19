@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import css from "./ToolDetails.module.css";
+import { getToolById } from "@/lib/api/bookingApi";
 //import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
 // import ToolGallery from "@/components/tools/ToolGallery";
 
@@ -15,7 +16,7 @@ const ToolDetailsClient = () => {
     error: toolError,
   } = useQuery({
     queryKey: ["tool", toolId],
-    // queryFn: () => getSingleTool(toolId), <-- get function
+    queryFn: () => getToolById(toolId),
     refetchOnMount: false,
   });
   const {

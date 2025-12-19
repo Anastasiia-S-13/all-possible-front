@@ -1,10 +1,7 @@
-.container {
+.bookingWrapper {
     width: 375px;
     margin: 0 auto;
-    background: var(--color-scheme-1-background);
     padding: 32px 20px;
-
-
 }
 
 .title {
@@ -52,17 +49,13 @@
 
 
 @media only screen and (min-width: 768px) {
-    .container {
+    .bookingWrapper {
         width: 768px;
         padding: 32px;
     }
 }
 
 @media only screen and (min-width: 1440px) {
-    .container {
-        width: 1440px;
-        padding: 48px 64px;
-    }
 
     .title {
         font-size: 48px;
@@ -70,6 +63,6 @@
 
     .bookingWrapper {
         width: 864px;
-        margin: 0 auto;
+        padding: 48px 0;
     }
 }

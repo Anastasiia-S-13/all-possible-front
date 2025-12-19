@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, use } from "react";
+import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Calendar from "@/components/Calendar/Calendar";
 import BookingForm from "@/components/BookingForm/BookingForm";
@@ -111,7 +111,7 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
   if (isLoading) {
     return (
       <main className={styles.main}>
-        <div className={styles.container}>
+        <div className="container">
           <div className={styles.loading}>
             <Loader />
           </div>
@@ -123,7 +123,7 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
   if (error || !tool) {
     return (
       <main className={styles.main}>
-        <div className={styles.container}>
+        <div className="container">
           <div className={styles.error}>Помилка завантаження інструменту</div>
         </div>
       </main>
@@ -132,38 +132,36 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
 
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
+      <div className={styles.bookingWrapper}>
         <h1 className={styles.title}>Підтвердження бронювання</h1>
 
-        <div className={styles.bookingWrapper}>
-          <BookingForm
-            toolId={toolId}
-            pricePerDay={tool.pricePerDay}
-            selectedRange={selectedRange}
-            onSubmit={handleBookingSubmit}
-          >
-            <div className={styles.section}>
-              <p className={styles.sectionTitle}>Виберіть період бронювання</p>
+        <BookingForm
+          toolId={toolId}
+          pricePerDay={tool.pricePerDay}
+          selectedRange={selectedRange}
+          onSubmit={handleBookingSubmit}
+        >
+          <div className={styles.section}>
+            <p className={styles.sectionTitle}>Виберіть період бронювання</p>
 
-              <Calendar
-                reservedPeriods={[
-                  ...(tool.bookedPeriods || []),
-                  ...(tool.bookedDates || []),
-                ]}
-                selectedRange={selectedRange}
-                onRangeChange={setSelectedRange}
-              />
+            <Calendar
+              reservedPeriods={[
+                ...(tool.bookedPeriods || []),
+                ...(tool.bookedDates || []),
+              ]}
+              selectedRange={selectedRange}
+              onRangeChange={setSelectedRange}
+            />
 
-              {(selectedRange.startDate || selectedRange.endDate) && (
-                <div className={styles.dateRangeInfo}>
-                  <strong>Обраний період:</strong>{" "}
-                  {formatDate(selectedRange.startDate)} —{" "}
-                  {formatDate(selectedRange.endDate)}
-                </div>
-              )}
-            </div>
-          </BookingForm>
-        </div>
+            {(selectedRange.startDate || selectedRange.endDate) && (
+              <div className={styles.dateRangeInfo}>
+                <strong>Обраний період:</strong>{" "}
+                {formatDate(selectedRange.startDate)} —{" "}
+                {formatDate(selectedRange.endDate)}
+              </div>
+            )}
+          </div>
+        </BookingForm>
       </div>
     </main>
   );

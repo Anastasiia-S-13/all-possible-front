@@ -85,7 +85,6 @@
     color: var(--color-red-dark);
     margin-top: 2px;
     min-height: 18px;
-    /* reserve space even when message appears/disappears */
     transition: opacity 0.12s ease;
 }
 

@@ -17,7 +17,6 @@ export const createBooking = async (
     );
     return response.data;
   } catch (error) {
-    console.error("createBooking failed:", error);
     throw error;
   }
 };

@@ -42,7 +42,6 @@ export default function BookingForm({
 
   const totalPrice = calculateTotalPrice(pricePerDay, selectedRange);
 
-  // Load saved data
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -56,8 +55,6 @@ export default function BookingForm({
         localStorage.removeItem(STORAGE_KEY);
         return;
       }
-
-      // initial values will be read by Formik via enableReinitialize
     } catch {
       localStorage.removeItem(STORAGE_KEY);
     }
@@ -110,7 +107,6 @@ export default function BookingForm({
     }
   };
 
-  // prepare initial values possibly from storage
   const getInitialValues = (): BookingFormSchema => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);

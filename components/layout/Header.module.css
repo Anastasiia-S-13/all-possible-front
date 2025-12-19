@@ -148,7 +148,7 @@
 @media (min-width: 768px) {
   .header {
     max-width: 768px;
-    padding: 16px 32px;
+    padding: 16px 0;
   }
 
   .publishButton {

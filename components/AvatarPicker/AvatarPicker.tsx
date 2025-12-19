@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import css from "./AvatarPicker.module.css";
 
 type Props = {
@@ -10,54 +10,53 @@ type Props = {
 };
 
 const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
-  const [previewUrl, setPreviewUrl] = useState(""); // стан превью зображееннння
-  const [error, setError] = useState(""); // Стан помилки вибору зображеення
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [error, setError] = useState("");
 
-  // додаємо у стан пропс який повертає бекенд у вигляді url
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   useEffect(() => {
     setPreviewUrl(toolPhotoUrl || "");
   }, [toolPhotoUrl]);
 
-  // обробнник зміни файлу
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    console.log("file", file);
 
-    // обмеженння за розміром та типом
-    if (file) {
-      // Перевіряємо тип файлу
-      if (!file.type.startsWith("image/")) {
-        setError("Only images");
-        return;
-      }
+    if (!file) return;
 
-      // Перевіряємо розмір файлу (максимум 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setError("Max file size 5MB");
-        return;
-      }
-
-      // прев'ю обраного файлу
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      onChangePhoto(file); // передаємо файл у батьківський компонент
+    if (!file.type.startsWith("image/")) {
+      setError("Only images");
+      return;
     }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Max file size 5MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    onChangePhoto(file);
   };
 
-  // функція видалеення та перезавантаження фото
   const handleRemove = () => {
     onChangePhoto(null);
     setPreviewUrl("");
   };
 
+  const triggerFileDialog = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
-    <div>
+    <div className={css.avatarPicker}>
+      <legend className={css.legend}>Фото інструменту</legend>
       <div className={css.picker}>
-        {previewUrl && (
+        {previewUrl ? (
           <Image
             src={previewUrl}
             alt="Preview"
@@ -65,24 +64,40 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
             height={300}
             className={css.avatar}
           />
-        )}
-        <label
-          className={previewUrl ? `${css.wrapper} ${css.reload}` : css.wrapper}
-        >
-          📷 Choose photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className={css.input}
+        ) : (
+          <Image
+            onClick={triggerFileDialog}
+            // className={css.clickable}
+            src={previewUrl || "/image/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
+            alt="Placeholder"
+            width={865}
+            height={576}
+            className={css.avatar}
           />
-        </label>
+        )}
+
+        {/* прихований інпут */}
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className={css.hiddenInput}
+          title="Upload image"
+        />
+
         {previewUrl && (
           <button className={css.remove} onClick={handleRemove}>
             ❌
           </button>
         )}
       </div>
+
+      {/* кнопка, яка відкриває діалог вибору файлу */}
+      <button className={css.uploadBtn} onClick={triggerFileDialog}>
+        Завантажити фото
+      </button>
+
       {error && <p className={css.error}>{error}</p>}
     </div>
   );

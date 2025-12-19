@@ -4,18 +4,22 @@ import { Tool, BookingResponse, CreateBookingRequest } from "@/types/Booking";
 export const createBooking = async (
   bookingData: CreateBookingRequest & { userId?: string }
 ): Promise<BookingResponse> => {
-  const payload: CreateBookingRequest = {
-    ...(bookingData as CreateBookingRequest),
-  };
+  const payload = { ...(bookingData as CreateBookingRequest) } as Partial<
+    CreateBookingRequest & { userId?: string }
+  >;
+  if ((payload as { userId?: string }).userId)
+    delete (payload as { userId?: string }).userId;
 
-  delete (payload as any).userId;
-
-  const response = await api.post<BookingResponse>(
-    `/${payload.toolId}/bookings`,
-    payload
-  );
-
-  return response.data;
+  try {
+    const response = await api.post<BookingResponse>(
+      `/api/bookings`,
+      payload as CreateBookingRequest
+    );
+    return response.data;
+  } catch (error) {
+    console.error("createBooking failed:", error);
+    throw error;
+  }
 };
 
 export const getToolById = async (toolId: string): Promise<Tool> => {

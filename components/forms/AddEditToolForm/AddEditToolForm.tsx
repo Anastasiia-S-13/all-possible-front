@@ -3,6 +3,7 @@
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import { useId, useState, useEffect } from "react";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 import css from "./AddEditToolForm.module.css";
 import {
@@ -44,6 +45,8 @@ export default function AddEditToolForm() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [photoUrl, setPhotoUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const router = useRouter();
 
   // ід для класів
   const fieldId = useId();
@@ -299,9 +302,13 @@ export default function AddEditToolForm() {
               <button className={css.btn} type="submit">
                 Опублікувати
               </button>
-              {/* <button type="button" onClick={}>
-                    Відмінити
-                  </button> */}
+              <button
+                className={css.btnCan}
+                type="button"
+                onClick={() => router.push("/")}
+              >
+                Відмінити
+              </button>
             </div>
           </Form>
         </div>

@@ -1,5 +1,8 @@
 .container {
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -26,9 +29,9 @@
 }
 
 /* Styles for Desktop devices */
-@media only screen and (min-width: 1186px) {
+@media only screen and (min-width: 1440px) {
   .title {
-    width: 1090px;
+    width: 100%;
     padding: 48px 0px;
   }
 }

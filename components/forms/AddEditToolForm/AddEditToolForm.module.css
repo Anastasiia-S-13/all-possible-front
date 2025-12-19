@@ -125,13 +125,13 @@
   border: 2px solid #8808cc;
   border-radius: 6px;
   padding: 10px 24px;
-  width: 335px;
+  width: 100%;
   height: 41px;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
-  color: white;
+  color: #fff;
   background: #8808cc;
   transition: background-color 0.2s ease-in-out;
 }
@@ -142,6 +142,30 @@
   color: #000;
 }
 .btn:active {
+  background: #e7cdf4;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+.btnCan {
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  height: 41px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000;
+  background: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+.btnCan:hover .btnCan:focus {
+  background: transparent;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+.btnCan:active {
   background: #e7cdf4;
   border: 2px solid #8808cc;
   color: #000;
@@ -178,12 +202,10 @@
   }
 
   .boxButtons {
-    display: flex;
-    flex-direction: row;
     width: 415px;
   }
-  .btn {
-    width: 415px;
-    height: 44px;
+  .btn,
+  .btnCan {
+    width: 100%;
   }
 }

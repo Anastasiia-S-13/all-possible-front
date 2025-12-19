@@ -1,0 +1,100 @@
+.wrapper {
+    position: relative;
+    width: 335px;
+}
+
+.select {
+    background: var(--opacity-transparent);
+    border: 2px solid var(--color-neutral-darkest);
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 335px;
+    height: 40px;
+    cursor: pointer;
+    transition: background 0.3s ease, border 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    line-height: 20px;
+}
+
+.open {
+    background: var(--color-electric-violet-lightest);
+    border-bottom: 2px solid var(--color-electric-violet-light);
+    border-radius: 6px 6px 0 0;
+}
+
+.dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 335px;
+    min-height: 255px;
+    height: 428px;
+    overflow-y: auto;
+    background: var(--color-electric-violet-lightest);
+    border: 2px solid var(--color-electric-violet-light);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    z-index: 10;
+
+    padding-right: 12px;
+    scrollbar-gutter: stable;
+}
+
+.dropdown::-webkit-scrollbar {
+    width: 7px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+    background-color: var(--color-electric-violet-light);
+    border-radius: 4px;
+
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+    background-color: var(--color-electric-violet-dark);
+    border-radius: 4px;
+    min-height: 56px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    .dropdown {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-electric-violet-dark) var(--color-electric-violet-light);
+    }
+}
+
+.option {
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: #000;
+}
+
+.option:hover {
+    background: var(--color-electric-violet-dark);
+    color: white;
+}
+
+.active {
+    background: var(--color-electric-violet-lighter);
+    color: white;
+}
+
+
+@media (min-width: 768px) {
+    .wrapper {
+        width: 304px;
+    }
+
+    .select,
+    .dropdown {
+        width: 304px;
+    }
+}

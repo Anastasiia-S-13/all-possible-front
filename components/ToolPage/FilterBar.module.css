@@ -1,0 +1,10 @@
+@media (min-width: 768px) {
+    .wrapper {
+        width: 304px;
+    }
+
+    .select,
+    .dropdown {
+        width: 304px;
+    }
+}

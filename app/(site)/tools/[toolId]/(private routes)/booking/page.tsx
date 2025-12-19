@@ -6,11 +6,10 @@ import Calendar from "@/components/Calendar/Calendar";
 import BookingForm from "@/components/BookingForm/BookingForm";
 import { Tool, DateRange } from "@/types/Booking";
 import { createBooking, getToolById } from "@/lib/api/bookingApi";
-import styles from "./ToolBooking.module.css";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/authStore";
 import { BookingFormSchema } from "@/lib/validation/validateBooking";
-
+import styles from "./ToolBooking.module.css";
 interface BookingPageProps {
   params: Promise<{ toolId: string }>;
 }

@@ -1,8 +1,16 @@
+.toolsPage {
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
 .title {
-    font-size: 32px;
+    font-family: var(--font-family);
     font-weight: 700;
-    margin-bottom: 24px;
+    font-size: 36px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
     text-align: center;
+    color: var(--color-scheme-1-text);
 }
 
 .head {
@@ -72,7 +80,15 @@
 }
 
 @media (min-width: 1440px) {
+    .toolsPage {
+        padding: 48px 0;
+    }
+
     .resetCategories {
         font-size: 16px;
+    }
+
+    .title {
+        font-size: 48px;
     }
 }

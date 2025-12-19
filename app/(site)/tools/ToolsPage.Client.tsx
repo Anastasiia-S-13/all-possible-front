@@ -65,65 +65,69 @@ export default function ToolsPageClient({
   };
 
   return (
-    <div className="container">
-      <h1 className={styles.title}>
-        {searchQuery ? `Результати пошуку: ${searchQuery}` : "Всі інструменти"}
-      </h1>
-      <div className={styles.head}>
-        <FilterBar
-          categories={initialCategories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-        <button
-          className={styles.resetCategories}
-          onClick={() => {
-            setSelectedCategory("");
-            setSearchQuery("");
-          }}
-        >
-          Скинути фільтри
-        </button>
-      </div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <ToolsGrid tools={tools} />
+    <section className={styles.toolsPage}>
+      <div className="container">
+        <h1 className={styles.title}>
+          {searchQuery
+            ? `Результати пошуку: ${searchQuery}`
+            : "Всі інструменти"}
+        </h1>
+        <div className={styles.head}>
+          <FilterBar
+            categories={initialCategories}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+          <button
+            className={styles.resetCategories}
+            onClick={() => {
+              setSelectedCategory("");
+              setSearchQuery("");
+            }}
+          >
+            Скинути фільтри
+          </button>
+        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <ToolsGrid tools={tools} />
 
-          {totalPages > 1 && (
-            <div className={styles.pagination}>
-              <button
-                disabled={currentPage === 1}
-                onClick={() => handlePageChange(currentPage - 1)}
-                className={styles.pageBtn}
-              >
-                Назад
-              </button>
-
-              {[...Array(totalPages)].map((_, i) => (
+            {totalPages > 1 && (
+              <div className={styles.pagination}>
                 <button
-                  key={i + 1}
-                  onClick={() => handlePageChange(i + 1)}
-                  className={`${styles.pageBtn} ${
-                    currentPage === i + 1 ? styles.activePage : ""
-                  }`}
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className={styles.pageBtn}
                 >
-                  {i + 1}
+                  Назад
                 </button>
-              ))}
 
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => handlePageChange(currentPage + 1)}
-                className={styles.pageBtn}
-              >
-                Вперед
-              </button>
-            </div>
-          )}
-        </>
-      )}
-    </div>
+                {[...Array(totalPages)].map((_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`${styles.pageBtn} ${
+                      currentPage === i + 1 ? styles.activePage : ""
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                <button
+                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className={styles.pageBtn}
+                >
+                  Вперед
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </section>
   );
 }

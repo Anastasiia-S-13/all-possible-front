@@ -16,7 +16,7 @@ export function SearchToolForm() {
 
   const handleSubmit = (values: SearchToolFormValues) => {
     if (values.searchQuery.trim()) {
-      router.push(`/tools?q=${encodeURIComponent(values.searchQuery.trim())}`);
+      router.push(`/tools?query=${encodeURIComponent(values.searchQuery.trim())}`);
     }
   };
 

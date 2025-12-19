@@ -68,7 +68,7 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
           <Image
             onClick={triggerFileDialog}
             // className={css.clickable}
-            src={previewUrl || "/image/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
+            src={previewUrl || "/images/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
             alt="Placeholder"
             width={865}
             height={576}

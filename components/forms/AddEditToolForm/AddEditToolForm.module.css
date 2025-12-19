@@ -1,91 +1,189 @@
 /* OrderForm.module.css */
+.AddEditToolForm {
+  max-width: 335px;
+}
+.previewField {
+  width: max-content;
+}
 
 .form {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 24px;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 4px;
 }
 
-.fieldset {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 16px;
+.boxField {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.legend {
-  font-weight: bold;
-  font-size: 18px;
+  margin-top: 24px;
 }
 
 .label {
-  font-weight: 500;
-  padding: 4px;
-}
-
-.field {
-  max-width: 100%;
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #000;
 }
 
 .input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid #000;
   box-sizing: border-box;
-  margin-bottom: 12px;
+  margin-top: 8px;
+  height: 43px;
+  border-radius: 6px;
+}
+.input::placeholder {
+  color: #aaa;
+  font-size: 16px;
+}
+.input:focus {
+  outline: none;
+  border: 2px solid #8808cc;
 }
 
 .textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #666666;
+  margin-top: 8px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 12px;
+  max-width: 100%;
+}
+
+.select {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.select:focus {
+  background: #e7cdf4;
+}
+
+/* Chrome / Edge */
+.select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select::-webkit-scrollbar-track {
+  background: #e7cdf4;
+}
+
+.select::-webkit-scrollbar-thumb {
+  background-color: #8808cc;
+}
+
+.select option:hover {
+  background-color: #8808cc;
+  color: white;
 }
 
 .option {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid;
+  border-radius: 6px;
+  background: #f3e6f9;
+}
+
+.option:checked,
+.option:hover {
+  background: #e7cdf4;
+  color: #000;
+}
+/* :global(.select option:hover) {
+  background: #e7cdf4;
+  color: #7c3030;
+} */
+
+.boxButtons {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  margin-bottom: 8px;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .btn {
-  padding: 10px 16px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  border: none;
+  border: 2px solid #8808cc;
   border-radius: 6px;
-  cursor: pointer;
+  padding: 10px 24px;
+  width: 335px;
+  height: 41px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: white;
+  background: #8808cc;
   transition: background-color 0.2s ease-in-out;
 }
 
-.btn:hover {
-  background-color: #0056b3;
+.btn:hover .btn:focus {
+  background: transparent;
+  border: 2px solid #8808cc;
+  color: #000;
 }
-
-.error {
+.btn:active {
+  background: #e7cdf4;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+/* .error {
   display: block;
   color: #e53935;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
+} */
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .AddEditToolForm {
+    max-width: 704px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .AddEditToolForm {
+    max-width: none;
+    width: 100%;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .left {
+    flex-grow: 1;
+  }
+
+  .boxButtons {
+    display: flex;
+    flex-direction: row;
+    width: 415px;
+  }
+  .btn {
+    width: 415px;
+    height: 44px;
+  }
 }

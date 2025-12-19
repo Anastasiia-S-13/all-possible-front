@@ -14,4 +14,3 @@ export interface UserProfileProps {
 
 export type EditProfileData = Pick<User, 'name' | 'email' | 'bio'>;
 
-

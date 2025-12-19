@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ac.goit.global",
       },
+      {
+        protocol: "https",
+        hostname: "ftp.goit.study",
+      },
     ],
   },
 };

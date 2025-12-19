@@ -27,6 +27,19 @@
   font-size: 14px;
   line-height: 150%;
   color: var(--color-neutral-darkest);
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.feedbackBtn:hover,
+.feedbackBtn:focus {
+  background-color: var(--color-electric-violet-lighter);
+}
+
+.feedbackBtn:active {
+  background-color: var(--color-electric-violet);
+  border-color: var(--color-electric-violet);
+  color: var(--color-white);
 }
 
 .feedbackItemBox {
@@ -40,7 +53,6 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  color: var(--color-scheme-1-text);
   min-height: 81px;
 }
 
@@ -49,7 +61,6 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 150%;
-  color: var(--color-scheme-1-text);
 }
 
 .feedbackSwiper {

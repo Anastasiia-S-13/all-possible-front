@@ -1,6 +1,6 @@
 :root {
-  --font-family: 'Work Sans', sans-serif;
-  --second-family: 'Nunito Sans', sans-serif;
+  --font-family: "Work Sans", sans-serif;
+  --second-family: "Nunito Sans", sans-serif;
   --color-scheme-1-background: var(--color-white);
   --color-neutral-darkest: #000;
   --color-scheme-1-border: var(--color-neutral-darkest);

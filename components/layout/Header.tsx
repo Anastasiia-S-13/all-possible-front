@@ -3,15 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+
+  // Hide header on auth pages
+  if (pathname?.startsWith("/auth")) {
+    return null;
+  }
 
   const isLoggedIn = isAuthenticated;
   const userId = user?.id;
@@ -42,7 +49,7 @@ export default function Header() {
           <Link href="/">Головна</Link>
           <Link href="/tools">Інструменти</Link>
 
-          {isLoggedIn && <Link href={`/profile/${userId}`}>Мій профіль</Link>}
+          {isLoggedIn && userId && <Link href={`/profile/${userId}`}>Мій профіль</Link>}
 
           {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
         </nav>

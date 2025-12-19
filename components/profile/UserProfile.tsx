@@ -4,9 +4,17 @@
 
 import { useRouter } from 'next/navigation';
 import css from './UserProfile.module.css';
-import { UserProfileProps } from '../../types/User';
+import { useAuthStore } from '@/stores/authStore';
 
-export default function UserProfile({ user, isOwner }: UserProfileProps) {
+interface UserProfileProps {
+  user: { name: string };
+  userId: string;
+}
+
+export default function UserProfile({ user, userId }: UserProfileProps) {
+  const currentUser = useAuthStore((state) => state.user);
+  const isOwner = currentUser?.id === userId;
+
   const firstletter = user.name.charAt(0).toUpperCase();
   const router = useRouter();
 

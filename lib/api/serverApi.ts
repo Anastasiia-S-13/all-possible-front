@@ -2,7 +2,7 @@ import { User } from '../../types/User';
 import { Tool } from '../../types/Tool';
 
 export async function getUserById(userId: string): Promise<User> {
-  const res = await fetch(`${process.env.API_URL}/users/${userId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`, {
     cache: 'no-store',
     credentials: 'include',
   });
@@ -11,11 +11,15 @@ export async function getUserById(userId: string): Promise<User> {
     throw new Error('Не вдалося завантажити користувача');
   }
 
-  return res.json();
+  const data = await res.json();
+  return {
+    ...data,
+    id: data._id || data.id,
+  };
 }
 
 export async function getUserTools(userId: string): Promise<Tool[]> {
-  const res = await fetch(`${process.env.API_URL}/users/${userId}/tools`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userId}/tools`, {
     cache: 'no-store',
   });
 

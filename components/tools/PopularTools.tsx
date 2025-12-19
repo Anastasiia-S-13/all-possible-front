@@ -2,16 +2,10 @@ import ToolCard from "./ToolCard";
 import styles from "./PopularTools.module.css";
 import Link from "next/link";
 import { Tool } from "@/types/Tool";
-type ToolResponse = {
-  tools: Tool[];
-};
+import { getAllToolsServer } from "@/lib/api/serverApi";
 
 export default async function PopularTools() {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/tools?perPage=8`;
-
-  const res = await fetch(url, { cache: "no-store" });
-
-  const data: ToolResponse = await res.json();
+  const data = await getAllToolsServer();
 
   return (
     <section className={styles.section}>
@@ -25,6 +19,7 @@ export default async function PopularTools() {
               name={tool.name}
               pricePerDay={tool.pricePerDay}
               image={tool.images}
+              rating={tool.rating}
             />
           </li>
         ))}

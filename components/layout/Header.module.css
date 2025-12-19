@@ -1,0 +1,203 @@
+/* ================= HEADER WRAPPER ================= */
+.headerWrapper {
+  width: 100%;
+  background-color: #f9fafb;
+}
+
+/* ================= HEADER ================= */
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+/* ================= LOGO ================= */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ================= NAV ================= */
+.nav {
+  display: none;
+  margin-left: auto;
+  gap: 32px;
+}
+
+.nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ================= ACTIONS ================= */
+.actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 16px;
+}
+
+/* ================= BUTTONS ================= */
+.signupButton,
+.publishButton {
+  padding: 8px 20px;
+  background-color: #8808cc;
+  color: #fff;
+  border-radius: 6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  border: 1px solid #8808cc;
+  transition: background-color 0.25s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.signupButton:hover,
+.publishButton:hover {
+  background-color: #6b06a3;
+}
+
+/* ================= USER ================= */
+.userBlock {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userAvatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  background-color: #8808cc;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.userName {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  line-height: 18px;
+}
+
+/* ================= DIVIDER ================= */
+.divider {
+  width: 1px;
+  height: 39px;
+  background-color: #000;
+  display: none;
+}
+
+/* ================= LOGOUT ================= */
+.logoutButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.logoutButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logoutButton:hover {
+  opacity: 0.7;
+}
+
+/* ================= BURGER ================= */
+.burger {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #111;
+  border-radius: 8px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= TABLET ================= */
+@media (min-width: 768px) {
+  .header {
+    max-width: 768px;
+    padding: 16px 0;
+  }
+
+  .publishButton {
+    display: flex;
+    padding: 8px 16px;
+    font-size: 14px;
+    line-height: 19px;
+  }
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 1440px) {
+  .header {
+    width: 1440px;
+    max-width: 1440px;
+    padding: 16px 64px;
+  }
+
+  .nav {
+    display: flex;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .actions {
+    margin-left: 16px;
+    gap: 16px;
+  }
+
+  .signupButton {
+    display: flex;
+  }
+
+  .publishButton {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .userBlock {
+    display: flex;
+  }
+
+  .divider {
+    display: block;
+  }
+
+  .logoutButton {
+    display: flex;
+  }
+}

@@ -3,7 +3,7 @@ import css from "./NewTool.module.css";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import AddEditToolForm from "@/components/forms/AddEditToolForm";
+import AddEditToolForm from "@/components/forms/AddEditToolForm/AddEditToolForm";
 // Імпорт для перевірки авторизації (треба адаптуйти під AuthProvider)
 // import { useAuth } from "@/providers/AuthProvider";
 

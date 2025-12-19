@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import css from "./AddEditToolForm.module.css";
 import { Category } from "@/types/typesCategories";
 import { getCategories } from "@/lib/api/clientApi";
-import AvatarPicker from "../AvatarPicker/AvatarPicker";
+import AvatarPicker from "../../AvatarPicker/AvatarPicker";
 
 // типізація категорій
 

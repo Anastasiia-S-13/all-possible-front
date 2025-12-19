@@ -1,8 +1,8 @@
 .container {
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 72px;
 }
 
 .title {
@@ -33,5 +33,7 @@
   .title {
     width: 100%;
     padding: 48px 0px;
+    font-family: var(--font-family);
+    font-size: 56px;
   }
 }

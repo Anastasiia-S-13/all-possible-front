@@ -2,38 +2,46 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
-import HeaderModal from "../layout/MobileMenu";
+import MobileMenu from "./MobileMenu";
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  userName?: string;
-}
-
-export default function Header({ isLoggedIn, userName }: HeaderProps) {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
+  const isLoggedIn = isAuthenticated;
+  const userId = user?.id;
+  const userName = user?.name;
+  const userAvatar = user?.avatar;
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <>
       <header className={styles.header}>
         {/* Logo */}
-        <div className={styles.logoContainer}>
-          <svg className={styles.logo} aria-hidden="true">
-            <use href="/sprite/sprite.svg#logo" />
-          </svg>
-
-          <Link href="/" className={styles.logoText}>
-            ToolNext
-          </Link>
-        </div>
+        <Link href="/" className={styles.logoContainer}>
+          <Image
+            src="/images/logo.svg"
+            alt="ToolNext"
+            width={124}
+            height={20}
+            priority
+          />
+        </Link>
 
         {/* Navigation */}
         <nav className={styles.nav}>
           <Link href="/">Головна</Link>
           <Link href="/tools">Інструменти</Link>
 
-          {isLoggedIn && <Link href="/profile">Мій профіль</Link>}
-          {isLoggedIn && <Link href="/create">Опублікувати оголошення</Link>}
+          {isLoggedIn && <Link href={`/profile/${userId}`}>Мій профіль</Link>}
 
           {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
         </nav>
@@ -41,16 +49,47 @@ export default function Header({ isLoggedIn, userName }: HeaderProps) {
         {/* Actions */}
         <div className={styles.actions}>
           {!isLoggedIn && (
-            <Link href="/auth/register" className={`${styles.signupButton} ${styles.publishButton}`}>
+            <Link href="/auth/register" className={styles.signupButton}>
               Зареєструватися
             </Link>
           )}
 
           {isLoggedIn && (
-            <div className={styles.userBlock}>
-              <div className={styles.userAvatar}>{userName?.[0]?.toUpperCase()}</div>
-              <span className={styles.userName}>{userName}</span>
-            </div>
+            <>
+              <Link href="/create" className={styles.publishButton}>
+                Опублікувати оголошення
+              </Link>
+
+              <div className={styles.userBlock}>
+                {userAvatar ? (
+                  <Image
+                    src={userAvatar}
+                    alt={userName || "User"}
+                    width={32}
+                    height={32}
+                    className={styles.userAvatar}
+                  />
+                ) : (
+                  <div className={styles.userAvatarPlaceholder}>
+                    {userName?.[0]?.toUpperCase() || "U"}
+                  </div>
+                )}
+                <span className={styles.userName}>{userName}</span>
+              </div>
+
+              <div className={styles.divider} />
+
+              <button
+                type="button"
+                className={styles.logoutButton}
+                onClick={handleLogout}
+                aria-label="Вийти"
+              >
+                <svg width="24" height="24" aria-hidden="true">
+                  <use href="/sprite/sprite.svg#icon-logout" />
+                </svg>
+              </button>
+            </>
           )}
 
           {/* Burger */}
@@ -60,13 +99,15 @@ export default function Header({ isLoggedIn, userName }: HeaderProps) {
             aria-label="Відкрити меню"
             onClick={() => setIsMenuOpen(true)}
           >
-            ☰
+            <svg width="24" height="24" aria-hidden="true">
+              <use href="/sprite/sprite.svg#icon-menu" />
+            </svg>
           </button>
         </div>
       </header>
 
       {/* Mobile menu modal */}
-      {isMenuOpen && <HeaderModal onClose={() => setIsMenuOpen(false)} />}
+      {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}
     </>
   );
 }

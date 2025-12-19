@@ -4,6 +4,7 @@ import {
   CreateBookingRequest,
   Tool,
 } from "@/types/Booking";
+import { Category } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
@@ -80,3 +81,18 @@ export const fetchUserById = async (userId: string): Promise<User> => {
   console.log(response.data);
   return response.data;
 }
+
+export const getCategories = async (): Promise<Category[]> => {
+  const response = await api.get<Category[]>('/categories');
+  return response.data;
+};
+
+export const updateTool = async (
+  toolId: string,
+  data: FormData
+): Promise<Tool> => {
+  const response = await api.patch<Tool>(`/tools/${toolId}`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+  return response.data;
+};

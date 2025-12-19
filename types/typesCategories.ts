@@ -14,16 +14,28 @@ export interface Tool {
   pricePerDay: number;
   images: string; //https://ftp.goit.study/img/tools-next/692db3ffab59e437964311d4.webp,
   rating: number;
-  specifications: string;
+  specifications: Record<string, string>;
   rentalTerms: string;
-  bookedDates: string;
-  feedbacks: string;
+  bookedDates: string[];
+  feedbacks: string[];
 }
 
-// specifications: {
-//     Тиск: string;
-//     Продуктивність: string;
-//     Час роботи: string;
-//     Акумулятор: string;
-// Вага: string;
-//   },
+export interface AddEditToolFormRes {
+  name: string;
+  category: string;
+  description: string;
+  pricePerDay: number;
+  images: string;
+  specificationsText: string;
+  rentalTerms: string;
+}
+
+export interface CreateToolPayload {
+  name: string;
+  category: string;
+  description: string;
+  pricePerDay: number;
+  images: string;
+  specifications?: Record<string, string>;
+  rentalTerms?: string;
+}

@@ -11,6 +11,8 @@ import {
   fetchFeedbacksRequestProps,
 } from "@/types/Feedback";
 
+import { Category, CreateToolPayload } from "@/types/typesCategories";
+
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
   config?: AxiosRequestConfig
@@ -52,8 +54,6 @@ export const getCategories = async () => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
 };
-
-// оновлює фото інструмнта при створенні
 
 export type UpdateToolRequest = {
   toolName?: string;

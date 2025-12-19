@@ -1,42 +1,60 @@
-.modalWrap {
+.toolDetailsContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 48px;
     max-width: 640px;
-    margin: 0 auto;
+    gap: 24px;
+    font-family: var(--font-family);
 }
 
-.headingWrap {
+.toolHead {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toolName {
+    font-size: 40px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+}
+
+.toolPricePerDay {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+}
+
+.userProfile {
+    display: flex;
+    gap: 16px;
+    max-width: 310px;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+}
+
+.toolOwner {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.heading {
-    font-size: 48px;
-    line-height: 120%;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--color-scheme-1-text);
-}
-
-.text {
-    font-size: 18px;
+.username {
+    font-weight: 600;
+    font-size: 16px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
 }
 
-.buttons {
-    display: flex;
-    gap: 24px;
-}
-
-.login {
+.profileBtn {
     border: 2px solid var(--color-neutral-darkest);
     border-radius: 6px;
-    padding: 10px 137px;
+    padding: 8px 20px;
     font-weight: 500;
     line-height: 150%;
     color: var(--color-neutral-darkest);
@@ -44,21 +62,34 @@
         color 300ms ease-in-out;
 }
 
-.login:hover,
-.login:focus {
+.profileBtn:hover,
+.profileBtn:focus {
     background-color: #e7cdf4;
 }
 
-.login:active {
+.profileBtn:active {
     background-color: #8808cc;
     color: #fff;
     border-color: #8808cc;
 }
 
-.register {
+.description {
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+}
+
+.specItem {
+    line-height: 150%;
+}
+
+.span {
+    font-weight: 700;
+}
+
+.bookingBtn {
     border: 1px solid var(--color-electric-violet);
     border-radius: 6px;
-    padding: 10px 111px;
+    padding: 10px 20px;
     background-color: var(--color-electric-violet);
     font-weight: 500;
     font-size: 16px;
@@ -67,12 +98,12 @@
     transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 }
 
-.register:hover,
-.register:focus {
+.bookingBtn:hover,
+.bookingBtn:focus {
     background-color: #fff;
     color: #000;
 }
 
-.register:active {
+.bookingBtn:active {
     background-color: #e7cdf4;
 }

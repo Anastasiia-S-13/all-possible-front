@@ -5,11 +5,6 @@ export interface User {
   email: string;
   createdAt?: string;
   bio?: string;
-};
-
-export interface UserProfileProps {
-  user: { name: string };
-  isOwner: boolean; 
 }
 
 export type EditProfileData = Pick<User, 'name' | 'email' | 'bio'>;

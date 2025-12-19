@@ -51,15 +51,15 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               Інструменти
             </Link>
 
-            {isAuthenticated ? (
-              <Link href={`/profile/${user?.id}`} className={styles.navLink} onClick={onClose}>
+            {isAuthenticated && user?.id ? (
+              <Link href={`/profile/${user.id}`} className={styles.navLink} onClick={onClose}>
                 Мій профіль
               </Link>
-            ) : (
+            ) : !isAuthenticated ? (
               <Link href="/auth/login" className={styles.navLink} onClick={onClose}>
                 Увійти
               </Link>
-            )}
+            ) : null}
           </nav>
 
           {!isAuthenticated ? (

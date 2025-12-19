@@ -1,10 +1,17 @@
+/* ================= HEADER WRAPPER ================= */
+.headerWrapper {
+  width: 100%;
+  background-color: #f9fafb;
+}
+
 /* ================= HEADER ================= */
 .header {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 16px;
-  background-color: #f9fafb;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 16px 20px;
   box-sizing: border-box;
 }
 
@@ -139,6 +146,11 @@
 
 /* ================= TABLET ================= */
 @media (min-width: 768px) {
+  .header {
+    max-width: 768px;
+    padding: 16px 32px;
+  }
+
   .publishButton {
     display: flex;
     padding: 8px 16px;
@@ -150,6 +162,8 @@
 /* ================= DESKTOP ================= */
 @media (min-width: 1440px) {
   .header {
+    width: 1440px;
+    max-width: 1440px;
     padding: 16px 64px;
   }
 

@@ -24,7 +24,8 @@ export default function Header() {
 
   return (
     <>
-      <header className={styles.header}>
+      <div className={styles.headerWrapper}>
+        <header className={styles.header}>
         {/* Logo */}
         <Link href="/" className={styles.logoContainer}>
           <Image
@@ -104,7 +105,8 @@ export default function Header() {
             </svg>
           </button>
         </div>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile menu modal */}
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}

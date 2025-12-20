@@ -55,7 +55,7 @@ const FeedbacksBlock = ({
         )}
       </div>
       {hasNoFeedbacks && isToolPage && <EmptyFeedbacks />}
-      {hasNoFeedbacks && isUserPage && isOwner && <EmptyUserFeedbacks />}
+      {hasNoFeedbacks && isUserPage && !isOwner && <EmptyUserFeedbacks />}
       {hasNoFeedbacks && isUserPage && isOwner && (
         <EmptyUserPersonalFeedbacks />
       )}

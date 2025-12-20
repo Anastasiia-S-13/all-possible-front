@@ -3,19 +3,38 @@ import ToolsPageClient from "./ToolsPage.Client";
 import { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ categories: string }>;
+  searchParams: Promise<{ categories?: string; q?: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { categories } = await params;
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const { categories, q } = await searchParams;
+
+  let categoryTitle = "";
+
+  if (categories) {
+    try {
+      const allCategories = await getCategories();
+      const found = allCategories.find((c: any) => c._id === categories);
+      categoryTitle = found ? found.title : categories;
+    } catch (error) {
+      categoryTitle = categories;
+    }
+  } else if (q) {
+    categoryTitle = `Пошук: ${q}`;
+  } else {
+    categoryTitle = "Всі інструменти";
+  }
 
   return {
-    title: `Інструменти | ${categories}`,
-    description: `Список інструментів для категорії ${categories}`,
+    title: `Інструменти | ${categoryTitle}`,
+    description: `Список інструментів для ${categoryTitle}`,
     openGraph: {
-      title: `Інструменти | ${categories}`,
-      description: `Список інструментів для категорії ${categories}`,
-      url: `/tools?categories=${categories}`,
+      title: `Інструменти | ${categoryTitle}`,
+      description: `Список інструментів для ${categoryTitle}`,
+      url: `/tools${categories ? `?categories=${categories}` : q ? `?q=${q}` : ""
+        }`,
       type: "website",
     },
   };
@@ -31,9 +50,15 @@ export default async function ToolsPage({
   const categories = await getCategories();
   const initialSearch = typeof q === "string" ? q : "";
 
+  const mappedCategories = categories.map((cat: any) => ({
+    ...cat,
+    description: cat.description ?? "",
+    keywords: cat.keywords ?? [],
+  }));
+
   return (
     <ToolsPageClient
-      initialCategories={categories}
+      initialCategories={mappedCategories}
       initialSearch={initialSearch}
     />
   );

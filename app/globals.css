@@ -159,8 +159,8 @@ img {
   font-size: 14px;
   line-height: 1.5;
   color: #fff;
-  background-color: #8808cc;
-  border: 1px solid #8808cc;
+  background-color: var(--color-electric-violet);
+  border: 1px solid var(--color-electric-violet);
   border-radius: 6px;
   padding: 9px 23px;
   text-wrap: nowrap;
@@ -176,5 +176,5 @@ img {
 }
 
 .gridBtn:active {
-  background-color: #e7cdf4;
+  background-color: var(--color-electric-violet-lighter);
 }

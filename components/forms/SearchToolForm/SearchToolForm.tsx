@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Formik, Form, Field } from 'formik';
-import { useRouter } from 'next/navigation';
+import { Formik, Form, Field } from "formik";
+import { useRouter } from "next/navigation";
 
-import Button from '@/components/Button';
+import Button from "@/components/Button";
 
-import css from './SearchToolForm.module.css';
+import css from "./SearchToolForm.module.css";
 
 interface SearchToolFormValues {
   searchQuery: string;
@@ -16,15 +16,14 @@ export function SearchToolForm() {
 
   const handleSubmit = (values: SearchToolFormValues) => {
     if (values.searchQuery.trim()) {
-      router.push(`/tools?query=${encodeURIComponent(values.searchQuery.trim())}`);
+      router.push(
+        `/tools?query=${encodeURIComponent(values.searchQuery.trim())}`
+      );
     }
   };
 
   return (
-    <Formik
-      initialValues={{ searchQuery: '' }}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={{ searchQuery: "" }} onSubmit={handleSubmit}>
       <Form className={css.form}>
         <Field
           className={css.field}
@@ -33,10 +32,10 @@ export function SearchToolForm() {
           placeholder="Дриль алмазного свердління"
         />
 
-        <Button className={css.button} type='submit' variant="primary" size="lg">
+        <Button type="submit" variant="primary" size="lg">
           Пошук
         </Button>
       </Form>
     </Formik>
-  )
+  );
 }

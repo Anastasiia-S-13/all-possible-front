@@ -5,7 +5,7 @@ export interface Category {
   keywords: string;
 }
 
-export interface Tool {
+export interface ToolCreate {
   _id: string;
   owner: string;
   category: string;
@@ -14,7 +14,7 @@ export interface Tool {
   pricePerDay: number;
   images: string; //https://ftp.goit.study/img/tools-next/692db3ffab59e437964311d4.webp,
   rating: number;
-  specifications: Record<string, string>;
+  specifications: string | Record<string, unknown>;
   rentalTerms: string;
   bookedDates: string[];
   feedbacks: string[];
@@ -24,9 +24,9 @@ export interface AddEditToolFormRes {
   name: string;
   category: string;
   description: string;
-  pricePerDay: number;
-  images: string;
-  specificationsText: string;
+  pricePerDay: string | number;
+  image: File | null;
+  specifications: string;
   rentalTerms: string;
 }
 

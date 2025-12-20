@@ -4,24 +4,16 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import css from "./AvatarPicker.module.css";
 
-type Props = {
-  toolPhotoUrl?: string;
-  onChangePhoto: (file: File | null) => void;
-};
-
-const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
-  const [previewUrl, setPreviewUrl] = useState("");
+interface AvatarPickerProps {
+  value?: string | null;
+  onChange: (file: File) => void;
+}
+const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
+  const [preview, setPreview] = useState<string | null>(value || null);
   const [error, setError] = useState("");
 
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    setPreviewUrl(toolPhotoUrl || "");
-  }, [toolPhotoUrl]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
@@ -33,19 +25,45 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
       setError("Max file size 5MB");
       return;
     }
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreviewUrl(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-
-    onChangePhoto(file);
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+      onChange(file);
+    }
   };
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // useEffect(() => {
+  //   setPreviewUrl(toolPhotoUrl || "");
+  // }, [toolPhotoUrl]);
+
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+
+  //   if (!file) return;
+
+  //   if (!file.type.startsWith("image/")) {
+  //     setError("Only images");
+  //     return;
+  //   }
+
+  //   if (file.size > 5 * 1024 * 1024) {
+  //     setError("Max file size 5MB");
+  //     return;
+  //   }
+
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     setPreviewUrl(reader.result as string);
+  //   };
+  //   reader.readAsDataURL(file);
+
+  //   onChangePhoto(file);
+  // };
+
   const handleRemove = () => {
-    onChangePhoto(null);
-    setPreviewUrl("");
+    // onChangePhoto(null);
+    setPreview("");
   };
 
   const triggerFileDialog = () => {
@@ -56,9 +74,9 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
     <div className={css.avatarPicker}>
       <legend className={css.legend}>Фото інструменту</legend>
       <div className={css.picker}>
-        {previewUrl ? (
+        {preview ? (
           <Image
-            src={previewUrl}
+            src={preview}
             alt="Preview"
             width={300}
             height={300}
@@ -68,7 +86,7 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
           <Image
             onClick={triggerFileDialog}
             // className={css.clickable}
-            src={previewUrl || "/images/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
+            src={preview || "/images/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
             alt="Placeholder"
             width={865}
             height={576}
@@ -81,12 +99,12 @@ const AvatarPicker = ({ toolPhotoUrl, onChangePhoto }: Props) => {
           type="file"
           accept="image/*"
           ref={fileInputRef}
-          onChange={handleFileChange}
+          onChange={handleChange}
           className={css.hiddenInput}
           title="Upload image"
         />
 
-        {previewUrl && (
+        {preview && (
           <button className={css.remove} onClick={handleRemove}>
             ❌
           </button>

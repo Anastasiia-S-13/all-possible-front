@@ -7,7 +7,7 @@ export function middleware(req: NextRequest) {
 
   const isPrivateRoute =
     req.nextUrl.pathname.startsWith("/tools") &&
-    req.nextUrl.pathname.includes("/bookings");
+    (req.nextUrl.pathname.includes("/bookings") || req.nextUrl.pathname.includes("/new"));
 
   if (isPrivateRoute && (!token || !userId)) {
     const loginUrl = new URL("/login", req.url);

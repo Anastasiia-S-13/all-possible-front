@@ -42,6 +42,26 @@
   border: 2px solid var(--color-primary);
 }
 
+.btn--primaryHero {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-primary);
+}
+
+.btn--primaryHero:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.btn--primaryHero:active:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
 .btn--primary:hover:not(:disabled) {
   background-color: transparent;
   border-color: var(--color-primary);

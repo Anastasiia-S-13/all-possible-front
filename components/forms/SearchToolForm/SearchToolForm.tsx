@@ -32,7 +32,7 @@ export function SearchToolForm() {
           placeholder="Дриль алмазного свердління"
         />
 
-        <Button type="submit" variant="primary" size="lg">
+        <Button variant="primaryHero" type="submit" size="lg">
           Пошук
         </Button>
       </Form>

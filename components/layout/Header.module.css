@@ -11,7 +11,6 @@
   width: 100%;
   max-width: 375px;
   margin: 0 auto;
-  padding: 16px 20px;
   box-sizing: border-box;
 }
 
@@ -20,19 +19,20 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  padding: 16px 0;
 }
 
 /* ================= NAV ================= */
 .nav {
   display: none;
   margin-left: auto;
-  gap: 32px;
 }
 
 .nav a {
   color: #111;
   text-decoration: none;
   font-weight: 500;
+  padding: 16px 16px;
 }
 
 /* ================= ACTIONS ================= */
@@ -148,7 +148,6 @@
 @media (min-width: 768px) {
   .header {
     max-width: 768px;
-    padding: 16px 0;
   }
 
   .publishButton {
@@ -164,7 +163,7 @@
   .header {
     width: 1440px;
     max-width: 1440px;
-    padding: 16px 64px;
+    padding: 0 64px;
   }
 
   .nav {
@@ -194,6 +193,10 @@
   }
 
   .logoutButton {
+    display: flex;
+  }
+
+  .signupButton {
     display: flex;
   }
 }

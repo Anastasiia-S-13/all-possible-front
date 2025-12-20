@@ -12,7 +12,7 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import { Category, CreateToolPayload } from "@/types/typesCategories";
+import {CreateToolPayload } from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
@@ -90,7 +90,6 @@ export const fetchToolById = async (toolId: string): Promise<Tool> => {
 
 export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
-  console.log(response.data);
   return response.data;
 };
 

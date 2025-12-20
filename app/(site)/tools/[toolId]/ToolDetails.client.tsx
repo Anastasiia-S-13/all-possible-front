@@ -31,12 +31,14 @@ const ToolDetailsClient = () => {
 
   return (
     toolData && (
-      <div className={css.container}>
-        <div className={css.toolDetailsWrap}>
-          <ToolGallery images={toolData.images} />
-          <ToolInfoBlock user={userData} tool={toolData} />
+      <section className={css.toolDetailsSection}>
+        <div className="container">
+          <div className={css.toolDetailsWrap}>
+            <ToolGallery images={toolData.images} />
+            <ToolInfoBlock user={userData} tool={toolData} />
+          </div>
         </div>
-      </div>
+      </section>
     )
   );
 };

@@ -54,13 +54,15 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
       </div>
       <p className={css.description}>{tool.description}</p>
       <div className={css.specs}>
-        <ul className={css.specsList}>
-          {Object.entries(tool.specifications).map(([key, value]) => (
-            <li key={key} className={css.specItem}>
-              <span className={css.span}>{key}:</span> {value}
-            </li>
-          ))}
-        </ul>
+        {tool.specifications && Object.keys(tool.specifications).length > 0 && (
+          <ul className={css.specsList}>
+            {Object.entries(tool.specifications).map(([key, value]) => (
+              <li key={key} className={css.specItem}>
+                <span className={css.span}>{key}:</span> {value}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <button className={css.bookingBtn} onClick={handleClick}>
         Забронювати

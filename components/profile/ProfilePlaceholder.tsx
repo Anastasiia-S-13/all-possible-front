@@ -1,10 +1,17 @@
-// components/profile/ProfilePlacsholder.tsx
+// components/profile/ProfilePlaceholder.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
 import styles from "./ProfilePlaceholder.module.css";
+import { useAuthStore } from "@/stores/authStore";
 
-export default function ProfilePlaceholder({ isOwner }: { isOwner: boolean }) {
+interface ProfilePlaceholderProps {
+  userId: string;
+}
+
+export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) {
+  const currentUser = useAuthStore((state) => state.user);
+  const isOwner = currentUser?.id === userId;
   const router = useRouter();
 
   const handleClick = () => {

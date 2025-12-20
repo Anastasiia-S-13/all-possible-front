@@ -1,28 +1,90 @@
 // lib/api/serverApi.ts
-import { User } from '../../types/User';
-import { Tool } from '../../types/Tool';
 
-export async function getUserById(userId: string): Promise<User> {
-  const res = await fetch(`${process.env.API_URL}/users/${userId}`, {
-    cache: 'no-store',
-    credentials: 'include',
-  });
+import { cookies } from 'next/headers';
+import { api } from './api';
 
-  if (!res.ok) {
-    throw new Error('Не вдалося завантажити користувача');
+import type { User } from '@/types/User';
+import type { Tool } from '@/types/Tool';
+import type { ToolHttpRequest } from '@/types/Tool';
+
+const getCookieHeader = async () => {
+  const cookieStore = await cookies();
+  return {
+    Cookie: cookieStore.toString(),
+  };
+};
+
+export const getUserById = async (
+  userId: string
+): Promise<User | null> => {
+  try {
+    const headers = await getCookieHeader();
+
+    const { data } = await api.get<User>(`/users/${userId}`, {
+      headers,
+    });
+
+    return {
+      ...data,
+      id: (data as any)._id ?? data.id,
+    };
+  } catch (error) {
+    console.warn('getUserById failed:', error);
+    return null; 
   }
+};
 
-  return res.json();
-}
+export const getUserTools = async (
+  userId: string
+): Promise<Tool[]> => {
+  try {
+    const headers = await getCookieHeader();
 
-export async function getUserTools(userId: string): Promise<Tool[]> {
-  const res = await fetch(`${process.env.API_URL}/users/${userId}/tools`, {
-    cache: 'no-store',
-  });
+    const { data } = await api.get<Tool[]>(
+      `/users/${userId}/tools`,
+      { headers }
+    );
 
-  if (!res.ok) {
+    return data;
+  } catch (error) {
+    console.warn('getUserTools failed:', error);
     return [];
   }
+};
 
-  return res.json();
-}
+export const getAllToolsServer = async (): Promise<ToolHttpRequest> => {
+  const headers = await getCookieHeader();
+
+  const { data } = await api.get<ToolHttpRequest>('/tools', {
+    params: {
+      perPage: 8,
+    },
+    headers,
+  });
+
+  return data;
+};
+
+export const getMe = async (): Promise<User | null> => {
+  try {
+    const headers = await getCookieHeader();
+
+    const { data } = await api.get<User>('/users/me', {
+      headers,
+    });
+
+    return {
+      ...data,
+      id: (data as any)._id ?? data.id,
+    };
+  } catch {
+    return null;
+  }
+};
+
+export const updateProfileFormData = async (data: FormData) => {
+  const res = await api.put('/users/me', data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return res.data;
+};

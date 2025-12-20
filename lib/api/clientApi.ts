@@ -1,8 +1,12 @@
 // lib/api/clientApi.ts
 
-import { User,  EditProfileData} from '../../types/User';
-
-import { BookingResponse, CreateBookingRequest, Tool } from "@/types/Booking";
+import { User, EditProfileData } from '../../types/User';
+import {
+  BookingResponse,
+  CreateBookingPayload,
+  CreateBookingRequest,
+  Tool,
+} from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
@@ -30,6 +34,21 @@ export async function updateProfile(user: EditProfileData) {
 
   return res.json();
 }
+
+export async function updateProfileFormData(formData: FormData) {
+  const res = await fetch('/api/profile', {
+    method: 'PUT',
+    body: formData, 
+  });
+
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || 'Не вдалося оновити профіль');
+  }
+
+  return res.json();
+}
+
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
   config?: AxiosRequestConfig
@@ -39,10 +58,11 @@ export const createBookingRequest = async (
 };
 
 export const createBooking = async (
-  bookingData: CreateBookingRequest & { userId: string }
+  bookingData: CreateBookingPayload & { userId: string }
 ): Promise<BookingResponse> => {
   try {
-    const response = await api.post(`/bookings`, { ...bookingData });
+    const { userId, ...payload } = bookingData;
+    const response = await api.post(`/bookings`, payload);
     return response.data;
   } catch (error) {
     throw new Error(`Error creating booking: ${error}`);

@@ -5,12 +5,14 @@ export interface User {
   email: string;
   createdAt?: string;
   bio?: string;
+  avatar?: string;
 };
 
 export interface UserProfileProps {
-  user: { name: string };
-  isOwner: boolean; 
+  user: { name: string; avatar?: string };
+  userId: string;
+  containerClassName?: string;
 }
 
-export type EditProfileData = Pick<User, 'name' | 'email' | 'bio'>;
+export type EditProfileData = Pick<User, 'name' | 'email' | 'bio' | 'avatar'>;
 

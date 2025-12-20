@@ -1,19 +1,30 @@
 // app/(site)/profile/[userId]/page.tsx
 
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
+import css from './Profile.module.css';
 import UserProfile from "../../../../components/profile/UserProfile";
 import ToolsGrid from "../../../../components/profile/ToolsGrid";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
-import { authOptions } from "@/lib/auth";
-import { getUserById, getUserTools} from "@/lib/api/serverApi";
+import { getUserById, getUserTools } from "@/lib/api/serverApi";
 
 type Props = {
   params: { userId: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const user = await getUserById(params.userId);
+  const { userId } = params;
+
+  let user: { name: string; avatar?: string } = { name: "Користувач" }; // fallback
+
+try {
+  const fetchedUser = await getUserById(userId);
+  if (fetchedUser) {
+    user = fetchedUser;
+  }
+} catch (error) {
+  console.error("Не вдалося отримати користувача:", error);
+  // залишаємо fallback
+}
 
   return {
     title: `${user.name} | Профіль`,
@@ -21,30 +32,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${user.name} | Профіль`,
       description: `Профіль користувача ${user.name}`,
-      url: `/profile/${params.userId}`,
+      url: `/profile/${userId}`,
       type: "profile",
     },
   };
 }
 
 export default async function ProfilePage({ params }: Props) {
-  const session = await getServerSession(authOptions);
+  const { userId } = params;
 
-  const user = await getUserById(params.userId);
-  const tools = await getUserTools(params.userId);
+  let user: { name: string; avatar?: string } | null = null;
+  let tools: any[] = [];
+
+  try {
+       user = await getUserById(userId);
+    tools = await getUserTools(userId);
+  } catch (error) {
+    console.error("Не вдалося отримати користувача або інструменти:", error);
+  }
+
+  if (!user) {
+    return <ProfilePlaceholder userId={userId} />;
+  }
 
   const hasTools = tools.length > 0;
 
-    const isOwner = session?.user?.id === params.userId;
-
   return (
     <main>
-      <UserProfile user={user} isOwner={isOwner} />
-
+            <UserProfile user={user} userId={userId} containerClassName={css.profileContainer} />
       {hasTools ? (
         <ToolsGrid tools={tools} />
       ) : (
-        <ProfilePlaceholder isOwner={isOwner} />
+        <ProfilePlaceholder userId={userId} />
       )}
     </main>
   );

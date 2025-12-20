@@ -5,3 +5,7 @@ export type Tool = {
   pricePerDay: number;
   rating?: number;
 };
+
+export interface ToolHttpRequest {
+  tools: Tool[];
+}

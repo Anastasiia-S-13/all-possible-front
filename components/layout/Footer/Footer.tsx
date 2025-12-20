@@ -2,12 +2,16 @@
 import Link from "next/link";
 import styles from "./Footer.module.css";
 import pageStyles from "@/app/page.module.css";
+import { useAuthStore } from "@/stores/authStore";
 
 type FooterProps = {
   isAuthenticated: boolean;
 };
 
 export default function Footer({ isAuthenticated }: FooterProps) {
+  const user = useAuthStore((state) => state.user);
+  const userId = user?.id;
+
   return (
     <footer className={styles.footer}>
       <div className={pageStyles.container}>
@@ -30,8 +34,8 @@ export default function Footer({ isAuthenticated }: FooterProps) {
 
             {isAuthenticated ? (
               <>
-                <Link href="/profile">Мій профіль</Link>
-                <Link href="/create">Опублікувати</Link>
+                <Link href={`/profile/${userId}`}>Мій профіль</Link>
+                <Link href="/tools/new">Опублікувати</Link>
               </>
             ) : (
               <>

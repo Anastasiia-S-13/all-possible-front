@@ -1,0 +1,95 @@
+.wrapper {
+    position: relative;
+    width: 335px;
+}
+
+.select {
+    background: var(--opacity-transparent);
+    border: 2px solid var(--color-neutral-darkest);
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 335px;
+    height: 40px;
+    cursor: pointer;
+    transition: background 0.3s ease, border 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    line-height: 20px;
+}
+
+.open {
+    background: var(--color-electric-violet-lightest);
+    border-bottom: 2px solid var(--color-electric-violet-light);
+    border-radius: 6px 6px 0 0;
+}
+
+.dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 335px;
+    min-height: 255px;
+    height: 428px;
+    background: var(--color-electric-violet-lightest);
+    border: 2px solid var(--color-electric-violet-light);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.scrollArea {
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 7px;
+}
+
+.scrollArea::-webkit-scrollbar {
+    width: 7px;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+    background-color: var(--color-electric-violet-light);
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+    background-color: var(--color-electric-violet-dark);
+    border-radius: 4px;
+}
+
+.option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: #000;
+    margin-right: -7px;
+    padding-right: 19px;
+}
+
+.option:hover {
+    background: var(--color-electric-violet-dark);
+    color: white;
+}
+
+.active {
+    background: var(--color-electric-violet-lighter);
+    color: white;
+}
+
+
+@media (min-width: 768px) {
+    .wrapper {
+        width: 304px;
+    }
+
+    .select,
+    .dropdown {
+        width: 304px;
+    }
+}

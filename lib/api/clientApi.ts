@@ -85,7 +85,6 @@ export const createTool = async (payload: CreateToolPayload) => {
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
-  console.log(response.data.images);
   return response.data;
 };
 
@@ -93,6 +92,16 @@ export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
   console.log(response.data);
   return response.data;
+};
+
+export const getAllTools = async (params: {
+  search?: string;
+  category?: string;
+  page?: number;
+  perPage?: number;
+}): Promise<{ tools: Tool[]; total: number; pages: number }> => {
+  const response = await api.get("/tools", { params });
+    return response.data;
 };
 
 export const updateTool = async (

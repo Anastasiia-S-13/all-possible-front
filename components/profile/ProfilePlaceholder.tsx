@@ -9,13 +9,15 @@ interface ProfilePlaceholderProps {
   userId: string;
 }
 
-export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) {
+export default function ProfilePlaceholder({
+  userId,
+}: ProfilePlaceholderProps) {
   const currentUser = useAuthStore((state) => state.user);
   const isOwner = currentUser?.id === userId;
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(isOwner ? "/tools/add" : "/");
+    router.push(isOwner ? "/tools/new" : "/");
   };
 
   return (
@@ -34,11 +36,7 @@ export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) 
           : "У нас є великий вибір інструментів від інших користувачів"}
       </p>
 
-      <button
-        type="button"
-        className={styles.button}
-        onClick={handleClick}
-      >
+      <button type="button" className={styles.button} onClick={handleClick}>
         {isOwner ? "Опублікувати інструмент" : "Всі інструменти"}
       </button>
     </div>

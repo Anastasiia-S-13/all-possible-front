@@ -25,3 +25,25 @@ export const registerSchema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'Паролі не співпадають')
     .required("Підтвердіть пароль"),
 });
+
+export const toolSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Назва має бути не менше 3 символів")
+    .max(96, "Назва має бути не більше 96 символів")
+    .required("Назва обов'язкова"),
+  pricePerDay: Yup.number()
+    .min(0, "Ціна не може бути від'ємною")
+    .required("Ціна обов'язкова"),
+  category: Yup.string()
+    .required("Оберіть категорію"),
+  description: Yup.string()
+    .min(20, "Опис має бути не менше 20 символів")
+    .max(2000, "Опис має бути не більше 2000 символів")
+    .required("Опис обов'язковий"),
+  rentalTerms: Yup.string()
+    .min(20, "Умови мають бути не менше 20 символів")
+    .max(1000, "Умови мають бути не більше 1000 символів")
+    .required("Умови оренди обов'язкові"),
+  specifications: Yup.string()
+    .max(1000, "Характеристики мають бути не більше 1000 символів"),
+});

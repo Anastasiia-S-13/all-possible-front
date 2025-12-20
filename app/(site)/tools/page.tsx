@@ -2,46 +2,39 @@ import { getCategories } from "@/lib/api/clientApi";
 import ToolsPageClient from "./ToolsPage.Client";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; category?: string }>;
-}): Promise<Metadata> {
-  const { q: query, category: categoryId } = await searchParams;
-  const categories = await getCategories();
-  const category = categories.find((c) => c._id === categoryId);
+type Props = {
+  params: Promise<{ categories: string }>;
+};
 
-  let title = "Всі інструменти";
-  if (query) {
-    title = `Пошук: ${query}`;
-  } else if (category) {
-    title = category.title;
-  }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { categories } = await params;
 
   return {
-    title: `${title} | ToolNext`,
-    description: category
-      ? `Список інструментів для категорії ${category.title}`
-      : "Знайдіть найкращі інструменти для оренди на ToolNext",
+    title: `Інструменти | ${categories}`,
+    description: `Список інструментів для категорії ${categories}`,
+    openGraph: {
+      title: `Інструменти | ${categories}`,
+      description: `Список інструментів для категорії ${categories}`,
+      url: `/tools?categories=${categories}`,
+      type: "website",
+    },
   };
 }
 
 export default async function ToolsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; category?: string }>;
+  searchParams: Promise<{ query?: string }>;
 }) {
-  const { q: query, category: categoryId } = await searchParams;
+  const { query } = await searchParams;
 
   const categories = await getCategories();
   const initialSearch = typeof query === "string" ? query : "";
-  const initialCategoryId = typeof categoryId === "string" ? categoryId : "";
 
   return (
     <ToolsPageClient
       initialCategories={categories}
       initialSearch={initialSearch}
-      initialCategoryId={initialCategoryId}
     />
   );
 }

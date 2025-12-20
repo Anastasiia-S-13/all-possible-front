@@ -8,10 +8,10 @@ export default function MetadataUpdater({ categoryTitle }: Props) {
   useEffect(() => {
     const title = categoryTitle
       ? `Інструменти | ${categoryTitle}`
-      : "Інструменти";
+      : "Інструменти | Всі інструменти";
     const description = categoryTitle
       ? `Список інструментів для категорії ${categoryTitle}`
-      : "Список всіх інструментів";
+      : "Список всіх доступних інструментів";
 
     document.title = title;
 

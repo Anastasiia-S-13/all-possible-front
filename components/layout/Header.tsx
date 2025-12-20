@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
@@ -14,6 +15,7 @@ export default function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const router = useRouter();
 
   // Hide header on auth pages
   if (pathname?.startsWith("/auth")) {
@@ -27,6 +29,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await logout();
+    router.push("/");
   };
 
   return (

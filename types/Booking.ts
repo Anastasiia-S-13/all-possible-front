@@ -7,6 +7,7 @@ export interface Tool {
   _id: string;
   name: string;
   pricePerDay: number;
+  images: string;
   description?: string;
   category?: string;
   bookedPeriods: BookedPeriod[];

@@ -1,0 +1,211 @@
+/* OrderForm.module.css */
+.AddEditToolForm {
+  max-width: 335px;
+}
+.previewField {
+  width: max-content;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.boxField {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.label {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #000;
+}
+
+.input {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  margin-top: 8px;
+  height: 43px;
+  border-radius: 6px;
+}
+.input::placeholder {
+  color: #aaa;
+  font-size: 16px;
+}
+.input:focus {
+  outline: none;
+  border: 2px solid #8808cc;
+}
+
+.textarea {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: #666666;
+  margin-top: 8px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 12px;
+  max-width: 100%;
+}
+
+.select {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.select:focus {
+  background: #e7cdf4;
+}
+
+/* Chrome / Edge */
+.select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select::-webkit-scrollbar-track {
+  background: #e7cdf4;
+}
+
+.select::-webkit-scrollbar-thumb {
+  background-color: #8808cc;
+}
+
+.select option:hover {
+  background-color: #8808cc;
+  color: white;
+}
+
+.option {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000;
+  border: 2px solid;
+  border-radius: 6px;
+  background: #f3e6f9;
+}
+
+.option:checked,
+.option:hover {
+  background: #e7cdf4;
+  color: #000;
+}
+/* :global(.select option:hover) {
+  background: #e7cdf4;
+  color: #7c3030;
+} */
+
+.boxButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.btn {
+  border: 2px solid #8808cc;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  height: 41px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #fff;
+  background: #8808cc;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover .btn:focus {
+  background: transparent;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+.btn:active {
+  background: #e7cdf4;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+.btnCan {
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  height: 41px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000;
+  background: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+.btnCan:hover .btnCan:focus {
+  background: transparent;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+.btnCan:active {
+  background: #e7cdf4;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+/* .error {
+  display: block;
+  color: #e53935;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+} */
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .AddEditToolForm {
+    max-width: 704px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .AddEditToolForm {
+    max-width: none;
+    width: 100%;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .left {
+    flex-grow: 1;
+  }
+
+  .boxButtons {
+    width: 415px;
+  }
+  .btn,
+  .btnCan {
+    width: 100%;
+  }
+}

@@ -4,7 +4,8 @@ import "@/styles/variables.css";
 import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { AuthProvider, ToastProvider } from "@/providers";
-import Footer from "@/components/layout/Footer/Footer";
+import FooterWithAuth from "@/components/layout/Footer/FooterWithAuth";
+import Header from "@/components/layout/Header";
 
 const workSans = localFont({
   src: [
@@ -60,19 +61,18 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
-  const isAuthenticated = false; // Replace with actual authentication logic
   return (
     <html lang="en">
       <body className={workSans.variable}>
         <TanStackProvider>
           <AuthProvider>
             <ToastProvider>
-              {/* <Header /> */}
+              <Header />
               <main>
                 {children}
                 {modal}
               </main>
-              <Footer isAuthenticated={isAuthenticated} />
+              <FooterWithAuth />
             </ToastProvider>
           </AuthProvider>
         </TanStackProvider>

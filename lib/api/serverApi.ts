@@ -2,10 +2,8 @@
 
 import { cookies } from 'next/headers';
 import { api } from './api';
-
-import type { User } from '@/types/User';
-import type { Tool } from '@/types/Tool';
-import type { ToolHttpRequest } from '@/types/Tool';
+import  { User } from '@/types/User';
+import  { Tool, ToolHttpRequest } from '@/types/Tool';
 
 const getCookieHeader = async () => {
   const cookieStore = await cookies();

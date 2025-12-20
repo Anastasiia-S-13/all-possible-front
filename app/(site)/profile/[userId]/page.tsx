@@ -1,5 +1,3 @@
-// app/(site)/profile/[userId]/page.tsx
-
 import { Metadata } from "next";
 import css from './Profile.module.css';
 import UserProfile from "../../../../components/profile/UserProfile";
@@ -10,6 +8,7 @@ import { getUserById, getUserTools } from "@/lib/api/serverApi";
 type Props = {
   params: { userId: string };
 };
+
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { userId } = params;

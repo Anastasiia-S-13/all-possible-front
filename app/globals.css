@@ -119,7 +119,7 @@ img {
   padding: 64px 0;
 }
 
-/* Styles for Tablet devices */
+
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -127,7 +127,7 @@ img {
   }
 }
 
-/* Styles for Desktop devices */
+
 @media only screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
@@ -137,4 +137,32 @@ img {
   .section {
     padding: 112px 0;
   }
+}
+
+.gridBtn {
+  display: block;
+  width: fit-content;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #8808cc;
+  border: 1px solid #8808cc;
+  border-radius: 6px;
+  padding: 9px 23px;
+  text-wrap: nowrap;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.gridBtn:hover,
+.gridBtn:focus {
+  background-color: #fff;
+  color: #000;
+}
+
+.gridBtn:active {
+  background-color: #e7cdf4;
 }

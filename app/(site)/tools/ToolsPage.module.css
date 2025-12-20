@@ -22,12 +22,31 @@
 }
 
 .resetCategories {
+    padding: 6px 10px;
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
     color: var(--color-neutral-darkest);
+    border-radius: 6px;
+    transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+        color 300ms ease-in-out;
 }
+
+
+.resetCategories:hover,
+.resetCategories:focus {
+    background-color: #e7cdf4;
+
+
+}
+
+.resetCategories:active {
+    background-color: #8808cc;
+    color: #fff;
+    border-color: #8808cc;
+}
+
 
 .pagination {
     display: flex;

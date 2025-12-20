@@ -25,7 +25,7 @@ export default function ToolsPageClient({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState(initialSearch);
 
-  const perPage = 8;
+  const perPage = 16;
 
   useEffect(() => {
     const loadTools = async () => {
@@ -93,8 +93,13 @@ export default function ToolsPageClient({
         ) : (
           <>
             <ToolsGrid tools={tools} />
+            {currentPage === 1 && totalPages > 1 && (
+              <button onClick={() => handlePageChange(2)} className="gridBtn">
+                Показати більше
+              </button>
+            )}
 
-            {totalPages > 1 && (
+            {currentPage > 1 && totalPages > 1 && (
               <div className={styles.pagination}>
                 <button
                   disabled={currentPage === 1}

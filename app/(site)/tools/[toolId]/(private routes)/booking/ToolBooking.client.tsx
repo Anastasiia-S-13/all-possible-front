@@ -110,28 +110,28 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
 
   if (isLoading) {
     return (
-      <main className={styles.main}>
+      <section className={styles.main}>
         <div className="container">
           <div className={styles.loading}>
             <Loader />
           </div>
         </div>
-      </main>
+      </section>
     );
   }
 
   if (error || !tool) {
     return (
-      <main className={styles.main}>
+      <section className={styles.main}>
         <div className="container">
           <div className={styles.error}>Помилка завантаження інструменту</div>
         </div>
-      </main>
+      </section>
     );
   }
 
   return (
-    <main className={styles.main}>
+    <section className={styles.main}>
       <div className={styles.bookingWrapper}>
         <h1 className={styles.title}>Підтвердження бронювання</h1>
 
@@ -163,6 +163,6 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
           </div>
         </BookingForm>
       </div>
-    </main>
+    </section>
   );
 }

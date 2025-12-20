@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Calendar from "@/components/Calendar/Calendar";
-import BookingForm from "@/components/BookingForm/BookingForm";
-import { Tool, DateRange } from "@/types/Booking";
+import Calendar from "@/components/BookingPage/Calendar/Calendar";
+import BookingForm from "@/components/BookingPage/BookingForm/BookingForm";
+import { ToolBokking, DateRange } from "@/types/Booking";
 import { createBooking, getToolById } from "@/lib/api/bookingApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/authStore";
@@ -28,7 +28,7 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
     data: tool,
     isLoading,
     error,
-  } = useQuery<Tool>({
+  } = useQuery<ToolBokking>({
     queryKey: ["tool", toolId],
     queryFn: () => getToolById(toolId),
   });
@@ -48,7 +48,7 @@ export default function ToolBookingClientPage({ params }: BookingPageProps) {
         endDate: result.booked.rentalPeriod.endDate,
       };
 
-      queryClient.setQueryData<Tool>(["tool", toolId], (old) =>
+      queryClient.setQueryData<ToolBokking>(["tool", toolId], (old) =>
         old
           ? {
               ...old,

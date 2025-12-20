@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { toast } from 'react-hot-toast';
-import { toolSchema } from '@/lib/validations';
-import { getCategories, updateTool } from '@/lib/api/clientApi';
-import { Tool } from '@/types/Booking';
-import { Category } from '@/types/Tool';
-import styles from './EditToolForm.module.css';
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { toast } from "react-hot-toast";
+import { toolSchema } from "@/lib/validations";
+import { getCategories, updateTool } from "@/lib/api/clientApi";
+import { ToolBokking } from "@/types/Booking";
+import { Category } from "@/types/Tool";
+import styles from "./EditToolForm.module.css";
 
 interface EditToolFormProps {
-  tool: Tool;
+  tool: ToolBokking;
   onSuccess?: () => void;
 }
 
@@ -32,7 +32,9 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(tool.images || null);
+  const [imagePreview, setImagePreview] = useState<string | null>(
+    tool.images || null
+  );
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -40,7 +42,7 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
         const data = await getCategories();
         setCategories(data);
       } catch (error) {
-        toast.error('Не вдалося завантажити категорії');
+        toast.error("Не вдалося завантажити категорії");
       } finally {
         setIsLoadingCategories(false);
       }
@@ -49,26 +51,28 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
   }, []);
 
   const initialValues: FormValues = {
-    name: tool.name || '',
+    name: tool.name || "",
     pricePerDay: tool.pricePerDay || 0,
-    category: '',
-    description: tool.description || '',
-    rentalTerms: tool.rentalTerms || '',
+    category: "",
+    description: tool.description || "",
+    rentalTerms: tool.rentalTerms || "",
     specifications: tool.specifications
-      ? Object.entries(tool.specifications).map(([k, v]) => `${k}: ${v}`).join('\n')
-      : '',
+      ? Object.entries(tool.specifications)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join("\n")
+      : "",
   };
 
   const handleImageChange = (file: File | null) => {
     if (!file) return;
 
     if (!file.type.match(/^image\/(jpeg|png)$/)) {
-      toast.error('Дозволені тільки JPG та PNG формати');
+      toast.error("Дозволені тільки JPG та PNG формати");
       return;
     }
 
     if (file.size > 1024 * 1024) {
-      toast.error('Розмір файлу не повинен перевищувати 1MB');
+      toast.error("Розмір файлу не повинен перевищувати 1MB");
       return;
     }
 
@@ -84,22 +88,22 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
     setIsSubmitting(true);
     try {
       const formData = new FormData();
-      formData.append('name', values.name);
-      formData.append('pricePerDay', String(values.pricePerDay));
-      formData.append('category', values.category);
-      formData.append('description', values.description);
-      formData.append('rentalTerms', values.rentalTerms);
+      formData.append("name", values.name);
+      formData.append("pricePerDay", String(values.pricePerDay));
+      formData.append("category", values.category);
+      formData.append("description", values.description);
+      formData.append("rentalTerms", values.rentalTerms);
 
       if (values.specifications) {
-        formData.append('specifications', values.specifications);
+        formData.append("specifications", values.specifications);
       }
 
       if (imageFile) {
-        formData.append('image', imageFile);
+        formData.append("image", imageFile);
       }
 
       await updateTool(tool._id, formData);
-      toast.success('Інструмент успішно оновлено!');
+      toast.success("Інструмент успішно оновлено!");
 
       if (onSuccess) {
         onSuccess();
@@ -108,7 +112,9 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
       }
     } catch (error: unknown) {
       const err = error as { response?: { data?: { message?: string } } };
-      toast.error(err.response?.data?.message || 'Помилка при оновленні інструменту');
+      toast.error(
+        err.response?.data?.message || "Помилка при оновленні інструменту"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -149,7 +155,12 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                   </div>
                 ) : (
                   <div className={styles.imagePlaceholder}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    >
                       <rect x="3" y="3" width="18" height="18" rx="2" />
                       <circle cx="8.5" cy="8.5" r="1.5" />
                       <path d="M21 15l-5-5L5 21" />
@@ -168,7 +179,9 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                   type="file"
                   accept="image/jpeg,image/png"
                   className={styles.hiddenInput}
-                  onChange={(e) => handleImageChange(e.target.files?.[0] || null)}
+                  onChange={(e) =>
+                    handleImageChange(e.target.files?.[0] || null)
+                  }
                 />
               </div>
             </div>
@@ -182,9 +195,15 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 id="name"
                 name="name"
                 placeholder="Введіть назву"
-                className={`${styles.input} ${errors.name && touched.name ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.name && touched.name ? styles.inputError : ""
+                }`}
               />
-              <ErrorMessage name="name" component="span" className={styles.error} />
+              <ErrorMessage
+                name="name"
+                component="span"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -197,9 +216,17 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 name="pricePerDay"
                 placeholder="500"
                 min="0"
-                className={`${styles.input} ${errors.pricePerDay && touched.pricePerDay ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.pricePerDay && touched.pricePerDay
+                    ? styles.inputError
+                    : ""
+                }`}
               />
-              <ErrorMessage name="pricePerDay" component="span" className={styles.error} />
+              <ErrorMessage
+                name="pricePerDay"
+                component="span"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -210,7 +237,9 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 as="select"
                 id="category"
                 name="category"
-                className={`${styles.select} ${errors.category && touched.category ? styles.inputError : ''}`}
+                className={`${styles.select} ${
+                  errors.category && touched.category ? styles.inputError : ""
+                }`}
               >
                 <option value="">Категорія</option>
                 {categories.map((cat) => (
@@ -219,7 +248,11 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                   </option>
                 ))}
               </Field>
-              <ErrorMessage name="category" component="span" className={styles.error} />
+              <ErrorMessage
+                name="category"
+                component="span"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -231,9 +264,17 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 id="rentalTerms"
                 name="rentalTerms"
                 placeholder="Застава 8000 грн. Стакина та бак для води надаються окремо."
-                className={`${styles.input} ${errors.rentalTerms && touched.rentalTerms ? styles.inputError : ''}`}
+                className={`${styles.input} ${
+                  errors.rentalTerms && touched.rentalTerms
+                    ? styles.inputError
+                    : ""
+                }`}
               />
-              <ErrorMessage name="rentalTerms" component="span" className={styles.error} />
+              <ErrorMessage
+                name="rentalTerms"
+                component="span"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -245,9 +286,17 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 id="description"
                 name="description"
                 placeholder="Ваш опис"
-                className={`${styles.textarea} ${errors.description && touched.description ? styles.inputError : ''}`}
+                className={`${styles.textarea} ${
+                  errors.description && touched.description
+                    ? styles.inputError
+                    : ""
+                }`}
               />
-              <ErrorMessage name="description" component="span" className={styles.error} />
+              <ErrorMessage
+                name="description"
+                component="span"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -259,9 +308,17 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
                 id="specifications"
                 name="specifications"
                 placeholder="Характеристики інструменту"
-                className={`${styles.textarea} ${styles.textareaLarge} ${errors.specifications && touched.specifications ? styles.inputError : ''}`}
+                className={`${styles.textarea} ${styles.textareaLarge} ${
+                  errors.specifications && touched.specifications
+                    ? styles.inputError
+                    : ""
+                }`}
               />
-              <ErrorMessage name="specifications" component="span" className={styles.error} />
+              <ErrorMessage
+                name="specifications"
+                component="span"
+                className={styles.error}
+              />
             </div>
           </Form>
 
@@ -272,11 +329,11 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
               className={styles.submitButton}
               disabled={isSubmitting}
               onClick={() => {
-                const form = document.querySelector('form');
+                const form = document.querySelector("form");
                 if (form) form.requestSubmit();
               }}
             >
-              {isSubmitting ? 'Збереження...' : 'Зберегти'}
+              {isSubmitting ? "Збереження..." : "Зберегти"}
             </button>
             <button
               type="button"

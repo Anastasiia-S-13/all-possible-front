@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { Category } from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 import { getAllTools } from "@/lib/api/clientApi";
-import ToolsGrid from "@/components/tools/ToolsGrid";
-import FilterBar from "@/components/ToolPage/FilterBar";
+import ToolsGrid from "@/components/ToolPage/ToolsGrid/ToolsGrid";
+import FilterBar from "@/components/ToolPage/FiltrBar/FilterBar";
 import styles from "./ToolsPage.module.css";
 import Loader from "@/app/loading";
 import MetadataUpdater from "@/components/ToolPage/MetadataUpdater";
@@ -34,7 +34,7 @@ export default function ToolsPageClient({
     selectedCategory === ""
       ? ""
       : initialCategories.find((cat) => cat._id === selectedCategory)?.title ||
-        "";
+      "";
 
   useEffect(() => {
     const loadTools = async () => {
@@ -130,9 +130,8 @@ export default function ToolsPageClient({
                   <button
                     key={i + 1}
                     onClick={() => handlePageChange(i + 1)}
-                    className={`${styles.pageBtn} ${
-                      currentPage === i + 1 ? styles.activePage : ""
-                    }`}
+                    className={`${styles.pageBtn} ${currentPage === i + 1 ? styles.activePage : ""
+                      }`}
                   >
                     {i + 1}
                   </button>

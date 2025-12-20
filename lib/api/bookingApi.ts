@@ -1,5 +1,9 @@
 import { api } from "./api";
-import { Tool, BookingResponse, CreateBookingRequest } from "@/types/Booking";
+import {
+  ToolBokking,
+  BookingResponse,
+  CreateBookingRequest,
+} from "@/types/Booking";
 
 export const createBooking = async (
   bookingData: CreateBookingRequest & { userId?: string }
@@ -21,7 +25,7 @@ export const createBooking = async (
   }
 };
 
-export const getToolById = async (toolId: string): Promise<Tool> => {
-  const response = await api.get<Tool>(`/tools/${toolId}`);
+export const getToolById = async (toolId: string): Promise<ToolBokking> => {
+  const response = await api.get<ToolBokking>(`/tools/${toolId}`);
   return response.data;
 };

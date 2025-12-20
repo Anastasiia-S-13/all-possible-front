@@ -28,6 +28,9 @@ export const bookingSchema = yup.object({
     .min(1, "Відділення обов'язкове")
     .max(200, "Відділення повинно містити максимум 200 символів")
     .required("Відділення Нової Пошти обов'язкове"),
+  toolId: yup.string(),
+  startDate: yup.string(),
+  endDate: yup.string(),
 });
 
 export type BookingFormSchema = yup.InferType<typeof bookingSchema>;

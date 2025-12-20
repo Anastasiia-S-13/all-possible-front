@@ -3,7 +3,7 @@ export interface BookedPeriod {
   endDate: string;
 }
 
-export interface Tool {
+export interface ToolBokking {
   _id: string;
   owner: string;
   name: string;
@@ -36,12 +36,6 @@ export interface CreateBookingRequest extends BookingFormData {
 export interface DateRange {
   startDate: Date | null;
   endDate: Date | null;
-}
-
-export interface User {
-  id: string;
-  name: string;
-  avatar?: string;
 }
 
 export interface BookingResponse {

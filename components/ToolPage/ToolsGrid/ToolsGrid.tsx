@@ -1,4 +1,4 @@
-import ToolCard from "./ToolCard";
+import ToolCard from "@/components/tools/ToolCard";
 import styles from "./ToolsGrid.module.css"; // Use its own listing styles
 import { Tool } from "@/types/Tool";
 

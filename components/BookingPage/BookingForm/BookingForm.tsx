@@ -11,7 +11,9 @@ import {
 import { calculateTotalPrice } from "@/lib/utils/calculateRating";
 import styles from "./BookingForm.module.css";
 
+
 const STORAGE_KEY = "bookingFormData";
+
 
 interface BookingFormProps {
   toolId: string;
@@ -38,12 +40,13 @@ export default function BookingForm({
   onSubmit,
   children,
 }: BookingFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const totalPrice = calculateTotalPrice(pricePerDay, selectedRange);
 
   useEffect(() => {
     try {
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) return;
 
@@ -74,7 +77,7 @@ export default function BookingForm({
 
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-    } catch {}
+    } catch { }
   };
 
   const handleSubmit = async (
@@ -96,7 +99,7 @@ export default function BookingForm({
         formikHelpers.resetForm();
         try {
           localStorage.removeItem(STORAGE_KEY);
-        } catch {}
+        } catch { }
       } else {
         toast.error(result.message || "Помилка при створенні бронювання");
       }
@@ -138,13 +141,16 @@ export default function BookingForm({
       validationSchema={bookingSchema}
       onSubmit={handleSubmit}
     >
+
       {({ values, handleChange, handleBlur }) => (
         <Form className={styles.form}>
           <div className={styles.row}>
             <div className={styles.field}>
+
               <label htmlFor="firstName" className={styles.label}>
                 Ім&apos;я
               </label>
+
               <Field
                 id="firstName"
                 name="firstName"
@@ -160,6 +166,7 @@ export default function BookingForm({
                 }}
                 onBlur={handleBlur}
               />
+
               <ErrorMessage
                 name="firstName"
                 component="span"
@@ -167,10 +174,12 @@ export default function BookingForm({
               />
             </div>
 
+
             <div className={styles.field}>
               <label htmlFor="lastName" className={styles.label}>
                 Прізвище
               </label>
+
               <Field
                 id="lastName"
                 name="lastName"
@@ -186,6 +195,7 @@ export default function BookingForm({
                 }}
                 onBlur={handleBlur}
               />
+
               <ErrorMessage
                 name="lastName"
                 component="span"
@@ -198,6 +208,7 @@ export default function BookingForm({
             <label htmlFor="phone" className={styles.label}>
               Номер телефону
             </label>
+
             <Field
               id="phone"
               name="phone"
@@ -213,6 +224,7 @@ export default function BookingForm({
               }}
               onBlur={handleBlur}
             />
+
             <ErrorMessage
               name="phone"
               component="span"
@@ -228,6 +240,7 @@ export default function BookingForm({
               <label htmlFor="deliveryCity" className={styles.label}>
                 Місто доставки
               </label>
+
               <Field
                 id="deliveryCity"
                 name="deliveryCity"
@@ -243,6 +256,7 @@ export default function BookingForm({
                 }}
                 onBlur={handleBlur}
               />
+
               <ErrorMessage
                 name="deliveryCity"
                 component="span"
@@ -254,6 +268,7 @@ export default function BookingForm({
               <label htmlFor="novaPoshtaBranch" className={styles.label}>
                 Відділення Нової Пошти
               </label>
+
               <Field
                 id="novaPoshtaBranch"
                 name="novaPoshtaBranch"
@@ -269,6 +284,7 @@ export default function BookingForm({
                 }}
                 onBlur={handleBlur}
               />
+
               <ErrorMessage
                 name="novaPoshtaBranch"
                 component="span"
@@ -279,6 +295,7 @@ export default function BookingForm({
 
           <div className={styles.priceRow}>
             <span className={styles.price}>Ціна: {totalPrice} грн</span>
+
             <button
               type="submit"
               className={styles.submitBtn}

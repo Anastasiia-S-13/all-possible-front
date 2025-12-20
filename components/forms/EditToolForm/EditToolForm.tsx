@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast';
 import { toolSchema } from '@/lib/validations';
-import { getCategories, updateToolById } from '@/lib/api/clientApi';
+import { getCategories, updateTool } from '@/lib/api/clientApi';
 import { Tool } from '@/types/Booking';
 import { Category } from '@/types/Tool';
 import styles from './EditToolForm.module.css';
@@ -98,7 +98,7 @@ export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
         formData.append('image', imageFile);
       }
 
-      await updateToolById(tool._id, formData);
+      await updateTool(tool._id, formData);
       toast.success('Інструмент успішно оновлено!');
 
       if (onSuccess) {

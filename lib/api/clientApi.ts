@@ -57,15 +57,6 @@ export const getCategories = async () => {
   return res.data;
 };
 
-export type UpdateToolRequest = {
-  toolName?: string;
-  photoUrl?: string;
-};
-
-export const updateTool = async (payload: UpdateToolRequest) => {
-  const res = await api.put<Tool>("/tools", payload);
-  return res.data;
-};
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
@@ -104,7 +95,7 @@ export const fetchUserById = async (userId: string): Promise<User> => {
   return response.data;
 };
 
-export const updateToolById = async (
+export const updateTool = async (
   toolId: string,
   data: FormData
 ): Promise<Tool> => {

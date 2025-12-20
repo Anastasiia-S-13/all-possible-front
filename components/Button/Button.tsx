@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import styles from './Button.module.css';
+import { ButtonHTMLAttributes, ReactNode } from "react";
+import styles from "./Button.module.css";
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
-type ButtonSize = 'sm' | 'lg' | 'icon' | 'icon-sm';
+type ButtonVariant = "primary" | "secondary" | "tertiary" | "primaryHero";
+type ButtonSize = "sm" | "lg" | "icon" | "icon-sm";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -12,11 +12,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({
-  variant = 'primary',
-  size = 'lg',
+  variant = "primary",
+  size = "lg",
   children,
   fullWidth = false,
-  className = '',
+  className = "",
   disabled,
   ...props
 }: ButtonProps) {
@@ -24,16 +24,14 @@ export default function Button({
     styles.btn,
     styles[`btn--${variant}`],
     styles[`btn--${size}`],
-    fullWidth && styles['btn--full'],
-    className
-  ].filter(Boolean).join(' ');
+    fullWidth && styles["btn--full"],
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <button
-      className={classNames}
-      disabled={disabled}
-      {...props}
-    >
+    <button className={classNames} disabled={disabled} {...props}>
       {children}
     </button>
   );

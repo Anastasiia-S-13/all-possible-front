@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, FormikHelpers, ErrorMessage } from "formik";
 import { toast } from "react-hot-toast";
 import { DateRange } from "@/types/Booking";
 import {
@@ -24,6 +23,14 @@ interface BookingFormProps {
   children?: React.ReactNode;
 }
 
+const initialValues: BookingFormSchema = {
+  firstName: "",
+  lastName: "",
+  phone: "",
+  deliveryCity: "",
+  novaPoshtaBranch: "",
+};
+
 export default function BookingForm({
   toolId,
   pricePerDay,
@@ -33,78 +40,47 @@ export default function BookingForm({
 }: BookingFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch,
-  } = useForm<BookingFormSchema>({
-    resolver: yupResolver(bookingSchema),
-    mode: "onBlur",
-  });
-
-  const watchedValues = watch();
+  const totalPrice = calculateTotalPrice(pricePerDay, selectedRange);
 
   useEffect(() => {
     try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      if (savedData) {
-        const parsedData = JSON.parse(savedData);
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
 
-        if (
-          parsedData.toolId !== toolId ||
-          Date.now() - parsedData.timestamp >= 3600000
-        ) {
-          localStorage.removeItem(STORAGE_KEY);
-          setIsLoaded(true);
-          return;
-        }
-
-        setTimeout(() => {
-          reset({
-            firstName: parsedData.firstName || "",
-            lastName: parsedData.lastName || "",
-            phone: parsedData.phone || "",
-            deliveryCity: parsedData.deliveryCity || "",
-            novaPoshtaBranch: parsedData.novaPoshtaBranch || "",
-          });
-        }, 0);
+      const parsed = JSON.parse(saved);
+      if (
+        parsed.toolId !== toolId ||
+        Date.now() - parsed.timestamp >= 3600000
+      ) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
       }
     } catch {
       localStorage.removeItem(STORAGE_KEY);
-    } finally {
-      setIsLoaded(true);
     }
-  }, [toolId, reset]);
+  }, [toolId]);
 
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    const hasData = Object.values(watchedValues).some(
-      (value) => value && value.trim() !== ""
+  const handleSaveToStorage = (values: BookingFormSchema) => {
+    const hasData = Object.values(values).some(
+      (v) => v && (v as string).trim() !== ""
     );
+    if (!hasData) return;
 
-    if (hasData) {
-      const formDataToSave = {
-        firstName: watchedValues.firstName || "",
-        lastName: watchedValues.lastName || "",
-        phone: watchedValues.phone || "",
-        deliveryCity: watchedValues.deliveryCity || "",
-        novaPoshtaBranch: watchedValues.novaPoshtaBranch || "",
-        toolId,
-        timestamp: Date.now(),
-      };
+    const payload = {
+      ...values,
+      toolId,
+      timestamp: Date.now(),
+    };
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(formDataToSave));
-    }
-  }, [watchedValues, toolId, isLoaded]);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch {}
+  };
 
-  const totalPrice = calculateTotalPrice(pricePerDay, selectedRange);
-
-  const handleFormSubmit = async (data: BookingFormSchema) => {
+  const handleSubmit = async (
+    values: BookingFormSchema,
+    formikHelpers: FormikHelpers<BookingFormSchema>
+  ) => {
     if (!selectedRange.startDate || !selectedRange.endDate) {
       toast.error("Будь ласка, виберіть період бронювання");
       return;
@@ -113,18 +89,14 @@ export default function BookingForm({
     setIsSubmitting(true);
 
     try {
-      const result = await onSubmit(data);
+      const result = await onSubmit(values);
 
       if (result.success) {
         toast.success("Бронювання успішно створено!");
-        reset({
-          firstName: "",
-          lastName: "",
-          phone: "",
-          deliveryCity: "",
-          novaPoshtaBranch: "",
-        });
-        localStorage.removeItem(STORAGE_KEY); // очищаємо тільки при успіху
+        formikHelpers.resetForm();
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {}
       } else {
         toast.error(result.message || "Помилка при створенні бронювання");
       }
@@ -135,110 +107,188 @@ export default function BookingForm({
     }
   };
 
+  const getInitialValues = (): BookingFormSchema => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return initialValues;
+      const parsed = JSON.parse(saved);
+      if (
+        parsed.toolId !== toolId ||
+        Date.now() - parsed.timestamp >= 3600000
+      ) {
+        return initialValues;
+      }
+
+      return {
+        firstName: parsed.firstName || "",
+        lastName: parsed.lastName || "",
+        phone: parsed.phone || "",
+        deliveryCity: parsed.deliveryCity || "",
+        novaPoshtaBranch: parsed.novaPoshtaBranch || "",
+      };
+    } catch {
+      return initialValues;
+    }
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={styles.row}>
-        <div className={styles.field}>
-          <label htmlFor="firstName" className={styles.label}>
-            Ім&apos;я
-          </label>
-          <input
-            id="firstName"
-            type="text"
-            placeholder="Ваше ім'я"
-            className={errors.firstName ? styles.inputError : styles.input}
-            {...register("firstName")}
-          />
-          {errors.firstName && (
-            <span className={styles.error}>{errors.firstName.message}</span>
-          )}
-        </div>
+    <Formik
+      initialValues={getInitialValues()}
+      enableReinitialize
+      validationSchema={bookingSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ values, handleChange, handleBlur }) => (
+        <Form className={styles.form}>
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label htmlFor="firstName" className={styles.label}>
+                Ім&apos;я
+              </label>
+              <Field
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="Ваше ім'я"
+                className={styles.input}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e);
+                  handleSaveToStorage({
+                    ...values,
+                    [e.target.name]: e.target.value,
+                  });
+                }}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="firstName"
+                component="span"
+                className={styles.error}
+              />
+            </div>
 
-        <div className={styles.field}>
-          <label htmlFor="lastName" className={styles.label}>
-            Прізвище
-          </label>
-          <input
-            id="lastName"
-            type="text"
-            placeholder="Ваше прізвище"
-            className={errors.lastName ? styles.inputError : styles.input}
-            {...register("lastName")}
-          />
-          {errors.lastName && (
-            <span className={styles.error}>{errors.lastName.message}</span>
-          )}
-        </div>
-      </div>
+            <div className={styles.field}>
+              <label htmlFor="lastName" className={styles.label}>
+                Прізвище
+              </label>
+              <Field
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Ваше прізвище"
+                className={styles.input}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e);
+                  handleSaveToStorage({
+                    ...values,
+                    [e.target.name]: e.target.value,
+                  });
+                }}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="lastName"
+                component="span"
+                className={styles.error}
+              />
+            </div>
+          </div>
 
-      <div className={styles.field}>
-        <label htmlFor="phone" className={styles.label}>
-          Номер телефону
-        </label>
-        <input
-          id="phone"
-          type="tel"
-          placeholder="+38 (XXX) XXX XX XX"
-          className={errors.phone ? styles.inputError : styles.input}
-          {...register("phone")}
-        />
-        {errors.phone && (
-          <span className={styles.error}>{errors.phone.message}</span>
-        )}
-      </div>
+          <div className={styles.field}>
+            <label htmlFor="phone" className={styles.label}>
+              Номер телефону
+            </label>
+            <Field
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="+38 (XXX) XXX XX XX"
+              className={styles.input}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e);
+                handleSaveToStorage({
+                  ...values,
+                  [e.target.name]: e.target.value,
+                });
+              }}
+              onBlur={handleBlur}
+            />
+            <ErrorMessage
+              name="phone"
+              component="span"
+              className={styles.error}
+            />
+          </div>
 
-      {/*календар*/}
-      {children}
+          {/* календар */}
+          {children}
 
-      <div className={styles.row}>
-        <div className={styles.field}>
-          <label htmlFor="deliveryCity" className={styles.label}>
-            Місто доставки
-          </label>
-          <input
-            id="deliveryCity"
-            type="text"
-            placeholder="Ваше місто"
-            className={errors.deliveryCity ? styles.inputError : styles.input}
-            {...register("deliveryCity")}
-          />
-          {errors.deliveryCity && (
-            <span className={styles.error}>{errors.deliveryCity.message}</span>
-          )}
-        </div>
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label htmlFor="deliveryCity" className={styles.label}>
+                Місто доставки
+              </label>
+              <Field
+                id="deliveryCity"
+                name="deliveryCity"
+                type="text"
+                placeholder="Ваше місто"
+                className={styles.input}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e);
+                  handleSaveToStorage({
+                    ...values,
+                    [e.target.name]: e.target.value,
+                  });
+                }}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="deliveryCity"
+                component="span"
+                className={styles.error}
+              />
+            </div>
 
-        <div className={styles.field}>
-          <label htmlFor="novaPoshtaBranch" className={styles.label}>
-            Відділення Нової Пошти
-          </label>
-          <input
-            id="novaPoshtaBranch"
-            type="text"
-            placeholder="24"
-            className={
-              errors.novaPoshtaBranch ? styles.inputError : styles.input
-            }
-            {...register("novaPoshtaBranch")}
-          />
+            <div className={styles.field}>
+              <label htmlFor="novaPoshtaBranch" className={styles.label}>
+                Відділення Нової Пошти
+              </label>
+              <Field
+                id="novaPoshtaBranch"
+                name="novaPoshtaBranch"
+                type="text"
+                placeholder="24"
+                className={styles.input}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange(e);
+                  handleSaveToStorage({
+                    ...values,
+                    [e.target.name]: e.target.value,
+                  });
+                }}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="novaPoshtaBranch"
+                component="span"
+                className={styles.error}
+              />
+            </div>
+          </div>
 
-          {errors.novaPoshtaBranch && (
-            <span className={styles.error}>
-              {errors.novaPoshtaBranch.message}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <div className={styles.priceRow}>
-        <span className={styles.price}>Ціна: {totalPrice} грн</span>
-        <button
-          type="submit"
-          className={styles.submitBtn}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Обробка..." : "Забронювати"}
-        </button>
-      </div>
-    </form>
+          <div className={styles.priceRow}>
+            <span className={styles.price}>Ціна: {totalPrice} грн</span>
+            <button
+              type="submit"
+              className={styles.submitBtn}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Обробка..." : "Забронювати"}
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 }

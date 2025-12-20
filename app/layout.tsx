@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "@/styles/variables.css";
 import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { AuthProvider, ToastProvider } from "@/providers";

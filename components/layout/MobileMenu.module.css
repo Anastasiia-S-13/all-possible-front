@@ -99,7 +99,8 @@
   color: #8808cc;
 }
 
-.registerButton {
+.registerButton,
+.publishButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +120,8 @@
   transition: background-color 0.25s ease;
 }
 
-.registerButton:hover {
+.registerButton:hover,
+.publishButton:hover {
   background-color: #6b06a3;
 }
 

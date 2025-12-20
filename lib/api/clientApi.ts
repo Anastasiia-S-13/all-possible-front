@@ -2,8 +2,8 @@ import {
   BookingResponse,
   CreateBookingPayload,
   CreateBookingRequest,
-  Tool,
 } from "@/types/Booking";
+import { Category } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
@@ -12,11 +12,8 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import {
-  Category,
-  CreateToolPayload,
-  ToolCreate,
-} from "@/types/typesCategories";
+import { CreateToolPayload, ToolCreate } from "@/types/typesCategories";
+import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
@@ -65,11 +62,7 @@ export type UpdateToolRequest = {
   photoUrl?: string;
 };
 
-export const updateTool = async (
-  toolId: string,
-  formData: FormData,
-  payload: UpdateToolRequest
-) => {
+export const updateTool = async (payload: UpdateToolRequest) => {
   const res = await api.put<Tool>("/tools", payload);
   return res.data;
 };
@@ -98,7 +91,7 @@ export async function getTool(id: string): Promise<ToolCreate> {
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
-  console.log(response.data);
+  console.log(response.data.images);
   return response.data;
 };
 

@@ -39,7 +39,6 @@ export default function Calendar({
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  // Допоміжна функція для отримання YYYY-MM-DD у локальному часі
   const formatDateLocal = (date: Date) => {
     const y = date.getFullYear();
     const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -56,7 +55,6 @@ export default function Calendar({
         const start = new Date(startStr);
         const end = new Date(endStr);
         const current = new Date(
-          //локальний час
           start.getFullYear(),
           start.getMonth(),
           start.getDate()

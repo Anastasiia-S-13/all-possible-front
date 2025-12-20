@@ -16,6 +16,11 @@
     gap: 8px;
 }
 
+.field {
+    min-height: 72px;
+    box-sizing: border-box;
+}
+
 .fieldFull {
     grid-column: 1 / -1;
 }
@@ -41,6 +46,7 @@
     color: var(--color-scheme-1-text);
     background: var(--opacity-transparent);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
 }
 
 .input::placeholder {
@@ -63,6 +69,7 @@
     padding: 8px 12px;
     width: 335px;
     height: 37px;
+    box-sizing: border-box;
 }
 
 .inputError:focus {
@@ -77,6 +84,8 @@
     line-height: 150%;
     color: var(--color-red-dark);
     margin-top: 2px;
+    min-height: 18px;
+    transition: opacity 0.12s ease;
 }
 
 .priceRow {

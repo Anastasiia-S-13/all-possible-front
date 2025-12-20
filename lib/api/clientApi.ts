@@ -2,7 +2,6 @@ import {
   BookingResponse,
   CreateBookingPayload,
   CreateBookingRequest,
-  Tool,
 } from "@/types/Booking";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
@@ -13,6 +12,7 @@ import {
 import { User, EditProfileData } from "@/types/User";
 
 import { Category, CreateToolPayload } from "@/types/typesCategories";
+import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,

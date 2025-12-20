@@ -1,0 +1,11 @@
+.container {
+    max-width: 1440px;
+    padding: 48px 64px 112px;
+    margin: 0 auto;
+    background-color: var(--color-scheme-3-background);
+}
+
+.toolDetailsWrap {
+    display: flex;
+    gap: 32px;
+}

@@ -3,6 +3,7 @@ import {
   CreateBookingPayload,
   CreateBookingRequest,
 } from "@/types/Booking";
+import { Category } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
@@ -56,15 +57,6 @@ export const getCategories = async () => {
   return res.data;
 };
 
-export type UpdateToolRequest = {
-  toolName?: string;
-  photoUrl?: string;
-};
-
-export const updateTool = async (payload: UpdateToolRequest) => {
-  const res = await api.put<Tool>("/tools", payload);
-  return res.data;
-};
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
@@ -100,5 +92,15 @@ export const fetchToolById = async (toolId: string): Promise<Tool> => {
 export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
   console.log(response.data);
+  return response.data;
+};
+
+export const updateTool = async (
+  toolId: string,
+  data: FormData
+): Promise<Tool> => {
+  const response = await api.patch<Tool>(`/tools/${toolId}`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
   return response.data;
 };

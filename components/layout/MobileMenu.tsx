@@ -67,35 +67,40 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               Зареєструватися
             </Link>
           ) : (
-            <div className={styles.userSection}>
-              <div className={styles.userInfo}>
-                {user?.avatar ? (
-                  <Image
-                    src={user.avatar}
-                    alt={user.name || "User"}
-                    width={32}
-                    height={32}
-                    className={styles.userAvatar}
-                  />
-                ) : (
-                  <div className={styles.userAvatarPlaceholder}>
-                    {user?.name?.[0]?.toUpperCase() || "U"}
-                  </div>
-                )}
-                <span className={styles.userName}>{user?.name}</span>
+            <>
+              <Link href="/create" className={styles.publishButton} onClick={onClose}>
+                Опублікувати оголошення
+              </Link>
+              <div className={styles.userSection}>
+                <div className={styles.userInfo}>
+                  {user?.avatar ? (
+                    <Image
+                      src={user.avatar}
+                      alt={user.name || "User"}
+                      width={32}
+                      height={32}
+                      className={styles.userAvatar}
+                    />
+                  ) : (
+                    <div className={styles.userAvatarPlaceholder}>
+                      {user?.name?.[0]?.toUpperCase() || "U"}
+                    </div>
+                  )}
+                  <span className={styles.userName}>{user?.name}</span>
+                </div>
+                <div className={styles.divider} />
+                <button
+                  type="button"
+                  className={styles.logoutButton}
+                  onClick={handleLogout}
+                  aria-label="Вийти"
+                >
+                  <svg width="24" height="24" aria-hidden="true">
+                    <use href="/sprite/sprite.svg#icon-logout" />
+                  </svg>
+                </button>
               </div>
-              <div className={styles.divider} />
-              <button
-                type="button"
-                className={styles.logoutButton}
-                onClick={handleLogout}
-                aria-label="Вийти"
-              >
-                <svg width="24" height="24" aria-hidden="true">
-                  <use href="/sprite/sprite.svg#icon-logout" />
-                </svg>
-              </button>
-            </div>
+            </>
           )}
         </div>
       </div>

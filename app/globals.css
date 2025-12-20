@@ -50,6 +50,18 @@
   --color-scheme-3-foreground: var(--color-neutral-lightest);
   --color-red-dark: #c40202;
   --color-red-light: #ea3131;
+
+  /* Aliases for auth forms compatibility */
+  --color-primary: var(--color-electric-violet);
+  --color-primary-hover: var(--color-electric-violet-lighter);
+  --color-primary-active: var(--color-electric-violet-dark);
+  --color-text: var(--color-neutral-darkest);
+  --color-text-inverse: var(--color-white);
+  --color-background: var(--color-white);
+  --color-border: var(--color-neutral-darkest);
+  --color-border-light: #E5E5E5;
+  --color-error: #DC2626;
+
 }
 
 * {

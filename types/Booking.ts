@@ -5,10 +5,14 @@ export interface BookedPeriod {
 
 export interface Tool {
   _id: string;
+  owner: string;
   name: string;
   pricePerDay: number;
   description?: string;
   category?: string;
+  images?: string;
+  rentalTerms?: string;
+  specifications?: Record<string, string>;
   bookedPeriods: BookedPeriod[];
   bookedDates?: BookedPeriod[];
   createdAt?: string;

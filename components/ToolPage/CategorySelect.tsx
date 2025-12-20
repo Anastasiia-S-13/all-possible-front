@@ -44,27 +44,30 @@ export default function CategorySelect({
       </div>
 
       {open && (
-        <ul className={styles.dropdown}>
-          <li
-            className={`${styles.option} ${
-              selectedCategory === "" ? styles.active : ""
-            }`}
-            onClick={() => handleSelect("")}
-          >
-            Всі категорії
-          </li>
-          {categories.map((cat) => (
+        <div className={styles.dropdown}>
+          <ul className={styles.scrollArea}>
             <li
-              key={cat._id}
               className={`${styles.option} ${
-                selectedCategory === cat._id ? styles.active : ""
+                selectedCategory === "" ? styles.active : ""
               }`}
-              onClick={() => handleSelect(cat._id)}
+              onClick={() => handleSelect("")}
             >
-              {cat.title}
+              Всі категорії
             </li>
-          ))}
-        </ul>
+
+            {categories.map((cat) => (
+              <li
+                key={cat._id}
+                className={`${styles.option} ${
+                  selectedCategory === cat._id ? styles.active : ""
+                }`}
+                onClick={() => handleSelect(cat._id)}
+              >
+                {cat.title}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

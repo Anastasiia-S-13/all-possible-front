@@ -17,6 +17,7 @@
     text-overflow: ellipsis;
     display: block;
     line-height: 20px;
+    /* padding-right: 18px; */
 }
 
 .open {
@@ -38,16 +39,29 @@
     border-top: none;
     border-radius: 0 0 6px 6px;
     z-index: 10;
-
-    padding-right: 12px;
     scrollbar-gutter: stable;
+    overflow: hidden;
 }
 
+
 .dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+
+
+.scrollArea {
+    max-height: 100%;
+    overflow-y: auto;
+    /* padding-right: 12px; */
+    box-sizing: content-box;
+}
+
+.scrollArea::-webkit-scrollbar {
     width: 7px;
 }
 
-.dropdown::-webkit-scrollbar-track {
+.scrollArea::-webkit-scrollbar-track {
     background-color: var(--color-electric-violet-light);
     border-radius: 4px;
 
@@ -56,30 +70,24 @@
     background-clip: padding-box;
 }
 
-.dropdown::-webkit-scrollbar-thumb {
+.scrollArea::-webkit-scrollbar-thumb {
     background-color: var(--color-electric-violet-dark);
     border-radius: 4px;
-    min-height: 56px;
-}
-
-@supports not selector(::-webkit-scrollbar) {
-    .dropdown {
-        scrollbar-width: thin;
-        scrollbar-color: var(--color-electric-violet-dark) var(--color-electric-violet-light);
-    }
+    min-height: 36px;
 }
 
 .option {
     padding: 8px 12px;
     cursor: pointer;
-    margin-right: 6px;
     transition: background 0.3s ease, color 0.3s ease;
     color: #000;
 }
 
 .option:hover {
+    position: absolute;
     background: var(--color-electric-violet-dark);
     color: white;
+    width: 100%;
 }
 
 .active {

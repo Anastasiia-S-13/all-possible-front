@@ -1,21 +1,23 @@
 import { api } from "./api";
-import {
-  Tool,
-  BookingResponse,
-  CreateBookingRequest,
-  CreateBookingPayload,
-} from "@/types/Booking";
+import { Tool, BookingResponse, CreateBookingRequest } from "@/types/Booking";
 
 export const createBooking = async (
-  bookingData: CreateBookingPayload
+  bookingData: CreateBookingRequest & { userId?: string }
 ): Promise<BookingResponse> => {
-  try {
-    const { userId, ...payload } = bookingData;
-    const response = await api.post(`/bookings`, payload);
+  const payload = { ...(bookingData as CreateBookingRequest) } as Partial<
+    CreateBookingRequest & { userId?: string }
+  >;
+  if ((payload as { userId?: string }).userId)
+    delete (payload as { userId?: string }).userId;
 
+  try {
+    const response = await api.post<BookingResponse>(
+      `/api/bookings`,
+      payload as CreateBookingRequest
+    );
     return response.data;
   } catch (error) {
-    throw new Error(`Error creating booking: ${error}`);
+    throw error;
   }
 };
 

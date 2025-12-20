@@ -6,12 +6,12 @@ import Image from 'next/image';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast';
 import { toolSchema } from '@/lib/validations';
-import { getCategories, updateTool } from '@/lib/api/clientApi';
+import { getCategories, updateToolById } from '@/lib/api/clientApi';
 import { Tool } from '@/types/Booking';
 import { Category } from '@/types/Tool';
-import styles from './AddEditToolForm.module.css';
+import styles from './EditToolForm.module.css';
 
-interface AddEditToolFormProps {
+interface EditToolFormProps {
   tool: Tool;
   onSuccess?: () => void;
 }
@@ -25,7 +25,7 @@ interface FormValues {
   specifications: string;
 }
 
-export default function AddEditToolForm({ tool, onSuccess }: AddEditToolFormProps) {
+export default function EditToolForm({ tool, onSuccess }: EditToolFormProps) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -98,7 +98,7 @@ export default function AddEditToolForm({ tool, onSuccess }: AddEditToolFormProp
         formData.append('image', imageFile);
       }
 
-      await updateTool(tool._id, formData);
+      await updateToolById(tool._id, formData);
       toast.success('Інструмент успішно оновлено!');
 
       if (onSuccess) {

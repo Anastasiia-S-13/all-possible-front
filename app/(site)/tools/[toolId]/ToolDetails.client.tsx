@@ -32,7 +32,7 @@ const ToolDetailsClient = () => {
   return (
     toolData && (
       <div className={css.container}>
-        <div className={css.tool_details_wrap}>
+        <div className={css.toolDetailsWrap}>
           <ToolGallery images={toolData.images} />
           <ToolInfoBlock user={userData} tool={toolData} />
         </div>

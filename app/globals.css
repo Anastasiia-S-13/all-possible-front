@@ -64,6 +64,10 @@
 
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--font-work-sans), sans-serif;
   display: flex;

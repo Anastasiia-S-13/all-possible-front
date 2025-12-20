@@ -2,7 +2,6 @@ import {
   BookingResponse,
   CreateBookingPayload,
   CreateBookingRequest,
-  Tool,
 } from "@/types/Booking";
 import { Category } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
@@ -13,26 +12,9 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-export async function getProfile(): Promise<User> {
-  const res = await fetch('/api/users/me');
-  if (!res.ok) throw new Error('Не вдалося завантажити профіль');
-  return res.json();
-}
+import { Category, CreateToolPayload } from "@/types/typesCategories";
+import { Tool } from "@/types/Tool";
 
-export async function updateProfile(user: EditProfileData) {
-  const res = await fetch('/api/profile', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || 'Не вдалося оновити профіль');
-  }
-
-  return res.json();
-}
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
   config?: AxiosRequestConfig
@@ -70,24 +52,59 @@ export async function fetchFeedbacks({
   return request.data;
 }
 
+export const getCategories = async () => {
+  const res = await api.get<Category[]>("/categories");
+  return res.data;
+};
+
+export type UpdateToolRequest = {
+  toolName?: string;
+  photoUrl?: string;
+};
+
+export const updateTool = async (payload: UpdateToolRequest) => {
+  const res = await api.put<Tool>("/tools", payload);
+  return res.data;
+};
+
+export const uploadImage = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const { data } = await api.post("/tools", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+  return data.url;
+};
+
+export const createTool = async (payload: CreateToolPayload) => {
+  try {
+    const { data } = await api.post<Tool>("/tools", payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Failed to create tool:", error);
+    throw new Error("Failed to create tool");
+  }
+};
+
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
   console.log(response.data.images);
   return response.data;
-}
+};
 
 export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
   console.log(response.data);
   return response.data;
-}
-
-export const getCategories = async (): Promise<Category[]> => {
-  const response = await api.get<Category[]>('/categories');
-  return response.data;
 };
 
-export const updateTool = async (
+export const updateToolById = async (
   toolId: string,
   data: FormData
 ): Promise<Tool> => {

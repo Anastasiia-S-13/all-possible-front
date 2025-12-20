@@ -8,22 +8,30 @@ import ToolsGrid from "@/components/tools/ToolsGrid";
 import FilterBar from "@/components/ToolPage/FilterBar";
 import styles from "./ToolsPage.module.css";
 import Loader from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 interface ToolsPageClientProps {
   initialCategories: Category[];
   initialSearch: string;
+  initialCategoryId?: string;
 }
 
 export default function ToolsPageClient({
   initialCategories,
   initialSearch,
+  initialCategoryId = "",
 }: ToolsPageClientProps) {
+  const router = useRouter();
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(initialCategoryId);
   const [searchQuery, setSearchQuery] = useState(initialSearch);
+
+  const selectedCategoryName = useMemo(() => {
+    return initialCategories.find((c) => c._id === selectedCategory)?.title || "";
+  }, [initialCategories, selectedCategory]);
 
   const perPage = 16;
 
@@ -59,6 +67,21 @@ export default function ToolsPageClient({
     setCurrentPage(1);
   }, [selectedCategory, searchQuery]);
 
+  const onCategoryChange = (id: string) => {
+    setSelectedCategory(id);
+    if (id) {
+      router.push(`/tools?category=${id}`);
+    } else {
+      router.push(`/tools`);
+    }
+  };
+
+  const onResetFilters = () => {
+    setSelectedCategory("");
+    setSearchQuery("");
+    router.push("/tools");
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -70,20 +93,17 @@ export default function ToolsPageClient({
         <h1 className={styles.title}>
           {searchQuery
             ? `Результати пошуку: ${searchQuery}`
-            : "Всі інструменти"}
+            : selectedCategoryName || "Всі інструменти"}
         </h1>
         <div className={styles.head}>
           <FilterBar
             categories={initialCategories}
             selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
+            onCategoryChange={onCategoryChange}
           />
           <button
             className={styles.resetCategories}
-            onClick={() => {
-              setSelectedCategory("");
-              setSearchQuery("");
-            }}
+            onClick={onResetFilters}
           >
             Скинути фільтри
           </button>
@@ -113,9 +133,8 @@ export default function ToolsPageClient({
                   <button
                     key={i + 1}
                     onClick={() => handlePageChange(i + 1)}
-                    className={`${styles.pageBtn} ${
-                      currentPage === i + 1 ? styles.activePage : ""
-                    }`}
+                    className={`${styles.pageBtn} ${currentPage === i + 1 ? styles.activePage : ""
+                      }`}
                   >
                     {i + 1}
                   </button>

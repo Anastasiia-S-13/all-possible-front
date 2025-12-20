@@ -10,15 +10,17 @@ import css from "./SearchToolForm.module.css";
 interface SearchToolFormValues {
   searchQuery: string;
 }
+interface SearchToolFormProps {
+  onSearchChange: (value: string) => void;
+}
 
-export function SearchToolForm() {
+export function SearchToolForm({ onSearchChange }: SearchToolFormProps) {
   const router = useRouter();
 
   const handleSubmit = (values: SearchToolFormValues) => {
     if (values.searchQuery.trim()) {
-      router.push(
-        `/tools?q=${encodeURIComponent(values.searchQuery.trim())}`
-      );
+      router.push(`/tools?q=${encodeURIComponent(values.searchQuery.trim())}`);
+      onSearchChange(values.searchQuery.trim());
     }
   };
 

@@ -8,6 +8,7 @@ interface Props {
   categories: Category[];
   selectedCategory: string;
   onCategoryChange: (categoryId: string) => void;
+  onSearchChange?: (value: string) => void;
 }
 
 export default function CategorySelect({

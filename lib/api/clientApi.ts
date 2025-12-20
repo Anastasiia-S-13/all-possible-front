@@ -3,7 +3,6 @@ import {
   CreateBookingPayload,
   CreateBookingRequest,
 } from "@/types/Booking";
-import { Tool } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
@@ -100,5 +99,15 @@ export const fetchToolById = async (toolId: string): Promise<Tool> => {
 export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
   console.log(response.data);
+  return response.data;
+};
+
+export const getAllTools = async (params: {
+  search?: string;
+  category?: string;
+  page?: number;
+  perPage?: number;
+}): Promise<{ tools: Tool[]; total: number; pages: number }> => {
+  const response = await api.get("/tools", { params });
   return response.data;
 };

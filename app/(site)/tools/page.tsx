@@ -24,12 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ToolsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string }>;
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const { query } = await searchParams;
+  const { q } = await searchParams;
 
   const categories = await getCategories();
-  const initialSearch = typeof query === "string" ? query : "";
+  const initialSearch = typeof q === "string" ? q : "";
 
   return (
     <ToolsPageClient

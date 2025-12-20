@@ -2,46 +2,30 @@
 import { Category } from "@/types/typesCategories";
 import styles from "./FilterBar.module.css";
 import CategorySelect from "./CategorySelect";
+import { SearchToolForm } from "../forms/SearchToolForm/SearchToolForm";
 
 interface FilterBarProps {
   categories: Category[];
   selectedCategory: string;
   onCategoryChange: (categoryId: string) => void;
+  onSearchChange: (value: string) => void;
 }
 
 const FilterBar = ({
   categories,
   selectedCategory,
   onCategoryChange,
+  onSearchChange,
 }: FilterBarProps) => {
   return (
-    // <div className={styles.filterBar}>
-    //   <button
-    //     className={`${styles.categoryBtn} ${
-    //       selectedCategory === "" ? styles.active : ""
-    //     }`}
-    //     onClick={() => onCategoryChange("")}
-    //   >
-    //     Всі
-    //   </button>
-    //   {categories.map((category) => (
-    //     <button
-    //       key={category._id}
-    //       className={`${styles.categoryBtn} ${
-    //         selectedCategory === category._id ? styles.active : ""
-    //       }`}
-    //       onClick={() => onCategoryChange(category._id)}
-    //     >
-    //       {category.title}
-    //     </button>
-    //   ))}
-    // </div>
-
-    <CategorySelect
-      categories={categories}
-      selectedCategory={selectedCategory}
-      onCategoryChange={onCategoryChange}
-    />
+    <>
+      <CategorySelect
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={onCategoryChange}
+        onSearchChange={onSearchChange}
+      />
+    </>
   );
 };
 

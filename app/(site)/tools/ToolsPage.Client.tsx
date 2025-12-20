@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Category } from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 import { getAllTools } from "@/lib/api/clientApi";
@@ -25,6 +26,7 @@ export default function ToolsPageClient({
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const router = useRouter();
 
   const perPage = 16;
 
@@ -66,6 +68,12 @@ export default function ToolsPageClient({
     setCurrentPage(1);
   }, [selectedCategory, searchQuery]);
 
+  useEffect(() => {
+    if (selectedCategory === "" && searchQuery === "") {
+      router.replace("/tools");
+    }
+  }, [selectedCategory, searchQuery]);
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -85,6 +93,7 @@ export default function ToolsPageClient({
             categories={initialCategories}
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}
+            onSearchChange={setSearchQuery}
           />
           <button
             className={styles.resetCategories}

@@ -1,9 +1,14 @@
 .toolDetailsContent {
     display: flex;
     flex-direction: column;
-    max-width: 640px;
     gap: 24px;
     font-family: var(--font-family);
+}
+
+@media only screen and (min-width: 768px) {
+    .toolDetailsContent {
+        max-width: 704px;
+    }
 }
 
 .toolHead {
@@ -13,7 +18,7 @@
 }
 
 .toolName {
-    font-size: 40px;
+    font-size: 32px;
     line-height: 120%;
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
@@ -21,15 +26,25 @@
 
 .toolPricePerDay {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 140%;
     letter-spacing: -0.01em;
+}
+
+@media only screen and (min-width: 1440px) {
+    .toolName {
+        font-size: 40px;
+    }
+
+    .toolPricePerDay {
+        font-size: 24px;
+    }
 }
 
 .userProfile {
     display: flex;
     gap: 16px;
-    max-width: 310px;
+    max-width: 288px;
 }
 
 .avatar {
@@ -46,7 +61,7 @@
 
 .username {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
 }
@@ -57,6 +72,7 @@
     padding: 8px 20px;
     font-weight: 500;
     line-height: 150%;
+    font-size: 14px;
     color: var(--color-neutral-darkest);
     transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
         color 300ms ease-in-out;
@@ -73,13 +89,30 @@
     border-color: #8808cc;
 }
 
+@media only screen and (min-width: 1440px) {
+    .userProfile {
+        max-width: 310px;
+    }
+
+    .username {
+        font-size: 16px;
+    }
+
+    .profileBtn {
+        font-size: 16px;
+    }
+}
+
 .description {
+    font-size: 14px;
     line-height: 150%;
     color: var(--color-scheme-1-text);
 }
 
 .specItem {
     line-height: 150%;
+    font-size: 14px;
+    color: var(--color-scheme-1-text);
 }
 
 .span {
@@ -89,10 +122,10 @@
 .bookingBtn {
     border: 1px solid var(--color-electric-violet);
     border-radius: 6px;
-    padding: 10px 20px;
+    padding: 10px 24px;
     background-color: var(--color-electric-violet);
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     color: var(--color-white);
     transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
@@ -106,4 +139,18 @@
 
 .bookingBtn:active {
     background-color: #e7cdf4;
+}
+
+@media only screen and (min-width: 1440px) {
+    .description {
+        font-size: 16px;
+    }
+
+    .specItem {
+        font-size: 16px;
+    }
+
+    .bookingBtn {
+        font-size: 16px;
+    }
 }

@@ -45,7 +45,7 @@ function Modal({ children, onClose }: ModalProps) {
           aria-label="Закрити модальне вікно"
         >
           <svg className={css.xMark} width={24} height={24}>
-            <use href="/public/sprite/sprite.svg#icon-close"></use>
+            <use href="/sprite/sprite.svg#icon-close"></use>
           </svg>
         </button>
         {children}

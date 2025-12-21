@@ -8,7 +8,7 @@ import { UserProfileProps } from "@/types/User";
 export default function UserProfile({
   user,
   userId,
-  tools = [], 
+  tools = [],
 }: UserProfileProps) {
   const router = useRouter();
   const currentUser = useAuthStore((state) => state.user);
@@ -19,8 +19,9 @@ export default function UserProfile({
 
   return (
     <div>
-         <div className={css.userProfileContainer}>
-        {user.avatar ? (
+      <div className={css.userProfileContainer}>
+        <div className={css.userInfo}>
+          {user.avatar ? (
           <img src={user.avatar} alt={user.name} className={css.avatar} />
         ) : (
           <div className={css.avatar}>{firstLetter}</div>
@@ -28,6 +29,7 @@ export default function UserProfile({
 
         <h2 className={css.username}>{user.name}</h2>
 
+        </div>
         {isOwner && (
           <button
             className={css.button}
@@ -37,5 +39,5 @@ export default function UserProfile({
           </button>
         )}
       </div>
-   </div> );
+    </div>);
 }

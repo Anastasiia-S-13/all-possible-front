@@ -12,7 +12,11 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import { CreateToolPayload, ToolCreate } from "@/types/typesCategories";
+import {
+  CreateToolPayload,
+  ToolCreate,
+  ToolsCategory,
+} from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
@@ -53,34 +57,25 @@ export async function fetchFeedbacks({
 }
 
 export const getCategories = async () => {
-  const res = await api.get<Category[]>("/categories");
+  const res = await api.get<ToolsCategory[]>("/categories");
   return res.data;
 };
 
-export type UpdateToolRequest = {
-  toolName?: string;
-  photoUrl?: string;
-};
-
-export const updateTool = async (payload: UpdateToolRequest) => {
-  const res = await api.put<Tool>("/tools", payload);
+export const updateTool = async (
+  id: string,
+  formData: FormData
+): Promise<ToolCreate> => {
+  const res = await api.put<ToolCreate>(`/tools/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return res.data;
 };
-
-// export const uploadImage = async (file: File): Promise<string> => {
-//   const formData = new FormData();
-//   formData.append("file", file);
-//   const { data } = await api.post("/tools", formData, {
-//     headers: { "Content-Type": "multipart/form-data" },
-//   });
-
-//   return data.url;
-// };
 
 export async function createTool(formData: FormData): Promise<ToolCreate> {
   const { data } = await api.post<ToolCreate>("/tools", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
+
   return data;
 }
 

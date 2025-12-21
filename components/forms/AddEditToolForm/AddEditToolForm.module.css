@@ -58,6 +58,7 @@
   border-radius: 6px;
   padding: 12px;
   max-width: 100%;
+  resize: none;
 }
 
 .select {

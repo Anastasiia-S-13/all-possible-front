@@ -12,7 +12,12 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import { CreateToolPayload } from "@/types/typesCategories";
+
+import {
+  CreateToolPayload,
+  ToolCreate,
+  ToolsCategory,
+} from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 
 export async function fetchFeedbacks({
@@ -31,7 +36,18 @@ export async function fetchFeedbacks({
 }
 
 export const getCategories = async () => {
-  const res = await api.get<Category[]>("/categories");
+  const res = await api.get<ToolsCategory[]>("/categories");
+  return res.data;
+};
+
+
+export const updateTool = async (
+  id: string,
+  formData: FormData
+): Promise<ToolCreate> => {
+  const res = await api.put<ToolCreate>(`/tools/${id}`, formData, {
+       headers: { "Content-Type": "multipart/form-data" },
+  });
   return res.data;
 };
 
@@ -41,27 +57,25 @@ export const uploadImage = async (file: File): Promise<string> => {
   const { data } = await api.post("/tools", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
-
-  return data.url;
+  return res.data;
 };
 
-export const createTool = async (payload: CreateToolPayload) => {
-  try {
-    const { data } = await api.post<Tool>("/tools", payload, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+export async function createTool(formData: FormData): Promise<ToolCreate> {
+  const { data } = await api.post<ToolCreate>("/tools", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
-    return data;
-  } catch (error) {
-    console.error("Failed to create tool:", error);
-    throw new Error("Failed to create tool");
-  }
-};
+  return data;
+}
+
+export async function getTool(id: string): Promise<ToolCreate> {
+  const { data } = await api.get<ToolCreate>(`/tools/${id}`);
+  return data;
+}
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
+  console.log(response.data.images);
   return response.data;
 };
 

@@ -21,7 +21,7 @@
 }
 
 .leftBtn {
-  font-family: var(--font-work-sans), sans-serif;
+  font-family: inherit;
   font-size: 16px;
   min-width: 240px;
   height: 48px;
@@ -33,7 +33,7 @@
 }
 
 .rightBtn {
-  font-family: var(--font-work-sans), sans-serif;
+  font-family: inherit;
   font-size: 16px;
   min-width: 240px;
   height: 48px;

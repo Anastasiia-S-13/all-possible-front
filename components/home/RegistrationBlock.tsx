@@ -1,10 +1,18 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/Button';
 import pageStyles from '@/app/page.module.css';
 import styles from './RegistrationBlock.module.css';
+import { useAuthStore } from '@/stores/authStore';
 
 export default function RegistrationBlock() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isLoggedIn = isAuthenticated;
+  if (isLoggedIn) {
+    return null;
+  }
   return (
     <section className={`${styles.cta} ${pageStyles.section}`}>
       <div className={pageStyles.container}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -9,6 +10,7 @@ import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
+  const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -27,6 +29,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await logout();
+    router.push("/");
   };
 
   return (

@@ -22,7 +22,7 @@ export default function ProfilePlaceholder({
 
   return (
     <div className={styles.placeholderContainer}>
-      <h1 className={styles.extraTitle}></h1>
+      <h2 className={styles.extraTitle}>Всі інструменти</h2>
 
       <p className={styles.title}>
         {isOwner

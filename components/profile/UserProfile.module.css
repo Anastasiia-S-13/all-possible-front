@@ -1,96 +1,98 @@
 /* components/profile/UserProfile.module.css */
 
 .userProfileContainer {
-    align-items: center;
-    transition: all 0.3s ease;
+  align-items: center;
+  transition: all 0.3s ease;
+  flex-direction: column;
+  max-width: 375px;
+  margin: 0 auto;
+  display: flex;
+  padding-top: 28px;
 }
 
 .avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-color: var(--color-electric-violet);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-bottom: 24px;
-    transition: width 0.3s ease, height 0.3s ease;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background-color: var(--color-electric-violet);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-bottom: 24px;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .username {
-    font-size: 22px;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 24px;
-    transition: all 0.3s ease;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
 }
 
 .button {
-    width: 168px;
-    height: 40px;
-    padding: 8px 16px;
-    background-color: var(--color-electric-violet);
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--color-white);
-    border: 1px solid var(--color-electric-violet);
-    border-radius: 6px;
-    border: none;
-    transition: background-color 0.2s ease;
-    text-align: center;
+  width: 168px;
+  height: 40px;
+  padding: 8px 16px;
+  background-color: var(--color-electric-violet);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-white);
+  border: 1px solid var(--color-electric-violet);
+  border-radius: 6px;
+  border: none;
+  transition: background-color 0.2s ease;
+  text-align: center;
 }
 
-
 .button:hover {
-    background-color: var(--color-white);
-    border: 2px solid var(--color-electric-violet);
-    color: var(--color-scheme-1-text);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-electric-violet);
+  color: var(--color-scheme-1-text);
 }
 
 .button:focus {
-    background-color: var(--color-electric-violet-lighter);
-    border: 2px solid var(--color-neutral-darkest);
-    color: var(--color-scheme-1-text);
+  background-color: var(--color-electric-violet-lighter);
+  border: 2px solid var(--color-neutral-darkest);
+  color: var(--color-scheme-1-text);
 }
 
 @media only screen and (min-width: 768px) {
-    .userProfileContainer {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        max-width: 768px;
-        padding-left: 32px;
-        padding-right: 32px;
-        flex-direction: row;
+  .userProfileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 768px;
+    flex-direction: row;
+    padding-top: 48px;
+  }
 
-    }
+  .avatar {
+    width: 199px;
+    height: 199px;
+    justify-content: flex-start;
+    margin-right: 24px;
+  }
 
-    .avatar {
-        width: 199px;
-        height: 199px;
-        justify-content: flex-start;
-    }
+  .username {
+    margin-bottom: 0px;
+    text-align: left;
+  }
 
-    .username {
-        margin-bottom: 0px;
-        text-align: left;
-    }
-
-    .button {
-        width: 218px;
-        font-size: 14px;
-    }
+  .button {
+    width: 218px;
+    font-size: 14px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
-    .userProfileContainer {
-        max-width: 1440px;
-        padding: 0px 64px;
-    }
+  .userProfileContainer {
+    max-width: 1440px;
+  }
 }

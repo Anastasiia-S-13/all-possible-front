@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import css from "./UserProfile.module.css";
 import { useAuthStore } from "@/stores/authStore";
 import { UserProfileProps } from "@/types/User";
-import FeedbacksBlock from "../home/Feedbacks/FeedbacksBlock";
 
 export default function UserProfile({
   user,
@@ -38,7 +37,5 @@ export default function UserProfile({
           </button>
         )}
       </div>
-
-           <FeedbacksBlock userId={userId} isOwner={isOwner} />
    </div> );
 }

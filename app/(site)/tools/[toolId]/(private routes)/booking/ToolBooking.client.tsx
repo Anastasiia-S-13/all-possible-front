@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Calendar from "@/components/Calendar/Calendar";
-import BookingForm from "@/components/BookingForm/BookingForm";
+import Calendar from "@/components/BookingPage/Calendar/Calendar";
+import BookingForm from "@/components/BookingPage/BookingForm/BookingForm";
 import { Tool, DateRange } from "@/types/Booking";
 import { createBooking, getToolById } from "@/lib/api/bookingApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";

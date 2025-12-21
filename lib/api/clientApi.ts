@@ -12,30 +12,8 @@ import {
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import {CreateToolPayload } from "@/types/typesCategories";
+import { CreateToolPayload } from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
-
-export const createBookingRequest = async (
-  payload?: CreateBookingRequest,
-  config?: AxiosRequestConfig
-) => {
-  const response = await api.post<Tool>("/booking", payload, { ...config });
-
-  return response.data;
-};
-
-export const createBooking = async (
-  bookingData: CreateBookingPayload
-): Promise<BookingResponse> => {
-  try {
-    const { userId, ...payload } = bookingData;
-    const response = await api.post(`/bookings`, payload);
-
-    return response.data;
-  } catch (error) {
-    throw new Error(`Error creating booking: ${error}`);
-  }
-};
 
 export async function fetchFeedbacks({
   page,
@@ -56,7 +34,6 @@ export const getCategories = async () => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
 };
-
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
@@ -100,7 +77,7 @@ export const getAllTools = async (params: {
   perPage?: number;
 }): Promise<{ tools: Tool[]; total: number; pages: number }> => {
   const response = await api.get("/tools", { params });
-    return response.data;
+  return response.data;
 };
 
 export const updateTool = async (
@@ -108,7 +85,7 @@ export const updateTool = async (
   data: FormData
 ): Promise<Tool> => {
   const response = await api.patch<Tool>(`/tools/${toolId}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 };

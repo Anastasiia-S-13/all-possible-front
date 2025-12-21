@@ -1,11 +1,8 @@
 /* components/profile/UserProfile.module.css */
 
 .userProfileContainer {
-    display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 24px 0px;
+    transition: all 0.3s ease;
 }
 
 .avatar {
@@ -20,18 +17,21 @@
     font-size: 28px;
     font-weight: 600;
     flex-shrink: 0;
+    margin-bottom: 24px;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .username {
     font-size: 22px;
     font-weight: 600;
     color: #1a1a1a;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
 }
 
 .button {
     width: 168px;
     height: 40px;
-    margin-left: auto;
     padding: 8px 16px;
     background-color: var(--color-electric-violet);
     font-family: var(--font-family);
@@ -43,6 +43,7 @@
     border-radius: 6px;
     border: none;
     transition: background-color 0.2s ease;
+    text-align: center;
 }
 
 
@@ -58,8 +59,37 @@
     color: var(--color-scheme-1-text);
 }
 
+@media only screen and (min-width: 768px) {
+    .userProfileContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+        flex-direction: row;
+
+    }
+
+    .avatar {
+        width: 199px;
+        height: 199px;
+        justify-content: flex-start;
+    }
+
+    .username {
+        margin-bottom: 0px;
+        text-align: left;
+    }
+
+    .button {
+        width: 218px;
+        font-size: 14px;
+    }
+}
+
 @media only screen and (min-width: 1440px) {
-    .container {
+    .userProfileContainer {
         max-width: 1440px;
         padding: 0px 64px;
     }

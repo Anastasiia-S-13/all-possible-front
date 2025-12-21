@@ -8,6 +8,7 @@ export interface Tool {
   owner: string;
   name: string;
   pricePerDay: number;
+  images: string;
   description?: string;
   category?: string;
   images?: string;

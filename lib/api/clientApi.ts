@@ -8,6 +8,9 @@ import {
 } from "@/types/Booking";
 import { Category, Tool } from "@/types/Tool";
 import {
+  CreateNewFeedback,
+  Feedback,
+  FeedbackFormModalProps,
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
 } from "@/types/Feedback";
@@ -81,7 +84,6 @@ export const uploadImage = async (file: File): Promise<string> => {
   return response.data.url;
 };
 
-
 export const createBookingRequest = async (
   payload?: CreateBookingRequest,
   config?: AxiosRequestConfig
@@ -119,3 +121,15 @@ export const getCategories = async (): Promise<Category[]> => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
 };
+
+export async function createNewFeedBack(
+  { name, description, rate }: CreateNewFeedback,
+  { toolId }: FeedbackFormModalProps
+): Promise<Feedback> {
+  const postFeedBack = await api.post<Feedback>(`/tools/${toolId}/feedback`, {
+    name,
+    description,
+    rate,
+  });
+  return postFeedBack.data;
+}

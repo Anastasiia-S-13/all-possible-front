@@ -38,10 +38,9 @@ const ToolDetailsClient = () => {
             <ToolGallery images={toolData.images} />
             <ToolInfoBlock user={userData} tool={toolData} />
           </div>
-            <FeedbacksBlock toolId={toolData._id} />
+          <FeedbacksBlock toolId={toolData._id} />
         </div>
       </section>
-
     )
   );
 };

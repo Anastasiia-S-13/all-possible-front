@@ -6,6 +6,11 @@
     display: flex;
     align-items: center;
     height: 100%;
+
+    background-image: url("/images/hero-banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   
     @media (min-width: 768px) {
       height: 518px;

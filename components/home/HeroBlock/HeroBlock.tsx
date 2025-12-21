@@ -6,7 +6,7 @@ import css from "./HeroBlock.module.css";
 export default function HeroBlock() {
   return (
     <section className={css.root}>
-      <Image className={css.image} src={"/images/hero-banner.png"} alt="Зображення HeroBlock" fill priority  />
+      {/* <Image className={css.image} src={"/images/hero-banner.png"} alt="Зображення HeroBlock" fill priority  /> */}
       
       <Container className={css.container}>
 

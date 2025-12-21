@@ -5,11 +5,11 @@
     max-width: 375px;
     margin: 0 auto;
     padding: 48px 20px 0px 20px;
+    min-height: 231px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--color-scheme-3-background);
-    transition: all 0.3s ease;
 }
 
 .avatar {
@@ -23,7 +23,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .username {
@@ -34,18 +33,16 @@
     letter-spacing: -0.01em;
     text-align: center;
     color: var(--color-scheme-3-text);
-    transition: all 0.3s ease;
 }
 
 @media only screen and (min-width: 768px) {
-    .profileContainer {
-        display: flex;
-        justify-content: flex-start;
+    .container {
         max-width: 768px;
         padding-left: 32px;
         padding-right: 32px;
+        min-height: 247px;
         flex-direction: row;
-        gap: 24px;
+        align-items: center;
     }
 
     .avatar {
@@ -60,7 +57,7 @@
 }
 
 @media only screen and (min-width: 1440px) {
-    .profileContainer {
+    .container {
         max-width: 1440px;
         padding-left: 64px;
         padding-right: 64px;

@@ -1,5 +1,4 @@
 // lib/validation/validateUser.ts
-
 import * as Yup from "yup";
 
 export const profileSchema = Yup.object().shape({
@@ -13,19 +12,4 @@ export const profileSchema = Yup.object().shape({
   bio: Yup.string()
     .max(300, "Занадто довгий опис")
     .nullable(),
-});
-
-export const editProfileSchema = Yup.object().shape({
-  name: Yup.string().required('Імʼя обовʼязкове'),
-  email: Yup.string().email('Невірний email').required('Email обовʼязковий'),
-  bio: Yup.string().max(200, 'Bio не може перевищувати 200 символів'),
-  avatarFile: Yup.mixed<File>()
-    .test('fileSize', 'Файл занадто великий', value => {
-      if (!value) return true; // поле пусте
-      return value.size <= 5 * 1024 * 1024;
-    })
-    .test('fileType', 'Неправильний формат', value => {
-      if (!value) return true;
-      return ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(value.type);
-    }),
 });

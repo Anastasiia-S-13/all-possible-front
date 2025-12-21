@@ -3,7 +3,6 @@ export interface AuthUser {
   name: string;
   email: string;
   avatar?: string;
-   bio?: string;
 }
 
 export interface LoginFormValues {

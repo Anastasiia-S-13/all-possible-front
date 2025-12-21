@@ -7,10 +7,12 @@ import css from "./ToolInfoBlock.module.css";
 import { Tool } from "@/types/Tool";
 import { User } from "@/types/User";
 import { useAuthStore } from "@/stores/authStore";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "../Modal/Modal";
 import AuthRedirectModal from "../modals/AuthRedirect/AuthRedirectModal";
+import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
+import { Rating } from "react-simple-star-rating";
 
 interface ToolInfoBlockProps {
   tool: Tool;
@@ -29,7 +31,6 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
     }
     router.push(`/tools/${tool._id}/booking`);
   };
-
   return (
     <div className={css.toolDetailsContent}>
       <div className={css.toolHead}>
@@ -51,6 +52,9 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
             Переглянути профіль
           </Link>
         </div>
+      </div>
+      <div>
+        <RateUserStars user={user} />
       </div>
       <p className={css.description}>{tool.description}</p>
       <div className={css.specs}>

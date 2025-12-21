@@ -9,9 +9,11 @@ import { Tool } from "@/types/Tool";
 import ToolsGrid from "./ToolsGrid";
 import ProfilePlaceholder from "./ProfilePlaceholder";
 import FeedbacksBlock from "../home/Feedbacks/FeedbacksBlock";
+import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
+import { User } from "@/types/User";
 
 interface UserProfileProps {
-  user: { name: string };
+  user: User;
   userId: string;
   tools: Tool[];
 }
@@ -30,7 +32,7 @@ export default function UserProfile({ user, userId, tools }: UserProfileProps) {
       <div className={css.userProfileContainer}>
         <div className={css.avatar}>{firstletter}</div>
         <h2 className={css.username}>{user.name}</h2>
-
+        <RateUserStars user={user} />
         {isOwner && (
           <button
             className={css.button}

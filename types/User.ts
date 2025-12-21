@@ -5,6 +5,8 @@ export type User = {
   avatar: string;
   createdAt: string;
   updatedAt: string;
+  feedbackCount: number;
+  rating: number;
 };
 
 export type EditProfileData = Pick<User, "name" | "email" | "bio">;

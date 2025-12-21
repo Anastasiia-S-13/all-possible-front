@@ -5,21 +5,21 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AddEditToolForm from "@/components/forms/AddEditToolForm/AddEditToolForm";
 // Імпорт для перевірки авторизації (треба адаптуйти під AuthProvider)
-// import { useAuth } from "@/providers/AuthProvider";
+import { useAuthStore } from "@/stores/authStore";
 
 export default function CreateToolPage() {
-  //const { isAuthenticated } = useAuth(); // Припускаємо, що є такий хук
+  const { isAuthenticated } = useAuthStore(); // Припускаємо, що є такий хук
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     router.push("/auth/login"); // Перенаправлення на логін, якщо не авторизований
-  //   }
-  // }, [isAuthenticated, router]);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/auth/login"); // Перенаправлення на логін, якщо не авторизований
+    }
+  }, [isAuthenticated, router]);
 
-  // if (!isAuthenticated) {
-  //   return <div>Завантаження...</div>; // Або плейсхолдер
-  // }
+  if (!isAuthenticated) {
+    return <div>Завантаження...</div>; // Або плейсхолдер
+  }
 
   return (
     <div className={css.container}>

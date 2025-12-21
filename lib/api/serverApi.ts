@@ -1,5 +1,7 @@
 import { User } from "../../types/User";
 import { Tool } from "../../types/Tool";
+import { ToolHttpRequest } from "@/types/Tool";
+import { api } from "./api";
 
 export async function getUserById(userId: string): Promise<User> {
   const res = await fetch(
@@ -35,9 +37,6 @@ export async function getUserTools(userId: string): Promise<Tool[]> {
 
   return res.json();
 }
-
-import { ToolHttpRequest } from "@/types/Tool";
-import { api } from "./api";
 
 export const getAllToolsServer = async (): Promise<ToolHttpRequest> => {
   const response = await api.get<ToolHttpRequest>("/tools", {

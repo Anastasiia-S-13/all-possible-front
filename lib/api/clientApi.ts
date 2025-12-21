@@ -7,12 +7,15 @@ import { Category } from "@/types/Tool";
 import { AxiosRequestConfig } from "axios";
 import { api } from "./api";
 import {
+  CreateNewFeedback,
+  Feedback,
+  FeedbackFormModalProps,
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
 } from "@/types/Feedback";
 import { User, EditProfileData } from "@/types/User";
 
-import {CreateToolPayload } from "@/types/typesCategories";
+import { CreateToolPayload } from "@/types/typesCategories";
 import { Tool } from "@/types/Tool";
 
 export const createBookingRequest = async (
@@ -57,7 +60,6 @@ export const getCategories = async () => {
   return res.data;
 };
 
-
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
@@ -100,7 +102,7 @@ export const getAllTools = async (params: {
   perPage?: number;
 }): Promise<{ tools: Tool[]; total: number; pages: number }> => {
   const response = await api.get("/tools", { params });
-    return response.data;
+  return response.data;
 };
 
 export const updateTool = async (
@@ -108,7 +110,19 @@ export const updateTool = async (
   data: FormData
 ): Promise<Tool> => {
   const response = await api.patch<Tool>(`/tools/${toolId}`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 };
+
+export async function createNewFeedBack(
+  { name, description, rate }: CreateNewFeedback,
+  { toolId }: FeedbackFormModalProps
+): Promise<Feedback> {
+  const postFeedBack = await api.post<Feedback>(`/tools/${toolId}/feedback`, {
+    name,
+    description,
+    rate,
+  });
+  return postFeedBack.data;
+}

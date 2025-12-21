@@ -12,7 +12,7 @@ export interface Tool {
   name: string;
   description: string;
   pricePerDay: number;
-  images: string; //https://ftp.goit.study/img/tools-next/692db3ffab59e437964311d4.webp,
+  images: string;
   rating: number;
   specifications: Record<string, string>;
   rentalTerms: string;

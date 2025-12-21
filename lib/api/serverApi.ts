@@ -1,14 +1,17 @@
-import { User } from '../../types/User';
-import { Tool } from '../../types/Tool';
+import { User } from "../../types/User";
+import { Tool } from "../../types/Tool";
 
 export async function getUserById(userId: string): Promise<User> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`, {
-    cache: 'no-store',
-    credentials: 'include',
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`,
+    {
+      cache: "no-store",
+      credentials: "include",
+    }
+  );
 
   if (!res.ok) {
-    throw new Error('Не вдалося завантажити користувача');
+    throw new Error("Не вдалося завантажити користувача");
   }
 
   const data = await res.json();
@@ -19,9 +22,12 @@ export async function getUserById(userId: string): Promise<User> {
 }
 
 export async function getUserTools(userId: string): Promise<Tool[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userId}/tools`, {
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${userId}/tools`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     return [];

@@ -3,9 +3,10 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding-top: 64px;
+    padding-bottom: 64px;
     gap: 48px;
-    max-width: 640px;
-    margin: 0 auto;
+    max-width: 294px;
 }
 
 .headingWrap {
@@ -15,29 +16,31 @@
 }
 
 .heading {
-    font-size: 48px;
+    font-size: 36px;
     line-height: 120%;
     letter-spacing: -0.01em;
     text-align: center;
-    color: var(--color-scheme-1-text);
 }
 
 .text {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 150%;
-    color: var(--color-scheme-1-text);
 }
 
 .buttons {
     display: flex;
+    flex-direction: column;
     gap: 24px;
+    width: 100%;
 }
 
 .login {
+    width: 100%;
     border: 2px solid var(--color-neutral-darkest);
     border-radius: 6px;
-    padding: 10px 137px;
+    padding: 10px 0;
     font-weight: 500;
+    font-size: 14px;
     line-height: 150%;
     color: var(--color-neutral-darkest);
     transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
@@ -56,12 +59,13 @@
 }
 
 .register {
+    width: 100%;
     border: 1px solid var(--color-electric-violet);
     border-radius: 6px;
-    padding: 10px 111px;
+    padding: 10px 0;
     background-color: var(--color-electric-violet);
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     color: var(--color-white);
     transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
@@ -75,4 +79,38 @@
 
 .register:active {
     background-color: #e7cdf4;
+}
+
+@media only screen and (min-width: 768px) {
+    .modalWrap {
+        max-width: 640px;
+    }
+
+    .buttons {
+        flex-direction: row;
+    }
+
+    .login {
+        padding: 10px 139px;
+    }
+
+    .register {
+        padding: 10px 116px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .heading {
+        font-size: 48px;
+    }
+
+    .login {
+        font-size: 16px;
+        padding: 10px 139px;
+    }
+
+    .register {
+        font-size: 16px;
+        padding: 10px 111px;
+    }
 }

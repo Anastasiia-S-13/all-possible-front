@@ -1,54 +1,55 @@
 .root {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-  
-    display: flex;
-    align-items: center;
-    height: 100%;
-  
-    @media (min-width: 768px) {
-      height: 518px;
-    }
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  background-image: url('/images/hero-banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (min-width: 768px) {
+    height: 518px;
   }
-  
-  
-  .root::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 2;
+}
+
+.root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.inner {
+  position: relative;
+  padding: 2.625rem 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem; /* 40px */
+  line-height: 120%;
+  font-weight: 700;
+  font-style: bold;
+  letter-spacing: -1%;
+  text-align: center;
+  text-wrap: balance;
+  color: rgba(255, 255, 255, 255);
+  @media (min-width: 768px) {
+    text-align: left;
   }
-  
-  .image {
-    position: absolute;
-    inset: 0;
-    object-fit: cover;
-    z-index: 1;
-  }
-  
-  .inner {
-    position: relative;
-    padding: 2.625rem 0;
-    width: 100%;
-    z-index: 3;
-  }
-  
-  
-  .title {
-    margin-bottom: 2rem;
-    font-size: 2.5rem; /* 40px */
-    line-height: 120%;
-    font-weight: 700;
-    font-style: bold;
-    letter-spacing: -1%;
-    text-align: center;
-    text-wrap: balance;    
-    color: rgba(255, 255, 255, 255);
-    @media (min-width: 768px) {
-      text-align: left;
-    }
-  
-  }
-  
+}

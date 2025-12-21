@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 import UserProfile from "../../../../components/profile/UserProfile";
-import ToolsGrid from "../../../../components/profile/ToolsGrid";
-import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 
 type Props = {
@@ -29,17 +27,9 @@ export default async function ProfilePage({ params }: Props) {
   const user = await getUserById(userId);
   const tools = await getUserTools(userId);
 
-  const hasTools = tools.length > 0;
-
   return (
-    <main>
-      <UserProfile user={user} userId={userId} />
-
-      {hasTools ? (
-        <ToolsGrid tools={tools} />
-      ) : (
-        <ProfilePlaceholder userId={userId} />
-      )}
-    </main>
+    <div>
+      <UserProfile user={user} userId={userId} tools={tools} />
+    </div>
   );
 }

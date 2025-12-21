@@ -11,7 +11,7 @@ interface SearchToolFormValues {
   searchQuery: string;
 }
 interface SearchToolFormProps {
-  onSearchChange: (value: string) => void;
+  onSearchChange?: (value: string) => void;
 }
 
 export function SearchToolForm({ onSearchChange }: SearchToolFormProps) {
@@ -20,7 +20,9 @@ export function SearchToolForm({ onSearchChange }: SearchToolFormProps) {
   const handleSubmit = (values: SearchToolFormValues) => {
     if (values.searchQuery.trim()) {
       router.push(`/tools?q=${encodeURIComponent(values.searchQuery.trim())}`);
-      onSearchChange(values.searchQuery.trim());
+      if (onSearchChange) {
+        onSearchChange(values.searchQuery.trim());
+      }
     }
   };
 

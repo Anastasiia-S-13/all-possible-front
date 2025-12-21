@@ -1,8 +1,6 @@
 "use client";
 import { Category } from "@/types/typesCategories";
-import styles from "./FilterBar.module.css";
-import CategorySelect from "./CategorySelect";
-import { SearchToolForm } from "../forms/SearchToolForm/SearchToolForm";
+import CategorySelect from "../CategorySelect/CategorySelect";
 
 interface FilterBarProps {
   categories: Category[];

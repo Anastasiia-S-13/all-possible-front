@@ -10,7 +10,7 @@ interface ProfilePlaceholderProps {
 }
 
 export default function ProfilePlaceholder({
-  userId,
+  userId
 }: ProfilePlaceholderProps) {
   const currentUser = useAuthStore((state) => state.user);
   const isOwner = currentUser?.id === userId;
@@ -22,7 +22,7 @@ export default function ProfilePlaceholder({
 
   return (
     <div className={styles.placeholderContainer}>
-      <h1 className={styles.extraTitle}></h1>
+      <h2 className={styles.extraTitle}>Всі інструменти</h2>
 
       <p className={styles.title}>
         {isOwner

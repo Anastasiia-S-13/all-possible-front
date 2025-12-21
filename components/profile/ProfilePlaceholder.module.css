@@ -1,108 +1,118 @@
 /* components/profile/ProfilePlaceholder.module.css */
 
 .placeholderContainer {
-    min-width: 320px;
-    max-width: 375px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 64px 20px;
-    text-align: left;
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px 0;
+  text-align: left;
+  transition: all 0.3s ease;
 }
 
 .extraTitle {
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--color-scheme-1-text);
-    padding-bottom: 32px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  transition: all 0.3s ease;
+  margin-bottom: 80px;
 }
 
 .title {
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    color: var(--color-scheme-1-text);
-    padding-bottom: 16px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  padding-bottom: 16px;
+  transition: all 0.3s ease;
 }
 
 .subtitle {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--color-scheme-1-text);
-    padding-bottom: 16px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-scheme-1-text);
+  padding-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.extraTitle,
+.title,
+.subtitle {
+  text-align: left;
 }
 
 .button {
-    border: 1px solid var(--color-electric-violet);
-    border-radius: 6px;
-    padding: 8px 20px;
-    width: 335px;
-    height: 37px;
-    background-color: var(--color-electric-violet);
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--color-white);
-    transition: background-color 0.2s;
+  border: 1px solid var(--color-electric-violet);
+  border-radius: 6px;
+  padding: 8px 20px;
+  width: 335px;
+  height: 37px;
+  background-color: var(--color-electric-violet);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-white);
+  transition: background-color 0.2s;
 }
 
 .button:hover {
-    background-color: var(--color-white);
-    border: 2px solid var(--color-electric-violet);
-    color: var(--color-scheme-1-text);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-electric-violet);
+  color: var(--color-scheme-1-text);
 }
 
 .button:focus {
-    background-color: var(--color-electric-violet-lighter);
-    border: 2px solid var(--color-neutral-darkest);
-    color: var(--color-scheme-1-text);
+  background-color: var(--color-electric-violet-lighter);
+  border: 2px solid var(--color-neutral-darkest);
+  color: var(--color-scheme-1-text);
 }
 
 @media only screen and (min-width: 768px) {
-    .container {
-        max-width: 768px;
-        padding-left: 32px;
-        padding-right: 32px;
-    }
+  .placeholderContainer {
+    display: block;
+    justify-content: flex-start;
 
-    .button {
-        width: 152px;
-        height: 37px;
-        font-size: 14px;
-    }
+    max-width: 768px;
+  }
+
+  .button {
+    width: 218px;
+    font-size: 14px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
-    .container {
-        max-width: 1440px;
-        padding: 0px 64px 112px 64px;
-    }
+  .placeholderContainer {
+    max-width: 1440px;
+    padding: 112px 0;
+  }
 
-    .extraTitle {
-        font-size: 48px;
-    }
+  .extraTitle {
+    font-size: 48px;
+  }
 
-    .title {
-        font-size: 24px;
-    }
+  .title {
+    font-size: 24px;
+  }
 
-    .subtitle {
-        font-size: 18px;
-    }
+  .subtitle {
+    font-size: 18px;
+  }
 
-    .button {
-        width: 224px;
-        height: 40px;
-        font-size: 16px;
-    }
+  .button {
+    width: 236px;
+    height: 40px;
+    font-size: 16px;
+  }
 }

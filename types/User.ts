@@ -22,9 +22,9 @@ export interface UserProfileProps {
     containerClassName?: string;
 }
 
-  export interface EditProfileValues {
+  export interface EditProfileFormValues {
     name: string;
     email: string;
-    bio: string;
-    avatarFile?: File | null;
+    bio?: string;
+    avatarFile: File | null;
   }

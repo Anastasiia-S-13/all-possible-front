@@ -4,8 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'ftp.goit.study', pathname: '/**' },
-      {protocol: 'https', hostname: 'ac.goit.global', pathname: '/**'}
-    ]
+      { protocol: 'https', hostname: 'ac.goit.global', pathname: '/**' },
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' }, 
+    ],
   },
 };
 

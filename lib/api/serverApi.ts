@@ -1,9 +1,9 @@
 // lib/api/serverApi.ts
 
 import { cookies } from 'next/headers';
-import { api } from './api';
-import  { User } from '@/types/User';
-import  { Tool, ToolHttpRequest } from '@/types/Tool';
+import { User } from '@/types/User';
+import { Tool, ToolHttpRequest } from '@/types/Tool';
+import { api } from '@/lib/api/api';
 
 const getCookieHeader = async () => {
   const cookieStore = await cookies();
@@ -12,15 +12,10 @@ const getCookieHeader = async () => {
   };
 };
 
-export const getUserById = async (
-  userId: string
-): Promise<User | null> => {
+export const getUserById = async (userId: string): Promise<User | null> => {
   try {
     const headers = await getCookieHeader();
-
-    const { data } = await api.get<User>(`/users/${userId}`, {
-      headers,
-    });
+    const { data } = await api.get<User>(`/users/${userId}`, { headers });
 
     return {
       ...data,
@@ -28,21 +23,14 @@ export const getUserById = async (
     };
   } catch (error) {
     console.warn('getUserById failed:', error);
-    return null; 
+    return null;
   }
 };
 
-export const getUserTools = async (
-  userId: string
-): Promise<Tool[]> => {
+export const getUserTools = async (userId: string): Promise<Tool[]> => {
   try {
     const headers = await getCookieHeader();
-
-    const { data } = await api.get<Tool[]>(
-      `/users/${userId}/tools`,
-      { headers }
-    );
-
+    const { data } = await api.get<Tool[]>(`/users/${userId}/tools`, { headers });
     return data;
   } catch (error) {
     console.warn('getUserTools failed:', error);
@@ -51,38 +39,41 @@ export const getUserTools = async (
 };
 
 export const getAllToolsServer = async (): Promise<ToolHttpRequest> => {
-  const headers = await getCookieHeader();
-
-  const { data } = await api.get<ToolHttpRequest>('/tools', {
-    params: {
-      perPage: 8,
-    },
-    headers,
-  });
-
-  return data;
+  try {
+    const headers = await getCookieHeader();
+    const { data } = await api.get<ToolHttpRequest>('/tools', {
+      params: { perPage: 8 },
+      headers,
+    });
+    return data;
+  } catch (error) {
+    console.warn('getAllToolsServer failed:', error);
+    throw error;
+  }
 };
 
 export const getMe = async (): Promise<User | null> => {
   try {
     const headers = await getCookieHeader();
-
-    const { data } = await api.get<User>('/users/me', {
-      headers,
-    });
-
+    const { data } = await api.get<User>('/users/me', { headers });
     return {
       ...data,
       id: (data as any)._id ?? data.id,
     };
-  } catch {
+  } catch (error) {
+    console.warn('getMe failed:', error);
     return null;
   }
 };
 
-export const updateProfileFormData = async (data: FormData) => {
-  const res = await api.put('/users/me', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-  return res.data;
+export const updateProfileFormData = async (formData: FormData) => {
+  try {
+    const { data } = await api.put('/users/me', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return data;
+  } catch (error) {
+    console.warn('updateProfileFormData failed:', error);
+    throw error;
+  }
 };

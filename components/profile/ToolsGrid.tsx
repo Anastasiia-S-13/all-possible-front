@@ -1,4 +1,5 @@
 // components/profile/ToolsGrid.tsx
+
 import { Tool } from '../../types/Tool';
 
 export default function ToolsGrid({ tools }: { tools: Tool[] }) {

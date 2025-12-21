@@ -1,33 +1,17 @@
+// app/(site)/profile/[userId]/edit/page.tsx
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams, notFound } from 'next/navigation';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useAuthStore } from '@/stores/authStore';
-import { updateProfileFormData } from '@/lib/api/clientApi';
-import Button from '@/components/Button';
-import styles from '@/EditProfile.module.css';
 import { toast } from 'react-hot-toast';
-
-interface EditProfileValues {
-  name: string;
-  email: string;
-  bio: string;
-  avatarFile?: File | null;
-}
-
-const editProfileSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Ім'я має бути не менше 2 символів")
-    .max(32, "Ім'я має бути не більше 32 символів")
-    .required("Ім'я обов'язкове"),
-  email: Yup.string()
-    .email('Невірний формат email')
-    .max(64, 'Email має бути не більше 64 символів')
-    .required("Email обов'язковий"),
-  bio: Yup.string().max(200, 'Bio має бути не більше 200 символів'),
-});
+import { useAuthStore } from '@/stores/authStore';
+import Button from '@/components/Button';
+import styles from './EditProfile.module.css';
+import { EditProfileValues, User } from '@/types/User';
+import { editProfileSchema } from '@/lib/validation/validateUser';
+import { updateProfileFormData } from '@/lib/api/clientApi';
 
 export default function EditProfilePage() {
   const params = useParams();
@@ -45,17 +29,24 @@ export default function EditProfilePage() {
   const [avatarPreview, setAvatarPreview] = useState<string>('');
 
   useEffect(() => {
-  if (!currentUser) return; // чекаємо на завантаження
-  if (params.userId !== currentUser.id) notFound();
-  setInitialValues({
-    name: currentUser.name,
-    email: currentUser.email,
-    bio: currentUser.bio || '',
-    avatarFile: null,
-  });
-}, [currentUser, params.userId]);
+    if (!currentUser) return;
 
-      const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>, setFieldValue: any) => {
+    if (params.userId !== currentUser.id) notFound();
+
+    setInitialValues({
+      name: currentUser.name,
+      email: currentUser.email,
+      bio: currentUser.bio || '',
+      avatarFile: null,
+    });
+
+    setAvatarPreview(currentUser.avatar || '');
+  }, [currentUser, params.userId]);
+
+  const handleAvatarChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any) => void
+  ) => {
     const files = e.target.files;
     if (files && files[0]) {
       setFieldValue('avatarFile', files[0]);
@@ -64,6 +55,8 @@ export default function EditProfilePage() {
   };
 
   const handleSubmit = async (values: EditProfileValues) => {
+    if (!currentUser) return;
+
     try {
       const formData = new FormData();
       formData.append('name', values.name);
@@ -71,11 +64,11 @@ export default function EditProfilePage() {
       formData.append('bio', values.bio);
       if (values.avatarFile) formData.append('avatar', values.avatarFile);
 
-      const updatedUser = await updateProfileFormData(formData);
+      const updatedUser: User = await updateProfileFormData(currentUser.id, formData);
 
       setUser(updatedUser);
       toast.success('Профіль успішно оновлено!');
-      router.push(`/profile/${currentUser?.id}`);
+      router.push(`/profile/${currentUser.id}`);
     } catch (err: any) {
       console.error(err);
       toast.error(err.message || 'Не вдалося оновити профіль');
@@ -100,28 +93,50 @@ export default function EditProfilePage() {
         enableReinitialize
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, isSubmitting }) => (
+        {({ setFieldValue, isSubmitting, errors, touched }) => (
           <Form className={styles.form}>
             <div className={styles.formGroup}>
-              <label htmlFor="name">Ім'я</label>
-              <Field name="name" type="text" className={styles.input} />
+              <label htmlFor="name" className={styles.label}>Ім'я*</label>
+              <Field
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Ваше імʼя"
+                className={`${styles.input} ${
+                  errors.name && touched.name ? styles.inputError : ''
+                }`}
+              />
               <ErrorMessage name="name" component="span" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email</label>
-              <Field name="email" type="email" className={styles.input} />
+              <label htmlFor="email" className={styles.label}>Email*</label>
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Ваша пошта"
+                className={`${styles.input} ${
+                  errors.email && touched.email ? styles.inputError : ''
+                }`}
+              />
               <ErrorMessage name="email" component="span" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="bio">Bio</label>
-              <Field name="bio" as="textarea" className={styles.textarea} />
+              <label htmlFor="bio" className={styles.label}>Bio</label>
+              <Field
+                as="textarea"
+                id="bio"
+                name="bio"
+                placeholder="Коротко про себе"
+                className={styles.textarea}
+              />
               <ErrorMessage name="bio" component="span" className={styles.error} />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="avatar">Avatar</label>
+              <label htmlFor="avatar" className={styles.label}>Аватар</label>
               <input
                 id="avatar"
                 type="file"
@@ -131,7 +146,13 @@ export default function EditProfilePage() {
               />
             </div>
 
-            <Button type="submit" variant="primary" size="lg" disabled={isSubmitting} className={styles.submitButton}>
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              disabled={isSubmitting}
+              className={styles.submitButton}
+            >
               {isSubmitting ? 'Збереження...' : 'Зберегти'}
             </Button>
           </Form>

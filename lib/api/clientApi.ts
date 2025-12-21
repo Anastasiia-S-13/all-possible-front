@@ -1,139 +1,156 @@
 // lib/api/clientApi.ts
 
+import { api } from './api';
 import {
   BookingResponse,
   CreateBookingPayload,
   CreateBookingRequest,
   Tool,
-} from "@/types/Booking";
-import { AxiosRequestConfig } from "axios";
-import { api } from "./api";
+} from '@/types/Booking';
 import {
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
-} from "@/types/Feedback";
-import { User, EditProfileData } from "@/types/User";
-import { Category, CreateToolPayload } from "@/types/typesCategories";
+} from '@/types/Feedback';
+import { User, EditProfileData, EditProfileValues } from '@/types/User';
+import { Category, CreateToolPayload } from '@/types/typesCategories';
 
-export async function getProfile(): Promise<User> {
-  const res = await fetch('/api/users/me');
-  if (!res.ok) throw new Error('Не вдалося завантажити профіль');
-  return res.json();
-}
-
-export async function updateProfile(user: EditProfileData) {
-  const res = await fetch('/api/profile', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || 'Не вдалося оновити профіль');
+export const getProfile = async (): Promise<User> => {
+  try {
+    const { data } = await api.get<User>('/users/me');
+    return data;
+  } catch (error) {
+    console.error('getProfile failed:', error);
+    throw new Error('Не вдалося завантажити профіль');
   }
+};
 
-  return res.json();
-}
-
-export async function updateProfileFormData(formData: FormData) {
-  const res = await fetch('/api/profile', {
-    method: 'PUT',
-    body: formData, 
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || 'Не вдалося оновити профіль');
+export const updateProfile = async (user: EditProfileData): Promise<User> => {
+  try {
+    const { data } = await api.put<User>('/profile', user, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return data;
+  } catch (error: any) {
+    console.error('updateProfile failed:', error);
+    throw new Error(error.response?.data?.error || 'Не вдалося оновити профіль');
   }
+};
 
-  return res.json();
+export async function updateProfileFormData(userId: string, formData: FormData) {
+  try {
+    const response = await api.patch<User>(`/profile/${userId}`, formData,  {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error('updateProfileFormData failed:', error);
+    throw new Error('Не вдалося оновити профіль');
+  }
 }
 
 export const createBookingRequest = async (
-  payload?: CreateBookingRequest,
-  config?: AxiosRequestConfig
+  payload?: CreateBookingRequest
 ) => {
-  const response = await api.post<Tool>("/booking", payload, { ...config });
-
-  return response.data;
+  try {
+    const { data } = await api.post<Tool>('/booking', payload);
+    return data;
+  } catch (error) {
+    console.error('createBookingRequest failed:', error);
+    throw error;
+  }
 };
 
-export const createBooking = async (
-  bookingData: CreateBookingPayload
-): Promise<BookingResponse> => {
+export const createBooking = async (bookingData: CreateBookingPayload): Promise<BookingResponse> => {
   try {
     const { userId, ...payload } = bookingData;
-    const response = await api.post(`/bookings`, payload);
-    return response.data;
+    const { data } = await api.post<BookingResponse>('/bookings', payload);
+    return data;
   } catch (error) {
+    console.error('createBooking failed:', error);
     throw new Error(`Error creating booking: ${error}`);
   }
 };
 
-export async function fetchFeedbacks({
+export const fetchFeedbacks = async ({
   page,
   toolId,
   userId,
-}: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> {
-  const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
-    params: {
-      page,
-      ...(toolId && { toolId }),
-      ...(userId && { userId }),
-    },
-  });
-  return request.data;
-}
-
-export const getCategories = async () => {
-  const res = await api.get<Category[]>("/categories");
-  return res.data;
+}: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> => {
+  try {
+    const { data } = await api.get<fetchFeedbacksProps>('/feedbacks', {
+      params: { page, ...(toolId && { toolId }), ...(userId && { userId }) },
+    });
+    return data;
+  } catch (error) {
+    console.error('fetchFeedbacks failed:', error);
+    throw error;
+  }
 };
 
-export type UpdateToolRequest = {
-  toolName?: string;
-  photoUrl?: string;
+export const getCategories = async (): Promise<Category[]> => {
+  try {
+    const { data } = await api.get<Category[]>('/categories');
+    return data;
+  } catch (error) {
+    console.error('getCategories failed:', error);
+    throw error;
+  }
 };
 
-export const updateTool = async (payload: UpdateToolRequest) => {
-  const res = await api.put<Tool>("/tools", payload);
-  return res.data;
+export const updateTool = async (payload: { toolName?: string; photoUrl?: string }): Promise<Tool> => {
+  try {
+    const { data } = await api.put<Tool>('/tools', payload);
+    return data;
+  } catch (error) {
+    console.error('updateTool failed:', error);
+    throw error;
+  }
 };
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
-  formData.append("file", file);
-  const { data } = await api.post("/tools", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
-
-  return data.url;
+  formData.append('file', file);
+  try {
+    const { data } = await api.post('/tools', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return data.url;
+  } catch (error) {
+    console.error('uploadImage failed:', error);
+    throw error;
+  }
 };
 
-export const createTool = async (payload: CreateToolPayload) => {
+export const createTool = async (payload: CreateToolPayload): Promise<Tool> => {
   try {
-    const { data } = await api.post<Tool>("/tools", payload, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const { data } = await api.post<Tool>('/tools', payload, {
+      headers: { 'Content-Type': 'application/json' },
     });
-
     return data;
   } catch (error) {
-    console.error("Failed to create tool:", error);
-    throw new Error("Failed to create tool");
+    console.error('createTool failed:', error);
+    throw new Error('Failed to create tool');
   }
 };
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
-  const response = await api.get<Tool>(`/tools/${toolId}`);
-  console.log(response.data.images);
-  return response.data;
-}
+  try {
+    const { data } = await api.get<Tool>(`/tools/${toolId}`);
+    return data;
+  } catch (error) {
+    console.error('fetchToolById failed:', error);
+    throw error;
+  }
+};
 
 export const fetchUserById = async (userId: string): Promise<User> => {
-  const response = await api.get<User>(`/users/${userId}`);
-  console.log(response.data);
-  return response.data;
-}
+  try {
+    const { data } = await api.get<User>(`/users/${userId}`);
+    return data;
+  } catch (error) {
+    console.error('fetchUserById failed:', error);
+    throw error;
+  }
+};

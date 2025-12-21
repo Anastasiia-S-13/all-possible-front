@@ -1,3 +1,5 @@
+// app/(site)/profile/[userId]page.tsx
+
 import { Metadata } from "next";
 import css from './Profile.module.css';
 import UserProfile from "../../../../components/profile/UserProfile";
@@ -6,14 +8,15 @@ import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholde
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 
 type Props = {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 };
 
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { userId } = params;
 
-  let user: { name: string; avatar?: string } = { name: "Користувач" }; // fallback
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { userId } = await params;
+
+  let user: { name: string; avatar?: string } = { name: "Користувач" }; 
 
 try {
   const fetchedUser = await getUserById(userId);
@@ -22,8 +25,7 @@ try {
   }
 } catch (error) {
   console.error("Не вдалося отримати користувача:", error);
-  // залишаємо fallback
-}
+  }
 
   return {
     title: `${user.name} | Профіль`,
@@ -38,7 +40,7 @@ try {
 }
 
 export default async function ProfilePage({ params }: Props) {
-  const { userId } = params;
+  const { userId } = await params;
 
   let user: { name: string; avatar?: string } | null = null;
   let tools: any[] = [];

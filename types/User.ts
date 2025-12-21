@@ -1,4 +1,5 @@
 // types/User.ts
+
 export interface User {
   id: string;
   name: string;
@@ -16,3 +17,10 @@ export interface UserProfileProps {
 
 export type EditProfileData = Pick<User, 'name' | 'email' | 'bio' | 'avatar'>;
 
+
+  export interface EditProfileValues {
+    name: string;
+    email: string;
+    bio: string;
+    avatarFile?: File | null;
+  }

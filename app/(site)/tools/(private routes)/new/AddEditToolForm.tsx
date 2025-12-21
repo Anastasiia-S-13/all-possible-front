@@ -202,7 +202,7 @@ export default function AddEditToolForm({
 
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-rentalTerms`} className={css.label}>
-                  Умови оренди (мін. 20 симв.)
+                  Умови оренди
                 </label>
                 <Field
                   as="textarea"
@@ -217,7 +217,7 @@ export default function AddEditToolForm({
 
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-description`} className={css.label}>
-                  Опис (мін. 20 симв.)
+                  Опис
                 </label>
                 <Field
                   as="textarea"

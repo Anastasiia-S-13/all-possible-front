@@ -181,13 +181,16 @@
   color: #000;
 }
 
-/* .error {
-  display: block;
-  color: #e53935;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 12px;
-} */
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-red-dark);
+  margin-top: 2px;
+  min-height: 18px;
+  transition: opacity 0.12s ease;
+}
 
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {

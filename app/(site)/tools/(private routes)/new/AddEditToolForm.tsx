@@ -5,7 +5,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-
 import css from "./AddEditToolForm.module.css";
 import {
   AddEditToolFormRes,
@@ -14,17 +13,26 @@ import {
 } from "@/types/typesCategories";
 import { createTool, getCategories, updateTool } from "@/lib/api/clientApi";
 import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
+import { useAuthStore } from "@/stores/authStore";
 
-// Валідація
 const AddEditToolSchema = Yup.object({
-  name: Yup.string().required("Введіть назву"),
+  name: Yup.string()
+    .min(3, "Назва має бути не коротшою за 3 символи")
+    .max(96, "Назва занадто довга")
+    .required("Введіть назву"),
   pricePerDay: Yup.number()
     .typeError("Ціна має бути числом")
-    .positive("Ціна має бути більшою за 0")
+    .min(0, "Ціна не може бути від'ємною")
     .required("Вкажіть ціну"),
   category: Yup.string().required("Оберіть категорію"),
-  description: Yup.string().required("Введіть опис"),
-  rentalTerms: Yup.string().required("Введіть умови оренди"),
+  description: Yup.string()
+    .min(20, "Опис має бути не коротшим за 20 символів")
+    .max(2000, "Опис занадто довгий")
+    .required("Введіть опис"),
+  rentalTerms: Yup.string()
+    .min(20, "Умови оренди мають бути не коротшими за 20 символів")
+    .max(1000, "Умови занадто довгі")
+    .required("Введіть умови оренди"),
   specifications: Yup.string().required("Введіть характеристики"),
   image: Yup.mixed().required("Додайте фото"),
 });
@@ -40,73 +48,81 @@ export default function AddEditToolForm({
 }: ToolFormProps) {
   const router = useRouter();
   const fieldId = useId();
+  const { isAuthenticated } = useAuthStore();
+
+  if (!isAuthenticated) {
+    router.push("/auth/login");
+  }
 
   const [categories, setCategories] = useState<ToolsCategory[]>([]);
 
-  // Завантаження категорій
   useEffect(() => {
     getCategories()
       .then(setCategories)
       .catch((e) => console.error("Failed to load categories", e));
   }, []);
 
-  // React Query мутація
-  const mutation = useMutation<ToolCreate, Error, FormData>({
+  const mutation = useMutation<ToolCreate | any, Error, FormData>({
     mutationFn: (formData: FormData) =>
-      toolId ? updateTool(toolId, formData) : createTool(formData),
-    onSuccess: (tool: ToolCreate) => {
-      router.push(`/tools/${tool._id}`);
+      toolId ? (updateTool(toolId, formData) as any) : createTool(formData),
+    onSuccess: (tool: any) => {
+      router.push(`/tools/${tool._id || toolId}`);
+      router.refresh();
     },
     onError: (err: any) => {
-      alert(err?.message || "Сталася помилка");
+      const errorMessage =
+        err.response?.data?.message || err?.message || "Сталася помилка";
+      alert(`Помилка: ${errorMessage}`);
     },
   });
 
-  const normalizeSpecifications = (spec: any) => {
-    if (!spec) return "";
-    if (typeof spec === "string") return spec;
-    return JSON.stringify(spec);
-  };
-
   const initialValues: AddEditToolFormRes = initialData
     ? {
-        name: initialData.name,
-        pricePerDay: initialData.pricePerDay.toString(),
-        category: initialData.category, // бекенд зберігає id в полі category
-        description: initialData.description,
-        rentalTerms: initialData.rentalTerms,
-        specifications:
-          typeof initialData.specifications === "string"
-            ? initialData.specifications
-            : JSON.stringify(
-                Object.fromEntries(Object.entries(initialData.specifications))
-              ),
-        image: null,
-      }
+      name: initialData.name,
+      pricePerDay: initialData.pricePerDay.toString(),
+      category: initialData.category,
+      description: initialData.description,
+      rentalTerms: initialData.rentalTerms,
+      specifications:
+        typeof initialData.specifications === "string"
+          ? initialData.specifications
+          : Object.entries(initialData.specifications || {})
+            .map(([k, v]) => `${k}: ${v}`)
+            .join("\n"),
+      image: null,
+    }
     : {
-        name: "",
-        pricePerDay: "",
-        category: "",
-        description: "",
-        rentalTerms: "",
-        specifications: "",
-        image: null,
-      };
+      name: "",
+      pricePerDay: "",
+      category: "",
+      description: "",
+      rentalTerms: "",
+      specifications: "",
+      image: null,
+    };
+
   function buildToolFormData(values: AddEditToolFormRes): FormData {
     const formData = new FormData();
 
-    formData.append("name", values.name);
+    formData.append("name", values.name.trim());
     formData.append("pricePerDay", String(values.pricePerDay));
     formData.append("category", values.category);
-    formData.append("description", values.description);
-    formData.append("rentalTerms", values.rentalTerms);
+    formData.append("description", values.description.trim());
+    formData.append("rentalTerms", values.rentalTerms.trim());
 
-    const specsObject = Object.fromEntries(
-      values.specifications
-        .split("\n")
-        .map((line) => line.split(":").map((s) => s.trim()))
-    );
-
+    const specsObject: Record<string, string> = {};
+    if (values.specifications) {
+      values.specifications.split("\n").forEach((line) => {
+        const colonIndex = line.indexOf(":");
+        if (colonIndex !== -1) {
+          const key = line.substring(0, colonIndex).trim();
+          const value = line.substring(colonIndex + 1).trim();
+          if (key) specsObject[key] = value;
+        } else if (line.trim()) {
+          specsObject[line.trim()] = "";
+        }
+      });
+    }
     formData.append("specifications", JSON.stringify(specsObject));
 
     if (values.image) {
@@ -127,17 +143,15 @@ export default function AddEditToolForm({
           mutation.mutate(formData);
         }}
       >
-        {({ setFieldValue, values, isSubmitting }) => (
+        {({ setFieldValue, isSubmitting }) => (
           <Form className={css.form}>
             <div className={css.left}>
-              {/* Фото */}
               <AvatarPicker
                 value={initialData?.images}
                 onChange={(file) => setFieldValue("image", file)}
               />
               <ErrorMessage name="image" component="p" className={css.error} />
 
-              {/* Назва */}
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-name`} className={css.label}>
                   Назва
@@ -147,19 +161,14 @@ export default function AddEditToolForm({
                   id={`${fieldId}-name`}
                   name="name"
                   className={css.input}
-                  placeholder="Введіть назву"
+                  placeholder="Введіть назву (мін. 3 симв.)"
                 />
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="name" component="span" className={css.error} />
               </div>
 
-              {/* Ціна */}
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-pricePerDay`} className={css.label}>
-                  Ціна/день
+                  Ціна/день (грн)
                 </label>
                 <Field
                   type="number"
@@ -168,14 +177,9 @@ export default function AddEditToolForm({
                   className={css.input}
                   placeholder="500"
                 />
-                <ErrorMessage
-                  name="pricePerDay"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="pricePerDay" component="span" className={css.error} />
               </div>
 
-              {/* Категорія */}
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-category`} className={css.label}>
                   Категорія
@@ -186,24 +190,19 @@ export default function AddEditToolForm({
                   name="category"
                   className={css.input}
                 >
-                  <option value="">Категорія</option>
+                  <option value="">Оберіть категорію</option>
                   {categories?.map((cat) => (
                     <option key={cat._id} value={cat._id}>
                       {cat.title}
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage
-                  name="category"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="category" component="span" className={css.error} />
               </div>
 
-              {/* Умови оренди */}
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-rentalTerms`} className={css.label}>
-                  Умови оренди
+                  Умови оренди (мін. 20 симв.)
                 </label>
                 <Field
                   as="textarea"
@@ -211,19 +210,14 @@ export default function AddEditToolForm({
                   name="rentalTerms"
                   className={css.textarea}
                   rows={3}
-                  placeholder="Застава 8000 грн..."
+                  placeholder="Застава 8000 грн. Паспорт. Мінімум 20 символів."
                 />
-                <ErrorMessage
-                  name="rentalTerms"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="rentalTerms" component="span" className={css.error} />
               </div>
 
-              {/* Опис */}
               <div className={css.boxField}>
                 <label htmlFor={`${fieldId}-description`} className={css.label}>
-                  Опис
+                  Опис (мін. 20 симв.)
                 </label>
                 <Field
                   as="textarea"
@@ -231,21 +225,13 @@ export default function AddEditToolForm({
                   name="description"
                   rows={7}
                   className={css.textarea}
-                  placeholder="Ваш опис"
+                  placeholder="Детальний опис інструменту. Мінімум 20 символів."
                 />
-                <ErrorMessage
-                  name="description"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="description" component="span" className={css.error} />
               </div>
 
-              {/* Характеристики */}
               <div className={css.boxField}>
-                <label
-                  htmlFor={`${fieldId}-specifications`}
-                  className={css.label}
-                >
+                <label htmlFor={`${fieldId}-specifications`} className={css.label}>
                   Характеристики
                 </label>
                 <Field
@@ -253,24 +239,20 @@ export default function AddEditToolForm({
                   id={`${fieldId}-specifications`}
                   name="specifications"
                   className={css.textarea}
-                  rows={7}
-                  placeholder="Характеристики інструменту"
+                  rows={5}
+                  placeholder="Вага: 5кг&#10;Потужність: 2000Вт"
                 />
-                <ErrorMessage
-                  name="specifications"
-                  component="span"
-                  className={css.error}
-                />
+                <ErrorMessage name="specifications" component="span" className={css.error} />
               </div>
             </div>
 
             <div className={css.boxButtons}>
-              <button className={css.btn} type="submit" disabled={isSubmitting}>
-                {isSubmitting
+              <button className={css.btn} type="submit" disabled={isSubmitting || mutation.isPending}>
+                {isSubmitting || mutation.isPending
                   ? "Завантаження..."
                   : toolId
-                  ? "Оновити"
-                  : "Опублікувати"}
+                    ? "Оновити"
+                    : "Опублікувати"}
               </button>
 
               <button

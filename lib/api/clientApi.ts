@@ -41,15 +41,15 @@ export const getCategories = async () => {
 };
 
 
-export const updateTool = async (
-  id: string,
-  formData: FormData
-): Promise<ToolCreate> => {
-  const res = await api.put<ToolCreate>(`/tools/${id}`, formData, {
-       headers: { "Content-Type": "multipart/form-data" },
-  });
-  return res.data;
-};
+// export const updateTool = async (
+//   id: string,
+//   formData: FormData
+// ): Promise<ToolCreate> => {
+//   const res = await api.put<ToolCreate>(`/tools/${id}`, formData, {
+//        headers: { "Content-Type": "multipart/form-data" },
+//   });
+//   return res.data;
+// };
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
@@ -57,7 +57,7 @@ export const uploadImage = async (file: File): Promise<string> => {
   const { data } = await api.post("/tools", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
-  return res.data;
+  return data.data;
 };
 
 export async function createTool(formData: FormData): Promise<ToolCreate> {

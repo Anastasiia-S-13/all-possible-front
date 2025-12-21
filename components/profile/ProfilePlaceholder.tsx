@@ -1,5 +1,4 @@
 // components/profile/ProfilePlaceholder.tsx
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -10,21 +9,20 @@ interface ProfilePlaceholderProps {
   userId: string;
 }
 
-export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) {
-  const { user: currentUser, isLoading } = useAuthStore();
+export default function ProfilePlaceholder({
+  userId,
+}: ProfilePlaceholderProps) {
+  const currentUser = useAuthStore((state) => state.user);
+  const isOwner = currentUser?.id === userId;
   const router = useRouter();
 
-  if (isLoading) return null;
-
-  const isOwner = currentUser?.id === userId;
-
   const handleClick = () => {
-    router.push(isOwner ? "/tools/new" : "/tools");
+    router.push(isOwner ? "/tools/new" : "/");
   };
 
   return (
     <div className={styles.placeholderContainer}>
-      <h1 className={styles.extraTitle}>Інструменти</h1>
+      <h1 className={styles.extraTitle}></h1>
 
       <p className={styles.title}>
         {isOwner

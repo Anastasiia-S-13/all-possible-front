@@ -1,7 +1,4 @@
-// app/(site)/profile/[userId]page.tsx
-
 import { Metadata } from "next";
-import css from './Profile.module.css';
 import UserProfile from "../../../../components/profile/UserProfile";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 
@@ -9,21 +6,9 @@ type Props = {
   params: Promise<{ userId: string }>;
 };
 
-
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { userId } = await params;
-
-  let user: { name: string; avatar?: string } = { name: "Користувач" }; 
-
-try {
-  const fetchedUser = await getUserById(userId);
-  if (fetchedUser) {
-    user = fetchedUser;
-  }
-} catch (error) {
-  console.error("Не вдалося отримати користувача:", error);
-  }
+  const user = await getUserById(userId);
 
   return {
     title: `${user.name} | Профіль`,
@@ -39,29 +24,12 @@ try {
 
 export default async function ProfilePage({ params }: Props) {
   const { userId } = await params;
-
-  let user: { name: string; avatar?: string } | null = null;
-  let tools: any[] = [];
-
-  try {
-       user = await getUserById(userId);
-    tools = await getUserTools(userId);
-  } catch (error) {
-    console.error("Не вдалося отримати користувача або інструменти:", error);
-  }
-
-  if (!user) {
-    return <ProfilePlaceholder userId={userId} />;
-  }
+  const user = await getUserById(userId);
+  const tools = await getUserTools(userId);
 
   return (
-    <>
-            <UserProfile user={user} userId={userId} containerClassName={css.profileContainer} />
-      {hasTools ? (
-        <ToolsGrid tools={tools} />
-      ) : (
-        <ProfilePlaceholder userId={userId} />
-      )}
-    </>
+    <div>
+      <UserProfile user={user} userId={userId} tools={tools} />
+    </div>
   );
 }

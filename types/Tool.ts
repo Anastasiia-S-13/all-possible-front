@@ -4,7 +4,7 @@ import { User } from "./User";
 
 export type Tool = {
   _id: string;
-  owner: User['id'];
+  owner: User['_id'];
   name: string;
   description: string;
   pricePerDay: number;

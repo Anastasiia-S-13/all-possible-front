@@ -6,10 +6,11 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 64px 20px;
     text-align: left;
+    transition: all 0.3s ease;
 }
 
 .extraTitle {
@@ -19,7 +20,8 @@
     line-height: 1.2;
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
-    padding-bottom: 32px;
+    padding-bottom: 16px;
+    transition: all 0.3s ease;
 }
 
 .title {
@@ -30,6 +32,7 @@
     letter-spacing: -0.01em;
     color: var(--color-scheme-1-text);
     padding-bottom: 16px;
+    transition: all 0.3s ease;
 }
 
 .subtitle {
@@ -39,6 +42,13 @@
     line-height: 1.5;
     color: var(--color-scheme-1-text);
     padding-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+.extraTitle,
+.title,
+.subtitle {
+    text-align: left;
 }
 
 .button {
@@ -69,23 +79,25 @@
 }
 
 @media only screen and (min-width: 768px) {
-    .container {
+    .placeholderContainer {
+        display: block;
+        justify-content: flex-start;
+
         max-width: 768px;
         padding-left: 32px;
         padding-right: 32px;
     }
 
     .button {
-        width: 152px;
-        height: 37px;
+        width: 218px;
         font-size: 14px;
     }
 }
 
 @media only screen and (min-width: 1440px) {
-    .container {
+    .placeholderContainer {
         max-width: 1440px;
-        padding: 0px 64px 112px 64px;
+        padding: 112px 64px;
     }
 
     .extraTitle {
@@ -101,7 +113,7 @@
     }
 
     .button {
-        width: 224px;
+        width: 236px;
         height: 40px;
         font-size: 16px;
     }

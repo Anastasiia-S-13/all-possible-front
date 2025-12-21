@@ -10,7 +10,7 @@ interface ProfilePlaceholderProps {
 }
 
 export default function ProfilePlaceholder({
-  userId,
+  userId
 }: ProfilePlaceholderProps) {
   const currentUser = useAuthStore((state) => state.user);
   const isOwner = currentUser?.id === userId;

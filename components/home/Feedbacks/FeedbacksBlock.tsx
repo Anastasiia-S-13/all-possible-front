@@ -14,24 +14,25 @@ import SwiperBtnNext from "./SwiperButton/SwiperBtnNext";
 import EmptyUserFeedbacks from "../EmptyFeedback/EmptyUserFeedbacks";
 import { useState } from "react";
 import EmptyUserPersonalFeedbacks from "../EmptyFeedback/EmptyUserPersonalFeedbacks";
+import { useAuthStore } from "@/stores/authStore";
 
 interface FeedbacksBlockProps {
   toolId?: string;
   userId?: string;
-  isOwner?: boolean;
 }
 
 const FeedbacksBlock = ({
   toolId,
   userId,
-  isOwner = false,
 }: FeedbacksBlockProps) => {
+  const { isAuthenticated, user: currentUser } = useAuthStore();
+  const isOwner = isAuthenticated && currentUser?.id === userId;
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   const { data, isSuccess } = useQuery({
     queryKey: ["feedbackAllKey", toolId, userId],
-    queryFn: () => fetchFeedbacks({ page: 1, toolId, userId }),
+    queryFn: () => fetchFeedbacks({ page: 1, toolId, ownerId: userId }),
   });
 
   const allFeedbacks = data?.feedbacks ?? [];

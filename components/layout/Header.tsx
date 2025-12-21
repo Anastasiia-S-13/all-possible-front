@@ -16,13 +16,14 @@ export default function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const hasHydrated = useAuthStore((state) => state._hasHydrated);
 
   // Hide header on auth pages
   if (pathname?.startsWith("/auth")) {
     return null;
   }
 
-  const isLoggedIn = isAuthenticated;
+  const isLoggedIn = hasHydrated && isAuthenticated;
   const userId = user?.id;
   const userName = user?.name;
   const userAvatar = user?.avatar;
@@ -52,16 +53,16 @@ export default function Header() {
             <Link href="/">Головна</Link>
             <Link href="/tools">Інструменти</Link>
 
-            {isLoggedIn && userId && (
+            {hasHydrated && isLoggedIn && userId && (
               <Link href={`/profile/${userId}`}>Мій профіль</Link>
             )}
 
-            {!isLoggedIn && <Link href="/auth/login">Увійти</Link>}
+            {hasHydrated && !isLoggedIn && <Link href="/auth/login">Увійти</Link>}
           </nav>
 
           {/* Actions */}
           <div className={styles.actions}>
-            {!isLoggedIn && (
+            {hasHydrated && !isLoggedIn && (
               <Link href="/auth/register" className={styles.signupButton}>
                 Зареєструватися
               </Link>

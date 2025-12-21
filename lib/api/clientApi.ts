@@ -103,12 +103,14 @@ export async function fetchFeedbacks({
   page,
   toolId,
   userId,
+  ownerId,
 }: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> {
   const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
     params: {
       page,
       ...(toolId && { toolId }),
       ...(userId && { userId }),
+      ...(ownerId && { ownerId }),
     },
   });
   return request.data;
@@ -118,4 +120,8 @@ export async function fetchFeedbacks({
 export const getCategories = async (): Promise<Category[]> => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
+};
+
+export const deleteTool = async (toolId: string): Promise<void> => {
+  await api.delete(`/tools/${toolId}`);
 };

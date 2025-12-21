@@ -7,6 +7,9 @@ import {
   CreateBookingRequest,
   Tool,
 } from '@/types/Booking';
+import { Category } from "@/types/Tool";
+import { AxiosRequestConfig } from "axios";
+import { api } from "./api";
 import {
   fetchFeedbacksProps,
   fetchFeedbacksRequestProps,
@@ -35,6 +38,7 @@ export const updateProfile = async (user: EditProfileData): Promise<User> => {
     throw new Error(error.response?.data?.error || 'Не вдалося оновити профіль');
   }
 };
+
 
 export async function updateProfileFormData(userId: string, formData: FormData) {
   try {
@@ -77,37 +81,22 @@ export const fetchFeedbacks = async ({
   page,
   toolId,
   userId,
-}: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> => {
-  try {
-    const { data } = await api.get<fetchFeedbacksProps>('/feedbacks', {
-      params: { page, ...(toolId && { toolId }), ...(userId && { userId }) },
-    });
-    return data;
-  } catch (error) {
-    console.error('fetchFeedbacks failed:', error);
-    throw error;
-  }
+}: fetchFeedbacksRequestProps): Promise<fetchFeedbacksProps> {
+  const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
+    params: {
+      page,
+      ...(toolId && { toolId }),
+      ...(userId && { userId }),
+    },
+  });
+  return request.data;
+}
+
+export const getCategories = async () => {
+  const res = await api.get<Category[]>("/categories");
+  return res.data;
 };
 
-export const getCategories = async (): Promise<Category[]> => {
-  try {
-    const { data } = await api.get<Category[]>('/categories');
-    return data;
-  } catch (error) {
-    console.error('getCategories failed:', error);
-    throw error;
-  }
-};
-
-export const updateTool = async (payload: { toolName?: string; photoUrl?: string }): Promise<Tool> => {
-  try {
-    const { data } = await api.put<Tool>('/tools', payload);
-    return data;
-  } catch (error) {
-    console.error('updateTool failed:', error);
-    throw error;
-  }
-};
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
@@ -136,21 +125,31 @@ export const createTool = async (payload: CreateToolPayload): Promise<Tool> => {
 };
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
-  try {
-    const { data } = await api.get<Tool>(`/tools/${toolId}`);
-    return data;
-  } catch (error) {
-    console.error('fetchToolById failed:', error);
-    throw error;
-  }
+  const response = await api.get<Tool>(`/tools/${toolId}`);
+  return response.data;
 };
 
 export const fetchUserById = async (userId: string): Promise<User> => {
-  try {
-    const { data } = await api.get<User>(`/users/${userId}`);
-    return data;
-  } catch (error) {
-    console.error('fetchUserById failed:', error);
-    throw error;
-  }
+  const response = await api.get<User>(`/users/${userId}`);
+  return response.data;
+};
+
+export const getAllTools = async (params: {
+  search?: string;
+  category?: string;
+  page?: number;
+  perPage?: number;
+}): Promise<{ tools: Tool[]; total: number; pages: number }> => {
+  const response = await api.get("/tools", { params });
+    return response.data;
+};
+
+export const updateTool = async (
+  toolId: string,
+  data: FormData
+): Promise<Tool> => {
+  const response = await api.patch<Tool>(`/tools/${toolId}`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+  return response.data;
 };

@@ -1,4 +1,4 @@
-// lib/api/serverApi.ts
+'use server';
 
 import { cookies } from 'next/headers';
 import { User } from '@/types/User';
@@ -12,20 +12,29 @@ const getCookieHeader = async () => {
   };
 };
 
-export const getUserById = async (userId: string): Promise<User | null> => {
-  try {
-    const headers = await getCookieHeader();
-    const { data } = await api.get<User>(`/users/${userId}`, { headers });
+export async function getUserById(userId: string): Promise<User> {
+  const headers = await getCookieHeader();
 
-    return {
-      ...data,
-      id: (data as any)._id ?? data.id,
-    };
-  } catch (error) {
-    console.warn('getUserById failed:', error);
-    return null;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`,
+    {
+      cache: 'no-store',
+      headers,
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error('Не вдалося завантажити користувача');
   }
-};
+
+  const data = await res.json();
+
+  return {
+    ...data,
+    id: data._id ?? data.id,
+  };
+}
+
 
 export const getUserTools = async (userId: string): Promise<Tool[]> => {
   try {

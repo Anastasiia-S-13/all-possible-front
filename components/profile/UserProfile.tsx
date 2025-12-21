@@ -1,6 +1,6 @@
 // components\profile\UserProfile.tsx
 
-'use client';
+"use client";
 
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/stores/authStore';
@@ -14,6 +14,8 @@ export default function UserProfile({ user, userId, containerClassName }: UserPr
   const isOwner = currentUser?.id === userId;
 
   const firstLetter = user.name.charAt(0).toUpperCase();
+
+  const hasTools = tools.length > 0;
 
   return (
     <div className={containerClassName || css.userProfileContainer}>
@@ -29,8 +31,8 @@ export default function UserProfile({ user, userId, containerClassName }: UserPr
           <Link href={`/profile/${userId}/edit`} className={css.button}>
              Редагувати профіль
           </Link>
-     
       )}
+      <FeedbacksBlock userId={userId} isOwner={isOwner} />
     </div>
   );
 }

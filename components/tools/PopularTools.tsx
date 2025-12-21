@@ -25,7 +25,7 @@ export default async function PopularTools() {
         ))}
       </ul>
 
-      <Link href="/tools" className={styles.link}>
+      <Link href="/tools" className="gridBtn">
         До всіх інструментів
       </Link>
     </section>

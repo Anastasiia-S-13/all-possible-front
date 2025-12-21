@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import css from "../../app/(site)/tools/[toolId]/ToolDetails.module.css";
+import css from "./ToolInfoBlock.module.css";
 import { Tool } from "@/types/Tool";
 import { User } from "@/types/User";
 import { useAuthStore } from "@/stores/authStore";
@@ -31,33 +31,40 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
   };
 
   return (
-    <div className={css.tool_details_content}>
-      <h1 className={css.tool_details_heading}>{tool.name}</h1>
-      <p className={css.tool_price}>{tool.pricePerDay}</p>
-      <div className={css.user_profile}>
+    <div className={css.toolDetailsContent}>
+      <div className={css.toolHead}>
+        <h1 className={css.toolName}>{tool.name}</h1>
+        <p className={css.toolPricePerDay}>{tool.pricePerDay}</p>
+      </div>
+      <div className={css.userProfile}>
         <Image
+          className={css.avatar}
           src={user.avatar}
           width={80}
           height={80}
           loading="lazy"
           alt="User avatar"
         />
-        <h2 className={css.username}>{user.name}</h2>
-        <Link className={css.user_profile_btn} href={`/profile/${user._id}`}>
-          Переглянути профіль
-        </Link>
+        <div className={css.toolOwner}>
+          <h2 className={css.username}>{user.name}</h2>
+          <Link className={css.profileBtn} href={`/profile/${user._id}`}>
+            Переглянути профіль
+          </Link>
+        </div>
       </div>
-      <p className={css.tool_description}>{tool.description}</p>
-      <div className={css.tool_specs}>
-        <ul className={css.tool_spec_list}>
-          {Object.entries(tool.specifications).map(([key, value]) => (
-            <li key={key} className={css.tool_spec_item}>
-              <span className={css.span}>{key}:</span> {value}
-            </li>
-          ))}
-        </ul>
+      <p className={css.description}>{tool.description}</p>
+      <div className={css.specs}>
+        {tool.specifications && Object.keys(tool.specifications).length > 0 && (
+          <ul className={css.specsList}>
+            {Object.entries(tool.specifications).map(([key, value]) => (
+              <li key={key} className={css.specItem}>
+                <span className={css.span}>{key}:</span> {value}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      <button className={css.booking_btn} onClick={handleClick}>
+      <button className={css.bookingBtn} onClick={handleClick}>
         Забронювати
       </button>
       {isOpen && (

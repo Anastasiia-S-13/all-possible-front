@@ -3,8 +3,6 @@
 import { Metadata } from "next";
 import css from './Profile.module.css';
 import UserProfile from "../../../../components/profile/UserProfile";
-import ToolsGrid from "../../../../components/profile/ToolsGrid";
-import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 
 type Props = {
@@ -56,16 +54,14 @@ export default async function ProfilePage({ params }: Props) {
     return <ProfilePlaceholder userId={userId} />;
   }
 
-  const hasTools = tools.length > 0;
-
   return (
-    <main>
+    <>
             <UserProfile user={user} userId={userId} containerClassName={css.profileContainer} />
       {hasTools ? (
         <ToolsGrid tools={tools} />
       ) : (
         <ProfilePlaceholder userId={userId} />
       )}
-    </main>
+    </>
   );
 }

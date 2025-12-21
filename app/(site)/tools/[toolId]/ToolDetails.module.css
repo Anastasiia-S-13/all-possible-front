@@ -1,0 +1,28 @@
+.toolDetailsSection {
+    padding: 32px 0 64px;
+}
+
+.toolDetailsWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    max-width: 335px;
+}
+
+@media only screen and (min-width: 768px) {
+    .toolDetailsWrap {
+        max-width: 704px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .toolDetailsSection {
+        padding: 48px 0 112px;
+    }
+
+    .toolDetailsWrap {
+        flex-direction: row;
+        max-width: 1312px;
+    }
+}

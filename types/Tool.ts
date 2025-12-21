@@ -19,3 +19,18 @@ export type Tool = {
 export interface ToolHttpRequest {
   tools: Tool[];
 }
+
+export interface Category {
+  _id: string;
+  title: string;
+}
+
+export interface UpdateToolData {
+  name?: string;
+  pricePerDay?: number;
+  category?: string;
+  description?: string;
+  rentalTerms?: string;
+  specifications?: string;
+  image?: File;
+}

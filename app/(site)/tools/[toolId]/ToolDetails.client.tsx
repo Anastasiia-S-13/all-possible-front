@@ -6,6 +6,7 @@ import css from "./ToolDetails.module.css";
 import { fetchToolById, fetchUserById } from "@/lib/api/clientApi";
 import ToolGallery from "@/components/tools/ToolGallery";
 import ToolInfoBlock from "@/components/tools/ToolInfoBlock";
+import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
 
 const ToolDetailsClient = () => {
   const { toolId } = useParams<{ toolId: string }>();
@@ -31,12 +32,16 @@ const ToolDetailsClient = () => {
 
   return (
     toolData && (
-      <div className={css.container}>
-        <div className={css.tool_details_wrap}>
-          <ToolGallery images={toolData.images} />
-          <ToolInfoBlock user={userData} tool={toolData} />
+      <section className={css.toolDetailsSection}>
+        <div className="container">
+          <div className={css.toolDetailsWrap}>
+            <ToolGallery images={toolData.images} />
+            <ToolInfoBlock user={userData} tool={toolData} />
+          </div>
+            <FeedbacksBlock toolId={toolData._id} />
         </div>
-      </div>
+      </section>
+
     )
   );
 };

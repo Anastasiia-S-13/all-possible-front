@@ -1,0 +1,95 @@
+.main {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -0.48px;
+  color: var(--color-scheme-2-text);
+  margin: 0 0 24px 0;
+}
+
+.loading,
+.error,
+.loginRequired,
+.accessDenied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.loginRequired h2,
+.accessDenied h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 12px 0;
+}
+
+.loginRequired p,
+.accessDenied p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 24px 0;
+}
+
+.loginBtn,
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #8808CC;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.loginBtn:hover,
+.backBtn:hover {
+  background-color: #6B06A3;
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 32px 32px;
+  }
+
+  .title {
+    margin-bottom: 32px;
+  }
+}
+
+/* Desktop (1440px) */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1312px;
+    padding: 40px 64px;
+  }
+
+  .title {
+    font-size: 56px;
+    letter-spacing: -0.56px;
+    margin-bottom: 40px;
+  }
+}

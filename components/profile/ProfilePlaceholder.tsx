@@ -11,7 +11,7 @@ interface ProfilePlaceholderProps {
 }
 
 export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) {
-  const { user: currentUser, isLoading } = useAuthStore(); 
+  const { user: currentUser, isLoading } = useAuthStore();
   const router = useRouter();
 
   if (isLoading) return null;
@@ -38,11 +38,7 @@ export default function ProfilePlaceholder({ userId }: ProfilePlaceholderProps) 
           : "У нас є великий вибір інструментів від інших користувачів"}
       </p>
 
-      <button
-        type="button"
-        className={styles.button}
-        onClick={handleClick}
-      >
+      <button type="button" className={styles.button} onClick={handleClick}>
         {isOwner ? "Опублікувати інструмент" : "Всі інструменти"}
       </button>
     </div>

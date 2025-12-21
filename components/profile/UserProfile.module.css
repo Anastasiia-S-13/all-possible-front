@@ -32,10 +32,11 @@
   color: #1a1a1a;
   margin-bottom: 24px;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .button {
-  width: 168px;
+  width: 180px;
   height: 40px;
   padding: 8px 16px;
   background-color: var(--color-electric-violet);
@@ -67,10 +68,15 @@
   .userProfileContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     max-width: 768px;
     flex-direction: row;
     padding-top: 48px;
+  }
+
+  .userInfo {
+    display: flex;
+    align-items: center;
   }
 
   .avatar {

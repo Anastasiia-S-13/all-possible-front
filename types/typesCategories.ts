@@ -3,6 +3,13 @@ export interface ToolsCategory {
   title: string;
 }
 
+export interface Category {
+  _id: string;
+  title: string;
+  description: string;
+  keywords: string;
+}
+
 export interface ToolCreate {
   _id: string;
   owner: string;

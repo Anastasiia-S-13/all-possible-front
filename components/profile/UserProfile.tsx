@@ -27,7 +27,10 @@ export default function UserProfile({
           ) : (
             <div className={css.avatar}>{firstLetter}</div>
           )}
-          <h2 className={css.username}>{user.name}</h2>
+          <div className={css.userDetails}>
+            <h2 className={css.username}>{user.name}</h2>
+            {user.bio && <p className={css.bio}>{user.bio}</p>}
+          </div>
         </div>
         {isOwner && (
           <button

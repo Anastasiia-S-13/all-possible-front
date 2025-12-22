@@ -19,13 +19,17 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #f5f5f5;
 }
 
 .avatar {
   border-radius: 12px;
-  max-width: 100%;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 .wrapper {
   cursor: pointer;
@@ -99,6 +103,7 @@
   .picker {
     max-width: none;
     width: 100%;
+    border-radius: 16px;
   }
   .avatar {
     border-radius: 16px;

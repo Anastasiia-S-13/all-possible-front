@@ -46,15 +46,26 @@ export default function EditProfilePage() {
   const handleSubmit = async (values: EditProfileFormValues) => {
     if (!currentUser) return;
 
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("email", values.email);
-    if (values.bio) formData.append("bio", values.bio);
-    if (values.avatarFile) formData.append("avatar", values.avatarFile);
-    const updatedUser: User = await updateProfileFormData(formData);
-    setUser(updatedUser);
-    toast.success("Профіль успішно оновлено!");
-    router.push(`/profile/${currentUser.id}`);
+    try {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      if (values.bio) formData.append("bio", values.bio);
+      if (values.avatarFile) formData.append("avatar", values.avatarFile);
+      const updatedUser = await updateProfileFormData(formData);
+      const normalizedUser = {
+        id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        avatar: updatedUser.avatar,
+      };
+      setUser(normalizedUser);
+      toast.success("Профіль успішно оновлено!");
+      router.push(`/profile/${normalizedUser.id}`);
+    } catch (error) {
+      console.error("Profile update error:", error);
+      toast.error("Помилка оновлення профілю");
+    }
   };
 
   if (!currentUser) return <p>Завантаження...</p>;

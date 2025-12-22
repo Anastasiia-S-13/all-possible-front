@@ -28,59 +28,61 @@ export default function EditProfileForm({
         initialValues={initialValues}
         validationSchema={editProfileSchema}
         enableReinitialize
-        onSubmit={onSubmit}
+        onSubmit={(values, actions) => {
+          onSubmit(values).finally(() => actions.setSubmitting(false));
+        }}
       >
         {({ setFieldValue, isSubmitting, errors, touched }) => (
-          <Form className={styles.form}>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">Імʼя*</label>
-              <Field
-                id="name"
-                name="name"
-                className={`${styles.input} ${
-                  errors.name && touched.name ? styles.inputError : ''
-                }`}
+            <Form className={styles.form}>
+              <div className={styles.formGroup}>
+                <label htmlFor="name">Імʼя*</label>
+                <Field
+                  id="name"
+                  name="name"
+                  className={`${styles.input} ${
+                    errors.name && touched.name ? styles.inputError : ''
+                  }`}
+                />
+                <ErrorMessage name="name" component="span" />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="email">Пошта*</label>
+                <Field
+                  id="email"
+                  name="email"
+                  type="email"
+                  className={`${styles.input} ${
+                    errors.email && touched.email ? styles.inputError : ''
+                  }`}
+                />
+                <ErrorMessage name="email" component="span" />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="bio">Bio</label>
+                <Field
+                  as="textarea"
+                  id="bio"
+                  name="bio"
+                  className={`${styles.textarea} ${
+                    errors.bio && touched.bio ? styles.inputError : ''
+                  }`}
+                />
+              </div>
+
+              <AvatarUpload
+                previewUrl={avatarPreview}
+                onChange={(file) => {
+                  setFieldValue('avatarFile', file);
+                  onAvatarSelect(file);
+                }}
               />
-              <ErrorMessage name="name" component="span" />
-            </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Пошта*</label>
-              <Field
-                id="email"
-                name="email"
-                type="email"
-                className={`${styles.input} ${
-                  errors.email && touched.email ? styles.inputError : ''
-                }`}
-              />
-              <ErrorMessage name="email" component="span" />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="bio">Bio</label>
-             <Field
-  as="textarea"
-  id="bio"
-  name="bio"
-  className={`${styles.textarea} ${
-    errors.bio && touched.bio ? styles.inputError : ''
-  }`}
-/>
-            </div>
-
-            <AvatarUpload
-              previewUrl={avatarPreview}
-              onChange={(file) => {
-                setFieldValue('avatarFile', file);
-                onAvatarSelect(file);
-              }}
-            />
-
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Збереження...' : 'Зберегти'}
-            </Button>
-          </Form>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Збереження...' : 'Зберегти'}
+              </Button>
+            </Form>
         )}
       </Formik>
     </div>

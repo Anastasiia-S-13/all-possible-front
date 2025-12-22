@@ -18,8 +18,9 @@ export const editProfileSchema = Yup.object().shape({
   email: Yup.string().email('Невірний email').required('Email обовʼязковий'),
   bio: Yup.string().max(200, 'Bio не може перевищувати 200 символів'),
   avatarFile: Yup.mixed<File>()
+    .nullable()
     .test('fileSize', 'Файл занадто великий', value => {
-      if (!value) return true; 
+      if (!value) return true;
       return value.size <= 5 * 1024 * 1024;
     })
     .test('fileType', 'Неправильний формат', value => {

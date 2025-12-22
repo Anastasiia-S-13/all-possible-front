@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/stores/authStore";
 import { fetchToolById } from "@/lib/api/clientApi";
-import EditToolForm from "@/components/forms/EditToolForm/EditToolForm";
+import AddEditToolForm from "@/components/forms/AddEditToolForm/AddEditToolForm";
 import styles from "./EditToolPage.module.css";
 
 interface EditToolPageProps {
@@ -83,7 +83,7 @@ export default function EditToolPage({ params }: EditToolPageProps) {
     <main className={styles.main}>
       <div className={styles.container}>
         <h1 className={styles.title}>Редагування інструменту</h1>
-        <EditToolForm tool={tool} />
+        <AddEditToolForm initialData={tool as any} toolId={toolId} />
       </div>
     </main>
   );

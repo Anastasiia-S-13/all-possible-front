@@ -15,7 +15,7 @@ import { createTool, getCategories, updateTool } from "@/lib/api/clientApi";
 import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
 import { useAuthStore } from "@/stores/authStore";
 
-const AddEditToolSchema = Yup.object({
+const getValidationSchema = (isEditMode: boolean) => Yup.object({
   name: Yup.string()
     .min(3, "Назва має бути не коротшою за 3 символи")
     .max(96, "Назва занадто довга")
@@ -34,7 +34,7 @@ const AddEditToolSchema = Yup.object({
     .max(1000, "Умови занадто довгі")
     .required("Введіть умови оренди"),
   specifications: Yup.string().required("Введіть характеристики"),
-  image: Yup.mixed().required("Додайте фото"),
+  image: isEditMode ? Yup.mixed().nullable() : Yup.mixed().required("Додайте фото"),
 });
 
 interface ToolFormProps {
@@ -78,28 +78,28 @@ export default function AddEditToolForm({
 
   const initialValues: AddEditToolFormRes = initialData
     ? {
-      name: initialData.name,
-      pricePerDay: initialData.pricePerDay.toString(),
-      category: initialData.category,
-      description: initialData.description,
-      rentalTerms: initialData.rentalTerms,
-      specifications:
-        typeof initialData.specifications === "string"
-          ? initialData.specifications
-          : Object.entries(initialData.specifications || {})
-            .map(([k, v]) => `${k}: ${v}`)
-            .join("\n"),
-      image: null,
-    }
+        name: initialData.name,
+        pricePerDay: initialData.pricePerDay.toString(),
+        category: initialData.category,
+        description: initialData.description,
+        rentalTerms: initialData.rentalTerms,
+        specifications:
+          typeof initialData.specifications === "string"
+            ? initialData.specifications
+            : Object.entries(initialData.specifications || {})
+                .map(([k, v]) => `${k}: ${v}`)
+                .join("\n"),
+        image: null,
+      }
     : {
-      name: "",
-      pricePerDay: "",
-      category: "",
-      description: "",
-      rentalTerms: "",
-      specifications: "",
-      image: null,
-    };
+        name: "",
+        pricePerDay: "",
+        category: "",
+        description: "",
+        rentalTerms: "",
+        specifications: "",
+        image: null,
+      };
 
   function buildToolFormData(values: AddEditToolFormRes): FormData {
     const formData = new FormData();
@@ -137,7 +137,7 @@ export default function AddEditToolForm({
       <Formik
         initialValues={initialValues}
         enableReinitialize
-        validationSchema={AddEditToolSchema}
+        validationSchema={getValidationSchema(!!toolId)}
         onSubmit={(values) => {
           const formData = buildToolFormData(values);
           mutation.mutate(formData);
@@ -163,7 +163,11 @@ export default function AddEditToolForm({
                   className={css.input}
                   placeholder="Введіть назву (мін. 3 симв.)"
                 />
-                <ErrorMessage name="name" component="span" className={css.error} />
+                <ErrorMessage
+                  name="name"
+                  component="span"
+                  className={css.error}
+                />
               </div>
 
               <div className={css.boxField}>
@@ -177,7 +181,11 @@ export default function AddEditToolForm({
                   className={css.input}
                   placeholder="500"
                 />
-                <ErrorMessage name="pricePerDay" component="span" className={css.error} />
+                <ErrorMessage
+                  name="pricePerDay"
+                  component="span"
+                  className={css.error}
+                />
               </div>
 
               <div className={css.boxField}>
@@ -197,7 +205,11 @@ export default function AddEditToolForm({
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage name="category" component="span" className={css.error} />
+                <ErrorMessage
+                  name="category"
+                  component="span"
+                  className={css.error}
+                />
               </div>
 
               <div className={css.boxField}>
@@ -212,7 +224,11 @@ export default function AddEditToolForm({
                   rows={3}
                   placeholder="Застава 8000 грн. Паспорт. Мінімум 20 символів."
                 />
-                <ErrorMessage name="rentalTerms" component="span" className={css.error} />
+                <ErrorMessage
+                  name="rentalTerms"
+                  component="span"
+                  className={css.error}
+                />
               </div>
 
               <div className={css.boxField}>
@@ -227,11 +243,18 @@ export default function AddEditToolForm({
                   className={css.textarea}
                   placeholder="Детальний опис інструменту. Мінімум 20 символів."
                 />
-                <ErrorMessage name="description" component="span" className={css.error} />
+                <ErrorMessage
+                  name="description"
+                  component="span"
+                  className={css.error}
+                />
               </div>
 
               <div className={css.boxField}>
-                <label htmlFor={`${fieldId}-specifications`} className={css.label}>
+                <label
+                  htmlFor={`${fieldId}-specifications`}
+                  className={css.label}
+                >
                   Характеристики
                 </label>
                 <Field
@@ -242,23 +265,31 @@ export default function AddEditToolForm({
                   rows={5}
                   placeholder="Вага: 5кг&#10;Потужність: 2000Вт"
                 />
-                <ErrorMessage name="specifications" component="span" className={css.error} />
+                <ErrorMessage
+                  name="specifications"
+                  component="span"
+                  className={css.error}
+                />
               </div>
             </div>
 
             <div className={css.boxButtons}>
-              <button className={css.btn} type="submit" disabled={isSubmitting || mutation.isPending}>
+              <button
+                className={css.btn}
+                type="submit"
+                disabled={isSubmitting || mutation.isPending}
+              >
                 {isSubmitting || mutation.isPending
                   ? "Завантаження..."
                   : toolId
-                    ? "Оновити"
-                    : "Опублікувати"}
+                  ? "Оновити"
+                  : "Опублікувати"}
               </button>
 
               <button
                 className={css.btnCan}
                 type="button"
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
               >
                 Відмінити
               </button>

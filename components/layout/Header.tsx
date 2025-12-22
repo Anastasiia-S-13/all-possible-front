@@ -11,12 +11,10 @@ import MobileMenu from "./MobileMenu";
 import Modal from "@/components/Modal/Modal";
 import ConfirmationModal from "@/components/modals/LogoutModal/ConfirmationModal";
 
-
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
@@ -31,21 +29,10 @@ export default function Header() {
   const userName = user?.name;
   const userAvatar = user?.avatar;
 
-  const handleLogoutClick = () => {
-    setIsLogoutModalOpen(true);
-  };
-
-  const handleLogoutCancel = () => {
-    setIsLogoutModalOpen(false);
-  };
-
-  const handleLogoutConfirm = async () => {
+  const handleLogout = async () => {
     await logout();
-    setIsLogoutModalOpen(false);
     router.push("/");
   };
-
-
 
   return (
     <>
@@ -109,7 +96,7 @@ export default function Header() {
                 <button
                   type="button"
                   className={styles.logoutButton}
-                  onClick={handleLogoutClick}
+                  onClick={handleLogout}
                   aria-label="Вийти"
                 >
                   <svg width="24" height="24" aria-hidden="true">
@@ -132,19 +119,7 @@ export default function Header() {
           </div>
         </header>
       </div>
-      {isLogoutModalOpen && (
-      <Modal onClose={handleLogoutCancel}>
-      <ConfirmationModal
-      title="Ви впевнені, що хочете вийти?"
-      leftText="Залишитись"
-      rightText="Вийти"
-      onLeftClick={handleLogoutCancel}
-      onRightClick={handleLogoutConfirm}
-      rightVariant="primary"
-      />
-      </Modal>
-)}
-      {/* Mobile menu modal */}
+
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}
     </>
   );

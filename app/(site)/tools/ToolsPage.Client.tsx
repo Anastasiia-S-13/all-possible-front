@@ -22,6 +22,7 @@ export default function ToolsPageClient({
 }: ToolsPageClientProps) {
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -34,7 +35,8 @@ export default function ToolsPageClient({
     selectedCategory === ""
       ? ""
       : initialCategories.find((cat) => cat._id === selectedCategory)?.title ||
-        "";
+      "";
+
 
   useEffect(() => {
     const loadTools = async () => {
@@ -43,16 +45,18 @@ export default function ToolsPageClient({
         const data = await getAllTools({
           search: searchQuery,
           category: selectedCategory,
-          page: currentPage,
+          page: 1,
           perPage,
         });
 
         if (data && Array.isArray(data.tools)) {
           setTools(data.tools);
           setTotalPages((data as any).pages || (data as any).totalPages || 1);
+          setCurrentPage(1);
         } else if (Array.isArray(data)) {
           setTools(data);
           setTotalPages(1);
+          setCurrentPage(1);
         }
       } catch (error) {
         console.error("Failed to fetch tools:", error);
@@ -62,22 +66,50 @@ export default function ToolsPageClient({
     };
 
     loadTools();
-  }, [searchQuery, selectedCategory, currentPage]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, searchQuery]);
+  }, [searchQuery, selectedCategory]);
 
   useEffect(() => {
     if (selectedCategory === "" && searchQuery === "") {
       router.replace("/tools");
     }
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, router]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleLoadMore = async () => {
+    if (currentPage >= totalPages) return;
+
+    setLoadingMore(true);
+    try {
+      const nextPage = currentPage + 1;
+      const data = await getAllTools({
+        search: searchQuery,
+        category: selectedCategory,
+        page: nextPage,
+        perPage,
+      });
+
+      if (data && Array.isArray(data.tools)) {
+        setTools((prevTools) => [...prevTools, ...data.tools]);
+        setCurrentPage(nextPage);
+      }
+    } catch (error) {
+      console.error("Failed to load more tools:", error);
+    } finally {
+      setLoadingMore(false);
+    }
   };
+
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setSearchQuery("");
+
+    if (categoryId) {
+      router.push(`/tools`);
+    } else {
+      router.push("/tools");
+    }
+  };
+
+  const hasMore = currentPage < totalPages;
 
   return (
     <section className={styles.toolsPage}>
@@ -92,8 +124,11 @@ export default function ToolsPageClient({
           <FilterBar
             categories={initialCategories}
             selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
+            resetSearch={selectedCategory}
+            onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchQuery}
+            setSearchQuery={setSearchQuery}
+
           />
           <button
             className={styles.resetCategories}
@@ -110,42 +145,14 @@ export default function ToolsPageClient({
         ) : (
           <>
             <ToolsGrid tools={tools} />
-            {currentPage === 1 && totalPages > 1 && (
-              <button onClick={() => handlePageChange(2)} className="gridBtn">
-                Показати більше
+            {hasMore && (
+              <button
+                onClick={handleLoadMore}
+                className="gridBtn"
+                disabled={loadingMore}
+              >
+                {loadingMore ? "Завантаження..." : "Показати більше"}
               </button>
-            )}
-
-            {currentPage > 1 && totalPages > 1 && (
-              <div className={styles.pagination}>
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className={styles.pageBtn}
-                >
-                  Назад
-                </button>
-
-                {[...Array(totalPages)].map((_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => handlePageChange(i + 1)}
-                    className={`${styles.pageBtn} ${
-                      currentPage === i + 1 ? styles.activePage : ""
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  className={styles.pageBtn}
-                >
-                  Вперед
-                </button>
-              </div>
             )}
           </>
         )}

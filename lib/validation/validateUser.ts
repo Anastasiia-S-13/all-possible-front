@@ -10,9 +10,7 @@ export const profileSchema = Yup.object().shape({
   email: Yup.string()
     .email("Невірний формат пошти")
     .required("Пошта обов'язкова"),
-  bio: Yup.string()
-    .max(300, "Занадто довгий опис")
-    .nullable(),
+  bio: Yup.string().max(300, "Занадто довгий опис").nullable(),
 });
 
 export const editProfileSchema = Yup.object().shape({
@@ -21,7 +19,7 @@ export const editProfileSchema = Yup.object().shape({
   bio: Yup.string().max(200, 'Bio не може перевищувати 200 символів'),
   avatarFile: Yup.mixed<File>()
     .test('fileSize', 'Файл занадто великий', value => {
-      if (!value) return true; // поле пусте
+      if (!value) return true; 
       return value.size <= 5 * 1024 * 1024;
     })
     .test('fileType', 'Неправильний формат', value => {

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
@@ -14,6 +13,9 @@ import { deleteTool } from "@/lib/api/clientApi";
 import Modal from "../Modal/Modal";
 import AuthRedirectModal from "../modals/AuthRedirect/AuthRedirectModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmation/DeleteConfirmationModal";
+import { Suspense, useState } from "react";
+import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
+import { Rating } from "react-simple-star-rating";
 
 interface ToolInfoBlockProps {
   tool: Tool;
@@ -81,6 +83,9 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
             Переглянути профіль
           </Link>
         </div>
+      </div>
+      <div>
+        <RateUserStars user={user} />
       </div>
       <p className={css.description}>{tool.description}</p>
       <div className={css.specs}>

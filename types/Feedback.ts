@@ -23,3 +23,14 @@ export interface fetchFeedbacksProps {
   toolId?: string;
   userId?: string;
 }
+
+export interface CreateNewFeedback {
+  name: string;
+  description?: string;
+  rate?: number;
+}
+
+export interface FeedbackFormModalProps {
+  toolId: string;
+  onSuccess?: () => void;
+}

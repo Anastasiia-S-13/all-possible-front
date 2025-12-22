@@ -9,7 +9,7 @@ import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
 import Modal from "@/components/Modal/Modal";
-import ConfirmationModal from "@/components/modals/ConfirmationModal";
+import ConfirmationModal from "@/components/modals/LogoutModal/ConfirmationModal";
 
 
 export default function Header() {

@@ -5,6 +5,7 @@ import { User } from "./User";
 export type Tool = {
   _id: string;
   owner: User['id'];
+  category: string;
   name: string;
   description: string;
   pricePerDay: number;

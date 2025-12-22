@@ -15,7 +15,7 @@ import { createTool, getCategories, updateTool } from "@/lib/api/clientApi";
 import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
 import { useAuthStore } from "@/stores/authStore";
 
-const AddEditToolSchema = Yup.object({
+const getValidationSchema = (isEditMode: boolean) => Yup.object({
   name: Yup.string()
     .min(3, "Назва має бути не коротшою за 3 символи")
     .max(96, "Назва занадто довга")
@@ -34,7 +34,7 @@ const AddEditToolSchema = Yup.object({
     .max(1000, "Умови занадто довгі")
     .required("Введіть умови оренди"),
   specifications: Yup.string().required("Введіть характеристики"),
-  image: Yup.mixed().required("Додайте фото"),
+  image: isEditMode ? Yup.mixed().nullable() : Yup.mixed().required("Додайте фото"),
 });
 
 interface ToolFormProps {
@@ -137,7 +137,7 @@ export default function AddEditToolForm({
       <Formik
         initialValues={initialValues}
         enableReinitialize
-        validationSchema={AddEditToolSchema}
+        validationSchema={getValidationSchema(!!toolId)}
         onSubmit={(values) => {
           const formData = buildToolFormData(values);
           mutation.mutate(formData);

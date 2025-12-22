@@ -59,7 +59,7 @@ export const updateTool = async (
   id: string,
   formData: FormData
 ): Promise<ToolCreate> => {
-  const res = await api.put<ToolCreate>(`/tools/${id}`, formData, {
+  const res = await api.patch<ToolCreate>(`/tools/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return res.data;

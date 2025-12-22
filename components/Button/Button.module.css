@@ -7,7 +7,8 @@
   font-weight: var(--font-medium);
   border-radius: 6px;
   text-align: center;
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease-in-out;
+
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
@@ -49,6 +50,7 @@
   -webkit-backdrop-filter: blur(6px);
   border-color: var(--color-primary);
   color: var(--color-text);
+  transition: all 0.3s ease-in-out;
 }
 
 .btn--primaryHero:active:not(:disabled) {

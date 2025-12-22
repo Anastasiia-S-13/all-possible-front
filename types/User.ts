@@ -21,6 +21,7 @@ export interface UserProfileProps {
   user: {
     name: string;
     avatar?: string;
+    bio?: string;
     feedbackCount?: number;
     rating?: number;
   };

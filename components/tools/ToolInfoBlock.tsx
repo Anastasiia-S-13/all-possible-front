@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 import css from "./ToolInfoBlock.module.css";
 import { Tool } from "@/types/Tool";
 import { User } from "@/types/User";
 import { useAuthStore } from "@/stores/authStore";
-import { Suspense, useState } from "react";
-import { useRouter } from "next/navigation";
+import { deleteTool } from "@/lib/api/clientApi";
 import Modal from "../Modal/Modal";
 import AuthRedirectModal from "../modals/AuthRedirect/AuthRedirectModal";
+import DeleteConfirmationModal from "../modals/DeleteConfirmation/DeleteConfirmationModal";
+import { Suspense, useState } from "react";
 import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
 import { Rating } from "react-simple-star-rating";
 
@@ -21,16 +24,44 @@ interface ToolInfoBlockProps {
 
 const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
   const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, user: currentUser } = useAuthStore();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleClick = () => {
+  const isOwner = isAuthenticated && (currentUser?.id === tool.owner || currentUser?.id === user.id);
+
+  const handleBookingClick = () => {
     if (!isAuthenticated) {
-      setIsOpen(true);
+      setIsAuthModalOpen(true);
       return;
     }
     router.push(`/tools/${tool._id}/booking`);
   };
+
+  const handleEditClick = () => {
+    router.push(`/tools/${tool._id}/edit`);
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setIsDeleting(true);
+    try {
+      await deleteTool(tool._id);
+      toast.success("Інструмент успішно видалено");
+      router.push("/tools");
+    } catch (error) {
+      toast.error("Помилка при видаленні інструменту");
+      console.error("Delete tool error:", error);
+    } finally {
+      setIsDeleting(false);
+      setIsDeleteModalOpen(false);
+    }
+  };
+
   return (
     <div className={css.toolDetailsContent}>
       <div className={css.toolHead}>
@@ -40,7 +71,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
       <div className={css.userProfile}>
         <Image
           className={css.avatar}
-          src={user.avatar}
+          src={user.avatar || "/images/default-avatar.png"}
           width={80}
           height={80}
           loading="lazy"
@@ -68,12 +99,37 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
           </ul>
         )}
       </div>
-      <button className={css.bookingBtn} onClick={handleClick}>
-        Забронювати
-      </button>
-      {isOpen && (
-        <Modal onClose={() => setIsOpen(false)}>
+
+      <div className={css.actionsWrapper}>
+        {isOwner ? (
+          <div className={css.ownerActions}>
+            <button className={css.editBtn} onClick={handleEditClick}>
+              Редагувати
+            </button>
+            <button className={css.deleteBtn} onClick={handleDeleteClick}>
+              Видалити
+            </button>
+          </div>
+        ) : (
+          <button className={css.bookingBtn} onClick={handleBookingClick}>
+            Забронювати
+          </button>
+        )}
+      </div>
+
+      {isAuthModalOpen && (
+        <Modal onClose={() => setIsAuthModalOpen(false)}>
           <AuthRedirectModal />
+        </Modal>
+      )}
+
+      {isDeleteModalOpen && (
+        <Modal onClose={() => setIsDeleteModalOpen(false)}>
+          <DeleteConfirmationModal
+            onConfirm={handleDeleteConfirm}
+            onCancel={() => setIsDeleteModalOpen(false)}
+            isLoading={isDeleting}
+          />
         </Modal>
       )}
     </div>

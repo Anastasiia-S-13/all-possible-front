@@ -22,16 +22,14 @@ import FeedbackFormModal from "@/components/modals/FeedBackFormModal/FeedbackFor
 interface FeedbacksBlockProps {
   toolId?: string;
   userId?: string;
-  isOwner?: boolean;
 }
 
 const FeedbacksBlock = ({
   toolId,
   userId,
-  isOwner = false,
 }: FeedbacksBlockProps) => {
-  const { isAuthenticated } = useAuthStore();
-
+  const { isAuthenticated, user: currentUser } = useAuthStore();
+  const isOwner = isAuthenticated && currentUser?.id === userId;
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isStart, setIsStart] = useState(true);
@@ -47,7 +45,7 @@ const FeedbacksBlock = ({
 
   const { data, isSuccess } = useQuery({
     queryKey: ["feedbackAllKey", toolId, userId],
-    queryFn: () => fetchFeedbacks({ page: 1, toolId, userId }),
+    queryFn: () => fetchFeedbacks({ page: 1, toolId, ownerId: userId }),
   });
 
   const allFeedbacks = data?.feedbacks ?? [];

@@ -13,6 +13,7 @@ export interface fetchFeedbacksRequestProps {
   page: number;
   toolId?: string;
   userId?: string;
+  ownerId?: string;
 }
 
 export interface fetchFeedbacksProps {

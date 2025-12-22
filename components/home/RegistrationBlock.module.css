@@ -1,6 +1,5 @@
-/* CTA Section - from Figma */
 .cta {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 .content {
@@ -59,7 +58,6 @@
   object-fit: cover;
 }
 
-/* Tablet (768px+) */
 @media (min-width: 768px) {
   .heading {
     font-size: 36px;
@@ -84,7 +82,6 @@
   }
 }
 
-/* Desktop (1440px+) - ROW layout */
 @media (min-width: 1440px) {
   .content {
     flex-direction: row;

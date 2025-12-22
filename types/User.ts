@@ -15,21 +15,23 @@ export interface User {
   rating?: number;
 }
 
-export type EditProfileData = Pick<User, 'name' | 'email' | 'bio' | 'avatar'>;
+export type EditProfileData = Pick<User, "name" | "email" | "bio" | "avatar">;
 
 export interface UserProfileProps {
   user: {
     name: string;
     avatar?: string;
+    feedbackCount?: number;
+    rating?: number;
   };
   userId: string;
   tools?: Tool[];
   containerClassName?: string;
 }
 
-  export interface EditProfileFormValues {
-    name: string;
-    email: string;
-    bio?: string;
-    avatarFile: File | null;
-  }
+export interface EditProfileFormValues {
+  name: string;
+  email: string;
+  bio?: string;
+  avatarFile: File | null;
+}

@@ -85,8 +85,7 @@ const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
         ) : (
           <Image
             onClick={triggerFileDialog}
-            // className={css.clickable}
-            src={preview || "/images/PlaceholderImage-Desktop.svg"} // 🔥 Твій плейсхолдер
+            src={preview || "/images/PlaceholderImage-Desktop.svg"}
             alt="Placeholder"
             width={865}
             height={576}
@@ -94,7 +93,6 @@ const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
           />
         )}
 
-        {/* прихований інпут */}
         <input
           type="file"
           accept="image/*"
@@ -111,7 +109,6 @@ const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
         )}
       </div>
 
-      {/* кнопка, яка відкриває діалог вибору файлу */}
       <button className={css.uploadBtn} onClick={triggerFileDialog}>
         Завантажити фото
       </button>

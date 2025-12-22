@@ -22,13 +22,11 @@ export default function UserProfile({
       <div className={css.userProfileContainer}>
         <div className={css.userInfo}>
           {user.avatar ? (
-          <img src={user.avatar} alt={user.name} className={css.avatar} />
-        ) : (
-          <div className={css.avatar}>{firstLetter}</div>
-        )}
-
-        <h2 className={css.username}>{user.name}</h2>
-
+            <img src={user.avatar} alt={user.name} className={css.avatar} />
+          ) : (
+            <div className={css.avatar}>{firstLetter}</div>
+          )}
+          <h2 className={css.username}>{user.name}</h2>
         </div>
         {isOwner && (
           <button
@@ -39,5 +37,6 @@ export default function UserProfile({
           </button>
         )}
       </div>
-    </div>);
+    </div>
+  );
 }

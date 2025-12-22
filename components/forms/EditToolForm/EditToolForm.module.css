@@ -86,7 +86,6 @@
   color: #DC2626;
 }
 
-/* Image Upload */
 .imageUpload {
   display: flex;
   flex-direction: column;
@@ -151,7 +150,7 @@
   display: none;
 }
 
-/* Buttons Section */
+
 .buttonsSection {
   display: flex;
   flex-direction: column;
@@ -218,7 +217,7 @@
   cursor: not-allowed;
 }
 
-/* Loading */
+
 .loading {
   display: flex;
   align-items: center;
@@ -226,7 +225,7 @@
   min-height: 200px;
 }
 
-/* Desktop (1440px) */
+
 @media (min-width: 1440px) {
   .formWrapper {
     flex-direction: row;

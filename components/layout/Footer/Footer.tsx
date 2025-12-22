@@ -1,4 +1,3 @@
-// components/layout/Footer/Footer.tsx
 import Link from "next/link";
 import styles from "./Footer.module.css";
 import pageStyles from "@/app/page.module.css";
@@ -16,7 +15,6 @@ export default function Footer({ isAuthenticated }: FooterProps) {
     <footer className={styles.footer}>
       <div className={pageStyles.container}>
         <div className={styles.top}>
-          {/* Logo */}
           <Link href="/" className={styles.logo} aria-label="ToolNext home">
             <svg
               className={styles.logoSvg}
@@ -27,7 +25,6 @@ export default function Footer({ isAuthenticated }: FooterProps) {
             </svg>
           </Link>
 
-          {/* Navigation */}
           <nav className={styles.nav}>
             <Link href="/">Головна</Link>
             <Link href="/tools">Інструменти</Link>
@@ -45,7 +42,6 @@ export default function Footer({ isAuthenticated }: FooterProps) {
             )}
           </nav>
 
-          {/* Social icons */}
           <ul className={styles.socials}>
             <li>
               <a

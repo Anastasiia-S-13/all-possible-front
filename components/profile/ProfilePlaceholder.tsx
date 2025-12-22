@@ -1,4 +1,3 @@
-// components/profile/ProfilePlaceholder.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -10,7 +9,7 @@ interface ProfilePlaceholderProps {
 }
 
 export default function ProfilePlaceholder({
-  userId
+  userId,
 }: ProfilePlaceholderProps) {
   const currentUser = useAuthStore((state) => state.user);
   const isOwner = currentUser?.id === userId;

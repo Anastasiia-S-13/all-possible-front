@@ -1,5 +1,3 @@
-/* Button Component - Mobile First */
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -15,7 +13,6 @@
   text-decoration: none;
 }
 
-/* Sizes */
 .btn--lg {
   padding: 10px 24px;
   font-size: var(--text-base);
@@ -34,7 +31,6 @@
   padding: 8px;
 }
 
-/* Primary Button */
 .btn--primary {
   background-color: var(--color-primary);
   color: var(--color-text-inverse);
@@ -78,7 +74,6 @@
   cursor: not-allowed;
 }
 
-/* Secondary Button */
 .btn--secondary {
   background-color: transparent;
   color: var(--color-text);
@@ -100,7 +95,6 @@
   cursor: not-allowed;
 }
 
-/* Tertiary/Ghost Button */
 .btn--tertiary {
   background-color: transparent;
   color: var(--color-text);
@@ -117,7 +111,6 @@
   cursor: not-allowed;
 }
 
-/* Full Width */
 .btn--full {
   width: 100%;
 }

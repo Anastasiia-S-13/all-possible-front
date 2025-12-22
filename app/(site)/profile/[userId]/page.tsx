@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import css from './Profile.module.css';
+import css from "./Profile.module.css";
 import UserProfile from "../../../../components/profile/UserProfile";
 import ToolsGrid from "../../../../components/profile/ToolsGrid";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
@@ -12,16 +12,16 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { userId } = await params;
- 
-  let user: { name: string; avatar?: string } = { name: "Користувач" }; 
 
-try {
-  const fetchedUser = await getUserById(userId);
-  if (fetchedUser) {
-    user = fetchedUser;
-  }
-} catch (error) {
-  console.error("Не вдалося отримати користувача:", error);
+  let user: { name: string; avatar?: string } = { name: "Користувач" };
+
+  try {
+    const fetchedUser = await getUserById(userId);
+    if (fetchedUser) {
+      user = fetchedUser;
+    }
+  } catch (error) {
+    console.error("Не вдалося отримати користувача:", error);
   }
 
   return {
@@ -42,7 +42,7 @@ export default async function ProfilePage({ params }: Props) {
   let tools: any[] = [];
 
   try {
-       user = await getUserById(userId);
+    user = await getUserById(userId);
     tools = await getUserTools(userId);
   } catch (error) {
     console.error("Не вдалося отримати користувача або інструменти:", error);
@@ -52,12 +52,15 @@ export default async function ProfilePage({ params }: Props) {
     return <ProfilePlaceholder userId={userId} />;
   }
 
-
   const hasTools = tools.length > 0;
 
   return (
     <div className="container">
-            <UserProfile user={user} userId={userId} containerClassName={css.profileContainer} />
+      <UserProfile
+        user={user}
+        userId={userId}
+        containerClassName={css.profileContainer}
+      />
       {hasTools ? (
         <ToolsGrid tools={tools} ownerId={userId} />
       ) : (

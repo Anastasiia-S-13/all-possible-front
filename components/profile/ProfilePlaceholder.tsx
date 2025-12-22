@@ -16,7 +16,7 @@ export default function ProfilePlaceholder({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(isOwner ? "/tools/new" : "/");
+    router.push(isOwner ? "/tools/new" : "/tools");
   };
 
   return (

@@ -71,7 +71,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
       <div className={css.userProfile}>
         <Image
           className={css.avatar}
-          src={user.avatar || "/images/default-avatar.png"}
+          src={user.avatar || ""}
           width={80}
           height={80}
           loading="lazy"
@@ -79,7 +79,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
         />
         <div className={css.toolOwner}>
           <h2 className={css.username}>{user.name}</h2>
-          <Link className={css.profileBtn} href={`/profile/${user._id}`}>
+          <Link className={css.profileBtn} href={`/profile/${user.id}`}>
             Переглянути профіль
           </Link>
         </div>

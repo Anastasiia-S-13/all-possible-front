@@ -7,7 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast';
 import { toolSchema } from '@/lib/validations';
 import { getCategories, updateTool } from '@/lib/api/clientApi';
-import { Tool } from '@/types/Booking';
+import { Tool } from '@/types/Tool';
 import { Category } from '@/types/Tool';
 import styles from './EditToolForm.module.css';
 

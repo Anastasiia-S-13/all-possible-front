@@ -15,8 +15,9 @@ interface BookingPageProps {
   params: { toolId: string };
 }
 
-export default function ToolBookingClientPage({ params }: BookingPageProps) {
+export default function ToolBookingClientPage() {
   const { toolId } = useParams<{ toolId: string }>();
+
 
   const queryClient = useQueryClient();
   const { user } = useAuthStore();

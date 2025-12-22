@@ -9,7 +9,7 @@ interface RateUserStarsProps {
   user: User;
 }
 
-export const RateUserStars = async ({ user }: RateUserStarsProps) => {
+export const RateUserStars = ({ user }: RateUserStarsProps) => {
   return (
     <div className={css.rateUserBox}>
       <Rating
@@ -20,7 +20,7 @@ export const RateUserStars = async ({ user }: RateUserStarsProps) => {
         readonly
       />
       <div className={css.feedBackCountBox}>
-        <p>{`(${Number(user.rating.toFixed(1))})`}</p>
+       <p>{`(${user.rating?.toFixed(1) ?? "0.0"})`}</p>
         <p className={css.rateUserFeedBackCount}>
           {`• ${user.feedbackCount} відгуки`}
         </p>

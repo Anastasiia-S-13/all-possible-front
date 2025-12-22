@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import css from "./UserProfile.module.css";
 import { useAuthStore } from "@/stores/authStore";
 import { UserProfileProps } from "@/types/User";
+import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
 
 export default function UserProfile({
   user,

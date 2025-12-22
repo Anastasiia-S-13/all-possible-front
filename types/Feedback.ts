@@ -13,6 +13,7 @@ export interface fetchFeedbacksRequestProps {
   page: number;
   toolId?: string;
   userId?: string;
+  ownerId?: string;
 }
 
 export interface fetchFeedbacksProps {
@@ -21,4 +22,15 @@ export interface fetchFeedbacksProps {
   totalPages: number;
   toolId?: string;
   userId?: string;
+}
+
+export interface CreateNewFeedback {
+  name: string;
+  description?: string;
+  rate?: number;
+}
+
+export interface FeedbackFormModalProps {
+  toolId: string;
+  onSuccess?: () => void;
 }

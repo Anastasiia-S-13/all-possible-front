@@ -5,7 +5,6 @@ import ToolsGrid from "../../../../components/profile/ToolsGrid";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
-import { getServerSession } from "next-auth";
 
 type Props = {
   params: Promise<{ userId: string }>;
@@ -55,18 +54,16 @@ export default async function ProfilePage({ params }: Props) {
 
 
   const hasTools = tools.length > 0;
-  const session = await getServerSession();
-const isOwner = session?.user?.id === userId;
 
   return (
     <div className="container">
             <UserProfile user={user} userId={userId} containerClassName={css.profileContainer} />
       {hasTools ? (
-        <ToolsGrid tools={tools} />
+        <ToolsGrid tools={tools} ownerId={userId} />
       ) : (
         <ProfilePlaceholder userId={userId} />
       )}
-      <FeedbacksBlock userId={userId} isOwner={isOwner} />
+      <FeedbacksBlock userId={userId} />
     </div>
   );
 }

@@ -13,6 +13,9 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const hasHydrated = useAuthStore((state) => state._hasHydrated);
+
+  const isLoggedIn = hasHydrated && isAuthenticated;
 
   const handleLogout = async () => {
     await logout();
@@ -51,24 +54,26 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
               Інструменти
             </Link>
 
-            {isAuthenticated && user?.id ? (
+            {hasHydrated && isLoggedIn && user?.id && (
               <Link href={`/profile/${user.id}`} className={styles.navLink} onClick={onClose}>
                 Мій профіль
               </Link>
-            ) : !isAuthenticated ? (
+            )}
+            {hasHydrated && !isLoggedIn && (
               <Link href="/auth/login" className={styles.navLink} onClick={onClose}>
                 Увійти
               </Link>
-            ) : null}
+            )}
           </nav>
 
-          {!isAuthenticated ? (
+          {hasHydrated && !isLoggedIn && (
             <Link href="/auth/register" className={styles.registerButton} onClick={onClose}>
               Зареєструватися
             </Link>
-          ) : (
+          )}
+          {isLoggedIn && (
             <>
-              <Link href="/create" className={styles.publishButton} onClick={onClose}>
+              <Link href="/tools/new" className={styles.publishButton} onClick={onClose}>
                 Опублікувати оголошення
               </Link>
               <div className={styles.userSection}>

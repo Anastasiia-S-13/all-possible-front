@@ -14,24 +14,38 @@ import SwiperBtnNext from "./SwiperButton/SwiperBtnNext";
 import EmptyUserFeedbacks from "../EmptyFeedback/EmptyUserFeedbacks";
 import { useState } from "react";
 import EmptyUserPersonalFeedbacks from "../EmptyFeedback/EmptyUserPersonalFeedbacks";
+import { useAuthStore } from "@/stores/authStore";
+import Modal from "@/components/Modal/Modal";
+import AuthRedirectModal from "@/components/modals/AuthRedirect/AuthRedirectModal";
+import FeedbackFormModal from "@/components/modals/FeedBackFormModal/FeedbackFormModal";
 
 interface FeedbacksBlockProps {
   toolId?: string;
   userId?: string;
-  isOwner?: boolean;
 }
 
 const FeedbacksBlock = ({
   toolId,
   userId,
-  isOwner = false,
 }: FeedbacksBlockProps) => {
+  const { isAuthenticated, user: currentUser } = useAuthStore();
+  const isOwner = isAuthenticated && currentUser?.id === userId;
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
+  const handleLeaveFeedback = () => {
+    if (!isAuthenticated) {
+      setIsAuthModalOpen(true);
+      return;
+    }
+    setIsFeedbackOpen(true);
+  };
+
   const { data, isSuccess } = useQuery({
     queryKey: ["feedbackAllKey", toolId, userId],
-    queryFn: () => fetchFeedbacks({ page: 1, toolId, userId }),
+    queryFn: () => fetchFeedbacks({ page: 1, toolId, ownerId: userId }),
   });
 
   const allFeedbacks = data?.feedbacks ?? [];
@@ -51,7 +65,9 @@ const FeedbacksBlock = ({
           {(isToolPage || isUserPage) && "Відгуки"}
         </h2>
         {isToolPage && (
-          <button className={css.feedbackBtn}>Залишити відгук</button>
+          <button className={css.feedbackBtn} onClick={handleLeaveFeedback}>
+            Залишити відгук
+          </button>
         )}
       </div>
       {hasNoFeedbacks && isToolPage && <EmptyFeedbacks />}
@@ -114,6 +130,22 @@ const FeedbacksBlock = ({
             </div>
           </div>
         </>
+      )}
+      {isAuthModalOpen && (
+        <Modal onClose={() => setIsAuthModalOpen(false)}>
+          <AuthRedirectModal />
+        </Modal>
+      )}
+      {isFeedbackOpen && toolId && (
+        <Modal onClose={() => setIsFeedbackOpen(false)}>
+          <div className={css.feedBackModalContainer}>
+            <h2 className={css.feedBackModalTitle}>Залишити відгук на товар</h2>
+            <FeedbackFormModal
+              toolId={toolId}
+              onSuccess={() => setIsFeedbackOpen(false)}
+            />
+          </div>
+        </Modal>
       )}
     </section>
   );

@@ -87,6 +87,17 @@
     color: var(--color-error);
 }
 
+/* File Input - центрування */
+.input[type="file"] {
+    height: auto;
+    padding: 12px;
+    text-align: center;
+}
+
+.input[type="file"]::file-selector-button {
+    margin-right: 8px;
+}
+
 .submitButton {
     width: 166px;
     height: 41px;
@@ -99,11 +110,15 @@
         font-size: 36px;
     }
 
-
     .formGroup {
         max-width: 480px;
         width: 100%;
         margin: 0 auto;
         align-items: flex-start;
+    }
+
+    .textarea {
+        max-width: 480px;
+        width: 100%;
     }
 }

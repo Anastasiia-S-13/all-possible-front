@@ -1,7 +1,9 @@
 /* OrderForm.module.css */
 .AddEditToolForm {
   max-width: 335px;
+  margin-bottom: 72px;
 }
+
 .previewField {
   width: max-content;
 }
@@ -38,10 +40,12 @@
   height: 43px;
   border-radius: 6px;
 }
+
 .input::placeholder {
   color: #aaa;
   font-size: 16px;
 }
+
 .input:focus {
   outline: none;
   border: 2px solid #8808cc;
@@ -110,6 +114,7 @@
   background: #e7cdf4;
   color: #000;
 }
+
 /* :global(.select option:hover) {
   background: #e7cdf4;
   color: #7c3030;
@@ -142,11 +147,13 @@
   border: 2px solid #8808cc;
   color: #000;
 }
+
 .btn:active {
   background: #e7cdf4;
   border: 2px solid #8808cc;
   color: #000;
 }
+
 .btnCan {
   border: 2px solid #000;
   border-radius: 6px;
@@ -161,23 +168,29 @@
   background: transparent;
   transition: background-color 0.2s ease-in-out;
 }
+
 .btnCan:hover .btnCan:focus {
   background: transparent;
   border: 2px solid #8808cc;
   color: #000;
 }
+
 .btnCan:active {
   background: #e7cdf4;
   border: 2px solid #8808cc;
   color: #000;
 }
-/* .error {
-  display: block;
-  color: #e53935;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 12px;
-} */
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-red-dark);
+  margin-top: 2px;
+  min-height: 18px;
+  transition: opacity 0.12s ease;
+}
 
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
@@ -185,6 +198,7 @@
     max-width: 704px;
   }
 }
+
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
   .AddEditToolForm {
@@ -205,6 +219,7 @@
   .boxButtons {
     width: 415px;
   }
+
   .btn,
   .btnCan {
     width: 100%;

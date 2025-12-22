@@ -10,9 +10,7 @@ export const profileSchema = Yup.object().shape({
   email: Yup.string()
     .email("Невірний формат пошти")
     .required("Пошта обов'язкова"),
-  bio: Yup.string()
-    .max(300, "Занадто довгий опис")
-    .nullable(),
+  bio: Yup.string().max(300, "Занадто довгий опис").nullable(),
 });
 
 export const editProfileSchema = Yup.object().shape({

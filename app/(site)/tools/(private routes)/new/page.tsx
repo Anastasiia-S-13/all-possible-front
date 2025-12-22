@@ -1,7 +1,7 @@
 
 import css from "./NewTool.module.css";
 
-import AddEditToolForm from "@/app/(site)/tools/(private routes)/new/AddEditToolForm";
+import AddEditToolForm from "@/components/forms/AddEditToolForm/AddEditToolForm";
 
 
 export default function CreateToolPage() {

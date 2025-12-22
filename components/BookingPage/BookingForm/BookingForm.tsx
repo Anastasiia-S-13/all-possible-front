@@ -220,7 +220,6 @@ export default function BookingForm({
             />
           </div>
 
-          {/* календар */}
           {children}
 
           <div className={styles.row}>

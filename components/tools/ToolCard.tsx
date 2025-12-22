@@ -69,7 +69,9 @@ export default function ToolCard({
               readonly
             />
           ) : (
-            <p>У цього інструмента ще немає оцінки</p>
+            <p className={styles.emptyRating}>
+              У цього інструмента ще немає оцінки
+            </p>
           )}
         </div>
 

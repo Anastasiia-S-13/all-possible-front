@@ -1,5 +1,5 @@
 import ToolCard from "../../tools/ToolCard";
-import styles from "./ToolsGrid.module.css"; // Use its own listing styles
+import styles from "./ToolsGrid.module.css";
 import { Tool } from "@/types/Tool";
 
 interface ToolsGridProps {

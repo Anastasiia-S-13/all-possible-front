@@ -1,30 +1,29 @@
 // app/(site)/profile/[userId]/edit/page.tsx
 
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter, notFound } from 'next/navigation';
-import { toast } from 'react-hot-toast';
-import { useAuthStore } from '@/stores/authStore';
-import { EditProfileFormValues, User } from '@/types/User';
-import { updateProfileFormData } from '@/lib/api/clientApi';
-import EditProfileForm from './EditProfileForm';
+import { useEffect, useState } from "react";
+import { useParams, useRouter, notFound } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { useAuthStore } from "@/stores/authStore";
+import { EditProfileFormValues, User } from "@/types/User";
+import { updateProfileFormData } from "@/lib/api/clientApi";
+import EditProfileForm from "./EditProfileForm";
 
 export default function EditProfilePage() {
   const params = useParams<{ userId: string }>();
   const router = useRouter();
-  const currentUser = useAuthStore(state => state.user);
-  const setUser = useAuthStore(state => state.setUser);
+  const currentUser = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
-  const [initialValues, setInitialValues] =
-    useState<EditProfileFormValues>({
-      name: '',
-      email: '',
-      bio: '',
-      avatarFile: null,
-    });
+  const [initialValues, setInitialValues] = useState<EditProfileFormValues>({
+    name: "",
+    email: "",
+    bio: "",
+    avatarFile: null,
+  });
 
-  const [avatarPreview, setAvatarPreview] = useState('');
+  const [avatarPreview, setAvatarPreview] = useState("");
 
   useEffect(() => {
     if (!currentUser) return;
@@ -33,11 +32,11 @@ export default function EditProfilePage() {
     setInitialValues({
       name: currentUser.name,
       email: currentUser.email,
-      bio: '',
+      bio: "",
       avatarFile: null,
     });
 
-    setAvatarPreview(currentUser.avatar || '');
+    setAvatarPreview(currentUser.avatar || "");
   }, [currentUser, params.userId]);
 
   const handleAvatarSelect = (file: File) => {
@@ -48,14 +47,13 @@ export default function EditProfilePage() {
     if (!currentUser) return;
 
     const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    if (values.bio) formData.append('bio', values.bio);
-    if (values.avatarFile) formData.append('avatar', values.avatarFile);
-
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    if (values.bio) formData.append("bio", values.bio);
+    if (values.avatarFile) formData.append("avatar", values.avatarFile);
     const updatedUser: User = await updateProfileFormData(formData);
     setUser(updatedUser);
-    toast.success('Профіль успішно оновлено!');
+    toast.success("Профіль успішно оновлено!");
     router.push(`/profile/${currentUser.id}`);
   };
 

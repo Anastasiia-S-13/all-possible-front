@@ -18,7 +18,6 @@ export default function Header() {
   const logout = useAuthStore((state) => state.logout);
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
 
-  // Hide header on auth pages
   if (pathname?.startsWith("/auth")) {
     return null;
   }
@@ -37,7 +36,6 @@ export default function Header() {
     <>
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
-          {/* Logo */}
           <Link href="/" className={styles.logoContainer}>
             <Image
               src="/images/logo.svg"
@@ -48,7 +46,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Navigation */}
           <nav className={styles.nav}>
             <Link href="/">Головна</Link>
             <Link href="/tools">Інструменти</Link>
@@ -57,10 +54,11 @@ export default function Header() {
               <Link href={`/profile/${userId}`}>Мій профіль</Link>
             )}
 
-            {hasHydrated && !isLoggedIn && <Link href="/auth/login">Увійти</Link>}
+            {hasHydrated && !isLoggedIn && (
+              <Link href="/auth/login">Увійти</Link>
+            )}
           </nav>
 
-          {/* Actions */}
           <div className={styles.actions}>
             {hasHydrated && !isLoggedIn && (
               <Link href="/auth/register" className={styles.signupButton}>
@@ -106,7 +104,6 @@ export default function Header() {
               </>
             )}
 
-            {/* Burger */}
             <button
               type="button"
               className={styles.burger}
@@ -121,7 +118,6 @@ export default function Header() {
         </header>
       </div>
 
-      {/* Mobile menu modal */}
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}
     </>
   );

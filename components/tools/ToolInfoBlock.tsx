@@ -13,9 +13,8 @@ import { deleteTool } from "@/lib/api/clientApi";
 import Modal from "../Modal/Modal";
 import AuthRedirectModal from "../modals/AuthRedirect/AuthRedirectModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmation/DeleteConfirmationModal";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
-import { Rating } from "react-simple-star-rating";
 
 interface ToolInfoBlockProps {
   tool: Tool;
@@ -29,7 +28,9 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const isOwner = isAuthenticated && (currentUser?.id === tool.owner || currentUser?.id === user.id);
+  const isOwner =
+    isAuthenticated &&
+    (currentUser?.id === tool.owner || currentUser?.id === user.id);
 
   const handleBookingClick = () => {
     if (!isAuthenticated) {
@@ -66,7 +67,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
     <div className={css.toolDetailsContent}>
       <div className={css.toolHead}>
         <h1 className={css.toolName}>{tool.name}</h1>
-        <p className={css.toolPricePerDay}>{tool.pricePerDay}</p>
+        <p className={css.toolPricePerDay}>{`${tool.pricePerDay} грн/день`}</p>
       </div>
       <div className={css.userProfile}>
         <Image

@@ -122,6 +122,13 @@
   fill: #fff;
 }
 
+.emptyRating {
+  color: var(--color-electric-violet-light);
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
 @media only screen and (min-width: 1440px) {
   .name {
     font-size: 18px;

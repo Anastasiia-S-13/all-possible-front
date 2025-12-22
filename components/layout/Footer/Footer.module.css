@@ -1,134 +1,129 @@
 .footer {
-    padding: 48px 0;
-    background-color: #f3e6f9;
-    color: #000;
+  padding: 48px 0;
+  background-color: #f3e6f9;
+  color: #000;
 }
 
 .top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
 }
 
 .logoSvg {
-    width: 159px;
-    height: 29px;
+  width: 159px;
+  height: 29px;
 }
 
 .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .nav a {
-    display: inline-block;
-    transition:
-        color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-        font-weight 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+  display: inline-block;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    font-weight 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-.nav a:hover  {
-    color: #8808cc;
-    transform: scale(1.05);
-    font-weight: 700;
-    
+.nav a:hover {
+  color: #8808cc;
+  transform: scale(1.05);
+  font-weight: 700;
 }
 
 .socials {
-    display: flex;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
 }
 
 .logo svg,
 .socials svg {
-    fill: #000;
-    transition:
-        fill 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);;
+  fill: #000;
+  transition: fill 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .socialSvg {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 .logo:hover svg,
 .socials a:hover svg {
-    fill: #8808cc;
-    transform: scale(1.1);
+  fill: #8808cc;
+  transform: scale(1.1);
 }
 
 .divider {
-    margin: 40px 0 32px;
-    border: 1px solid #000;
+  margin: 40px 0 32px;
+  border: 1px solid #000;
 }
 
 .copy {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.5;
-    text-align: center;
-    font-family: var(--font-work-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  font-family: var(--font-work-sans);
 }
 
 .year {
-    font: inherit;
-    font-feature-settings: "lnum" 1;
-    font-variant-numeric: lining-nums;
+  font: inherit;
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
 }
 
 /* Tablet */
 @media (min-width: 768px) {
-    .footer {
-        padding: 48px 0;
-    }
+  .footer {
+    padding: 48px 0;
+  }
 
-    .nav {
-        flex-direction: row;
-    }
-
+  .nav {
+    flex-direction: row;
+  }
 }
 
-/* Desktop */
 @media (min-width: 1440px) {
-    .footer {
-        padding: 80px 0;
-    }
+  .footer {
+    padding: 80px 0;
+  }
 
-    .top {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+  .top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .logoSvg {
-        width: 83px;
-        height: 15px;
-        }
+  .logoSvg {
+    width: 83px;
+    height: 15px;
+  }
 
-    .nav {
-        font-size: 14px;
-    }
+  .nav {
+    font-size: 14px;
+  }
 
-    .socialSvg {
-        width: 24px;
-        height: 24px;
-    }
+  .socialSvg {
+    width: 24px;
+    height: 24px;
+  }
 
-    .divider {
-        margin: 80px 0 32px;
-    }
+  .divider {
+    margin: 80px 0 32px;
+  }
 
-    .copy {
-        font-size: 14px;
-    }
+  .copy {
+    font-size: 14px;
+  }
 }

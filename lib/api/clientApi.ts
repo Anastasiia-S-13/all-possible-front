@@ -20,19 +20,17 @@ import {
   ToolsCategory,
 } from "@/types/typesCategories";
 
-
 export const fetchUserById = async (userId: string): Promise<User> => {
   const response = await api.get<User>(`/users/${userId}`);
   return response.data;
 };
 
 export const updateProfileFormData = async (formData: FormData) => {
-  const { data } = await api.put("/users/me", formData, {
+  const { data } = await api.patch("/users/me/edit", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
-
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
@@ -50,9 +48,7 @@ export const getAllTools = async (params: {
   return response.data;
 };
 
-export async function createTool(
-  formData: FormData
-): Promise<ToolCreate> {
+export async function createTool(formData: FormData): Promise<ToolCreate> {
   const { data } = await api.post<ToolCreate>("/tools", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
@@ -73,13 +69,9 @@ export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await api.post<{ url: string }>(
-    "/tools/upload",
-    formData,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    }
-  );
+  const response = await api.post<{ url: string }>("/tools/upload", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
   return response.data.url;
 };
@@ -100,7 +92,6 @@ export const createBooking = async (
   return response.data;
 };
 
-
 export async function fetchFeedbacks({
   page,
   toolId,
@@ -116,14 +107,12 @@ export async function fetchFeedbacks({
     },
   });
   return request.data;
-};
-
+}
 
 export const getCategories = async (): Promise<Category[]> => {
   const res = await api.get<Category[]>("/categories");
   return res.data;
 };
-
 
 export const deleteTool = async (toolId: string): Promise<void> => {
   await api.delete(`/tools/${toolId}`);

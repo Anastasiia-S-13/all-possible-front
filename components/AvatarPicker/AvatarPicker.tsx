@@ -6,7 +6,7 @@ import css from "./AvatarPicker.module.css";
 
 interface AvatarPickerProps {
   value?: string | null;
-  onChange: (file: File) => void;
+  onChange: (file: File | null) => void;
 }
 const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
   const [preview, setPreview] = useState<string | null>(value || null);
@@ -62,8 +62,11 @@ const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
   // };
 
   const handleRemove = () => {
-    // onChangePhoto(null);
     setPreview("");
+    onChange(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const triggerFileDialog = () => {
@@ -103,13 +106,13 @@ const AvatarPicker = ({ value, onChange }: AvatarPickerProps) => {
         />
 
         {preview && (
-          <button className={css.remove} onClick={handleRemove}>
+          <button type="button" className={css.remove} onClick={handleRemove}>
             ❌
           </button>
         )}
       </div>
 
-      <button className={css.uploadBtn} onClick={triggerFileDialog}>
+      <button type="button" className={css.uploadBtn} onClick={triggerFileDialog}>
         Завантажити фото
       </button>
 

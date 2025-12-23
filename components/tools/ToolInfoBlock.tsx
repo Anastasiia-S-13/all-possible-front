@@ -30,7 +30,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
 
   const isOwner =
     isAuthenticated &&
-    (currentUser?.id === tool.owner || currentUser?.id === user.id);
+    (currentUser?.id === tool.owner || currentUser?.id === user._id);
 
   const handleBookingClick = () => {
     if (!isAuthenticated) {
@@ -80,7 +80,7 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
         />
         <div className={css.toolOwner}>
           <h2 className={css.username}>{user.name}</h2>
-          <Link className={css.profileBtn} href={`/profile/${user.id}`}>
+          <Link className={css.profileBtn} href={`/profile/${user._id}`}>
             Переглянути профіль
           </Link>
         </div>

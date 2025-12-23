@@ -1,125 +1,124 @@
-/* components/forms/EditProfileForm/EditProfile.module.css */
-
 .formWrapper {
-    width: 100%;
-    min-height: 756px;
-    padding: 0 20px;
-    padding-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    box-sizing: border-box;
+  width: 100%;
+  min-height: 756px;
+  padding: 0 20px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 32px 0;
-    text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 32px 0;
+  text-align: center;
 }
 
 .avatarWrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 32px;
-    flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-shrink: 0;
 }
 
 .avatarPreview {
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  align-items: center;
 }
 
 .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 .label {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
 }
 
 .input,
 .textarea {
-    width: 100%;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--color-text);
-    background-color: #fff;
-    border: 2px solid var(--color-border);
-    border-radius: 6px;
-    box-sizing: border-box;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--color-text);
+  background-color: #fff;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 0px 8px;
 }
 
 .input {
-    height: 48px;
+  height: 48px;
 }
 
 .textarea {
-    min-height: 80px;
-    resize: vertical;
+  min-height: 80px;
+  resize: none;
 }
 
 .input:focus,
 .textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(136, 8, 204, 0.1);
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(136, 8, 204, 0.1);
 }
 
 .error {
-    font-size: 12px;
-    color: var(--color-error);
+  font-size: 12px;
+  color: var(--color-error);
 }
 
 /* File Input - центрування */
 .input[type="file"] {
-    height: auto;
-    padding: 12px;
-    text-align: center;
+  height: auto;
+  padding: 12px;
+  text-align: center;
 }
 
 .input[type="file"]::file-selector-button {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .submitButton {
-    width: 166px;
-    height: 41px;
-    font-size: 14px;
-    align-self: center;
+  width: 166px;
+  height: 41px;
+  font-size: 14px;
+  align-self: center;
 }
 
 @media only screen and (min-width: 768px) {
-    .title {
-        font-size: 36px;
-    }
+  .title {
+    font-size: 36px;
+  }
 
-    .formGroup {
-        max-width: 480px;
-        width: 100%;
-        margin: 0 auto;
-        align-items: flex-start;
-    }
+  .formGroup {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
 
-    .textarea {
-        max-width: 480px;
-        width: 100%;
-    }
+  .textarea {
+    max-width: 480px;
+    width: 100%;
+  }
 }

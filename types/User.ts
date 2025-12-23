@@ -1,10 +1,7 @@
-// types/User.ts
-
 import { Tool } from "./Tool";
 
 export interface User {
-  id: string;
-  _id?: string;
+  _id: string;
   name: string;
   email: string;
   createdAt?: string;
@@ -18,13 +15,7 @@ export interface User {
 export type EditProfileData = Pick<User, "name" | "email" | "bio" | "avatar">;
 
 export interface UserProfileProps {
-  user: {
-    name: string;
-    avatar?: string;
-    bio?: string;
-    feedbackCount?: number;
-    rating?: number;
-  };
+  user: User;
   userId: string;
   tools?: Tool[];
   containerClassName?: string;

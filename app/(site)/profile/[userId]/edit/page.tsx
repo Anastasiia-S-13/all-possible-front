@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter, notFound } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useAuthStore } from "@/stores/authStore";
-import { EditProfileFormValues, User } from "@/types/User";
+import { EditProfileFormValues } from "@/types/User";
 import { updateProfileFormData } from "@/lib/api/clientApi";
 import EditProfileForm from "./EditProfileForm";
 
@@ -32,7 +32,7 @@ export default function EditProfilePage() {
     setInitialValues({
       name: currentUser.name,
       email: currentUser.email,
-      bio: "",
+      bio: currentUser.bio,
       avatarFile: null,
     });
 
@@ -58,6 +58,7 @@ export default function EditProfilePage() {
         name: updatedUser.name,
         email: updatedUser.email,
         avatar: updatedUser.avatar,
+        bio: updatedUser.bio,
       };
       setUser(normalizedUser);
       toast.success("Профіль успішно оновлено!");

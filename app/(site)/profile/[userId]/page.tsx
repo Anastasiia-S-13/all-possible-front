@@ -5,15 +5,19 @@ import ToolsGrid from "../../../../components/profile/ToolsGrid";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
+import { User } from "@/types/User";
+import { Tool } from "@/types/Tool";
 
-type Props = {
+type ProfilePageProps = {
   params: Promise<{ userId: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProfilePageProps): Promise<Metadata> {
   const { userId } = await params;
 
-  let user: { name: string; avatar?: string } = { name: "Користувач" };
+  let user: User = { _id: "", name: "Користувач", email: "" };
 
   try {
     const fetchedUser = await getUserById(userId);
@@ -36,14 +40,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProfilePage({ params }: Props) {
+export default async function ProfilePage({ params }: ProfilePageProps) {
   const { userId } = await params;
-  let user: { name: string; avatar?: string } | null = null;
-  let tools: any[] = [];
+  let user: User | null = null;
+  let tools: Tool[] = [];
 
   try {
     user = await getUserById(userId);
     tools = await getUserTools(userId);
+    console.log("USER", user);
   } catch (error) {
     console.error("Не вдалося отримати користувача або інструменти:", error);
   }

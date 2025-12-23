@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { authApi } from '@/lib/api';
-import type { AuthUser } from '@/types';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { authApi } from "@/lib/api";
+import type { AuthUser } from "@/types";
 
 interface ApiUser {
   _id: string;
   name: string;
   email: string;
   avatar?: string;
+  bio?: string;
 }
 
 const normalizeUser = (apiUser: ApiUser): AuthUser => ({
@@ -17,6 +18,7 @@ const normalizeUser = (apiUser: ApiUser): AuthUser => ({
   name: apiUser.name,
   email: apiUser.email,
   avatar: apiUser.avatar,
+  bio: apiUser.bio,
 });
 
 interface AuthState {
@@ -87,7 +89,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
-        const stored = localStorage.getItem('auth-storage');
+        const stored = localStorage.getItem("auth-storage");
         const storedState = stored ? JSON.parse(stored)?.state : null;
 
         if (!storedState?.isAuthenticated) {
@@ -117,7 +119,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

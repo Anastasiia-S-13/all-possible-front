@@ -6,6 +6,7 @@
   margin: 0 auto;
   display: flex;
   padding-top: 28px;
+  padding-bottom: 64px;
 }
 
 .avatar {
@@ -20,7 +21,6 @@
   font-size: 28px;
   font-weight: 600;
   flex-shrink: 0;
-  margin-bottom: 24px;
   transition: width 0.3s ease, height 0.3s ease;
   object-fit: cover;
 }
@@ -29,13 +29,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
 }
 
 .username {
   font-size: 22px;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 8px;
   transition: all 0.3s ease;
   text-align: center;
 }
@@ -44,7 +44,6 @@
   font-size: 14px;
   color: #666;
   text-align: center;
-  margin-bottom: 16px;
   max-width: 300px;
 }
 
@@ -90,13 +89,13 @@
   .userInfo {
     display: flex;
     align-items: center;
+    gap: 24px;
   }
 
   .avatar {
     width: 199px;
     height: 199px;
     justify-content: flex-start;
-    margin-right: 24px;
   }
 
   .userDetails {
@@ -104,7 +103,6 @@
   }
 
   .username {
-    margin-bottom: 4px;
     text-align: left;
   }
 
@@ -122,5 +120,8 @@
 @media only screen and (min-width: 1440px) {
   .userProfileContainer {
     max-width: 1440px;
+  }
+  .userDetails {
+    gap: 8px;
   }
 }

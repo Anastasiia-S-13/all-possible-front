@@ -48,7 +48,6 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   try {
     user = await getUserById(userId);
     tools = await getUserTools(userId);
-    console.log("USER", user);
   } catch (error) {
     console.error("Не вдалося отримати користувача або інструменти:", error);
   }

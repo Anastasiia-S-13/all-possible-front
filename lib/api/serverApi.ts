@@ -16,11 +16,7 @@ export const getUserById = async (userId: string): Promise<User | null> => {
   try {
     const headers = await getCookieHeader();
     const { data } = await api.get<User>(`/users/${userId}`, { headers });
-    console.log(data);
-    return {
-      ...data,
-      id: (data as any)._id ?? data.id,
-    };
+    return data;
   } catch (error) {
     console.warn("getUserById failed:", error);
     return null;

@@ -4,7 +4,7 @@ import { User } from "./User";
 
 export type Tool = {
   _id: string;
-  owner: User['id'];
+  owner: User["_id"];
   category: string;
   name: string;
   description: string;
@@ -12,7 +12,7 @@ export type Tool = {
   images: string;
   rating: number;
   specifications: Record<string, string>;
-  rentalTerms: string,
+  rentalTerms: string;
   bookedDates: BookingResponse[];
   feedBacks: Feedback[];
 };

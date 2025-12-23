@@ -34,7 +34,6 @@ export const updateProfileFormData = async (formData: FormData) => {
 
 export const fetchToolById = async (toolId: string): Promise<Tool> => {
   const response = await api.get<Tool>(`/tools/${toolId}`);
-  console.log(response.data.images);
   return response.data;
 };
 

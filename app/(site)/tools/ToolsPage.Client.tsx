@@ -10,6 +10,7 @@ import FilterBar from "@/components/ToolPage/FilterBar/FilterBar";
 import styles from "./ToolsPage.module.css";
 import Loader from "@/app/loading";
 import MetadataUpdater from "@/components/ToolPage/MetadataUpdater";
+import ScrollToTop from "@/components/Button/ScrollToTop";
 
 interface ToolsPageClientProps {
   initialCategories: Category[];
@@ -27,6 +28,7 @@ export default function ToolsPageClient({
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
   const router = useRouter();
 
   const perPage = 16;
@@ -35,8 +37,7 @@ export default function ToolsPageClient({
     selectedCategory === ""
       ? ""
       : initialCategories.find((cat) => cat._id === selectedCategory)?.title ||
-      "";
-
+        "";
 
   useEffect(() => {
     const loadTools = async () => {
@@ -74,6 +75,18 @@ export default function ToolsPageClient({
     }
   }, [selectedCategory, searchQuery, router]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollBtn(window.scrollY > 1200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleLoadMore = async () => {
     if (currentPage >= totalPages) return;
 
@@ -109,6 +122,13 @@ export default function ToolsPageClient({
     }
   };
 
+  const handleScrillToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const hasMore = currentPage < totalPages;
 
   return (
@@ -128,7 +148,6 @@ export default function ToolsPageClient({
             onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchQuery}
             setSearchQuery={setSearchQuery}
-
           />
           <button
             className={styles.resetCategories}
@@ -156,6 +175,7 @@ export default function ToolsPageClient({
             )}
           </>
         )}
+        <ScrollToTop isVisible={showScrollBtn} onClick={handleScrillToTop} />
       </div>
     </section>
   );

@@ -50,7 +50,7 @@ export default function EditProfilePage() {
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("email", values.email);
-      if (values.bio) formData.append("bio", values.bio);
+      formData.append("bio", values.bio || "");
       if (values.avatarFile) formData.append("avatar", values.avatarFile);
       const updatedUser = await updateProfileFormData(formData);
       const normalizedUser = {

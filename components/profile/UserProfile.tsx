@@ -19,7 +19,7 @@ export default function UserProfile({
   const hasTools = tools.length > 0;
 
   return (
-    <div>
+    <>
       <div className={css.userProfileContainer}>
         <div className={css.userInfo}>
           {user.avatar ? (
@@ -30,6 +30,9 @@ export default function UserProfile({
           <div className={css.userDetails}>
             <h2 className={css.username}>{user.name}</h2>
             {user.bio && <p className={css.bio}>{user.bio}</p>}
+            <div className={css.rateUserBox}>
+              <RateUserStars user={user} />
+            </div>
           </div>
         </div>
         {isOwner && (
@@ -41,6 +44,6 @@ export default function UserProfile({
           </button>
         )}
       </div>
-    </div>
+    </>
   );
 }

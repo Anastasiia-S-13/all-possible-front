@@ -30,7 +30,6 @@ export default function ToolCard({
   isOwner = false,
 }: ToolCardProps) {
   const router = useRouter();
-  const isRate = Boolean(rating);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -60,19 +59,13 @@ export default function ToolCard({
       />
       <div className={styles.content}>
         <div className={styles.rating}>
-          {isRate ? (
-            <Rating
-              emptyIcon={<EmptyStar />}
-              allowFraction
-              fillIcon={<FulledStar />}
-              initialValue={rating}
-              readonly
-            />
-          ) : (
-            <p className={styles.emptyRating}>
-              У цього інструмента ще немає оцінки
-            </p>
-          )}
+          <Rating
+            emptyIcon={<EmptyStar />}
+            allowFraction
+            fillIcon={<FulledStar />}
+            initialValue={rating}
+            readonly
+          />
         </div>
 
         <h3 className={styles.name}>{name}</h3>

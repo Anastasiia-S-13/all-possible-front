@@ -14,6 +14,7 @@ export const RateUserStars = ({ user }: RateUserStarsProps) => {
   return (
     <div className={css.rateUserBox}>
       <Rating
+        className={ css.rating}
         allowFraction
         initialValue={user.rating}
         emptyIcon={<EmptyStar />}

@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 import css from "./Profile.module.css";
 import UserProfile from "../../../../components/profile/UserProfile";
-import ToolsGrid from "../../../../components/profile/ToolsGrid";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
 import { User } from "@/types/User";
 import { Tool } from "@/types/Tool";
+import ToolsGridProfile from "../../../../components/profile/ToolsGridProfile";
 
 type ProfilePageProps = {
   params: Promise<{ userId: string }>;
@@ -67,7 +67,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         containerClassName={css.profileContainer}
       />
       {hasTools ? (
-        <ToolsGrid tools={tools} ownerId={userId} />
+        <ToolsGridProfile tools={tools} ownerId={userId} />
       ) : (
         <ProfilePlaceholder userId={userId} />
       )}

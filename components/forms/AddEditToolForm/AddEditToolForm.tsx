@@ -14,28 +14,32 @@ import {
 import { createTool, getCategories, updateTool } from "@/lib/api/clientApi";
 import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
 import { useAuthStore } from "@/stores/authStore";
+import toast from "react-hot-toast";
 
-const getValidationSchema = (isEditMode: boolean) => Yup.object({
-  name: Yup.string()
-    .min(3, "Назва має бути не коротшою за 3 символи")
-    .max(96, "Назва занадто довга")
-    .required("Введіть назву"),
-  pricePerDay: Yup.number()
-    .typeError("Ціна має бути числом")
-    .min(0, "Ціна не може бути від'ємною")
-    .required("Вкажіть ціну"),
-  category: Yup.string().required("Оберіть категорію"),
-  description: Yup.string()
-    .min(20, "Опис має бути не коротшим за 20 символів")
-    .max(2000, "Опис занадто довгий")
-    .required("Введіть опис"),
-  rentalTerms: Yup.string()
-    .min(20, "Умови оренди мають бути не коротшими за 20 символів")
-    .max(1000, "Умови занадто довгі")
-    .required("Введіть умови оренди"),
-  specifications: Yup.string().required("Введіть характеристики"),
-  image: isEditMode ? Yup.mixed().nullable() : Yup.mixed().required("Додайте фото"),
-});
+const getValidationSchema = (isEditMode: boolean) =>
+  Yup.object({
+    name: Yup.string()
+      .min(3, "Назва має бути не коротшою за 3 символи")
+      .max(96, "Назва занадто довга")
+      .required("Введіть назву"),
+    pricePerDay: Yup.number()
+      .typeError("Ціна має бути числом")
+      .min(0, "Ціна не може бути від'ємною")
+      .required("Вкажіть ціну"),
+    category: Yup.string().required("Оберіть категорію"),
+    description: Yup.string()
+      .min(20, "Опис має бути не коротшим за 20 символів")
+      .max(2000, "Опис занадто довгий")
+      .required("Введіть опис"),
+    rentalTerms: Yup.string()
+      .min(20, "Умови оренди мають бути не коротшими за 20 символів")
+      .max(1000, "Умови занадто довгі")
+      .required("Введіть умови оренди"),
+    specifications: Yup.string().required("Введіть характеристики"),
+    image: isEditMode
+      ? Yup.mixed().nullable()
+      : Yup.mixed().required("Додайте фото"),
+  });
 
 interface ToolFormProps {
   initialData?: ToolCreate | null;
@@ -72,7 +76,7 @@ export default function AddEditToolForm({
     onError: (err: any) => {
       const errorMessage =
         err.response?.data?.message || err?.message || "Сталася помилка";
-      alert(`Помилка: ${errorMessage}`);
+      toast.error(`Помилка: ${errorMessage}`);
     },
   });
 

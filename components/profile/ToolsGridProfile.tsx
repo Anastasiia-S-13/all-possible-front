@@ -10,7 +10,7 @@ interface ToolsGridProps {
   ownerId: string;
 }
 
-export default function ToolsGrid({ tools, ownerId }: ToolsGridProps) {
+export default function ToolsGridProfile({ tools, ownerId }: ToolsGridProps) {
   const { isAuthenticated, user: currentUser, _hasHydrated } = useAuthStore();
   const isOwner =
     _hasHydrated && isAuthenticated && currentUser?.id === ownerId;

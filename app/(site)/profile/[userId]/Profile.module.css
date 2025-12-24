@@ -1,0 +1,66 @@
+.profileContainer {
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 48px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-scheme-3-background);
+  transition: all 0.3s ease;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--color-scheme-2-accent);
+  color: var(--color-white);
+  gap: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.username {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-3-text);
+  transition: all 0.3s ease;
+}
+
+@media only screen and (min-width: 768px) {
+  .profileContainer {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .avatar {
+    width: 199px;
+    height: 199px;
+    justify-content: flex-start;
+  }
+
+  .username {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .profileContainer {
+    max-width: 1440px;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}

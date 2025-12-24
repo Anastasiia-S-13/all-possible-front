@@ -1,0 +1,49 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import css from "./UserProfile.module.css";
+import { useAuthStore } from "@/stores/authStore";
+import { UserProfileProps } from "@/types/User";
+import { RateUserStars } from "../RateStars/RateUserStars/RateUserStars";
+
+export default function UserProfile({
+  user,
+  userId,
+  tools = [],
+}: UserProfileProps) {
+  const router = useRouter();
+  const currentUser = useAuthStore((state) => state.user);
+  const isOwner = currentUser?.id === userId;
+
+  const firstLetter = user.name.charAt(0).toUpperCase();
+  const hasTools = tools.length > 0;
+
+  return (
+    <>
+      <div className={css.userProfileContainer}>
+        <div className={css.userInfo}>
+          {user.avatar ? (
+            <img src={user.avatar} alt={user.name} className={css.avatar} />
+          ) : (
+            <div className={css.avatar}>{firstLetter}</div>
+          )}
+          <div className={css.userDetails}>
+            <h2 className={css.username}>{user.name}</h2>
+            {user.bio && <p className={css.bio}>{user.bio}</p>}
+            <div className={css.rateUserBox}>
+              <RateUserStars user={user} />
+            </div>
+          </div>
+        </div>
+        {isOwner && (
+          <button
+            className={css.button}
+            onClick={() => router.push(`/profile/${userId}/edit`)}
+          >
+            Редагувати профіль
+          </button>
+        )}
+      </div>
+    </>
+  );
+}

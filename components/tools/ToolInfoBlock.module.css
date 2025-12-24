@@ -1,0 +1,233 @@
+.toolDetailsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: var(--font-family);
+}
+
+@media only screen and (min-width: 768px) {
+    .toolDetailsContent {
+        max-width: 704px;
+    }
+}
+
+.toolHead {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toolName {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    color: var(--color-scheme-1-text);
+}
+
+.toolPricePerDay {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+}
+
+@media only screen and (min-width: 1440px) {
+    .toolName {
+        font-size: 40px;
+    }
+
+    .toolPricePerDay {
+        font-size: 24px;
+    }
+}
+
+.userProfile {
+    display: flex;
+    gap: 16px;
+    max-width: 288px;
+}
+
+.avatar {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+}
+
+.toolOwner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+}
+
+.profileBtn {
+    border: 2px solid var(--color-neutral-darkest);
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-weight: 500;
+    line-height: 150%;
+    font-size: 14px;
+    color: var(--color-neutral-darkest);
+    transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+        color 300ms ease-in-out;
+}
+
+.profileBtn:hover,
+.profileBtn:focus {
+    background-color: #e7cdf4;
+}
+
+.profileBtn:active {
+    background-color: #8808cc;
+    color: #fff;
+    border-color: #8808cc;
+}
+
+@media only screen and (min-width: 1440px) {
+    .userProfile {
+        max-width: 310px;
+    }
+
+    .username {
+        font-size: 16px;
+    }
+
+    .profileBtn {
+        font-size: 16px;
+    }
+}
+
+.description {
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
+}
+
+.specItem {
+    line-height: 150%;
+    font-size: 14px;
+    color: var(--color-scheme-1-text);
+}
+
+.span {
+    font-weight: 700;
+}
+
+.bookingBtn {
+    border: 1px solid var(--color-electric-violet);
+    border-radius: 6px;
+    padding: 10px 24px;
+    background-color: var(--color-electric-violet);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-white);
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.bookingBtn:hover,
+.bookingBtn:focus {
+    background-color: #fff;
+    color: #000;
+}
+
+.bookingBtn:active {
+    background-color: #e7cdf4;
+}
+
+@media only screen and (min-width: 1440px) {
+    .description {
+        font-size: 16px;
+    }
+
+    .specItem {
+        font-size: 16px;
+    }
+
+    .bookingBtn {
+        font-size: 16px;
+    }
+}
+
+.actionsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ownerActions {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.editBtn,
+.deleteBtn {
+    flex: 1;
+}
+
+.editBtn {
+    border: 1px solid var(--color-electric-violet);
+    border-radius: 6px;
+    padding: 10px 24px;
+    background-color: var(--color-electric-violet);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.editBtn:hover,
+.editBtn:focus {
+    background-color: #fff;
+    color: #000;
+}
+
+.editBtn:active {
+    background-color: #e7cdf4;
+}
+
+.deleteBtn {
+    border: 2px solid var(--color-neutral-darkest);
+    border-radius: 6px;
+    padding: 10px 24px;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--color-neutral-darkest);
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+        color 300ms ease-in-out;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus {
+    background-color: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.deleteBtn:active {
+    background-color: #dc2626;
+    color: #fff;
+    border-color: #dc2626;
+}
+
+@media only screen and (min-width: 1440px) {
+    .editBtn {
+        font-size: 16px;
+    }
+
+    .deleteBtn {
+        font-size: 16px;
+    }
+}

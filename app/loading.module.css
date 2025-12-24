@@ -1,0 +1,24 @@
+.loader {
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border: 5px solid;
+  border-color: var(--color-electric-violet) transparent;
+  border-radius: 50%;
+  display: block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 64px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

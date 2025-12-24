@@ -1,0 +1,16 @@
+.rateUserBox {
+  display: none;
+}
+
+@media only screen and (min-width: 1440px) {
+  .rateUserBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feedBackCountBox {
+    display: flex;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,149 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  gap: 16px;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 335 / 413;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  min-height: 54px;
+}
+
+.price {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.rating {
+  font-size: 14px;
+  text-align: left;
+}
+
+.detailsBtn {
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 2px solid #000;
+  border-radius: 6px;
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.detailsBtn:hover,
+.detailsBtn:focus {
+  background-color: #e7cdf4;
+}
+
+.detailsBtn:active {
+  background-color: #8808cc;
+  color: #fff;
+  border-color: #8808cc;
+}
+
+.ownerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn {
+  flex: 1;
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 2px solid #000;
+  border-radius: 6px;
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.editBtn:hover,
+.editBtn:focus {
+  background-color: #e7cdf4;
+}
+
+.editBtn:active {
+  background-color: #8808cc;
+  color: #fff;
+  border-color: #8808cc;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus {
+  background-color: #fee2e2;
+  border-color: #dc2626;
+}
+
+.deleteBtn:hover svg,
+.deleteBtn:focus svg {
+  fill: #dc2626;
+}
+
+.deleteBtn:active {
+  background-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.deleteBtn:active svg {
+  fill: #fff;
+}
+
+.emptyRating {
+  color: var(--color-electric-violet-light);
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1440px) {
+  .name {
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .detailsBtn {
+    font-size: 16px;
+    padding: 6.5px 10px;
+  }
+
+  .editBtn {
+    font-size: 16px;
+  }
+}

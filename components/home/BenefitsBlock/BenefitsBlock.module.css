@@ -1,0 +1,88 @@
+.titleBenefits {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 24px;
+}
+
+.titleDescription {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+}
+
+.descBlock {
+  margin-bottom: 40px;
+}
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+
+.icon {
+  margin-bottom: 24px;
+}
+
+.itemTitle {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+  color: var(--color-scheme-1-text);
+  margin-bottom: 24px;
+}
+
+.itemDesc {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-1-text);
+}
+
+@media only screen and (min-width: 768px) {
+  .benefitsList {
+    gap: 53px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .descBlock {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+
+  .titleBenefits {
+    font-size: 40px;
+  }
+
+  .titleDescription {
+    font-size: 18px;
+  }
+
+  .benefitsList {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 32px;
+  }
+
+  .benefitsItem {
+    max-width: 416px;
+  }
+  .itemTitle {
+    font-size: 24px;
+  }
+  .itemDesc {
+    font-size: 16px;
+  }
+}

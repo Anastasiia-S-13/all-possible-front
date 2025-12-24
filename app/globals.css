@@ -1,0 +1,181 @@
+:root {
+  --font-family: "Work Sans", sans-serif;
+  --second-family: "Nunito Sans", sans-serif;
+  --color-scheme-1-background: var(--color-white);
+  --color-neutral-darkest: #000;
+  --color-scheme-1-border: var(--color-neutral-darkest);
+  --color-scheme-1-text: var(--color-neutral-darkest);
+  --color-neutral-lighter: #d8d8d8;
+  --color-white: #fff;
+  --color-neutral-lightest: #f2f2f2;
+  --color-neutral-light: #b2b2b2;
+  --color-neutral: #7f7f7f;
+  --color-neutral-dark: #4c4c4c;
+  --color-neutral-darker: #191919;
+  --opacity-transparent: rgba(255, 255, 255, 0);
+  --color-scheme-1-foreground: var(--color-white);
+  --color-scheme-1-accent: var(--color-electric-violet);
+  --opacity-white-5: rgba(255, 255, 255, 0.05);
+  --opacity-white-10: rgba(255, 255, 255, 0.1);
+  --opacity-white-15: rgba(255, 255, 255, 0.15);
+  --opacity-white-20: rgba(255, 255, 255, 0.2);
+  --opacity-white-30: rgba(255, 255, 255, 0.3);
+  --opacity-white-40: rgba(255, 255, 255, 0.4);
+  --opacity-white-50: rgba(255, 255, 255, 0.5);
+  --opacity-white-60: rgba(255, 255, 255, 0.6);
+  --opacity-neutral-darkest-5: rgba(0, 0, 0, 0.05);
+  --opacity-neutral-darkest-10: rgba(0, 0, 0, 0.1);
+  --opacity-neutral-darkest-15: rgba(0, 0, 0, 0.15);
+  --opacity-neutral-darkest-20: rgba(0, 0, 0, 0.2);
+  --opacity-neutral-darkest-30: rgba(0, 0, 0, 0.3);
+  --opacity-neutral-darkest-40: rgba(0, 0, 0, 0.4);
+  --opacity-neutral-darkest-50: rgba(0, 0, 0, 0.5);
+  --opacity-neutral-darkest-60: rgba(0, 0, 0, 0.6);
+  --color-electric-violet-lightest: #f3e6f9;
+  --color-electric-violet-lighter: #e7cdf4;
+  --color-electric-violet-light: #ab52db;
+  --color-electric-violet: #8808cc;
+  --color-electric-violet-dark: #6c06a3;
+  --color-electric-violet-darker: #360351;
+  --color-electric-violet-darkest: #28023d;
+  --color-scheme-2-text: var(--color-neutral-darkest);
+  --color-scheme-2-background: var(--color-electric-violet-lightest);
+  --color-scheme-2-border: var(--color-neutral-darkest);
+  --color-scheme-2-accent: var(--color-electric-violet);
+  --color-scheme-2-foreground: var(--color-electric-violet-lightest);
+  --color-scheme-3-text: var(--color-neutral-darkest);
+  --color-scheme-3-background: var(--color-neutral-lightest);
+  --color-scheme-3-border: var(--color-neutral-darkest);
+  --color-scheme-3-accent: var(--color-electric-violet);
+  --color-scheme-3-foreground: var(--color-neutral-lightest);
+  --color-red-dark: #c40202;
+  --color-red-light: #ea3131;
+
+  /* Aliases for auth forms compatibility */
+  --color-primary: var(--color-electric-violet);
+  --color-primary-hover: var(--color-electric-violet-lighter);
+  --color-primary-active: var(--color-electric-violet-dark);
+  --color-text: var(--color-neutral-darkest);
+  --color-text-inverse: var(--color-white);
+  --color-background: var(--color-white);
+  --color-border: var(--color-neutral-darkest);
+  --color-border-light: #E5E5E5;
+  --color-error: #DC2626;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-work-sans), sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  color: #000000;
+  background: var(--color-scheme-3-background);
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 64px 0;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+}
+
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 64px;
+  }
+
+  .section {
+    padding: 112px 0;
+  }
+}
+
+.gridBtn {
+  display: block;
+  width: fit-content;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  background-color: var(--color-electric-violet);
+  border: 1px solid var(--color-electric-violet);
+  border-radius: 6px;
+  padding: 9px 23px;
+  text-wrap: nowrap;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.gridBtn:hover,
+.gridBtn:focus {
+  background-color: #fff;
+  color: #000;
+}
+
+.gridBtn:active {
+  background-color: var(--color-electric-violet-lighter);
+}

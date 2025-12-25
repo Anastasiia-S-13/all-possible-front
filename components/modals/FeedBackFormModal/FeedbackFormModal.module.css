@@ -60,6 +60,7 @@
 
 .feedBackModalButton:active {
     background-color: #e7cdf4;
+    
 }
 .error {
     font-family: var(--font-family);

@@ -1,0 +1,96 @@
+.feedBackModalBox {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.feedBackModalSubBox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.feedBackModalName {
+    padding: 14.5px 12px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    height: 48px;
+    transition: border-color 300ms ease-in-out;
+}
+
+.feedBackModalName:hover,
+.feedBackModalName:focus {
+    outline: none;
+    border-color: #8808cc;
+}
+
+.feedBackModalDescription {
+    resize: none;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.feedBackModalDescription:hover,
+.feedBackModalDescription:focus {
+    transition: border-color 300ms ease-in-out;
+    border-color: #8808cc;
+    outline: none;
+}
+
+.feedBackModalButton {
+    background-color: #8808cc;
+    border: 1px solid #8808cc;
+    border-radius: 6px;
+    padding: 9px 111px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #fff;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.feedBackModalButton:hover,
+.feedBackModalButton:focus {
+    background-color: #fff;
+    color: #000;
+}
+
+.feedBackModalButton:active {
+    background-color: #e7cdf4;
+
+}
+
+.error {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-red-dark);
+    margin-top: 2px;
+    min-height: 18px;
+    transition: opacity 0.12s ease;
+}
+
+@media only screen and (min-width: 768px) {
+    .feedBackModalButtonBox {
+        margin: 0 auto;
+    }
+
+    .feedBackModalButton {
+        padding: 9px 26px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .feedBackModalSubBox {
+        font-size: 16px;
+    }
+
+    .feedBackModalButton {
+        font-size: 16px;
+    }
+}

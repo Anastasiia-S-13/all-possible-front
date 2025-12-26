@@ -12,12 +12,31 @@
     height: 40px;
     cursor: pointer;
     transition: background 0.3s ease, border 0.3s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     line-height: 20px;
 }
+
+.textWrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
 
 .open {
     background: var(--color-electric-violet-lightest);

@@ -6,6 +6,7 @@
   justify-content: center;
   gap: 8px;
 }
+
 .legend {
   font-family: var(--second-family);
   font-weight: 400;
@@ -13,6 +14,7 @@
   line-height: 150%;
   color: #000;
 }
+
 .picker {
   width: 100%;
   display: flex;
@@ -27,10 +29,11 @@
 
 .avatar {
   border-radius: 12px;
-  width: 100%;
+  width: auto;
   height: 100%;
   object-fit: cover;
 }
+
 .wrapper {
   cursor: pointer;
   position: absolute;
@@ -100,21 +103,25 @@
   .avatarPicker {
     max-width: 704px;
   }
+
   .picker {
     max-width: none;
     width: 100%;
     border-radius: 16px;
   }
+
   .avatar {
     border-radius: 16px;
   }
 }
+
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
   .avatarPicker {
     max-width: none;
     width: 100%;
   }
+
   .picker {
     max-width: none;
     width: 100%;

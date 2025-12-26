@@ -54,9 +54,11 @@ export default function AddEditToolForm({
   const fieldId = useId();
   const { isAuthenticated } = useAuthStore();
 
-  if (!isAuthenticated) {
-    router.push("/auth/login");
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/auth/login");
+    }
+  }, [isAuthenticated, router]);
 
   const [categories, setCategories] = useState<ToolsCategory[]>([]);
 
@@ -69,15 +71,15 @@ export default function AddEditToolForm({
   const mutation = useMutation<ToolCreate | any, Error, FormData>({
     mutationFn: (formData: FormData) =>
       toolId ? (updateTool(toolId, formData) as any) : createTool(formData),
-    onSuccess: (tool: any) => {
-      router.push(`/tools/${tool._id || toolId}`);
-      router.refresh();
-    },
-    onError: (err: any) => {
-      const errorMessage =
-        err.response?.data?.message || err?.message || "Сталася помилка";
-      toast.error(`Помилка: ${errorMessage}`);
-    },
+    // onSuccess: (tool: any) => {
+    //   router.push(`/tools/${tool._id || toolId}`);
+    //   router.refresh();
+    // },
+    // onError: (err: any) => {
+    //   const errorMessage =
+    //     err.response?.data?.message || err?.message || "Сталася помилка";
+    //   toast.error(`Помилка: ${errorMessage}`);
+    // },
   });
 
   const initialValues: AddEditToolFormRes = initialData
@@ -142,9 +144,23 @@ export default function AddEditToolForm({
         initialValues={initialValues}
         enableReinitialize
         validationSchema={getValidationSchema(!!toolId)}
-        onSubmit={(values) => {
+        // onSubmit={(values) => {
+        //   const formData = buildToolFormData(values);
+        //   mutation.mutate(formData);
+        // }}
+        onSubmit={async (values, { setSubmitting }) => {
           const formData = buildToolFormData(values);
-          mutation.mutate(formData);
+          try {
+            const tool = await mutation.mutateAsync(formData);
+            router.push(`/tools/${tool._id || toolId}`);
+            router.refresh();
+          } catch (err: any) {
+            const errorMessage =
+              err.response?.data?.message || err?.message || "Сталася помилка";
+            toast.error(`Помилка: ${errorMessage}`);
+          } finally {
+            setSubmitting(false);
+          }
         }}
       >
         {({ setFieldValue, isSubmitting }) => (
@@ -200,7 +216,7 @@ export default function AddEditToolForm({
                   as="select"
                   id={`${fieldId}-category`}
                   name="category"
-                  className={css.input}
+                  className={`${css.input} ${css.select} ${css.categorySelect}`}
                 >
                   <option value="">Оберіть категорію</option>
                   {categories?.map((cat) => (
@@ -278,6 +294,17 @@ export default function AddEditToolForm({
             </div>
 
             <div className={css.boxButtons}>
+              {/* <button
+                className={css.btn}
+                type="submit"
+                disabled={isSubmitting || mutation.isPending}
+              >
+                {isSubmitting || mutation.isPending
+                  ? "Завантаження..."
+                  : toolId
+                  ? "Оновити"
+                  : "Опублікувати"}
+              </button> */}
               <button
                 className={css.btn}
                 type="submit"
@@ -289,7 +316,6 @@ export default function AddEditToolForm({
                   ? "Оновити"
                   : "Опублікувати"}
               </button>
-
               <button
                 className={css.btnCan}
                 type="button"

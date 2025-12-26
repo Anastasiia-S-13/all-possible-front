@@ -15,8 +15,6 @@ export default function CategorySelect({
   categories,
   selectedCategory,
   onCategoryChange,
-
-
 }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -36,23 +34,38 @@ export default function CategorySelect({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
   return (
     <div className={styles.wrapper} ref={ref}>
       <div
         className={`${styles.select} ${open ? styles.open : ""}`}
         onClick={() => setOpen((prev) => !prev)}
       >
-        {categories.find((c) => c._id === selectedCategory)?.title ||
-          "Всі категорії"}
+        <div className={styles.textWrapper}>
+          {categories.find((c) => c._id === selectedCategory)?.title ||
+            "Всі категорії"}
+        </div>
+        <svg
+          className={`${styles.icon} ${open ? styles.arrowDown : ""}`}
+          width="24"
+          height="24"
+        >
+          <use
+            href={
+              open
+                ? "/sprite/sprite.svg#icon-keyboard_arrow_up"
+                : "/sprite/sprite.svg#icon-keyboard_arrow_down"
+            }
+          ></use>
+        </svg>
       </div>
 
       {open && (
         <div className={styles.dropdown}>
           <ul className={styles.scrollArea}>
             <li
-              className={`${styles.option} ${selectedCategory === "" ? styles.active : ""
-                }`}
+              className={`${styles.option} ${
+                selectedCategory === "" ? styles.active : ""
+              }`}
               onClick={() => handleSelect("")}
             >
               Всі категорії
@@ -61,8 +74,9 @@ export default function CategorySelect({
             {categories.map((cat) => (
               <li
                 key={cat._id}
-                className={`${styles.option} ${selectedCategory === cat._id ? styles.active : ""
-                  }`}
+                className={`${styles.option} ${
+                  selectedCategory === cat._id ? styles.active : ""
+                }`}
                 onClick={() => handleSelect(cat._id)}
               >
                 {cat.title}

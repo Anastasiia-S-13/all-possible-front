@@ -15,6 +15,7 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
@@ -29,9 +30,18 @@ export default function Header() {
   const userName = user?.name;
   const userAvatar = user?.avatar;
 
-  const handleLogout = async () => {
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleLogoutConfirm = async () => {
     await logout();
+    setIsLogoutModalOpen(false);
     router.push("/");
+  };
+
+  const handleLogoutCancel = () => {
+    setIsLogoutModalOpen(false);
   };
 
   return (
@@ -96,7 +106,7 @@ export default function Header() {
                 <button
                   type="button"
                   className={styles.logoutButton}
-                  onClick={handleLogout}
+                  onClick={handleLogoutClick}
                   aria-label="Вийти"
                 >
                   <svg width="24" height="24" aria-hidden="true">
@@ -121,6 +131,18 @@ export default function Header() {
       </div>
 
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}
+
+      {isLogoutModalOpen && (
+        <Modal onClose={handleLogoutCancel}>
+          <ConfirmationModal
+            title="Ви впевнені, що хочете вийти?"
+            leftText="Залишитись"
+            rightText="Вийти"
+            onLeftClick={handleLogoutCancel}
+            onRightClick={handleLogoutConfirm}
+          />
+        </Modal>
+      )}
     </>
   );
 }

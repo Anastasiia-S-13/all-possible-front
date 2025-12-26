@@ -1,26 +1,53 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./MobileMenu.module.css";
+import Modal from "@/components/Modal/Modal";
+import ConfirmationModal from "@/components/modals/LogoutModal/ConfirmationModal";
 
 interface MobileMenuProps {
   onClose: () => void;
 }
 
 export default function MobileMenu({ onClose }: MobileMenuProps) {
+  const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const isLoggedIn = hasHydrated && isAuthenticated;
 
-  const handleLogout = async () => {
-    await logout();
-    onClose();
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
   };
+
+  const handleLogoutConfirm = async () => {
+    await logout();
+    setIsLogoutModalOpen(false);
+    onClose();
+    router.push("/");
+  };
+
+  const handleLogoutCancel = () => {
+    setIsLogoutModalOpen(false);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1440) {
+        onClose();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [onClose]);
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -97,7 +124,7 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
                 <button
                   type="button"
                   className={styles.logoutButton}
-                  onClick={handleLogout}
+                  onClick={handleLogoutClick}
                   aria-label="Вийти"
                 >
                   <svg width="24" height="24" aria-hidden="true">
@@ -109,6 +136,18 @@ export default function MobileMenu({ onClose }: MobileMenuProps) {
           )}
         </div>
       </div>
+
+      {isLogoutModalOpen && (
+        <Modal onClose={handleLogoutCancel}>
+          <ConfirmationModal
+            title="Ви впевнені, що хочете вийти?"
+            leftText="Залишитись"
+            rightText="Вийти"
+            onLeftClick={handleLogoutCancel}
+            onRightClick={handleLogoutConfirm}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

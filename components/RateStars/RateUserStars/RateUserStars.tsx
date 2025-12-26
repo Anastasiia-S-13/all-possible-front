@@ -1,30 +1,30 @@
 "use client";
 
-import { User } from "@/types/User";
 import { Rating } from "react-simple-star-rating";
 import EmptyStar from "../EmptyStar";
 import FulledStar from "../FullerStar";
 import css from "./RateUserStars.module.css";
 
 interface RateUserStarsProps {
-  user: User;
+  rating?: number;
+  feedbackCount?: number;
 }
 
-export const RateUserStars = ({ user }: RateUserStarsProps) => {
+export const RateUserStars = ({ rating = 0, feedbackCount = 0 }: RateUserStarsProps) => {
   return (
     <div className={css.rateUserBox}>
       <Rating
-        className={ css.rating}
+        className={css.rating}
         allowFraction
-        initialValue={user.rating}
+        initialValue={rating}
         emptyIcon={<EmptyStar />}
         fillIcon={<FulledStar />}
         readonly
       />
       <div className={css.feedBackCountBox}>
-        <p>{`(${user.rating?.toFixed(1) ?? "0.0"})`}</p>
+        <p>{`(${rating?.toFixed(1) ?? "0.0"})`}</p>
         <p className={css.rateUserFeedBackCount}>
-          {`• ${user.feedbackCount} відгуки`}
+          {`• ${feedbackCount} відгуки`}
         </p>
       </div>
     </div>

@@ -93,6 +93,7 @@ export const createBooking = async (
 
 export async function fetchFeedbacks({
   page,
+  perPage,
   toolId,
   userId,
   ownerId,
@@ -100,6 +101,7 @@ export async function fetchFeedbacks({
   const request = await api.get<fetchFeedbacksProps>("/feedbacks", {
     params: {
       page,
+      ...(perPage && { perPage }),
       ...(toolId && { toolId }),
       ...(userId && { userId }),
       ...(ownerId && { ownerId }),

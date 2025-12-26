@@ -31,7 +31,10 @@ export default function UserProfile({
             <h2 className={css.username}>{user.name}</h2>
             {user.bio && <p className={css.bio}>{user.bio}</p>}
             <div className={css.rateUserBox}>
-              <RateUserStars user={user} />
+              <RateUserStars
+                rating={user.rating}
+                feedbackCount={user.feedbackCount}
+              />
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ export interface Feedback {
 
 export interface fetchFeedbacksRequestProps {
   page: number;
+  perPage?: number;
   toolId?: string;
   userId?: string;
   ownerId?: string;

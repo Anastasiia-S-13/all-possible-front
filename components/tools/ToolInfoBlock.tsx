@@ -86,7 +86,10 @@ const ToolInfoBlock = ({ tool, user }: ToolInfoBlockProps) => {
         </div>
       </div>
       <div>
-        <RateUserStars user={user} />
+        <RateUserStars
+          rating={tool.rating}
+          feedbackCount={tool.feedbacks?.length || 0}
+        />
       </div>
       <p className={css.description}>{tool.description}</p>
       <div className={css.specs}>

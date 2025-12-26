@@ -14,7 +14,7 @@ export type Tool = {
   specifications: Record<string, string>;
   rentalTerms: string;
   bookedDates: BookingResponse[];
-  feedBacks: Feedback[];
+  feedbacks: Feedback[];
 };
 
 export interface ToolHttpRequest {

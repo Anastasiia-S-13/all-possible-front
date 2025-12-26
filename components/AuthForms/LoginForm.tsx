@@ -27,8 +27,8 @@ export default function LoginForm() {
       toast.success("Успішний вхід!");
       router.push("/");
     } catch (error: unknown) {
-      const err = error as { response?: { data?: { error?: string } } };
-      toast.error(err.response?.data?.error || "Помилка входу");
+      const err = error as { response?: { data?: { message?: string } } };
+      toast.error(err.response?.data?.message || "Помилка входу");
     } finally {
       setIsSubmitting(false);
     }

@@ -31,7 +31,7 @@ export default function ToolsPageClient({
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const router = useRouter();
 
-  const perPage = 16;
+  const perPage = 8;
 
   const selectedCategoryTitle =
     selectedCategory === ""
@@ -103,6 +103,13 @@ export default function ToolsPageClient({
       if (data && Array.isArray(data.tools)) {
         setTools((prevTools) => [...prevTools, ...data.tools]);
         setCurrentPage(nextPage);
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
       }
     } catch (error) {
       console.error("Failed to load more tools:", error);

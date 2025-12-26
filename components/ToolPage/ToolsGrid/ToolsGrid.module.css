@@ -38,8 +38,3 @@
     }
 }
 
-@media (max-width: 1439px) {
-    .item:nth-child(n + 7) {
-        display: none;
-    }
-}

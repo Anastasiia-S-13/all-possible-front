@@ -27,3 +27,11 @@ export interface EditProfileFormValues {
   bio?: string;
   avatarFile: File | null;
 }
+
+export interface UserToolsProps {
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  tools: Tool[];
+}

@@ -4,9 +4,11 @@ import UserProfile from "../../../../components/profile/UserProfile";
 import ProfilePlaceholder from "../../../../components/profile/ProfilePlaceholder";
 import { getUserById, getUserTools } from "@/lib/api/serverApi";
 import FeedbacksBlock from "@/components/home/Feedbacks/FeedbacksBlock";
-import { User } from "@/types/User";
+import { User, UserToolsProps } from "@/types/User";
 import { Tool } from "@/types/Tool";
 import ToolsGridProfile from "../../../../components/profile/ToolsGridProfile";
+import { useState } from "react";
+import ProfileClient from "./Profile.client";
 
 type ProfilePageProps = {
   params: Promise<{ userId: string }>;
@@ -43,20 +45,15 @@ export async function generateMetadata({
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { userId } = await params;
   let user: User | null = null;
-  let tools: Tool[] = [];
 
   try {
     user = await getUserById(userId);
-    tools = await getUserTools(userId);
   } catch (error) {
-    console.error("Не вдалося отримати користувача або інструменти:", error);
+    console.error("Не вдалося отримати користувача", error);
   }
-
   if (!user) {
     return <ProfilePlaceholder userId={userId} />;
   }
-
-  const hasTools = tools.length > 0;
 
   return (
     <div className="container">
@@ -65,11 +62,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         userId={userId}
         containerClassName={css.profileContainer}
       />
-      {hasTools ? (
-        <ToolsGridProfile tools={tools} ownerId={userId} />
-      ) : (
-        <ProfilePlaceholder userId={userId} />
-      )}
+      <ProfileClient userId={userId} />
       <FeedbacksBlock userId={userId} />
     </div>
   );

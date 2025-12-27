@@ -65,7 +65,17 @@
   max-width: 100%;
   resize: none;
 }
+.select_wrapper {
+  position: relative;
+}
 
+.arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
 .select {
   font-family: var(--font-family);
   font-weight: 400;
@@ -75,6 +85,11 @@
   border: 2px solid;
   border-radius: 6px;
   background: #fff;
+  width: 100%;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .select:focus {
@@ -115,11 +130,6 @@
   background: #e7cdf4;
   color: #000;
 }
-
-/* :global(.select option:hover) {
-  background: #e7cdf4;
-  color: #7c3030;
-} */
 
 .boxButtons {
   display: flex;

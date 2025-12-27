@@ -61,6 +61,7 @@ export default function AddEditToolForm({
   }, [isAuthenticated, router]);
 
   const [categories, setCategories] = useState<ToolsCategory[]>([]);
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   useEffect(() => {
     getCategories()
@@ -71,15 +72,6 @@ export default function AddEditToolForm({
   const mutation = useMutation<ToolCreate | any, Error, FormData>({
     mutationFn: (formData: FormData) =>
       toolId ? (updateTool(toolId, formData) as any) : createTool(formData),
-    // onSuccess: (tool: any) => {
-    //   router.push(`/tools/${tool._id || toolId}`);
-    //   router.refresh();
-    // },
-    // onError: (err: any) => {
-    //   const errorMessage =
-    //     err.response?.data?.message || err?.message || "Сталася помилка";
-    //   toast.error(`Помилка: ${errorMessage}`);
-    // },
   });
 
   const initialValues: AddEditToolFormRes = initialData
@@ -212,19 +204,30 @@ export default function AddEditToolForm({
                 <label htmlFor={`${fieldId}-category`} className={css.label}>
                   Категорія
                 </label>
-                <Field
-                  as="select"
-                  id={`${fieldId}-category`}
-                  name="category"
-                  className={`${css.input} ${css.select} ${css.categorySelect}`}
-                >
-                  <option value="">Оберіть категорію</option>
-                  {categories?.map((cat) => (
-                    <option key={cat._id} value={cat._id}>
-                      {cat.title}
-                    </option>
-                  ))}
-                </Field>
+                <div className={css.select_wrapper}>
+                  <Field
+                    as="select"
+                    id={`${fieldId}-category`}
+                    name="category"
+                    className={`${css.input} ${css.select}`}
+                    onFocus={() => setIsSelectOpen(true)}
+                    onBlur={() => setIsSelectOpen(false)}
+                  >
+                    <option value="">Оберіть категорію</option>
+                    {categories?.map((cat) => (
+                      <option key={cat._id} value={cat._id}>
+                        {cat.title}
+                      </option>
+                    ))}
+                  </Field>
+                  <svg className={css.arrow} width="24" height="24">
+                    <use
+                      href={`/sprite/sprite.svg#icon-keyboard_arrow_${
+                        isSelectOpen ? "up" : "down"
+                      }`}
+                    />
+                  </svg>
+                </div>
                 <ErrorMessage
                   name="category"
                   component="span"
@@ -294,17 +297,6 @@ export default function AddEditToolForm({
             </div>
 
             <div className={css.boxButtons}>
-              {/* <button
-                className={css.btn}
-                type="submit"
-                disabled={isSubmitting || mutation.isPending}
-              >
-                {isSubmitting || mutation.isPending
-                  ? "Завантаження..."
-                  : toolId
-                  ? "Оновити"
-                  : "Опублікувати"}
-              </button> */}
               <button
                 className={css.btn}
                 type="submit"

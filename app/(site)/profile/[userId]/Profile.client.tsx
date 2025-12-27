@@ -5,14 +5,14 @@ import ProfilePlaceholder from "@/components/profile/ProfilePlaceholder";
 import ToolsGridProfile from "@/components/profile/ToolsGridProfile";
 import { getUserToolsClient } from "@/lib/api/clientApi";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type ProfileClientProps = {
   userId: string;
 };
 const ProfileClient = ({ userId }: ProfileClientProps) => {
   const queryClient = useQueryClient();
-
+  const listRef = useRef<HTMLUListElement>(null);
   useEffect(() => {
     return () => {
       queryClient.removeQueries({
@@ -21,13 +21,12 @@ const ProfileClient = ({ userId }: ProfileClientProps) => {
     };
   }, [queryClient, userId]);
   const perPage = 8;
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["user-tools", userId],
       initialPageParam: 1,
       queryFn: ({ pageParam = 1 }) =>
         getUserToolsClient(userId, pageParam, perPage),
-
       getNextPageParam: (lastPage) =>
         lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
     });
@@ -36,15 +35,25 @@ const ProfileClient = ({ userId }: ProfileClientProps) => {
   if (tools.length === 0) {
     return <ProfilePlaceholder userId={userId} />;
   }
-  if (isFetchingNextPage) {
-    return <Loader />;
-  }
+
+  const handleLoadMore = async () => {
+    await fetchNextPage();
+    setTimeout(() => {
+      if (listRef.current) {
+        listRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }, 50);
+  };
+
   return (
     <>
-      <ToolsGridProfile tools={tools} ownerId={userId} />
+      <ToolsGridProfile tools={tools} ownerId={userId} listRef={listRef} />
       {hasNextPage && (
         <button
-          onClick={() => fetchNextPage()}
+          onClick={handleLoadMore}
           disabled={isFetchingNextPage}
           className="gridBtn"
         >

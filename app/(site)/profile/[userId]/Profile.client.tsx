@@ -36,7 +36,7 @@ const ProfileClient = ({ userId }: ProfileClientProps) => {
   if (tools.length === 0) {
     return <ProfilePlaceholder userId={userId} />;
   }
-  if (status === "pending") {
+  if (isFetchingNextPage) {
     return <Loader />;
   }
   return (

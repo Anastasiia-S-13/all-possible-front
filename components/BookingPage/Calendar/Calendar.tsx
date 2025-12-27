@@ -166,13 +166,13 @@ export default function Calendar({
       return classesArray.join(" ");
     }
 
-    const isReserved = isDateReserved(day);
-    if (isReserved === true) {
-      classesArray.push(styles.reserved);
+    const isPast = isDateInPast(day);
+    if (isPast === true) {
+      classesArray.push(styles.disabled);
     } else {
-      const isPast = isDateInPast(day);
-      if (isPast === true) {
-        classesArray.push(styles.disabled);
+      const isReserved = isDateReserved(day);
+      if (isReserved === true) {
+        classesArray.push(styles.reserved);
       } else {
         const isStart = isRangeStart(day);
         if (isStart === true) {

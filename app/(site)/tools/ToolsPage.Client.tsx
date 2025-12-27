@@ -31,7 +31,7 @@ export default function ToolsPageClient({
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const router = useRouter();
 
-  const perPage = 8;
+  const perPage = 16;
 
   const selectedCategoryTitle =
     selectedCategory === ""

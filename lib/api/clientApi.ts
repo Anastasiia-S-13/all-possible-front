@@ -1,6 +1,6 @@
 import { api } from "./api";
 import { AxiosRequestConfig } from "axios";
-import { User } from "@/types/User";
+import { User, UserToolsProps } from "@/types/User";
 import {
   BookingResponse,
   CreateBookingPayload,
@@ -46,6 +46,16 @@ export const getAllTools = async (params: {
   const response = await api.get("/tools", { params });
   return response.data;
 };
+
+export const getUserToolsClient = async (
+  userId: string,
+  page: number,
+  perPage: number): Promise<UserToolsProps> => {
+  const response =await api.get<UserToolsProps>(`/users/${userId}/tools`, {
+    params: { page, perPage },
+  });
+  return response.data;
+  }
 
 export async function createTool(formData: FormData): Promise<ToolCreate> {
   const { data } = await api.post<ToolCreate>("/tools", formData, {

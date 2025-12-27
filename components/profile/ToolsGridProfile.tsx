@@ -8,9 +8,14 @@ import styles from "./ToolsGrid.module.css";
 interface ToolsGridProps {
   tools: Tool[];
   ownerId: string;
+  listRef: React.RefObject<HTMLUListElement | null>;
 }
 
-export default function ToolsGridProfile({ tools, ownerId }: ToolsGridProps) {
+export default function ToolsGridProfile({
+  tools,
+  ownerId,
+  listRef,
+}: ToolsGridProps) {
   const { isAuthenticated, user: currentUser, _hasHydrated } = useAuthStore();
   const isOwner =
     _hasHydrated && isAuthenticated && currentUser?.id === ownerId;
@@ -22,7 +27,7 @@ export default function ToolsGridProfile({ tools, ownerId }: ToolsGridProps) {
   return (
     <>
       <h2>Інструменти</h2>
-      <ul className={styles.list}>
+      <ul className={styles.list} ref={listRef}>
         {tools.map((tool) => (
           <li key={tool._id} className={styles.item}>
             <ToolCard

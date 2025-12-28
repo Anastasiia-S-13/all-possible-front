@@ -4,7 +4,7 @@
   min-height: 100vh;
   max-width: 375px;
   margin: 0 auto;
-  background: var(--color-background);
+  background: var(--color-neutral-light);
 }
 
 @media screen and (min-width: 768px) {
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-  background-color: var(--color-background);
+  background-color: var(--color-neutral-lightest);
   order: 1;
   min-height: 100vh;
 }
@@ -168,4 +168,36 @@
     flex: none;
     width: 736px;
   }
+}
+
+.burger {
+  width: 40px;
+  height: 40px;
+  /* Changed from #111 */
+  border: 2px solid var(--color-text);
+  border-radius: 8px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Ensure icon takes text color */
+  color: var(--color-text);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.burger svg {
+  fill: currentColor;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 16px 0;
+}
+
+:global([data-theme='dark']) .logoContainer img {
+  filter: invert(1);
 }

@@ -45,9 +45,15 @@ export default function AuthPage() {
       </div>
 
       <div className={styles.formSection}>
-        <Link href="/" className={styles.logo}>
-          <Image src="/images/logo.svg" alt="ToolNext" width={124} height={20} />
-        </Link>
+        <Link href="/" className={styles.logoContainer}>
+            <Image
+              src="/images/logo.svg"
+              alt="ToolNext"
+              width={124}
+              height={20}
+              priority
+            />
+          </Link>
 
         <div className={styles.formWrapper}>
           <h1 className={styles.title}>

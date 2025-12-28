@@ -35,7 +35,7 @@
 .username {
   font-size: 22px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-neutral-darkest);
   transition: all 0.3s ease;
   text-align: center;
 }

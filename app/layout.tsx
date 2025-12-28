@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "./providers";
 import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { AuthProvider, ToastProvider } from "@/providers";
@@ -61,8 +62,9 @@ export default function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={workSans.variable}>
+        <Providers>
         <TanStackProvider>
           <AuthProvider>
             <ToastProvider>
@@ -75,6 +77,7 @@ export default function RootLayout({
             </ToastProvider>
           </AuthProvider>
         </TanStackProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -4,7 +4,7 @@
   font-size: 40px;
   line-height: 120%;
   letter-spacing: -0.01em;
-  color: #000;
+  color: var(--color-scheme-3-text);
   width: 335px;
   padding: 48px 0px;
 }

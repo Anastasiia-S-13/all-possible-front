@@ -49,7 +49,6 @@ export default function Header() {
     <>
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
-          <ThemeSwitch/>
           <Link href="/" className={styles.logoContainer}>
             <Image
               src="/images/logo.svg"
@@ -59,6 +58,7 @@ export default function Header() {
               priority
             />
           </Link>
+          <ThemeSwitch/>
 
           <nav className={styles.nav}>
             <Link href="/">Головна</Link>

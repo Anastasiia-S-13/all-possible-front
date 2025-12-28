@@ -1,7 +1,7 @@
 .feedbackSection {
   padding: 64px 0;
   /* Set the background for the entire section */
-  background-color: var(--color-neutral-lightest); 
+  background-color: var(--color-neutral-lightest);
   transition: background-color 0.3s ease;
 }
 
@@ -32,7 +32,7 @@
   font-size: 14px;
   line-height: 150%;
   /* Changed from var(--color-neutral-darkest) to generic text */
-  color: var(--color-text); 
+  color: var(--color-text);
   background-color: transparent;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
     color 300ms ease-in-out;
@@ -43,7 +43,7 @@
   /* Background color is already a light violet, which is fine for both themes */
   background-color: var(--color-electric-violet-lighter);
   /* Ensure text color provides good contrast on the light hover background */
-  color: var(--color-neutral-darker); 
+  color: var(--color-neutral-darker);
   /* Also ensure border color changes on hover */
   border-color: var(--color-electric-violet-lighter);
 }
@@ -52,7 +52,7 @@
   background-color: var(--color-electric-violet);
   border-color: var(--color-electric-violet);
   /* Changed from var(--color-white) to inverse text */
-  color: var(--color-text-inverse); 
+  color: var(--color-text-inverse);
 }
 
 .feedbackItemBox {
@@ -97,16 +97,21 @@
 
 .feedbackSwiperBtnDisabled {
   /* Background is scheme foreground, which is white/dark-grey. */
-  background: var(--color-scheme-1-foreground); 
+  background: var(--color-scheme-1-foreground);
   opacity: 0.4;
   pointer-events: none;
-  color: var(--color-scheme-1-text); 
+  color: var(--color-scheme-1-text);
+}
+.feedbackSwiperContainer :global(.feedback-pagination) {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 /* Pagination Fixes */
 .feedbackSwiperContainer :global(.swiper-pagination-bullet) {
   transform: scale(0.8);
-  background-color: var(--color-scheme-1-text); 
+  background-color: var(--color-scheme-1-text);
   opacity: 0.5;
   transition: background-color 0.3s ease, opacity 0.3s ease;
   margin: 0 !important;

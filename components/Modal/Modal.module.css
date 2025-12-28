@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(33, 37, 41, 0.6);
+  background-color: var(--color-neutral-light-60); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,12 +9,13 @@
 }
 
 .modal {
-  background-color: #ffffff;
+  background-color: var(--color-background);
   border-radius: 8px;
   width: 100%;
   max-width: 334px;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px var(--color-neutral-light-30);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .close {
@@ -22,6 +23,7 @@
   top: 16px;
   right: 16px;
   padding: 0;
+  color: var(--color-text);
 }
 
 @media only screen and (min-width: 768px) {

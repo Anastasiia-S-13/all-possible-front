@@ -12,5 +12,6 @@
   .feedBackCountBox {
     display: flex;
     gap: 8px;
+    color: var(--color-scheme-3-text)
   }
 }

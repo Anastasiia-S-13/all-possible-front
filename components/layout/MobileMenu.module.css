@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* FIXED: Replaced hardcoded rgba(0, 0, 0, 0.5) with theme variable */
+  background-color: var(--opacity-neutral-darkest-50);
   z-index: 1000;
 }
 
@@ -14,7 +15,8 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: #f2f2f2;
+  /* FIXED: Replaced hardcoded #f2f2f2 with theme variable */
+  background-color: var(--color-neutral-lightest);
   display: flex;
   flex-direction: column;
   z-index: 1001;
@@ -26,7 +28,8 @@
   align-items: center;
   height: 72px;
   padding: 0 20px;
-  border-bottom: 1px solid #e5e5e5;
+  /* FIXED: Replaced hardcoded #e5e5e5 with theme variable */
+  border-bottom: 1px solid var(--color-border-light);
   flex-shrink: 0;
 }
 
@@ -34,17 +37,21 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  /* color: currentColor; is inherited */
   text-decoration: none;
 }
 
 .logo svg {
   width: 24px;
   height: 24px;
+  /* SVG fill usually inherits, but if not, ensure it uses text color */
+  fill: var(--color-text); 
 }
 
 .logoText {
   font-weight: 600;
-  color: #111;
+  /* FIXED: Replaced hardcoded #111 with theme variable */
+  color: var(--color-text);
 }
 
 .closeButton {
@@ -54,7 +61,8 @@
   width: 40px;
   height: 40px;
   background: transparent;
-  border: 2px solid #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  border: 2px solid var(--color-text);
   border-radius: 6px;
   cursor: pointer;
   transition: opacity 0.25s ease;
@@ -62,6 +70,11 @@
 
 .closeButton:hover {
   opacity: 0.7;
+}
+
+.closeButton svg {
+    /* Ensure the icon color matches the text/border color */
+    fill: var(--color-text);
 }
 
 .content {
@@ -88,14 +101,16 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
-  color: #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
   text-decoration: none;
   padding: 10px 0;
   transition: color 0.25s ease;
 }
 
 .navLink:hover {
-  color: #8808cc;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  color: var(--color-primary);
 }
 
 .registerButton,
@@ -106,22 +121,26 @@
   width: 100%;
   max-width: 200px;
   padding: 8px 20px;
-  background-color: #8808cc;
-  color: #fff;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  background-color: var(--color-primary);
+  /* FIXED: Replaced hardcoded #fff with theme variable */
+  color: var(--color-text-inverse);
   --font-work-sans: 'workSans', 'workSans Fallback';
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid #8808cc;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 1px solid var(--color-primary);
   border-radius: 6px;
   transition: background-color 0.25s ease;
 }
 
 .registerButton:hover,
 .publishButton:hover {
-  background-color: #6b06a3;
+  /* FIXED: Replaced hardcoded #6b06a3 with theme variable */
+  background-color: var(--color-primary-hover);
 }
 
 .userSection {
@@ -148,8 +167,10 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #8808cc;
-  color: #fff;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  background-color: var(--color-primary);
+  /* FIXED: Replaced hardcoded #fff with theme variable */
+  color: var(--color-text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,13 +184,15 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
-  color: #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .divider {
   width: 1px;
   height: 24px;
-  background-color: #e5e5e5;
+  /* FIXED: Replaced hardcoded #e5e5e5 with theme variable */
+  background-color: var(--color-border-light);
 }
 
 .logoutButton {
@@ -181,6 +204,11 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.25s ease;
+}
+
+.logoutButton svg {
+    /* Ensure the icon color matches the text color */
+    fill: var(--color-text);
 }
 
 .logoutButton:hover {

@@ -25,7 +25,8 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  color: #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .input {
@@ -33,23 +34,28 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #000;
-  border: 2px solid #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  border: 2px solid var(--color-border);
   box-sizing: border-box;
   margin-top: 8px;
   height: 43px;
   border-radius: 6px;
-  padding: 8px 12px;
+  /* Add background color for better dark mode consistency */
+  background-color: var(--color-background);
 }
 
 .input::placeholder {
-  color: #aaa;
+  /* FIXED: Replaced hardcoded #aaa with theme variable for subtle text */
+  color: var(--color-neutral);
   font-size: 16px;
 }
 
 .input:focus {
   outline: none;
-  border: 2px solid #8808cc;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
 }
 
 .textarea {
@@ -57,43 +63,43 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  color: var(--color-scheme-1-text);
+  /* FIXED: Replaced hardcoded #666666 with a neutral color variable */
+  color: var(--color-neutral);
   margin-top: 8px;
-  border: 2px solid #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  border: 2px solid var(--color-border);
   border-radius: 6px;
   padding: 12px;
   max-width: 100%;
   resize: none;
-}
-.select_wrapper {
-  position: relative;
+  /* Add background color for better dark mode consistency */
+  background-color: var(--color-background);
 }
 
-.arrow {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+.textarea:focus {
+  outline: none;
+  /* Use primary color for focus to match .input */
+  border: 2px solid var(--color-primary);
 }
+
 .select {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #000;
-  border: 2px solid;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
+  /* border is already correct since it inherits from .input */
+  border: 2px solid var(--color-border);
   border-radius: 6px;
-  background: #fff;
-  width: 100%;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  /* FIXED: Replaced hardcoded #fff with theme variable */
+  background: var(--color-background);
 }
 
 .select:focus {
-  background: #e7cdf4;
+  /* FIXED: Replaced hardcoded #e7cdf4 with theme variable */
+  background: var(--color-electric-violet-lighter);
+  border: 2px solid var(--color-primary);
 }
 
 /* Chrome / Edge */
@@ -102,34 +108,53 @@
 }
 
 .select::-webkit-scrollbar-track {
-  background: #e7cdf4;
+  /* FIXED: Replaced hardcoded #e7cdf4 with theme variable */
+  background: var(--color-electric-violet-lighter);
 }
 
 .select::-webkit-scrollbar-thumb {
-  background-color: #8808cc;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  background-color: var(--color-primary);
+}
+
+/* --- Note: Styles for <option> elements are notoriously tricky to theme reliably cross-browser. 
+     We are updating the visible ones here. --- */
+
+.select option {
+  /* FIXED: Replaced hardcoded #f3e6f9 with theme variable */
+  background: var(--color-electric-violet-lightest);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .select option:hover {
-  background-color: #8808cc;
-  color: white;
+  /* FIXED: Replaced hardcoded #8808cc and white with theme variables */
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
 }
 
+/* The .option class might be used for custom options */
 .option {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
-  color: #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
   border: 2px solid;
   border-radius: 6px;
-  background: #f3e6f9;
+  /* FIXED: Replaced hardcoded #f3e6f9 with theme variable */
+  background: var(--color-electric-violet-lightest);
 }
 
 .option:checked,
 .option:hover {
-  background: #e7cdf4;
-  color: #000;
+  /* FIXED: Replaced hardcoded #e7cdf4 with theme variable */
+  background: var(--color-electric-violet-lighter);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
+
 
 .boxButtons {
   display: flex;
@@ -138,8 +163,10 @@
   margin-top: 32px;
 }
 
+/* Primary Button (.btn - Publish/Update) */
 .btn {
-  border: 2px solid #8808cc;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
   border-radius: 6px;
   padding: 10px 24px;
   width: 100%;
@@ -148,25 +175,35 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
-  color: #fff;
-  background: #8808cc;
+  /* FIXED: Replaced hardcoded #fff with theme variable */
+  color: var(--color-text-inverse);
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  background: var(--color-primary);
   transition: background-color 0.2s ease-in-out;
 }
 
-.btn:hover .btn:focus {
+.btn:hover, 
+.btn:focus {
   background: transparent;
-  border: 2px solid #8808cc;
-  color: #000;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .btn:active {
-  background: #e7cdf4;
-  border: 2px solid #8808cc;
-  color: #000;
+  /* FIXED: Replaced hardcoded #e7cdf4 with theme variable */
+  background: var(--color-electric-violet-lighter);
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
+/* Cancel Button (.btnCan) */
 .btnCan {
-  border: 2px solid #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  border: 2px solid var(--color-border);
   border-radius: 6px;
   padding: 10px 24px;
   width: 100%;
@@ -175,21 +212,28 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
-  color: #000;
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
   background: transparent;
   transition: background-color 0.2s ease-in-out;
 }
 
-.btnCan:hover .btnCan:focus {
+.btnCan:hover, 
+.btnCan:focus {
   background: transparent;
-  border: 2px solid #8808cc;
-  color: #000;
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .btnCan:active {
-  background: #e7cdf4;
-  border: 2px solid #8808cc;
-  color: #000;
+  /* FIXED: Replaced hardcoded #e7cdf4 with theme variable */
+  background: var(--color-electric-violet-lighter);
+  /* FIXED: Replaced hardcoded #8808cc with theme variable */
+  border: 2px solid var(--color-primary);
+  /* FIXED: Replaced hardcoded #000 with theme variable */
+  color: var(--color-text);
 }
 
 .error {

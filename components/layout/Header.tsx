@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
+import ThemeSwitch from "../Button/ThemeSwitch";
 import Modal from "@/components/Modal/Modal";
 import ConfirmationModal from "@/components/modals/LogoutModal/ConfirmationModal";
 
@@ -48,6 +49,7 @@ export default function Header() {
     <>
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
+          <ThemeSwitch/>
           <Link href="/" className={styles.logoContainer}>
             <Image
               src="/images/logo.svg"

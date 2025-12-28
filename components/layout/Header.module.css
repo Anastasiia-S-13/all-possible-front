@@ -1,5 +1,9 @@
 .headerWrapper {
   width: 100%;
+  /* Ensure header background matches the theme */
+  background-color: var(--color-background); 
+  border-bottom: 1px solid var(--color-border); /* Optional: adds subtle separation */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .header {
@@ -18,16 +22,27 @@
   padding: 16px 0;
 }
 
+/* Optional: Invert logo color in dark mode if it's a black SVG */
+:global([data-theme='dark']) .logoContainer img {
+  filter: invert(1);
+}
+
 .nav {
   display: none;
   margin-left: auto;
 }
 
 .nav a {
-  color: #111;
+  /* Changed from #111 to variable */
+  color: var(--color-text); 
   text-decoration: none;
   font-weight: 500;
   padding: 16px 16px;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-primary);
 }
 
 .actions {
@@ -40,8 +55,10 @@
 .signupButton,
 .publishButton {
   padding: 8px 20px;
-  background-color: #8808cc;
-  color: #fff;
+  /* Changed from #8808cc to variable */
+  background-color: var(--color-primary);
+  /* Keep text #fff because primary color stays purple in both themes */
+  color: #fff; 
   border-radius: 6px;
   display: none;
   align-items: center;
@@ -50,8 +67,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
-  border: 1px solid #8808cc;
-  transition: background-color 0.25s ease;
+  border: 1px solid var(--color-primary);
   white-space: nowrap;
   box-sizing: border-box;
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
@@ -61,13 +77,18 @@
 .publishButton:hover,
 .signupButton:focus,
 .publishButton:focus {
-  background-color: #fff;
-  color: #000;
+  /* Swap to theme background (White in Light / Black in Dark) */
+  background-color: var(--color-background);
+  /* Swap to theme text (Black in Light / White in Dark) */
+  color: var(--color-text);
+  border-color: var(--color-primary);
 }
 
 .signupButton:active,
 .publishButton:active {
-  background-color: #e7cdf4;
+  /* Use active state variable */
+  background-color: var(--color-primary-active);
+  color: #fff;
 }
 
 .userBlock {
@@ -86,7 +107,7 @@
 .userAvatarPlaceholder {
   width: 32px;
   height: 32px;
-  background-color: #8808cc;
+  background-color: var(--color-primary);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -99,14 +120,16 @@
 .userName {
   font-size: 12px;
   font-weight: 600;
-  color: #000;
+  /* Changed from #000 */
+  color: var(--color-text);
   line-height: 18px;
 }
 
 .divider {
   width: 1px;
   height: 39px;
-  background-color: #000;
+  /* Changed from #000 */
+  background-color: var(--color-border);
   display: none;
 }
 
@@ -118,21 +141,27 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.25s ease;
+  /* Ensure icon takes text color */
+  color: var(--color-text);
 }
 
 .logoutButton svg {
   width: 24px;
   height: 24px;
+  /* This ensures the SVG uses the color defined in .logoutButton */
+  fill: currentColor; 
 }
 
 .logoutButton:hover {
   opacity: 0.7;
+  color: var(--color-primary);
 }
 
 .burger {
   width: 40px;
   height: 40px;
-  border: 2px solid #111;
+  /* Changed from #111 */
+  border: 2px solid var(--color-text);
   border-radius: 8px;
   background: none;
   font-size: 20px;
@@ -140,6 +169,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Ensure icon takes text color */
+  color: var(--color-text);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.burger svg {
+  fill: currentColor;
 }
 
 @media (min-width: 768px) {

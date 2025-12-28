@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import localFont from "next/font/local";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { AuthProvider, ToastProvider } from "@/providers";
+import { AuthProvider, ToastProvider } from "@/components/providers";
 import FooterWithAuth from "@/components/layout/Footer/FooterWithAuth";
 import Header from "@/components/layout/Header";
 

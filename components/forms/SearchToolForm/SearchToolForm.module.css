@@ -17,6 +17,7 @@
   background: transparent;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, color 0.2s;
   font-size: 1rem;
   line-height: 150%;
   color: rgb(255, 255, 255);
@@ -29,6 +30,8 @@
 .field:focus,
 .field:focus-visible {
   border: 2px solid #8808cc;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
 }
 
 @media (min-width: 768px) {

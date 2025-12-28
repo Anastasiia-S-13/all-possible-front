@@ -1,5 +1,8 @@
 .section {
   padding: 64px 0px;
+  /* Set the background color for the section */
+  background-color: var(--color-neutral-lightest); 
+  transition: background-color 0.3s ease;
 }
 
 .title {
@@ -7,6 +10,9 @@
   font-weight: 700;
   margin-bottom: 32px;
   text-align: center;
+  /* Set the text color */
+  color: var(--color-text);
+  transition: color 0.3s ease;
 }
 
 .list {
@@ -27,23 +33,31 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.5;
-  color: #fff;
-  background-color: #8808cc;
-  border: 1px solid #8808cc;
+  /* Changed from #fff to inverse text color or theme text */
+  color: var(--color-text-inverse); 
+  /* Changed from #8808cc to variable */
+  background-color: var(--color-primary); 
+  /* Changed from #8808cc to variable */
+  border: 1px solid var(--color-primary); 
   border-radius: 6px;
   padding: 9px 23px;
   text-wrap: nowrap;
-  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
 }
 
 .link:hover,
 .link:focus {
-  background-color: #fff;
-  color: #000;
+  /* Changed from #fff to variable */
+  background-color: var(--color-background); 
+  /* Changed from #000 to variable */
+  color: var(--color-text);
+  border-color: var(--color-primary);
 }
 
 .link:active {
-  background-color: #e7cdf4;
+  /* Changed from #e7cdf4 to active variable */
+  background-color: var(--color-primary-active);
+  color: var(--color-text-inverse);
 }
 
 @media only screen and (min-width: 768px) {

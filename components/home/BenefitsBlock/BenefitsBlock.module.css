@@ -19,6 +19,7 @@
 .descBlock {
   margin-bottom: 40px;
 }
+
 .benefitsList {
   display: flex;
   flex-direction: column;
@@ -26,8 +27,17 @@
   gap: 11px;
 }
 
+.benefitsItem {
+    /* Set the color on the parent so the icon and all text children inherit it */
+    color: var(--color-scheme-1-text); 
+}
+
 .icon {
   margin-bottom: 24px;
+  /* --- CRITICAL FIX FOR SVG THEME SWITCHING --- */
+  /* This forces the SVG's fill to match the text color of the parent (.benefitsItem) */
+  fill: currentColor; 
+  /* --- END CRITICAL FIX --- */
 }
 
 .itemTitle {
@@ -36,7 +46,8 @@
   font-size: 20px;
   line-height: 140%;
   letter-spacing: -0.01em;
-  color: var(--color-scheme-1-text);
+  /* Text color is already correct, but inherited color from .benefitsItem is cleaner */
+  color: var(--color-scheme-1-text); 
   margin-bottom: 24px;
 }
 
@@ -45,6 +56,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
+  /* Text color is already correct */
   color: var(--color-scheme-1-text);
 }
 

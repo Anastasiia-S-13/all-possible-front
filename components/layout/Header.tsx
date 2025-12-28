@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./Header.module.css";
 import MobileMenu from "./MobileMenu";
+import ThemeSwitch from "../Button/ThemeSwitch";
 import Modal from "@/components/Modal/Modal";
 import ConfirmationModal from "@/components/modals/LogoutModal/ConfirmationModal";
 
@@ -57,6 +58,7 @@ export default function Header() {
               priority
             />
           </Link>
+          <ThemeSwitch/>
 
           <nav className={styles.nav}>
             <Link href="/">Головна</Link>

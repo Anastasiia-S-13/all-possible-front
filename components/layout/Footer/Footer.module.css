@@ -1,8 +1,6 @@
 .footer {
   padding: 48px 0;
-  /* FIXED: Replaced hardcoded #f3e6f9 with theme variable --color-scheme-2-background */
   background-color: var(--color-scheme-2-background);
-  /* FIXED: Replaced hardcoded #000 with theme variable --color-scheme-2-text */
   color: var(--color-scheme-2-text);
 }
 
@@ -36,7 +34,6 @@
 }
 
 .nav a:hover {
-  /* FIXED: Replaced hardcoded #8808cc with theme variable --color-primary */
   color: var(--color-primary);
   transform: scale(1.05);
   font-weight: 700;
@@ -51,7 +48,6 @@
 
 .logo svg,
 .socials svg {
-  /* FIXED: Replaced hardcoded #000 with theme variable --color-scheme-2-text */
   fill: var(--color-scheme-2-text);
   transition: fill 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -64,14 +60,12 @@
 
 .logo:hover svg,
 .socials a:hover svg {
-  /* FIXED: Replaced hardcoded #8808cc with theme variable --color-primary */
   fill: var(--color-primary);
   transform: scale(1.1);
 }
 
 .divider {
   margin: 40px 0 32px;
-  /* FIXED: Replaced hardcoded #000 with theme variable --color-scheme-2-text (or --color-border) */
   border: 1px solid var(--color-scheme-2-text);
 }
 
@@ -89,7 +83,6 @@
   font-variant-numeric: lining-nums;
 }
 
-/* Tablet */
 @media (min-width: 768px) {
   .footer {
     padding: 48px 0;

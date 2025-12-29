@@ -1,6 +1,5 @@
 .feedbackSection {
   padding: 64px 0;
-  /* Set the background for the entire section */
   background-color: var(--color-neutral-lightest);
   transition: background-color 0.3s ease;
 }
@@ -18,20 +17,17 @@
   font-size: 36px;
   line-height: 120%;
   letter-spacing: -0.01em;
-  /* Already correct */
   color: var(--color-scheme-1-text);
 }
 
 .feedbackBtn {
   font-family: var(--font-family);
-  /* Changed from var(--color-neutral-darkest) to generic border */
   border: 2px solid var(--color-border);
   border-radius: 6px;
   padding: 8px 110px;
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
-  /* Changed from var(--color-neutral-darkest) to generic text */
   color: var(--color-text);
   background-color: transparent;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
@@ -40,18 +36,14 @@
 
 .feedbackBtn:hover,
 .feedbackBtn:focus {
-  /* Background color is already a light violet, which is fine for both themes */
   background-color: var(--color-electric-violet-lighter);
-  /* Ensure text color provides good contrast on the light hover background */
   color: var(--color-neutral-darker);
-  /* Also ensure border color changes on hover */
   border-color: var(--color-electric-violet-lighter);
 }
 
 .feedbackBtn:active {
   background-color: var(--color-electric-violet);
   border-color: var(--color-electric-violet);
-  /* Changed from var(--color-white) to inverse text */
   color: var(--color-text-inverse);
 }
 
@@ -67,7 +59,6 @@
   font-size: 18px;
   line-height: 150%;
   min-height: 81px;
-  /* Already correct */
   color: var(--color-scheme-1-text);
 }
 
@@ -76,7 +67,6 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 150%;
-  /* Already correct */
   color: var(--color-scheme-1-text);
 }
 
@@ -96,7 +86,6 @@
 }
 
 .feedbackSwiperBtnDisabled {
-  /* Background is scheme foreground, which is white/dark-grey. */
   background: var(--color-scheme-1-foreground);
   opacity: 0.4;
   pointer-events: none;
@@ -108,7 +97,6 @@
   gap: 8px;
 }
 
-/* Pagination Fixes */
 .feedbackSwiperContainer :global(.swiper-pagination-bullet) {
   transform: scale(0.8);
   background-color: var(--color-scheme-1-text);
@@ -118,7 +106,6 @@
 }
 
 .feedbackSwiperContainer :global(.swiper-pagination-bullet-active) {
-  /* Ensure the active bullet is the primary text color */
   background-color: var(--color-scheme-1-text);
   transform: scale(1.2);
   opacity: 1;
@@ -142,7 +129,6 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-align: center;
-  /* Explicitly set title color */
   color: var(--color-text);
 }
 

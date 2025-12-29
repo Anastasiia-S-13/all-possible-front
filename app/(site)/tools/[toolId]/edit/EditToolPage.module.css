@@ -68,7 +68,7 @@
   background-color: #6B06A3;
 }
 
-/* Tablet (768px) */
+
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -80,7 +80,6 @@
   }
 }
 
-/* Desktop (1440px) */
 @media (min-width: 1440px) {
   .container {
     max-width: 1312px;

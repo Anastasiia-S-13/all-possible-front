@@ -78,7 +78,6 @@
   color: var(--color-text);
 }
 
-
 .title {
   width: 100%;
   max-width: 480px;
@@ -173,7 +172,6 @@
 .burger {
   width: 40px;
   height: 40px;
-  /* Changed from #111 */
   border: 2px solid var(--color-text);
   border-radius: 8px;
   background: none;
@@ -182,7 +180,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Ensure icon takes text color */
   color: var(--color-text);
   transition: border-color 0.3s ease, color 0.3s ease;
 }
@@ -198,6 +195,6 @@
   padding: 16px 0;
 }
 
-:global([data-theme='dark']) .logoContainer img {
+:global([data-theme="dark"]) .logoContainer img {
   filter: invert(1);
 }

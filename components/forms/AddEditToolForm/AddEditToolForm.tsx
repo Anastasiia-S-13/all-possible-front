@@ -136,10 +136,6 @@ export default function AddEditToolForm({
         initialValues={initialValues}
         enableReinitialize
         validationSchema={getValidationSchema(!!toolId)}
-        // onSubmit={(values) => {
-        //   const formData = buildToolFormData(values);
-        //   mutation.mutate(formData);
-        // }}
         onSubmit={async (values, { setSubmitting }) => {
           const formData = buildToolFormData(values);
           try {

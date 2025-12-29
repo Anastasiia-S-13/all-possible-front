@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* FIXED: Replaced hardcoded #fff with theme variable */
   background-color: var(--color-neutral-lightest);
   box-sizing: border-box;
 }
@@ -61,14 +60,13 @@
   font-size: 14px;
   line-height: 24px;
   color: var(--color-text);
-  /* FIXED: Replaced hardcoded #fff with theme variable */
   background-color: var(--color-background);
   border: 2px solid var(--color-border);
   border-radius: 6px;
   box-sizing: border-box;
   padding: 0px 8px;
-  /* Ensure smooth color transition */
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s, color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s,
+    color 0.2s;
 }
 
 .input {
@@ -78,7 +76,7 @@
 .textarea {
   min-height: 80px;
   resize: none;
-  padding: 8px; /* Added padding to textarea for better look */
+  padding: 8px;
 }
 
 .input:focus,
@@ -93,7 +91,6 @@
   color: var(--color-error);
 }
 
-/* File Input - центрування */
 .input[type="file"] {
   height: auto;
   padding: 12px;

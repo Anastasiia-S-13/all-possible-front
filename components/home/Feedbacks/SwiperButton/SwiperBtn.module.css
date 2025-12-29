@@ -6,7 +6,8 @@
   border-radius: 6px;
   padding: 10px;
   border: 2px solid var(--color-scheme-1-border);
-  background: var(--color-scheme-1-foreground);
+  background-color: var(--color-neutral-lightest);
+  fill: var(--color-neutral-darker);
   transition: background-color 0.3s ease, fill 0.3s ease, opacity 0.3s ease;
 }
 

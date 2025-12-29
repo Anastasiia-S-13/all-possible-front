@@ -1,8 +1,7 @@
 .headerWrapper {
   width: 100%;
-  /* Ensure header background matches the theme */
   background-color: var(--color-background); 
-  border-bottom: 1px solid var(--color-border); /* Optional: adds subtle separation */
+  border-bottom: 1px solid var(--color-border); 
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -22,7 +21,6 @@
   padding: 16px 0;
 }
 
-/* Optional: Invert logo color in dark mode if it's a black SVG */
 :global([data-theme='dark']) .logoContainer img {
   filter: invert(1);
 }
@@ -33,7 +31,6 @@
 }
 
 .nav a {
-  /* Changed from #111 to variable */
   color: var(--color-text); 
   text-decoration: none;
   font-weight: 500;
@@ -55,9 +52,7 @@
 .signupButton,
 .publishButton {
   padding: 8px 20px;
-  /* Changed from #8808cc to variable */
   background-color: var(--color-primary);
-  /* Keep text #fff because primary color stays purple in both themes */
   color: #fff; 
   border-radius: 6px;
   display: none;
@@ -77,16 +72,13 @@
 .publishButton:hover,
 .signupButton:focus,
 .publishButton:focus {
-  /* Swap to theme background (White in Light / Black in Dark) */
   background-color: var(--color-background);
-  /* Swap to theme text (Black in Light / White in Dark) */
   color: var(--color-text);
   border-color: var(--color-primary);
 }
 
 .signupButton:active,
 .publishButton:active {
-  /* Use active state variable */
   background-color: var(--color-primary-active);
   color: #fff;
 }
@@ -120,7 +112,6 @@
 .userName {
   font-size: 12px;
   font-weight: 600;
-  /* Changed from #000 */
   color: var(--color-text);
   line-height: 18px;
 }
@@ -128,7 +119,6 @@
 .divider {
   width: 1px;
   height: 39px;
-  /* Changed from #000 */
   background-color: var(--color-border);
   display: none;
 }
@@ -141,14 +131,12 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.25s ease;
-  /* Ensure icon takes text color */
   color: var(--color-text);
 }
 
 .logoutButton svg {
   width: 24px;
   height: 24px;
-  /* This ensures the SVG uses the color defined in .logoutButton */
   fill: currentColor; 
 }
 
@@ -160,7 +148,6 @@
 .burger {
   width: 40px;
   height: 40px;
-  /* Changed from #111 */
   border: 2px solid var(--color-text);
   border-radius: 8px;
   background: none;
@@ -169,7 +156,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Ensure icon takes text color */
   color: var(--color-text);
   transition: border-color 0.3s ease, color 0.3s ease;
 }

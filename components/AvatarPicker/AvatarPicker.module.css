@@ -95,7 +95,6 @@
   color: white;
 }
 
-/* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .avatarPicker {
     max-width: 704px;
@@ -109,7 +108,7 @@
     border-radius: 16px;
   }
 }
-/* Styles for Desktop devices */
+
 @media only screen and (min-width: 1440px) {
   .avatarPicker {
     max-width: none;

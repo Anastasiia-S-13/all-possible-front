@@ -104,11 +104,16 @@ export default function ToolsPageClient({
         setTools((prevTools) => [...prevTools, ...data.tools]);
         setCurrentPage(nextPage);
 
+        const oneElement = document.querySelector("li");
+        const heightOneElement = oneElement?.getBoundingClientRect().height;
+
         setTimeout(() => {
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth",
-          });
+          if (oneElement && heightOneElement) {
+            scrollBy({
+              top: heightOneElement,
+              behavior: "smooth",
+            });
+          }
         }, 100);
       }
     } catch (error) {

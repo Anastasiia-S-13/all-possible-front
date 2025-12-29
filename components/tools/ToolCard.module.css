@@ -1,9 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  /* Changed from #f2f2f2 to theme variable (lightest neutral) */
   background-color: var(--color-neutral-lightest);
-  /* Set the default text color for all content */
   color: var(--color-text);
   gap: 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -27,16 +25,14 @@
   font-weight: 600;
   line-height: 1.5;
   min-height: 54px;
-  /* Ensure name uses theme text color */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .price {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
-  /* Ensure price uses theme text color */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .rating {
@@ -44,7 +40,6 @@
   text-align: left;
 }
 
-/* --- Shared Button Styles: .detailsBtn and .editBtn --- */
 .detailsBtn,
 .editBtn {
   padding: 8px 10px;
@@ -53,10 +48,8 @@
   font-size: 14px;
   line-height: 1.5;
   text-decoration: none;
-  /* Changed from #000 to theme border color */
   border: 2px solid var(--color-border);
-  /* Text color is typically theme text */
-  color: var(--color-text); 
+  color: var(--color-text);
   border-radius: 6px;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
     color 300ms ease-in-out;
@@ -66,23 +59,18 @@
 .detailsBtn:focus,
 .editBtn:hover,
 .editBtn:focus {
-  /* Changed from #e7cdf4 to primary lighter variable */
   background-color: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
-  /* Ensure text is theme text color, or a dark color if hover is very light */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .detailsBtn:active,
 .editBtn:active {
-  /* Changed from #8808cc to primary variable */
   background-color: var(--color-primary);
-  /* Changed from #fff to inverse text color */
-  color: var(--color-text-inverse); 
+  color: var(--color-text-inverse);
   border-color: var(--color-primary);
 }
 
-/* --- Owner Actions and Delete Button --- */
 .ownerActions {
   display: flex;
   gap: 8px;
@@ -98,48 +86,40 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  /* Changed from #000 to theme border color */
   border: 2px solid var(--color-border);
   background-color: transparent;
   cursor: pointer;
-  /* Icon fill color inherits from this color property */
   color: var(--color-text);
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
     color 300ms ease-in-out;
 }
 
 .deleteBtn svg {
-    fill: currentColor;
+  fill: currentColor;
 }
 
 .deleteBtn:hover,
 .deleteBtn:focus {
-  /* Changed from #fee2e2 (light red) to a theme error color light */
-  background-color: var(--color-error); 
-  /* Changed from #dc2626 (dark red) to error color */
-  border-color: var(--color-error); 
+  background-color: var(--color-error);
+  border-color: var(--color-error);
 }
 
 .deleteBtn:hover svg,
 .deleteBtn:focus svg {
-  /* Changed from #dc2626 to error color */
-  fill: var(--color-error); 
+  fill: var(--color-error);
 }
 
 .deleteBtn:active {
-  /* Changed from #dc2626 to error color */
-  background-color: var(--color-error); 
+  background-color: var(--color-error);
   border-color: var(--color-error);
 }
 
 .deleteBtn:active svg {
-  /* Changed from #fff to inverse text color */
   fill: var(--color-text-inverse);
 }
 
 .emptyRating {
-  /* Ensures empty stars are visible but subtle in both themes */
-  color: var(--color-neutral-light); 
+  color: var(--color-neutral-light);
   height: 28px;
   display: flex;
   align-items: center;
@@ -170,5 +150,5 @@
 .editBtn:focus {
   background-color: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
-  color: var(--color-text-inverse); 
+  color: var(--color-text-inverse);
 }

@@ -28,7 +28,7 @@
   line-height: 1.5;
   min-height: 54px;
   /* Ensure name uses theme text color */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .price {
@@ -36,7 +36,7 @@
   font-weight: 500;
   line-height: 1.5;
   /* Ensure price uses theme text color */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .rating {
@@ -56,11 +56,13 @@
   /* Changed from #000 to theme border color */
   border: 2px solid var(--color-border);
   /* Text color is typically theme text */
-  color: var(--color-text); 
+  color: var(--color-text);
   border-radius: 6px;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
     color 300ms ease-in-out;
 }
+
+
 
 .detailsBtn:hover,
 .detailsBtn:focus,
@@ -70,7 +72,7 @@
   background-color: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
   /* Ensure text is theme text color, or a dark color if hover is very light */
-  color: var(--color-text); 
+  color: var(--color-text);
 }
 
 .detailsBtn:active,
@@ -78,7 +80,7 @@
   /* Changed from #8808cc to primary variable */
   background-color: var(--color-primary);
   /* Changed from #fff to inverse text color */
-  color: var(--color-text-inverse); 
+  color: var(--color-text-inverse);
   border-color: var(--color-primary);
 }
 
@@ -104,31 +106,32 @@
   cursor: pointer;
   /* Icon fill color inherits from this color property */
   color: var(--color-text);
+  border-radius: 6px;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out,
     color 300ms ease-in-out;
 }
 
 .deleteBtn svg {
-    fill: currentColor;
+  fill: currentColor;
 }
 
 .deleteBtn:hover,
 .deleteBtn:focus {
   /* Changed from #fee2e2 (light red) to a theme error color light */
-  background-color: var(--color-error); 
+  background-color: var(--color-error);
   /* Changed from #dc2626 (dark red) to error color */
-  border-color: var(--color-error); 
+  border-color: var(--color-error);
 }
 
 .deleteBtn:hover svg,
 .deleteBtn:focus svg {
   /* Changed from #dc2626 to error color */
-  fill: var(--color-error); 
+  fill: var(--color-text);
 }
 
 .deleteBtn:active {
   /* Changed from #dc2626 to error color */
-  background-color: var(--color-error); 
+  background-color: var(--color-error);
   border-color: var(--color-error);
 }
 
@@ -139,7 +142,7 @@
 
 .emptyRating {
   /* Ensures empty stars are visible but subtle in both themes */
-  color: var(--color-neutral-light); 
+  color: var(--color-neutral-light);
   height: 28px;
   display: flex;
   align-items: center;
@@ -170,5 +173,5 @@
 .editBtn:focus {
   background-color: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
-  color: var(--color-text-inverse); 
+  color: var(--color-text-inverse);
 }

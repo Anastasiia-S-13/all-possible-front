@@ -3,8 +3,9 @@
 import Loader from "@/app/loading";
 import ProfilePlaceholder from "@/components/profile/ProfilePlaceholder";
 import ToolsGridProfile from "@/components/profile/ToolsGridProfile";
-import { getUserToolsClient } from "@/lib/api/clientApi";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import BookedToolsGrid from "@/components/profile/BookedToolsGrid";
+import { getUserToolsClient, getUserBookings } from "@/lib/api/clientApi";
+import { useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 type ProfileClientProps = {
@@ -13,13 +14,19 @@ type ProfileClientProps = {
 const ProfileClient = ({ userId }: ProfileClientProps) => {
   const queryClient = useQueryClient();
   const listRef = useRef<HTMLUListElement>(null);
+  const bookingsListRef = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
     return () => {
       queryClient.removeQueries({
         queryKey: ["user-tools", userId],
       });
+      queryClient.removeQueries({
+        queryKey: ["user-bookings", userId],
+      });
     };
   }, [queryClient, userId]);
+
   const perPage = 8;
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
@@ -31,8 +38,14 @@ const ProfileClient = ({ userId }: ProfileClientProps) => {
         lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
     });
 
+  const { data: bookings = [], isLoading: isLoadingBookings } = useQuery({
+    queryKey: ["user-bookings", userId],
+    queryFn: () => getUserBookings(userId),
+  });
+
   const tools = data?.pages.flatMap((page) => page.tools) || [];
-  if (tools.length === 0) {
+
+  if (tools.length === 0 && bookings.length === 0) {
     return <ProfilePlaceholder userId={userId} />;
   }
 
@@ -50,15 +63,27 @@ const ProfileClient = ({ userId }: ProfileClientProps) => {
 
   return (
     <>
-      <ToolsGridProfile tools={tools} ownerId={userId} listRef={listRef} />
-      {hasNextPage && (
-        <button
-          onClick={handleLoadMore}
-          disabled={isFetchingNextPage}
-          className="gridBtn"
-        >
-          {isFetchingNextPage ? "Завантаження..." : "Завантажити ще"}
-        </button>
+      {tools.length > 0 && (
+        <>
+          <ToolsGridProfile tools={tools} ownerId={userId} listRef={listRef} />
+          {hasNextPage && (
+            <button
+              onClick={handleLoadMore}
+              disabled={isFetchingNextPage}
+              className="gridBtn"
+            >
+              {isFetchingNextPage ? "Завантаження..." : "Завантажити ще"}
+            </button>
+          )}
+        </>
+      )}
+
+      {isLoadingBookings ? (
+        <Loader />
+      ) : (
+        bookings.length > 0 && (
+          <BookedToolsGrid bookings={bookings} listRef={bookingsListRef} />
+        )
       )}
     </>
   );

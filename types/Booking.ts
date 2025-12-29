@@ -66,3 +66,27 @@ export interface BookingResponse {
 export type CreateBookingPayload = CreateBookingRequest & {
   userId?: string;
 };
+
+
+export interface UserBooking {
+  id: string;
+  toolId: string;
+  toolName: string;
+  toolImage?: string;
+  startDate: string;
+  endDate: string;
+  totalPrice: number;
+  status: 'pending' | 'confirmed';
+  deliveryCity: string;
+  novaPoshtaBranch: string;
+  createdAt: string;
+}
+
+export interface UserBookingsResponse {
+  success: boolean;
+  count: number;
+  bookings: UserBooking[];
+  message?: string;
+}
+
+

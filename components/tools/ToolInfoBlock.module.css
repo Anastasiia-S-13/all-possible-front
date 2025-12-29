@@ -29,6 +29,11 @@
     font-size: 20px;
     line-height: 140%;
     letter-spacing: -0.01em;
+
+}
+
+[data-theme='dark'] .toolPricePerDay {
+    color: var(--color-neutral)
 }
 
 @media only screen and (min-width: 1440px) {

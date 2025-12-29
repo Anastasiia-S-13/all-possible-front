@@ -5,6 +5,8 @@ import {
   BookingResponse,
   CreateBookingPayload,
   CreateBookingRequest,
+  UserBooking,
+  UserBookingsResponse,
 } from "@/types/Booking";
 import { Category, Tool } from "@/types/Tool";
 import {
@@ -51,11 +53,11 @@ export const getUserToolsClient = async (
   userId: string,
   page: number,
   perPage: number): Promise<UserToolsProps> => {
-  const response =await api.get<UserToolsProps>(`/users/${userId}/tools`, {
+  const response = await api.get<UserToolsProps>(`/users/${userId}/tools`, {
     params: { page, perPage },
   });
   return response.data;
-  }
+}
 
 export async function createTool(formData: FormData): Promise<ToolCreate> {
   const { data } = await api.post<ToolCreate>("/tools", formData, {
@@ -140,3 +142,15 @@ export async function createNewFeedBack(
   });
   return postFeedBack.data;
 }
+
+export const getUserBookings = async (userId: string): Promise<UserBooking[]> => {
+  try {
+    const { data } = await api.get<UserBookingsResponse>(
+      `/user/${userId}/availability`
+    );
+    return data.bookings || [];
+  } catch (error) {
+    console.warn("getUserBookings failed:", error);
+    return [];
+  }
+};

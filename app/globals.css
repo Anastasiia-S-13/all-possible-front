@@ -99,6 +99,16 @@
   --color-border: #404040;
   --color-border-light: #333333;
   --color-primary: var(--color-electric-violet-dark);
+
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: var(--color-neutral-darkest);
+  }
 }
 
 * {

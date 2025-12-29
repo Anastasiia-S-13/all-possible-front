@@ -6,7 +6,7 @@ type Variant = "primary" | "danger";
 
 type ConfirmationModalProps = {
   title: string;
-  text?: string; // optional helper text under title
+  text?: string; 
   leftText: string;
   rightText: string;
   onLeftClick: () => void;

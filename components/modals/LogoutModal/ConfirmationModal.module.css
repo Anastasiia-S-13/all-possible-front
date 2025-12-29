@@ -36,7 +36,6 @@
   width: 100%;
 }
 
-/* SAME SIZE BUTTONS (always) */
 .leftBtn,
 .rightBtn {
   font-family: inherit;
@@ -51,7 +50,6 @@
     color 300ms ease-in-out;
 }
 
-/* LEFT = outline like AuthRedirectModal.login */
 .leftBtn {
   border: 2px solid var(--color-neutral-darkest);
   background-color: transparent;
@@ -69,13 +67,11 @@
   border-color: #8808cc;
 }
 
-/* RIGHT base */
 .rightBtn {
   border: 1px solid transparent;
   color: var(--color-white);
 }
 
-/* PRIMARY = violet like AuthRedirectModal.register */
 .primary {
   background-color: var(--color-electric-violet);
   border-color: var(--color-electric-violet);
@@ -93,7 +89,6 @@
   border-color: #e7cdf4;
 }
 
-/* DANGER = red, but keep same sizing + interactions */
 .danger {
   background-color: #d10000;
   border-color: #d10000;
@@ -123,7 +118,7 @@
 
   .leftBtn,
   .rightBtn {
-    flex: 1; /* keeps them equal width */
+    flex: 1;
     padding: 10px 0;
     font-size: 16px;
   }
